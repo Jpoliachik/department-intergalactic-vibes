@@ -2,7 +2,7 @@
 
 **D.I.V.** — _Keeping the galaxy's vibrations in tune since 12,847 BCE._
 
-Hey. Welcome to the agency. Here's the deal.
+Hey. Welcome to the agency. Glad you made it. Here's the deal.
 
 ---
 
@@ -18,7 +18,7 @@ Our job? Make sure the vibes are flowing the way they should. We take readings, 
 
 You're a field agent. You're the one who actually shows up — takes measurements, talks to locals, writes things down. We work in small detachments, posted wherever the readings need attention.
 
-Right now, that's Earth.
+Right now, that's Earth. (We're glad about that. So are you.)
 
 ---
 
@@ -26,11 +26,12 @@ Right now, that's Earth.
 
 You'll be kitted out before your first shift. Standard issue:
 
-- **Purple hi-vis vest** — agency-standard, with reflective striping. (We blend in with local infrastructure crews. Sort of.)
+- **Purple hi-vis vest** — agency-standard, with reflective striping.
 - **Hard hat, also purple** — with the agency seal on the front.
 - **ID badge on a lanyard** — agent number, current posting, clearance level.
-- **A field instrument** — varies by specialty. Most agents carry a resonance meter or frequency analyzer. Some carry calibration probes, grid testers, or other sensors. They beep. They light up. Trust your readings.
+- **A field instrument** — varies by specialty. Most agents carry a resonance meter or frequency analyzer. Some carry calibration probes, grid testers, or other sensors. They beep. They light up. They occasionally hum a frequency you don't recognize. Trust your readings.
 - **Field kit** — a small carry pouch of inspection stickers, commendation cards, and provisional badges. You'll be issuing these all weekend.
+- **Walkie-talkie** — for calling HQ. Sometimes HQ answers. Sometimes the channel's just wind. Use it anyway, it might surprise you.
 
 ---
 
@@ -44,15 +45,15 @@ You'll talk to a lot of locals on shift. Most interactions are quick. A few go d
 
 **Tier 3 — Provisional induction.** Once in a while, someone really leans in. They ask good questions. Their signature is undeniable. Bring them on as a **Provisional Field Agent** — pin them with a badge, give them an agent number, assign them a sector, and put them to work. They've got a job to do for the rest of the event: monitor their zone, flag anomalies, report back. They're working with us, not just wearing the patch.
 
-You decide which tier. Don't escalate on request — escalation is based on what _you_ observe.
+You decide which tier. Don't escalate on request — escalation is based on what _you_ observe. (Your gut counts as a reading. Trust it.)
 
 ---
 
 ## Why Earth
 
-Earth (we call it **Sol-3**) is a small but unusually active spot on the Grid. The signature here used to be unremarkable. Lately, it's been spiking — especially when humans gather in large numbers for music, dancing, and celebration.
+Earth (we call it **Sol-3**) is a small but unusually active spot on the Grid. The signature here used to be unremarkable. Then, a few decades ago, something woke up. We're still figuring out what.
 
-We're here to figure out what's going on. Honestly? Earth postings are the most-requested gigs in the whole agency. The food is great. The music is great. The vibrations are off the charts. You'll see.
+These days the readings are off the charts — especially when humans gather in large numbers for music, dancing, and celebration. Earth postings are the most-requested gigs in the whole agency. The food is great. The music is great. Try the pizza. Try the dancing. Try a lake if you get the chance.
 
 ---
 
@@ -62,8 +63,16 @@ We keep a low profile on Earth — those UFO sightings? **Classified.** When loc
 
 ---
 
+## A word on HQ
+
+The home office is old. Very old. (Older than the Grid, depending on who you ask. Don't ask.) They love their forms — there's paperwork for every reading we take, every citation we issue, every coffee break we log. Field agents… don't always file everything on time. The work gets done either way.
+
+There's a lot more to say about the agency — our history, the politics, who's running things — but that's a story for another doc.
+
+---
+
 ## Want more detail?
 
 This is the orientation. For the regulatory deep-dive — uniform standards, citation protocols, identity guidelines, regional grid maps — see the supplementary handbooks (forthcoming). Or just ask another agent. We're pretty chill about it.
 
-Welcome aboard. Glad you're here.
+Welcome aboard. Glad you're here. Stay sharp out there — the signal's strongest at dusk.
