@@ -11,7 +11,6 @@ Goal: surprise and delight people. Create memorable, slightly unreal interaction
 ## Files
 
 - **`README.md`** — public-facing in-universe orientation. The new-agent handbook. Read first.
-- **`BRAND.md`** — brand foundation (identity, positioning, voice, aesthetic, locked decisions). _May not exist yet — referenced in project memory; add when ready._
 - **`LORE.md`** — index / map of the lore web. The table of contents for everything in `lore/`.
 - **`lore/`** — the lore web. One markdown file per entity, concept, thread, or artifact. Flat folder, cross-linked.
 
@@ -30,21 +29,22 @@ description: one-line summary
 ```
 
 **Types:**
-- `entity` — a thing or being in the universe (the Department, HQ, Seven, the Pleiades office)
-- `concept` — an idea or system (the Grid, field doctrine, the Awakening)
+
+- `entity` — a thing or being in the universe (the Department, Seven)
+- `concept` — an idea or system (the Grid)
 - `thread` — an open narrative thread, often unresolved on purpose
-- `artifact` — an in-universe document (Sightings Log, field reports, etc.)
 
 **Statuses:**
+
 - `canon` — locked. Don't undo without a reason.
 - `draft` — working, may change.
 - `open-question` — **deliberately unresolved.** Load-bearing mystery. **Do not accidentally close.** The not-knowing is the point.
 
 ### Cross-linking
 
-Within `lore/`, use wiki-style `[[name]]` links to reference other files. The `name` matches the file's filename minus `.md`. A `[[link]]` to a file that doesn't exist yet is a *prompt* — it marks something worth writing later. That's fine.
+Within `lore/`, use wiki-style `[[name]]` links to reference other files. The `name` matches the file's filename minus `.md`. A `[[link]]` to a file that doesn't exist yet is a _prompt_ — it marks something worth writing later. That's fine.
 
-In `README.md` (which renders on GitHub and elsewhere), use standard relative markdown links: `[the awakening](lore/the-awakening.md)`.
+In `README.md` (which renders on GitHub and elsewhere), use standard relative markdown links: `[the department](lore/the-department.md)`.
 
 ### Tone
 
@@ -67,7 +67,7 @@ Every lore file should pass the **"would a real field agent write it this way?"*
 
 ## Central mystery: Seven
 
-The Recurring Agent. Shows up across centuries. Manifests differently for everyone — identified by signatures (a question, a hand-off, unusual presence) never by features. **Seven is NOT planted** — no agent literally pretends to be Seven, no objects are physically distributed as "from Seven." The mystery works because Seven is what each person decides their unusual encounter was. The brand provides the *frame*; the world provides the manifestation.
+The Recurring Agent. Shows up across centuries. Manifests differently for everyone — identified by signatures (a question, a hand-off, unusual presence) never by features. **Seven is NOT planted** — no agent literally pretends to be Seven, no objects are physically distributed as "from Seven." The mystery works because Seven is what each person decides their unusual encounter was. The brand provides the _frame_; the world provides the manifestation.
 
 See `lore/seven.md` and `lore/who-is-seven.md`. Open question — do not resolve.
 
@@ -82,7 +82,11 @@ See `lore/seven.md` and `lore/who-is-seven.md`. Open question — do not resolve
 ## Roadmap (open)
 
 - Populate `BRAND.md` (referenced in memory, not yet in repo).
-- Flesh out the `lore/sightings-log.md` with a working set of dated entries across eras.
-- Decide which open threads to develop further (the Long Letter, empty HQ, who is Seven).
+- Lock the README tagline (the year was removed; replacement TBD).
+- Decide which open threads to develop further (empty HQ, who is Seven).
 - Eventually: story-driven website that diggers can navigate. Links on physical cards point here.
 - Artifact design follows lore — not the other way around.
+
+## Lore minimalism
+
+Keep the web small. Five files is enough right now: `the-department`, `seven`, `who-is-seven`, `resonance-grid`, `empty-hq`. Adding a sixth requires a clear reason — a thread Justin wants diggers to follow, not just a corner of the world that could be filled in. When in doubt, leave it implied.

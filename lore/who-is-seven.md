@@ -14,7 +14,7 @@ The Department's records contain (at least) the following theories. None are off
 
 ### 1. Seven is the First Tuner.
 
-The being who first heard the [[resonance-grid|Grid]] and started listening on purpose. Still here. Still listening. Still showing up. Has lived long enough — or differently enough — that they don't fit into normal time. Some support for this in the earliest entries of [[the-long-letter]], which appear to be in Seven's handwriting.
+The being who first heard the [[resonance-grid|Grid]] and started listening on purpose. Still here. Still listening. Still showing up. Has lived long enough — or differently enough — that they don't fit into normal time.
 
 ### 2. Seven is the signal itself, briefly embodied.
 
@@ -36,7 +36,7 @@ Comes up in older reports. Generally treated as the most likely answer by agents
 
 Because Seven is what they are *to the person who meets them.* Locking in a single answer collapses the wave. If Seven is officially the First Tuner, then the stranger who handed you a folded slip of paper at Bonnaroo wasn't Seven, was just a stranger. If Seven is officially a role passed between beings, then the moment of unusual presence you had with your sister last Tuesday wasn't Seven, was just your sister.
 
-Field doctrine: Seven manifests differently for everyone, and the manifestation is the truth. Theories about Seven are interesting at the campfire. They are not for the [[sightings-log]].
+Field doctrine: Seven manifests differently for everyone, and the manifestation is the truth. Theories about Seven are interesting at the campfire. They are not, anywhere, the answer.
 
 ## Open questions
 

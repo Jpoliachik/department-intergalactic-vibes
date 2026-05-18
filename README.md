@@ -1,6 +1,6 @@
 # Department of Intergalactic Vibrations
 
-**D.I.V.** — _Keeping the galaxy's vibrations in tune since 12,847 BCE._
+**D.I.V.** — _Keeping the galaxy's vibrations in tune._
 
 Hey. Welcome to the agency. Glad you made it. Here's the deal.
 
@@ -16,9 +16,9 @@ Our job? Make sure the vibes are flowing the way they should. We take readings, 
 
 ## Who you are
 
-You're a [field agent](lore/field-doctrine.md). You're the one who actually shows up — takes measurements, talks to locals, writes things down. We work in small detachments, posted wherever the readings need attention.
+You're a field agent. You're the one who actually shows up — takes measurements, talks to locals, writes things down. We work in small detachments, posted wherever the readings need attention.
 
-Right now, that's Earth. Specifically, you're posted with the **[Pleiades Field Office](lore/pleiades-field-office.md)** for the weekend. (We're glad about that. So are you.)
+Right now, that's Earth.
 
 ---
 
@@ -31,7 +31,7 @@ You'll be kitted out before your first shift. Standard issue:
 - **ID badge on a lanyard** — agent number, current posting, clearance level.
 - **A field instrument** — varies by specialty. Most agents carry a resonance meter or frequency analyzer. Some carry calibration probes, grid testers, or other sensors. They beep. They light up. They occasionally hum a frequency you don't recognize. Trust your readings.
 - **Field kit** — a small carry pouch of inspection stickers, commendation cards, and provisional badges. You'll be issuing these all weekend.
-- **Walkie-talkie** — for calling [HQ](lore/hq.md). Sometimes HQ answers. Sometimes [the channel's just wind](lore/transmissions.md). Use it anyway, it might surprise you.
+- **Walkie-talkie** — for calling HQ. Sometimes HQ answers. Sometimes the channel's just wind. Use it anyway, it might surprise you.
 
 ---
 
@@ -51,9 +51,7 @@ You decide which tier. Don't escalate on request — escalation is based on what
 
 ## Why Earth
 
-Earth (we call it **Sol-3**) is a small but unusually active spot on the Grid. The signature here used to be unremarkable. Then, a few decades ago, [something woke up](lore/the-awakening.md). We're still figuring out what.
-
-These days the readings are off the charts — especially when humans gather in large numbers for music, dancing, and celebration. Earth postings are the most-requested gigs in the whole agency. The food is great. The music is great. Try the pizza. Try the dancing. Try a lake if you get the chance.
+Earth (we call it **Sol-3**) is a small but unusually active spot on the Grid. The readings here are off the charts — especially when humans gather in large numbers for music, dancing, and celebration. Earth postings are the most-requested gigs in the whole agency. The food is great. The music is great. Try the pizza. Try the dancing. Try a beach if you get the chance.
 
 ---
 
@@ -65,9 +63,9 @@ We keep a low profile on Earth — those UFO sightings? **Classified.** When loc
 
 ## A word on HQ
 
-The [home office](lore/hq.md) is old. Very old. (Older than the Grid, depending on who you ask. Don't ask.) They love their forms — there's paperwork for every reading we take, every citation we issue, every coffee break we log. Field agents… don't always file everything on time. The work gets done either way.
+The home office is old. Very old. Nobody really knows how old. They love their forms — there's paperwork for every reading we take, every citation we issue, every coffee break we log. Field agents… don't always file everything on time. The work gets done either way.
 
-There's a lot more to say about [the agency](lore/the-department.md) — our history, [the politics](lore/empty-hq.md), [who's running things](lore/empty-hq.md). Some of it is documented. Some of it isn't documented on purpose. And then there's [Seven](lore/seven.md) — but we don't really write about Seven. You'll meet them, or you won't.
+There's a lot more to say about [the agency](lore/the-department.md) — our history, [who's running things](lore/empty-hq.md). Some of it is documented. Some of it isn't documented on purpose. And then there's [Seven](lore/seven.md) — but we don't really write about Seven. You might meet them. You might've already met?
 
 ---
 

@@ -22,11 +22,7 @@ Seven is **never** recognized by appearance. Agents who try to describe what the
 
 ## The handwriting
 
-Field reports attributed to Seven all end with the same mark: a small seven-dot constellation, hand-drawn, never quite the same twice. The Pleiades. (See [[sightings-log]].)
-
-## Why Seven matters to the Pleiades crew
-
-Quiet theory in the office: Seven only manifests at **Pleiades-resonant gatherings**. Seven Stars festival is one of those. That's part of why this posting matters. Agents don't talk about it openly — it would feel like trying to summon the thing — but everyone knows.
+Field reports attributed to Seven all end with the same mark: a small seven-dot constellation, hand-drawn, never quite the same twice. The Pleiades.
 
 ## What's deliberately unresolved
 
@@ -40,4 +36,4 @@ See [[who-is-seven]]. Field doctrine: don't resolve it. The mystery is load-bear
 
 ## Field guidance
 
-If someone tells you they think they met Seven, don't confirm and don't deny. Ask what was handed to them. Listen. Note it for the [[sightings-log]] if they're willing.
+If someone tells you they think they met Seven, don't confirm and don't deny. Ask what was handed to them. Listen.

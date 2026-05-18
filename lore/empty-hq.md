@@ -6,7 +6,7 @@ description: Is anyone actually running the agency? Has anyone been, for a long 
 
 # Is HQ Empty?
 
-A quiet thread that runs through field-side conversations. Not a conspiracy. Not a scandal. Just a question nobody at [[hq]] can quite answer, and nobody at HQ seems especially eager to.
+A quiet thread that runs through field-side conversations. Not a conspiracy. Not a scandal. Just a question nobody at [[the-department|HQ]] can quite answer, and nobody at HQ seems especially eager to.
 
 ## The observation
 
@@ -18,7 +18,7 @@ But:
 - Agents sent to HQ on visits come back with descriptions that don't agree with each other.
 - Signatures on memos are old and reused.
 - Decisions seem to happen, but it's hard to trace where.
-- The walkie-talkie sometimes carries voices, but mostly carries [[transmissions|wind]].
+- The walkie-talkie sometimes carries voices, but mostly carries wind.
 
 ## The possibilities
 
@@ -30,8 +30,6 @@ But:
 ## Why it matters (and why it doesn't)
 
 If HQ is empty, the [[resonance-grid|Grid]] still gets tended — because we're the ones tending it. The work doesn't depend on the building.
-
-If HQ is empty, the [[the-long-letter|Long Letter]] still gets written — because we're the ones writing it.
 
 If HQ is empty, the question is who keeps mailing the badges. And nobody has a good answer to that.
 

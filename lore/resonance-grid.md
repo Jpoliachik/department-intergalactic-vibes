@@ -20,8 +20,6 @@ The Grid is not powered. It is *fed*. Wherever beings come together in this way,
 
 Take readings. Patch what's leaking — usually a place where connection has gone quiet and the signal is fading. Document what's working. Issue commendations where the signal is strong. Most of the work is observational. The Grid doesn't need managing. It needs witnessing.
 
-See [[field-doctrine]] for how we go about it. See [[the-awakening]] for why Earth specifically.
-
 ## What the Grid is NOT
 
 - Not a power source to be tapped. Anyone who frames it that way is fundamentally misreading it.
@@ -32,4 +30,4 @@ See [[field-doctrine]] for how we go about it. See [[the-awakening]] for why Ear
 
 The Grid is organized — loosely — by constellations. Each star is a node; the patterns we read into the sky from Earth are actually structural. Astrology, taken seriously, is operational cartography. Taken loosely, it's a vibe. Both are fine.
 
-The Pleiades cluster is one node-group. Seven Stars festival sits under it. That's not nothing. See [[pleiades-field-office]].
+The Pleiades cluster is one node-group. Seven Stars festival sits under it. That's not nothing.
