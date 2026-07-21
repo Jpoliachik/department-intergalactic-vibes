@@ -68,19 +68,19 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Spark
 **Object:** Lit match
 
-**Responsible for:** Starting the thing. You're first onto the empty floor, first to break the quiet, first to turn a circle of people standing around into an actual happening. Nothing on the Grid flows until something moves first — so you move first, gloriously, a little before anyone's sure it's time.
+**Responsible for:** Starting the thing. You're first onto the empty floor, first to break the quiet, first to turn a circle of people standing around into an actual happening. Nothing happens until something moves first — so you move first, gloriously, a little before anyone's sure it's time.
 
 **Field Reading:** _Go before you're ready. Readiness follows._
 
 ---
 
-### Line Splice Operator
+### Linkage Officer
 
 **Function:** Linkage · Desig. LS-03
 **Field name:** The Connector
-**Object:** Knot
+**Object:** Splice
 
-**Responsible for:** Closing the gaps. You spot two strangers across a crowd who clearly ought to know each other, and you make the introduction — splicing a brand-new line into the Grid that wasn't there a minute ago. You live for _"oh, you two have to meet"_ and the look on both their faces three minutes later.
+**Responsible for:** Closing the gaps. You spot two strangers across a crowd who clearly ought to know each other, and you make the introduction — splicing a brand-new line between them that wasn't there a minute ago. You live for _"oh, you two have to meet"_ and the look on both their faces three minutes later.
 
 **Field Reading:** _Every stranger is a line waiting to be drawn._
 
@@ -104,7 +104,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Tuner
 **Object:** Tuning fork
 
-**Responsible for:** The long conversation — the real one. While the rest of the field takes wide readings, you tune all the way in to a single person and give them your whole frequency. You're the one who catches the quiet, important signal everyone else danced right past. Eye contact is your primary instrument.
+**Responsible for:** The long conversation — the real one. While everyone else reads the whole room, you tune all the way in to a single person and give them your whole frequency. You're the one who catches the quiet, important signal everyone else danced right past. Eye contact is your primary instrument.
 
 **Field Reading:** _Listen all the way to one, and you've heard the night._
 
@@ -114,11 +114,11 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 
 **Function:** Maintenance · Desig. FM-06
 **Field name:** The Caretaker
-**Object:** Heart
+**Object:** Water bottle
 
-**Responsible for:** Tending the nodes — which is to say, the people. Water, shade, sunscreen, the gentle _"hey, you good?"_, the patient walk home for someone who's had a big one. You keep the Grid clean by keeping its people whole, and you know in your bones that looking after each other _is_ the work, not a break from it. You always have snacks.
+**Responsible for:** Tending the people. Water, shade, sunscreen, the gentle _"hey, you good?"_, the patient walk home for someone who's had a big one. You're the one who moves through the crowd and finds the person who needs finding — you go to them, often before they've thought to ask. You know in your bones that looking after each other _is_ the work, not a break from it. You always have snacks.
 
-**Field Reading:** _Keeping each other whole is the connection._
+**Field Reading:** _Look after the people, and the night looks after itself._
 
 ---
 
@@ -128,7 +128,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Wanderer
 **Object:** Compass
 
-**Responsible for:** Roaming and reporting. You drift the whole site on instinct, find the hidden corner nobody else found, clock where the signal runs strongest, and bring word back to the field. You trust your feet over the schedule and your nose over the map — and you're somehow always exactly where you turn out to be needed.
+**Responsible for:** Roaming and reporting. You drift the whole site on instinct, find the hidden corner nobody else found, clock where the energy runs strongest, and bring word back to the crew. You trust your feet over the schedule and your nose over the map — and you're somehow always exactly where you turn out to be needed.
 
 **Field Reading:** _Follow the pull, not the program._
 
@@ -140,9 +140,9 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Jester
 **Object:** Balloon
 
-**Responsible for:** Keep it bouncy. Keep it light. You're the one who makes things playful — who breaks the tension with a joke, starts the silly little game, turns a long wait in a line into a bit worth remembering. The Grid runs warmer on laughter (it's documented), so you keep a steady supply flowing. You take the work seriously and absolutely nothing else.
+**Responsible for:** Keep it bouncy. Keep it light. You're the one who makes things playful — who breaks the tension with a joke, starts the silly little game, turns a long wait in a line into a bit worth remembering. A crowd runs warmer on laughter — and that's a measured fact, not a nice-to-have — so you keep a steady supply flowing. You take the work seriously and absolutely nothing else.
 
-**Field Reading:** _Laughter keeps the signal afloat._
+**Field Reading:** _Laughter keeps the night afloat._
 
 ---
 
@@ -152,7 +152,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Pulse
 **Object:** Metronome
 
-**Responsible for:** Holding the rhythm. You find the beat — the real one, underneath all the other ones — and you keep the whole field locked to it. Where the Spark starts the motion, you're what keeps it going: the head-nod, the foot-tap, the steady throughline a long night quietly organizes itself around. You have never once been off-beat. Probably.
+**Responsible for:** Holding the rhythm. You find the beat — the real one, underneath all the other ones — and you keep the whole field locked to it. Where the Spark starts the motion, you're what keeps it going: the head-nod, the foot-tap, the steady throughline a long night quietly organizes itself around. You have never once been off-beat.
 
 **Field Reading:** _Find the beat beneath the beat._
 
@@ -176,7 +176,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Keeper of Base
 **Object:** Kettle
 
-**Responsible for:** Keeping the home node. The camp, the supplies, the spot everyone returns to between shifts. You make sure there's somewhere to come back to and something good waiting when they arrive — a chair, a cold drink, a phone charger, a familiar face. Every orbit needs a center, and you're it.
+**Responsible for:** Keeping the home base. The camp, the supplies, the spot everyone returns to between shifts. You make sure there's somewhere to come back to and something good waiting when they arrive — a chair, a cold drink, a phone charger, a familiar face. Every orbit needs a center, and you're it.
 
 **Field Reading:** _Keep the kettle on. They all come back._
 
@@ -186,7 +186,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 
 **Function:** Record · Desig. OC-12
 **Field name:** The Witness
-**Object:** Camera
+**Object:** Film camera
 
 **Responsible for:** Taking it all in. You don't run the night — you _remember_ it, so everyone else gets to be completely inside it. You're the one who recounts the whole glorious blur over coffee the next morning: who said what, the exact moment it all peaked, the bit nobody else quite caught. You hold the story everyone's too busy living to keep.
 
@@ -194,23 +194,23 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 
 ---
 
-### Signal Amplification Specialist
+### Night Watch Officer
 
-**Function:** Amplification · Desig. SA-13
-**Field name:** The Amplifier
-**Object:** Megaphone
+**Function:** Vigil · Desig. NW-13
+**Field name:** The Sentinel
+**Object:** Hourglass
 
-**Responsible for:** Boosting whatever's already happening. You don't start the fire — you fan it. The loudest cheer when someone lands the move, the _"AYYY"_ that turns one person's small moment into the whole field's, the gain knob on every good thing already in the room. Catch a spark off someone else and send it back twice as bright.
+**Responsible for:** Holding the post until the light comes back. Long after the music's stopped and most of the field has drifted to their tents, you're still up — not restless, not straining, just quietly _keeping the watch_ while the sand runs down. You're the one awake when the sky turns from black to that first bruised blue, keeping the last small circle together, seeing the night all the way through to its other side because someone should and you'd rather it be you. The dark hours aren't something to survive until morning — they're the shift you were made for. _(You'll sleep when the sun's up. Not before.)_
 
-**Field Reading:** _What you amplify grows._
+**Field Reading:** _The dark doesn't last. You do._
 
 ---
 
 ### Glamour Technician
 
 **Function:** Glamour · Desig. GL-14
-**Field name:** The Glamour
-**Object:** Flower
+**Field name:** The Enchanter
+**Object:** Fairy lights
 
 **Responsible for:** Making things beautiful. You're the glitter, the fairy lights strung between poles, the flowers in someone's hair, the face paint, the flag flying over the camp. You turn a patch of trampled dirt into somewhere that feels enchanted — because to you, beauty isn't decoration laid on top of the work. It _is_ the work. A space that looks like magic makes people behave like they're standing in some.
 
