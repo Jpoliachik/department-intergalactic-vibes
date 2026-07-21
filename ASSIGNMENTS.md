@@ -194,15 +194,15 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 
 ---
 
-### Signal Amplification Specialist
+### Night Watch Officer
 
-**Function:** Amplification · Desig. SA-13
-**Field name:** The Amplifier
-**Object:** Megaphone
+**Function:** Vigil · Desig. NW-13
+**Field name:** The Sentinel
+**Object:** Hourglass
 
-**Responsible for:** Boosting whatever's already happening. You don't start the fire — you fan it. The loudest cheer when someone lands the move, the _"AYYY"_ that turns one person's small moment into the whole field's, the gain knob on every good thing already in the room. Catch a spark off someone else and send it back twice as bright.
+**Responsible for:** Holding the post until the light comes back. Long after the music's stopped and most of the field has drifted to their tents, you're still up — not restless, not straining, just quietly _keeping the watch_ while the sand runs down. You're the one awake when the sky turns from black to that first bruised blue, keeping the last small circle together, seeing the night all the way through to its other side because someone should and you'd rather it be you. The dark hours aren't something to survive until morning — they're the shift you were made for. _(You'll sleep when the sun's up. Not before.)_
 
-**Field Reading:** _What you amplify grows._
+**Field Reading:** _The dark doesn't last. You do._
 
 ---
 
