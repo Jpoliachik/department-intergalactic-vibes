@@ -68,7 +68,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Spark
 **Object:** Lit match
 
-**Responsible for:** Starting the thing. You're first onto the empty floor, first to break the quiet, first to turn a circle of people standing around into an actual happening. Nothing on the Grid flows until something moves first — so you move first, gloriously, a little before anyone's sure it's time.
+**Responsible for:** Starting the thing. You're first onto the empty floor, first to break the quiet, first to turn a circle of people standing around into an actual happening. Nothing happens until something moves first — so you move first, gloriously, a little before anyone's sure it's time.
 
 **Field Reading:** _Go before you're ready. Readiness follows._
 
@@ -104,7 +104,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Tuner
 **Object:** Tuning fork
 
-**Responsible for:** The long conversation — the real one. While the rest of the field takes wide readings, you tune all the way in to a single person and give them your whole frequency. You're the one who catches the quiet, important signal everyone else danced right past. Eye contact is your primary instrument.
+**Responsible for:** The long conversation — the real one. While everyone else reads the whole room, you tune all the way in to a single person and give them your whole frequency. You're the one who catches the quiet, important signal everyone else danced right past. Eye contact is your primary instrument.
 
 **Field Reading:** _Listen all the way to one, and you've heard the night._
 
@@ -128,7 +128,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Wanderer
 **Object:** Compass
 
-**Responsible for:** Roaming and reporting. You drift the whole site on instinct, find the hidden corner nobody else found, clock where the signal runs strongest, and bring word back to the field. You trust your feet over the schedule and your nose over the map — and you're somehow always exactly where you turn out to be needed.
+**Responsible for:** Roaming and reporting. You drift the whole site on instinct, find the hidden corner nobody else found, clock where the energy runs strongest, and bring word back to the crew. You trust your feet over the schedule and your nose over the map — and you're somehow always exactly where you turn out to be needed.
 
 **Field Reading:** _Follow the pull, not the program._
 
@@ -142,7 +142,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 
 **Responsible for:** Keep it bouncy. Keep it light. You're the one who makes things playful — who breaks the tension with a joke, starts the silly little game, turns a long wait in a line into a bit worth remembering. A crowd runs warmer on laughter — and that's a measured fact, not a nice-to-have — so you keep a steady supply flowing. You take the work seriously and absolutely nothing else.
 
-**Field Reading:** _Laughter keeps the signal afloat._
+**Field Reading:** _Laughter keeps the night afloat._
 
 ---
 
@@ -176,7 +176,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Keeper of Base
 **Object:** Kettle
 
-**Responsible for:** Keeping the home node. The camp, the supplies, the spot everyone returns to between shifts. You make sure there's somewhere to come back to and something good waiting when they arrive — a chair, a cold drink, a phone charger, a familiar face. Every orbit needs a center, and you're it.
+**Responsible for:** Keeping the home base. The camp, the supplies, the spot everyone returns to between shifts. You make sure there's somewhere to come back to and something good waiting when they arrive — a chair, a cold drink, a phone charger, a familiar face. Every orbit needs a center, and you're it.
 
 **Field Reading:** _Keep the kettle on. They all come back._
 
