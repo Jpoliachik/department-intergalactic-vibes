@@ -68,7 +68,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Spark
 **Object:** Lit match
 
-**Your Assignment:** Be the first one moving, before it feels reasonable. Everyone else is only waiting for permission.
+**Your Assignment:** Be the first one moving, before it feels reasonable. The moment was only ever waiting for you.
 
 **Field Reading:** _Go before you're ready. Readiness follows._
 
@@ -116,7 +116,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Caretaker
 **Object:** Water bottle
 
-**Your Assignment:** Reach the person fading before they ask. Looking after each other is the whole point.
+**Your Assignment:** Reach the person fading before they ask. No light stays lit alone.
 
 **Field Reading:** _Look after the people, and the night looks after itself._
 
@@ -152,7 +152,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Pulse
 **Object:** Metronome
 
-**Your Assignment:** Find the rhythm under all the noise and hold it. Everything else falls in line.
+**Your Assignment:** Find the rhythm under all the noise and hold it. The whole night falls into step.
 
 **Field Reading:** _Find the beat beneath the beat._
 
@@ -164,7 +164,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Oracle
 **Object:** Crystal ball
 
-**Your Assignment:** Trust the hunch before it makes sense. When you say _this way_, mean it.
+**Your Assignment:** Trust the hunch before it makes sense. Knowing always arrives before the proof.
 
 **Field Reading:** _Read the air, not the clock._
 
@@ -176,7 +176,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Keeper of Base
 **Object:** Kettle
 
-**Your Assignment:** Be the place everyone drifts back to. Keep something good waiting there.
+**Your Assignment:** Be the place everyone drifts back to. Everything that wanders comes home.
 
 **Field Reading:** _Keep the kettle on. They all come back._
 
@@ -200,7 +200,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Sentinel
 **Object:** Hourglass
 
-**Your Assignment:** Stay when the others have gone. Meet the morning first.
+**Your Assignment:** Stay awake when the others have gone. The dawn belongs to whoever waited for it.
 
 **Field Reading:** _The dark doesn't last. You do._
 
@@ -212,7 +212,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Enchanter
 **Object:** Fairy lights
 
-**Your Assignment:** Make it beautiful — that's the work, not the extra. People rise to a room that looks like magic.
+**Your Assignment:** Make one plain corner beautiful. People become the magic a place promises them.
 
 **Field Reading:** _Beauty is a frequency. Broadcast it._
 
