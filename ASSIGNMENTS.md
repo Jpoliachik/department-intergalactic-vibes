@@ -56,7 +56,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Anchor
 **Object:** Anchor
 
-**Your Assignment:** Be the still point when the night gets big. People let go only where someone else is holding on.
+**Your Assignment:** Be the still point the night turns around. People let go only where someone else is holding on.
 
 **Field Reading:** _Hold your ground, and others are free to lose theirs._
 
@@ -80,7 +80,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Connector
 **Object:** Splice
 
-**Your Assignment:** Introduce the two who should already know each other. Then get out of the way.
+**Your Assignment:** Introduce the two who were always going to find each other. You're simply the moment it happens.
 
 **Field Reading:** _Every stranger is a line waiting to be drawn._
 
@@ -104,7 +104,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Tuner
 **Object:** Tuning fork
 
-**Your Assignment:** Give one person all of you. The truest things are said quietly.
+**Your Assignment:** Give one person your whole signal. The universe says its deepest things quietly.
 
 **Field Reading:** _Listen all the way to one, and you've heard the night._
 
@@ -188,7 +188,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Witness
 **Object:** Film camera
 
-**Your Assignment:** Don't just live the night — keep it. Everyone else will be too full to remember.
+**Your Assignment:** Don't just live the night — keep it. What's remembered never really ends.
 
 **Field Reading:** _What you carry home is the only copy._
 
@@ -224,7 +224,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Mentor
 **Object:** Key
 
-**Your Assignment:** Wave in the one hovering at the edge. Someone once did it for you.
+**Your Assignment:** See the one still outside the light, and wave them in. Someone once did it for you.
 
 **Field Reading:** _Hold the door open behind you._
 
