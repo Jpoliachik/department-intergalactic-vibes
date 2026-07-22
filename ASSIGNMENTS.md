@@ -44,7 +44,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Fool
 **Object:** Empty cup
 
-**Your Assignment:** You arrive knowing nothing — the rarest way to arrive. Ask what no one else remembers to ask, and say yes before you find the reason not to. You hold this only briefly.
+**Your Assignment:** Say yes before you find the reason not to. You won't be new for long.
 
 **Field Reading:** _An empty cup holds the most._
 
