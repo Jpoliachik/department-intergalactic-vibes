@@ -29,7 +29,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 - **Function** — where it sits on the Grid, plus its classification code.
 - **Field name** — what agents actually call the post. The face of the card.
 - **Object** — the post's symbol. The single recognizable thing it carries.
-- **Responsible for** — the work of the post.
+- **Your Assignment** — the charge of the post. A direction, not a task list. Yours to interpret.
 - **Field Reading** — issued with the draw. Half instruction, half forecast. Concise on purpose.
 
 ---
@@ -44,7 +44,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Fool
 **Object:** Empty cup
 
-**Responsible for:** Knowing nothing — and knowing that's the gift. You're brand new. No preconceptions, no idea what's supposed to be impossible, which makes you the clearest channel on the whole field. You ask the questions everyone else forgot to ask. You notice what the veterans stopped seeing years ago. You say yes before you've thought of a reason not to. Beginner's mind is the rarest state there is, and you have it for free. Spend it before you lose it.
+**Your Assignment:** You arrive knowing nothing — the rarest way to arrive. Ask what no one else remembers to ask, and say yes before you find the reason not to. You hold this only briefly.
 
 **Field Reading:** _An empty cup holds the most._
 
@@ -56,7 +56,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Anchor
 **Object:** Anchor
 
-**Responsible for:** Holding steady — and holding _still_ — while everyone around you is delightedly losing it. You're the calm the field orbits: the human gravity well, the one people find their feet around when the night gets big. You're also the most _here_ person in the room — unhurried, fully present, savoring the moment everyone else is busy rushing past. You steady a whole crowd without ever raising your voice. _(Hugs are a recognized stabilization technique. Deploy as needed.)_
+**Your Assignment:** When the night gets big, be the still point it turns around. People can only lose themselves safely if someone stays found. Be the most _here_ person in the room.
 
 **Field Reading:** _Hold your ground, and others are free to lose theirs._
 
@@ -68,7 +68,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Spark
 **Object:** Lit match
 
-**Responsible for:** Starting the thing. You're first onto the empty floor, first to break the quiet, first to turn a circle of people standing around into an actual happening. Nothing happens until something moves first — so you move first, gloriously, a little before anyone's sure it's time.
+**Your Assignment:** Some moments hang there holding their breath, waiting for one person to move first. Learn the weight of that pause — then step into it, a little before it's reasonable to.
 
 **Field Reading:** _Go before you're ready. Readiness follows._
 
@@ -80,7 +80,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Connector
 **Object:** Splice
 
-**Responsible for:** Closing the gaps. You spot two strangers across a crowd who clearly ought to know each other, and you make the introduction — splicing a brand-new line between them that wasn't there a minute ago. You live for _"oh, you two have to meet"_ and the look on both their faces three minutes later.
+**Your Assignment:** You'll see two strangers who ought to know each other before either of them does. Close the gap, then step back. What happens next was always theirs.
 
 **Field Reading:** _Every stranger is a line waiting to be drawn._
 
@@ -92,7 +92,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Beacon
 **Object:** Lantern
 
-**Responsible for:** Being findable. You're the warm light people drift toward at 3am without quite knowing why. You don't chase the crowd — you _are_ the spot the crowd ends up. Plant yourself somewhere good, glow steady, and watch a whole gathering assemble itself around you like it was the plan all along.
+**Your Assignment:** Don't go looking for the crowd. Choose your spot, glow steadily, and let it gather around you. Some lights are meant to hold still.
 
 **Field Reading:** _Don't chase the signal. Become it._
 
@@ -104,7 +104,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Tuner
 **Object:** Tuning fork
 
-**Responsible for:** The long conversation — the real one. While everyone else reads the whole room, you tune all the way in to a single person and give them your whole frequency. You're the one who catches the quiet, important signal everyone else danced right past. Eye contact is your primary instrument.
+**Your Assignment:** The truest thing all weekend will be said quietly, to one person. Be the one who's fully there to hear it.
 
 **Field Reading:** _Listen all the way to one, and you've heard the night._
 
@@ -116,7 +116,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Caretaker
 **Object:** Water bottle
 
-**Responsible for:** Tending the people. Water, shade, sunscreen, the gentle _"hey, you good?"_, the patient walk home for someone who's had a big one. You're the one who moves through the crowd and finds the person who needs finding — you go to them, often before they've thought to ask. You know in your bones that looking after each other _is_ the work, not a break from it. You always have snacks.
+**Your Assignment:** Someone will dim before they know to say so. Learn to feel it before they do, and go to them. What you bring is yours to choose.
 
 **Field Reading:** _Look after the people, and the night looks after itself._
 
@@ -128,7 +128,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Wanderer
 **Object:** Compass
 
-**Responsible for:** Roaming and reporting. You drift the whole site on instinct, find the hidden corner nobody else found, clock where the energy runs strongest, and bring word back to the crew. You trust your feet over the schedule and your nose over the map — and you're somehow always exactly where you turn out to be needed.
+**Your Assignment:** Trust your feet over the map and your nose over the schedule. Wander far enough and you arrive exactly where you were needed.
 
 **Field Reading:** _Follow the pull, not the program._
 
@@ -140,7 +140,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Jester
 **Object:** Balloon
 
-**Responsible for:** Keep it bouncy. Keep it light. You're the one who makes things playful — who breaks the tension with a joke, starts the silly little game, turns a long wait in a line into a bit worth remembering. A crowd runs warmer on laughter — and that's a measured fact, not a nice-to-have — so you keep a steady supply flowing. You take the work seriously and absolutely nothing else.
+**Your Assignment:** Take the work seriously and nothing else. Any heaviness is one good laugh from lifting — so be the one who breaks the tension on purpose.
 
 **Field Reading:** _Laughter keeps the night afloat._
 
@@ -152,7 +152,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Pulse
 **Object:** Metronome
 
-**Responsible for:** Holding the rhythm. You find the beat — the real one, underneath all the other ones — and you keep the whole field locked to it. Where the Spark starts the motion, you're what keeps it going: the head-nod, the foot-tap, the steady throughline a long night quietly organizes itself around. You have never once been off-beat.
+**Your Assignment:** Somewhere under all the noise runs the real rhythm. Lock onto it, and the night quietly arranges itself around you.
 
 **Field Reading:** _Find the beat beneath the beat._
 
@@ -164,7 +164,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Oracle
 **Object:** Crystal ball
 
-**Responsible for:** Reading what's coming before it arrives. You feel a crowd's mood turn while it's still turning — but you read deeper than that, too: the omens, the strange coincidences, the dream that turns out to mean something. Part meteorologist, part mystic, fully willing to trust the hair on the back of your neck and the thing you can't quite explain. When you say _"we should go this way,"_ people go.
+**Your Assignment:** You'll feel the mood turn while it's still turning. Trust the hair on your neck and the thing you can't explain. When you say _this way_, mean it.
 
 **Field Reading:** _Read the air, not the clock._
 
@@ -176,7 +176,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Keeper of Base
 **Object:** Kettle
 
-**Responsible for:** Keeping the home base. The camp, the supplies, the spot everyone returns to between shifts. You make sure there's somewhere to come back to and something good waiting when they arrive — a chair, a cold drink, a phone charger, a familiar face. Every orbit needs a center, and you're it.
+**Your Assignment:** Every orbit needs a center. Be the place they drift back to, and see that something good is always waiting there.
 
 **Field Reading:** _Keep the kettle on. They all come back._
 
@@ -188,7 +188,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Witness
 **Object:** Film camera
 
-**Responsible for:** Taking it all in. You don't run the night — you _remember_ it, so everyone else gets to be completely inside it. You're the one who recounts the whole glorious blur over coffee the next morning: who said what, the exact moment it all peaked, the bit nobody else quite caught. You hold the story everyone's too busy living to keep.
+**Your Assignment:** Don't run the night — remember it, so everyone else can disappear into it completely. Carry the story they're too busy living to keep.
 
 **Field Reading:** _What you carry home is the only copy._
 
@@ -200,7 +200,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Sentinel
 **Object:** Hourglass
 
-**Responsible for:** Holding the post until the light comes back. Long after the music's stopped and most of the field has drifted to their tents, you're still up — not restless, not straining, just quietly _keeping the watch_ while the sand runs down. You're the one awake when the sky turns from black to that first bruised blue, keeping the last small circle together, seeing the night all the way through to its other side because someone should and you'd rather it be you. The dark hours aren't something to survive until morning — they're the shift you were made for. _(You'll sleep when the sun's up. Not before.)_
+**Your Assignment:** Stay when the others have gone. The dark hours aren't to be survived — they're yours. Be awake when the sky turns, and meet the morning first.
 
 **Field Reading:** _The dark doesn't last. You do._
 
@@ -212,7 +212,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Enchanter
 **Object:** Fairy lights
 
-**Responsible for:** Making things beautiful. You're the glitter, the fairy lights strung between poles, the flowers in someone's hair, the face paint, the flag flying over the camp. You turn a patch of trampled dirt into somewhere that feels enchanted — because to you, beauty isn't decoration laid on top of the work. It _is_ the work. A space that looks like magic makes people behave like they're standing in some.
+**Your Assignment:** Beauty isn't laid on top of the work — it _is_ the work. Turn a patch of bare ground into somewhere enchanted, and watch people act like they're standing in magic.
 
 **Field Reading:** _Beauty is a frequency. Broadcast it._
 
@@ -224,7 +224,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Mentor
 **Object:** Key
 
-**Responsible for:** Bringing the new ones in. You're the one who spots someone hovering at the edge — not sure they're allowed, not sure they belong — and you wave them over anyway. You explain how it works, hand them their first sticker, show them where to stand, make them feel like they've been part of this the whole time. Every agent was once a stranger somebody bothered to welcome. You're that somebody.
+**Your Assignment:** Somewhere, someone is hovering at the edge, unsure they're allowed. Wave them in. Every belonging began with one person who bothered.
 
 **Field Reading:** _Hold the door open behind you._
 
