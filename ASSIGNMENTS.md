@@ -56,7 +56,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Anchor
 **Object:** Anchor
 
-**Your Assignment:** When the night gets big, be the still point it turns around. People can only lose themselves safely if someone stays found. Be the most _here_ person in the room.
+**Your Assignment:** Be the still point when the night gets big. People let go only where someone else is holding on.
 
 **Field Reading:** _Hold your ground, and others are free to lose theirs._
 
@@ -68,7 +68,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Spark
 **Object:** Lit match
 
-**Your Assignment:** Some moments hang there holding their breath, waiting for one person to move first. Learn the weight of that pause — then step into it, a little before it's reasonable to.
+**Your Assignment:** Be the first one moving, before it feels reasonable. Everyone else is only waiting for permission.
 
 **Field Reading:** _Go before you're ready. Readiness follows._
 
@@ -80,7 +80,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Connector
 **Object:** Splice
 
-**Your Assignment:** You'll see two strangers who ought to know each other before either of them does. Close the gap, then step back. What happens next was always theirs.
+**Your Assignment:** Introduce the two who should already know each other. Then get out of the way.
 
 **Field Reading:** _Every stranger is a line waiting to be drawn._
 
@@ -92,7 +92,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Beacon
 **Object:** Lantern
 
-**Your Assignment:** Don't go looking for the crowd. Choose your spot, glow steadily, and let it gather around you. Some lights are meant to hold still.
+**Your Assignment:** Don't chase the crowd — pick your spot and glow. What's meant for you comes to you.
 
 **Field Reading:** _Don't chase the signal. Become it._
 
@@ -104,7 +104,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Tuner
 **Object:** Tuning fork
 
-**Your Assignment:** The truest thing all weekend will be said quietly, to one person. Be the one who's fully there to hear it.
+**Your Assignment:** Give one person all of you. The truest things are said quietly.
 
 **Field Reading:** _Listen all the way to one, and you've heard the night._
 
@@ -116,7 +116,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Caretaker
 **Object:** Water bottle
 
-**Your Assignment:** Someone will dim before they know to say so. Learn to feel it before they do, and go to them. What you bring is yours to choose.
+**Your Assignment:** Reach the person fading before they ask. Looking after each other is the whole point.
 
 **Field Reading:** _Look after the people, and the night looks after itself._
 
@@ -128,7 +128,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Wanderer
 **Object:** Compass
 
-**Your Assignment:** Trust your feet over the map and your nose over the schedule. Wander far enough and you arrive exactly where you were needed.
+**Your Assignment:** Trust your feet over the map. You always arrive where you're needed.
 
 **Field Reading:** _Follow the pull, not the program._
 
@@ -140,7 +140,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Jester
 **Object:** Balloon
 
-**Your Assignment:** Take the work seriously and nothing else. Any heaviness is one good laugh from lifting — so be the one who breaks the tension on purpose.
+**Your Assignment:** Take the work seriously and nothing else. Anything heavy is one laugh from lifting.
 
 **Field Reading:** _Laughter keeps the night afloat._
 
@@ -152,7 +152,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Pulse
 **Object:** Metronome
 
-**Your Assignment:** Somewhere under all the noise runs the real rhythm. Lock onto it, and the night quietly arranges itself around you.
+**Your Assignment:** Find the rhythm under all the noise and hold it. Everything else falls in line.
 
 **Field Reading:** _Find the beat beneath the beat._
 
@@ -164,7 +164,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Oracle
 **Object:** Crystal ball
 
-**Your Assignment:** You'll feel the mood turn while it's still turning. Trust the hair on your neck and the thing you can't explain. When you say _this way_, mean it.
+**Your Assignment:** Trust the hunch before it makes sense. When you say _this way_, mean it.
 
 **Field Reading:** _Read the air, not the clock._
 
@@ -176,7 +176,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Keeper of Base
 **Object:** Kettle
 
-**Your Assignment:** Every orbit needs a center. Be the place they drift back to, and see that something good is always waiting there.
+**Your Assignment:** Be the place everyone drifts back to. Keep something good waiting there.
 
 **Field Reading:** _Keep the kettle on. They all come back._
 
@@ -188,7 +188,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Witness
 **Object:** Film camera
 
-**Your Assignment:** Don't run the night — remember it, so everyone else can disappear into it completely. Carry the story they're too busy living to keep.
+**Your Assignment:** Don't just live the night — keep it. Everyone else will be too full to remember.
 
 **Field Reading:** _What you carry home is the only copy._
 
@@ -200,7 +200,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Sentinel
 **Object:** Hourglass
 
-**Your Assignment:** Stay when the others have gone. The dark hours aren't to be survived — they're yours. Be awake when the sky turns, and meet the morning first.
+**Your Assignment:** Stay when the others have gone. Meet the morning first.
 
 **Field Reading:** _The dark doesn't last. You do._
 
@@ -212,7 +212,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Enchanter
 **Object:** Fairy lights
 
-**Your Assignment:** Beauty isn't laid on top of the work — it _is_ the work. Turn a patch of bare ground into somewhere enchanted, and watch people act like they're standing in magic.
+**Your Assignment:** Make it beautiful — that's the work, not the extra. People rise to a room that looks like magic.
 
 **Field Reading:** _Beauty is a frequency. Broadcast it._
 
@@ -224,7 +224,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 **Field name:** The Mentor
 **Object:** Key
 
-**Your Assignment:** Somewhere, someone is hovering at the edge, unsure they're allowed. Wave them in. Every belonging began with one person who bothered.
+**Your Assignment:** Wave in the one hovering at the edge. Someone once did it for you.
 
 **Field Reading:** _Hold the door open behind you._
 
