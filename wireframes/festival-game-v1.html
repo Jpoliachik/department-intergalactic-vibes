@@ -367,7 +367,9 @@
   .screen.center::before { content: ""; flex: 1; }
   .spacer { flex: 1; min-height: 6px; }
   .rule { height: 1px; background: #241F38; flex: none; }
-  .stack { display: flex; flex-direction: column; gap: 8px; }
+  /* width:100% is load-bearing — .screen.center sets align-items:center, which
+     would otherwise shrink the stack to its longest label and narrow the buttons */
+  .stack { display: flex; flex-direction: column; gap: 8px; width: 100%; flex: none; }
 
   .eyebrow {
     font-size: 9.5px;
@@ -825,6 +827,88 @@
   .chip[aria-pressed="true"] { border-color: #C9F24D; box-shadow: inset 0 0 12px -4px rgba(201, 242, 77, .8); }
   .chip.locked { color: #302A47; border-color: #241F38; cursor: default; font-size: 13px; }
 
+  /* --- standing assignment + field orders --- */
+
+  .assign {
+    border: 1px solid #302A47;
+    border-left: 2px solid #8B5CFF;
+    border-radius: 4px;
+    background: #12101C;
+    padding: 10px 11px;
+    flex: none;
+    text-align: left;
+  }
+
+  .assign-label {
+    font-size: 8.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #8B5CFF;
+    margin-bottom: 5px;
+  }
+
+  .assign-text { font-size: 12.5px; line-height: 1.5; color: #EDE9F7; margin: 0; }
+
+  .orders {
+    border: 1px solid #302A47;
+    border-radius: 4px;
+    background: #12101C;
+    flex: none;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    font-family: var(--mono);
+    color: #EDE9F7;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .orders:hover { border-color: #8B5CFF; }
+  .orders:focus-visible { outline: 2px solid #C9F24D; outline-offset: 2px; }
+
+  .orders-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #6C6489;
+    padding: 8px 11px 6px;
+    border-bottom: 1px solid #241F38;
+  }
+
+  .order {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 9px;
+    align-items: center;
+    padding: 8px 11px;
+    font-size: 11.5px;
+    border-bottom: 1px solid #241F38;
+  }
+
+  .order:last-child { border-bottom: 0; }
+  .order .ico { font-size: 14px; line-height: 1; }
+  .order-count { font-size: 10px; color: #C9F24D; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+  .order.done { color: #6C6489; }
+  .order.done .order-count { color: #6C6489; }
+
+  /* the way through to your constellation */
+  .order.footer-row { background: #171426; color: #9A93B5; font-size: 11px; }
+  .order.footer-row .order-count { color: #EDE9F7; font-size: 14px; }
+
+  /* --- constellation of lines drawn --- */
+
+  .constellation {
+    border: 1px solid #302A47;
+    border-radius: 6px;
+    background: radial-gradient(circle at 50% 45%, rgba(139, 92, 255, .12), transparent 65%), #0E0C17;
+    padding: 6px;
+    flex: none;
+  }
+
+  .constellation svg { display: block; width: 100%; height: auto; }
+
   .callout {
     border: 1px solid #302A47;
     border-left: 2px solid #C9F24D;
@@ -950,6 +1034,70 @@
           '<div class="chipbar">' + chips + "</div></div>" +
         "</div>" +
       "</div>"
+    );
+  };
+
+  const assign = (post, text) =>
+    '<div class="assign"><div class="assign-label">Your assignment · ' + post + "</div>" +
+    '<p class="assign-text">' + text + "</p></div>";
+
+  const orders = (goto, when, rows, footer) =>
+    '<button class="orders" data-goto="' + goto + '">' +
+      '<div class="orders-head"><span>Field orders</span><span>' + when + "</span></div>" +
+      rows
+        .map(
+          (r) =>
+            '<div class="order' + (r.done >= r.total ? " done" : "") + '">' +
+              '<span class="ico">' + r.ico + "</span>" +
+              "<span>" + r.text + "</span>" +
+              '<span class="order-count">' + r.done + "/" + r.total + "</span>" +
+            "</div>"
+        )
+        .join("") +
+      (footer
+        ? '<div class="order footer-row"><span class="ico">🔗</span><span>' + footer + '</span><span class="order-count">›</span></div>'
+        : "") +
+    "</button>";
+
+  // 16 posts of the deck, laid out as a star field. `met` holds the ones you've drawn a line to.
+  const POSTS = [
+    { x: 30, y: 32, o: "☕", n: "The Fool" },
+    { x: 78, y: 18, o: "⚓", n: "The Anchor" },
+    { x: 126, y: 44, o: "🔥", n: "The Spark" },
+    { x: 174, y: 24, o: "🔌", n: "The Connector" },
+    { x: 222, y: 46, o: "🏮", n: "The Beacon" },
+    { x: 268, y: 28, o: "🎵", n: "The Tuner" },
+    { x: 48, y: 84, o: "💧", n: "The Caretaker" },
+    { x: 100, y: 102, o: "🧭", n: "The Wanderer" },
+    { x: 152, y: 86, o: "🎈", n: "The Jester" },
+    { x: 204, y: 108, o: "⏱", n: "The Pulse" },
+    { x: 256, y: 90, o: "🔮", n: "The Oracle" },
+    { x: 34, y: 148, o: "🫖", n: "Keeper of Base" },
+    { x: 84, y: 170, o: "🎥", n: "The Witness" },
+    { x: 138, y: 148, o: "⏳", n: "The Sentinel" },
+    { x: 192, y: 174, o: "✨", n: "The Enchanter" },
+    { x: 250, y: 152, o: "🔑", n: "The Mentor" },
+  ];
+
+  const constellation = (met) => {
+    const pts = met.map((i) => POSTS[i]);
+    const line = pts.map((p) => p.x + "," + p.y).join(" ");
+    let dots = "";
+    POSTS.forEach((p, i) => {
+      if (met.includes(i)) {
+        dots +=
+          '<circle cx="' + p.x + '" cy="' + p.y + '" r="11" fill="rgba(201,242,77,.13)" stroke="#C9F24D" stroke-width="1"/>' +
+          '<text x="' + p.x + '" y="' + p.y + '" font-size="12" text-anchor="middle" dominant-baseline="central">' + p.o + "</text>";
+      } else {
+        dots += '<circle cx="' + p.x + '" cy="' + p.y + '" r="2.5" fill="#3B3358"/>';
+      }
+    });
+    return (
+      '<div class="constellation"><svg viewBox="0 0 300 200" role="img" aria-label="' +
+      met.length + ' of 16 posts met">' +
+      '<polyline points="' + line + '" fill="none" stroke="#C9F24D" stroke-width="1" opacity=".45"/>' +
+      dots +
+      "</svg></div>"
     );
   };
 
@@ -1101,17 +1249,26 @@
             chips: ichip("🎖", "Induction Officer") + ichip("🔑", "Key") + ichip("📻", "Unread", "amber"),
           }) +
           pips(2, 34, true) +
+          orders("c5", "First orders", [
+            { ico: "🔍", text: "Find three traces", done: 0, total: 3 },
+            { ico: "🔗", text: "Draw a line to another agent", done: 0, total: 1 },
+          ], "No lines drawn yet") +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
             '<button class="tap tap-primary" data-goto="c1">My badge</button>' +
             '<button class="tap tap-ghost" data-goto="c1">📲 Add to home screen</button>' +
           "</div>" +
         "</div>",
-      purpose: "Turn the reveal into a collection goal without a sentence of explanation. 32 dark pips do that work.",
-      interactions: ["Install prompt appears once, here — highest-intent moment for the PWA.", "Empty hat slot is visibly empty."],
+      purpose: "Turn the reveal into a collection goal and hand them a job in the same breath. 32 dark pips plus two orders do that without a sentence of explanation.",
+      interactions: [
+        "Install prompt appears once, here — highest-intent moment for the PWA.",
+        "Orders arrive at induction so nobody reaches their first badge without knowing what to do next.",
+        "Empty hat slot is visibly empty.",
+      ],
       state: ["Full agent record persisted; the app is offline-capable from here."],
       notes: [
         "Pips replace '2 / 34' prose and the explanatory paragraph — you can see how much is out there at a glance.",
+        "The standing assignment isn't repeated here — they just read it on A3. Orders are the new information.",
         "'📻 Unread' chip is the card-path player's reason to still scan an anon sticker: no frequency yet.",
       ],
       questions: ["Is 34 the right advertised total? A visible denominator makes completion feel finite — and makes it obvious when nobody finishes."],
@@ -1289,8 +1446,12 @@
             av: { hat: "🍌", torso: "🦺", held: "🔮" },
             chips: ichip("🎖", "Field Pathfinder") + dotchip("#C9F24D", "Nuclear Lime") + ichip("🧭", "Object pending", "amber"),
           }) +
+          assign("Field Pathfinder", "Trust your feet over the map. You always arrive where you&rsquo;re needed.") +
+          orders("c5", "Tonight", [
+            { ico: "🔍", text: "Find three more traces", done: 1, total: 3 },
+            { ico: "🔗", text: "Draw a line to another agent", done: 0, total: 1 },
+          ], "5 of 16 posts met") +
           pips(7) +
-          '<div class="chipbar">' + ichip("📍", "Camp North") + ichip("📝", "3 readings today") + "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
             '<button class="tap tap-primary" data-goto="c3">📷 Scan</button>' +
@@ -1298,17 +1459,26 @@
             '<button class="tap" data-goto="h1"><span class="ico">🛰</span>Report to HQ</button>' +
           "</div>" +
         "</div>",
-      purpose: "The badge is the product. Three actions in priority order: scan, arrange, check in.",
+      purpose:
+        "The badge is the product, and it should always be telling you what to do next — one charge from your post, two orders that get you moving and talking to people.",
       interactions: [
+        "The orders block is tappable → your constellation of lines drawn (C5).",
         "'Report to HQ' is a door, not a tab — leaving the badge should feel like going somewhere.",
         "Most scans actually arrive from outside the app via the OS camera or an NFC tap.",
       ],
-      state: ["Renders entirely from localStorage. Zero network."],
-      notes: [
-        "No tab bar keeps this reading as an issued credential rather than software.",
-        "Sector and activity became chips instead of a sentence.",
+      state: [
+        "Standing assignment is the deck's own 'Your Assignment' line for your designation — static, never changes.",
+        "Orders are counters in localStorage. Reset daily; no server needed.",
       ],
-      questions: ["Should the badge re-show your assignment and field reading, or is that induction-only?"],
+      notes: [
+        "Two orders, deliberately: one sends you hunting <b>objects</b> ('traces'), one sends you at <b>people</b>. The second is the whole point of the thing.",
+        "'Traces' is doing real work — it covers stickers and NFC trinkets without naming either, so the order stays true wherever they find one.",
+        "Sector and activity chips got cut to make room; the orders earned that space.",
+      ],
+      questions: [
+        "Should orders be role-specific too — a Pathfinder told to survey the north camp, a Caretaker told to find someone fading? Much better flavour, 16× the copy to write.",
+        "Do orders reset daily, per-session, or never? Daily gives people a reason to reopen the app on day two.",
+      ],
     },
     {
       id: "c2",
@@ -1382,6 +1552,88 @@
         "'One (1)' does the tone work that a paragraph used to.",
       ],
       questions: ["Sound or haptic on reveal? A short buzz reads well in a loud field; audio is mostly wasted."],
+    },
+    {
+      id: "c4",
+      group: "Core loop",
+      label: "Line drawn",
+      title: "Scan — another agent's card",
+      sub: "New. What happens when you scan someone else's assignment card, instead of a sticker.",
+      net: "off",
+      html:
+        '<div class="screen center">' +
+          '<div class="eyebrow">Signal spliced</div>' +
+          '<div class="art lime">🔗</div>' +
+          '<h1 class="big">Line drawn.</h1>' +
+          '<p class="sub">To a Mentor · IN-15</p>' +
+          '<div class="callout"><span class="ico">🤝</span><span><b>A line runs one way until both ends are spliced.</b> Hand them your card.</span></div>' +
+          '<div class="chipbar" style="justify-content:center">' +
+            ichip("🔑", "Key issued", "lime") + ichip("🔗", "5 of 16 posts met", "lime") +
+          "</div>" +
+          '<div class="spacer"></div>' +
+          '<div class="stack">' +
+            '<button class="tap tap-primary" data-goto="c5">See my lines</button>' +
+            '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
+          "</div>" +
+        "</div>",
+      purpose:
+        "Make meeting a person mechanically different from finding an object. Objects fill your badge; people fill your constellation.",
+      interactions: [
+        "Works fully offline: their card code is in your bundled lookup table, so the app knows the <b>post</b> without knowing the person.",
+        "You also receive the item that card grants — people's cards are walking item sources, which is already how the spec's code table works.",
+        "The prompt to hand over your own card is the mutual-scan nudge. Two phones, two cards, both credited, still no server.",
+      ],
+      state: [
+        "Appends the designation to your met-posts set, plus the card's item. Duplicate cards of the same post are recorded once for the constellation but still grant the item.",
+      ],
+      notes: [
+        "Offline you meet a <b>function</b>, not a name — which is exactly how the Grid is described. If you later check in at HQ, logged card codes can resolve into the names of agents who've also checked in: the file catches up.",
+        "'Line', not 'squad' — the Linkage Officer's reading already says <i>every stranger is a line waiting to be drawn</i>. The vocabulary was sitting there.",
+        "Nothing is competitive about this. There's no rejecting a line, no removing one, no seeing who declined.",
+      ],
+      questions: [
+        "Should the item come from <b>their</b> card (drawn here — so cards circulate items) or should meeting a new post grant its own reward? Their card is simpler and needs no new table.",
+        "Is the one-way line worth showing at all, or should a line only count once both people have scanned each other? One-way is kinder to shy people; mutual is a better story.",
+        "Does scanning the same person's card twice need to do anything different? Currently it just re-grants the item.",
+      ],
+    },
+    {
+      id: "c5",
+      group: "Core loop",
+      label: "Lines",
+      title: "Lines drawn",
+      sub: "New. The second collection — 16 posts, and you cannot fill it alone.",
+      net: "off",
+      html:
+        '<div class="screen">' +
+          '<div class="eyebrow">Lines drawn · 5 of 16 posts</div>' +
+          constellation([1, 3, 7, 10, 15]) +
+          '<div class="chipbar">' +
+            ichip("⚓", "The Anchor") + ichip("🔌", "The Connector") + ichip("🧭", "The Wanderer") +
+            ichip("🔮", "The Oracle") + ichip("🔑", "The Mentor") +
+          "</div>" +
+          '<p class="reading">&ldquo;Every stranger is a line waiting to be drawn.&rdquo;</p>' +
+          '<div class="spacer"></div>' +
+          '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
+        "</div>",
+      purpose:
+        "One screen that only gets more beautiful the more people you actually talk to. That's the whole thesis of the game in a single graphic.",
+      interactions: [
+        "Reached from the orders block on home, or straight after drawing a line.",
+        "Tap a lit star → which post, when you met it, and the agent's name if HQ has since resolved it.",
+        "Unmet posts are faint dots, never labelled — you can see there are sixteen without knowing what's missing.",
+      ],
+      state: ["Met-posts set in localStorage. Fully offline; HQ only enriches it with names."],
+      notes: [
+        "The Grid is organized by constellations (locked decision), so drawing your connections as a star map isn't decoration — it's the actual cosmology.",
+        "16 posts is a naturally finite set that <b>cannot</b> be completed alone or by scanning objects. Nobody fills this at their tent.",
+        "The quote is the Linkage Officer's field reading, verbatim from the deck.",
+      ],
+      questions: [
+        "Filling all 16 should mean <i>something</i> — an item, a title, a line on your badge. What? This is the one reward in the app that would be genuinely hard to earn.",
+        "Should HQ standings rank by lines drawn as well as items held? Ranking connection feels slightly against the spirit, but it would drive the behaviour you want.",
+        "Do lines expire? Items don't. I'd say lines are permanent — they're the one thing in the app that shouldn't age off.",
+      ],
     },
 
     // ============ HQ ============

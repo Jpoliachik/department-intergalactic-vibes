@@ -6,7 +6,7 @@
 
 Storyboard for the D.I.V. collection game. Open `festival-game-v1.html` to tap through it.
 
-21 screens, 5 flows. Wireframe fidelity — item art is emoji placeholders, structure and copy are real.
+23 screens, 5 flows. Wireframe fidelity — item art is emoji placeholders, structure and copy are real.
 
 ## Flows
 
@@ -17,7 +17,7 @@ Storyboard for the D.I.V. collection game. Open `festival-game-v1.html` to tap t
 `b1` cold open → `b2` frequency → `b3` posture → `b4` tool → `b5` badge
 
 **Core loop**
-`c1` badge (home) · `c2` locker · `c3` new item
+`c1` badge (home) · `c2` locker · `c3` new item · `c4` line drawn · `c5` lines
 
 **HQ** (needs a connection)
 `h1` check-in → `h2` board → `h3` another agent's card · `h4` standings · `h5` envelope → `h6` mystery item
@@ -35,6 +35,19 @@ Storyboard for the D.I.V. collection game. Open `festival-game-v1.html` to tap t
 - **Copy cut app-wide.** Most screens are down to one headline and at most one line. Explanatory paragraphs became chips: retention is `⏳ Ages off in 4h`, offline reassurance is `✅ Your badge still works`, Object issuance is `🔑 OBJECT ISSUED`.
 
 Item art is emoji standing in for pixel sprites. Slots map cleanly: 🎩 hat, 👕 outfit, ✊ held item, ✨ aura tint, 🖼 backdrop.
+
+## Lines — the connection mechanic (proposal)
+
+**Scanning another agent's assignment card draws a line.** Not a squad, not a friends list. Their card code is already in your bundled lookup table, so offline your app learns *which post they hold* — a Mentor, a Spark — but not who they are. That's the Grid recording functions, not identities.
+
+- **You also receive the item their card grants**, so people's cards are walking item sources. No new rules — that's already how the code table works.
+- **`c5` is a constellation of the 16 posts**, filling in as you meet them. The Grid is organized by constellations, so this isn't decoration, it's the cosmology. Unmet posts are faint unlabelled dots.
+- **It cannot be completed alone.** Nobody fills sixteen posts at their own tent. Objects fill your badge; people fill your constellation.
+- **One-way by default**, with a nudge: *"A line runs one way until both ends are spliced. Hand them your card."* Two phones, two cards, both credited, still no server.
+- **Names resolve later, if ever.** Offline you met a function. If you both check in at HQ, logged card codes can resolve into names — the file catches up.
+- Vocabulary comes from the deck: the Linkage Officer's reading is *"Every stranger is a line waiting to be drawn."*
+
+**Home always gives you a job** (`c1`, and `a4` at induction): your standing assignment — the deck's own line for your designation — plus two orders. One sends you hunting objects ("find three more traces", covering stickers and trinkets without naming either), one sends you at people ("draw a line to another agent"). The orders block is the door to your constellation.
 
 ## Decisions locked
 
@@ -55,6 +68,10 @@ Each screen carries its own in the prototype's notes panel. The ones that change
 - `a3` — now the longest screen in the app. If it crowds on a real phone, cut the field reading first: it's the line most likely to be read off the printed card instead.
 - `a3` — should the anon path get a welcome too, or does card-only make cards more ceremonial?
 - `a2` — does naming the agent land harder ("Agent Marlow vouched for you")? Needs the squad member's name on the card, which is a print-run decision.
+- `c5` — filling all 16 posts should mean *something*. What? It's the one reward in the app that would be genuinely hard to earn.
+- `c4` — should a line count one-way, or only once both people have scanned each other? One-way is kinder to shy people; mutual is a better story.
+- `c1` — should orders be role-specific (a Pathfinder told to survey north camp, a Caretaker told to find someone fading)? Much better flavour, 16× the copy.
+- `h4` — should standings rank by lines drawn as well as items held? Ranking connection cuts against the spirit, but it drives the behaviour.
 - `h1` — check-in TTL of 4h vs 6h. 4h is a genuinely "right now" board; 6h survives a nap.
 - `h2` — board density past ~100 check-ins: cap at the 20 most recent, or let it fill up like a real bulletin board?
 - `a4` — is 34 the right advertised total? A visible denominator makes completion feel finite.
