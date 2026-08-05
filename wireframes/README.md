@@ -23,7 +23,7 @@ Why it works:
 - The only route forward is a conversation with a person in a purple vest. *"Assignments are issued by hand, in the field."*
 - It **deletes the hardest unbuilt piece.** The quiz no longer has to map onto the 16 designations, so there are no 16 answer-pairs left to author. The three questions go back to doing exactly what the original spec said: frequency, status, tool.
 
-Put `a5` and `b4` side by side in the prototype's rail — the diff between those two screens is the entire pitch for the assignment card.
+Put `c1` and `b4` side by side in the prototype's rail — the diff between the unassigned home and the registered badge is the entire pitch for the assignment card.
 
 ## Flows
 
