@@ -1,4 +1,4 @@
-<title>D.I.V. Field App — Wireframes v2</title>
+<title>D.I.V. Field App — Wireframes v3</title>
 
 <style>
   :root {
@@ -849,6 +849,10 @@
 
   .assign-text { font-size: 12.5px; line-height: 1.5; color: #EDE9F7; margin: 0; }
 
+  /* unassigned agents: the gap where a post should be */
+  .assign.pending { border-left-color: #F2A23D; }
+  .assign.pending .assign-label { color: #F2A23D; }
+
   .orders {
     border: 1px solid #302A47;
     border-radius: 4px;
@@ -948,8 +952,8 @@
 
 <header class="masthead">
   <div>
-    <h1>D.I.V. Field App — Wireframes v2</h1>
-    <p>Storyboard for the Seven Stars collection game. Tap inside the phone — options, buttons, board pins and locker chips are live. Arrow keys step the whole flow.</p>
+    <h1>D.I.V. Field App — Wireframes v3</h1>
+    <p>Storyboard for the Seven Stars collection game. Everyone signs up the same way; only an assignment card gives you a post. Tap inside the phone — options, buttons, board pins and locker chips are live. Arrow keys step the flow.</p>
   </div>
   <div class="masthead-meta">
     <div>Screens<b id="metaCount">—</b></div>
@@ -1041,6 +1045,10 @@
     '<div class="assign"><div class="assign-label">Your assignment · ' + post + "</div>" +
     '<p class="assign-text">' + text + "</p></div>";
 
+  const noAssign = () =>
+    '<div class="assign pending"><div class="assign-label">No post on file</div>' +
+    '<p class="assign-text">Unassigned agents take general readings. Assignments are issued by hand, in the field.</p></div>';
+
   const orders = (goto, when, rows, footer) =>
     '<button class="orders" data-goto="' + goto + '">' +
       '<div class="orders-head"><span>Field orders</span><span>' + when + "</span></div>" +
@@ -1123,13 +1131,165 @@
   // ---------- storyboard ----------
 
   const SCREENS = [
-    // ============ FLOW A ============
+    // ============ SIGN-UP — everyone ============
     {
       id: "a1",
-      group: "Flow A · Assignment card",
-      label: "Handoff",
+      group: "Flow A · Sign-up (everyone)",
+      label: "Cold open",
+      title: "Unregistered signal",
+      sub: "The universal front door. Sticker, NFC trinket, or a card — every path starts here now.",
+      net: "ok",
+      html:
+        '<div class="screen center">' +
+          '<div class="art">📡</div>' +
+          '<h1 class="big">You&rsquo;ve been reading on this frequency for a while.</h1>' +
+          '<p class="sub">Unregistered signature · QR-1188</p>' +
+          '<div class="spacer"></div>' +
+          '<button class="tap tap-primary" data-goto="a2">Take the reading</button>' +
+        "</div>",
+      purpose: "Justify the quiz in one line. 'You've already been doing this' flatters, and it's in-universe.",
+      interactions: [
+        "Four taps from here to a working badge.",
+        "A card scanned by someone with no app lands here too — sign-up first, then the assignment.",
+      ],
+      state: ["Code held in memory; resolved to a starter item after the quiz."],
+      notes: [
+        "Everyone signs up the same way now. There's no privileged entry point, which is what makes the assignment card matter later instead of at the door.",
+        "No mention of a game, points, or collecting. The framing is a workplace intake.",
+      ],
+      questions: ["Allow a bail-out straight to a random badge? Faster, but skips what makes the result feel personal."],
+    },
+    {
+      id: "a2",
+      group: "Flow A · Sign-up (everyone)",
+      label: "Q1 · Frequency",
+      title: "Question 1 — frequency",
+      sub: "Sets your aura tint. Cheapest slot in the game, so it goes first and feels generous.",
+      net: "ok",
+      html:
+        '<div class="screen">' +
+          '<p class="sub">Reading 1 / 3</p>' +
+          '<h1 class="big">What frequency are you running?</h1>' +
+          '<div class="opt-grid">' +
+            opt("a3", "", "Nuclear Lime", "#C9F24D") +
+            opt("a3", "", "Deep Violet", "#8B5CFF") +
+            opt("a3", "", "Signal Orange", "#F2703D") +
+            opt("a3", "", "Cold Silver", "#B8C4D9") +
+          "</div>" +
+          '<div class="spacer"></div>' +
+        "</div>",
+      purpose: "Establish the answer pattern — art first, words second. Nobody is reading a menu.",
+      interactions: ["Tap = commit and advance. No Next button, no back.", "Chosen tint shows on the aura immediately."],
+      state: ["→ aura slot. CSS glow tint, no art asset per option."],
+      notes: [
+        "Colour swatches instead of icons — the answer <i>is</i> the colour, so showing it is more honest.",
+        "The quiz no longer decides your post, so these questions only have to be evocative, not load-bearing.",
+      ],
+      questions: ["Four frequencies, or 6–8 for badge variety? Cost is near zero — it's a tint."],
+    },
+    {
+      id: "a3",
+      group: "Flow A · Sign-up (everyone)",
+      label: "Q2 · Status",
+      title: "Question 2 — status",
+      sub: "Becomes the Status line on your badge. A vibe, not a rank.",
+      net: "ok",
+      html:
+        '<div class="screen">' +
+          '<p class="sub">Reading 2 / 3</p>' +
+          '<h1 class="big">Where are you right now?</h1>' +
+          '<div class="opt-grid">' +
+            opt("a4", "🎯", "In the middle of it") +
+            opt("a4", "⛺", "Holding a spot") +
+            opt("a4", "🥾", "Still moving") +
+            opt("a4", "🌙", "Somewhere quiet") +
+          "</div>" +
+          '<div class="spacer"></div>' +
+        "</div>",
+      purpose: "One field of personality on the badge, in the player's own words rather than ours.",
+      interactions: ["Tap to advance. The chosen phrase is echoed back verbatim as your Status."],
+      state: ["→ status string on the badge. Changeable later? Currently no."],
+      notes: [
+        "This used to be one axis of a hidden 4×4 map onto the 16 designations. That whole mechanism is gone — posts come from cards now, so there are no 16 mappings left to author.",
+        "'Answer for tonight, not in general' is implied by the question rather than stated.",
+      ],
+      questions: ["Should status be re-answerable later in the app? It's the one badge field that genuinely changes over a weekend."],
+    },
+    {
+      id: "a4",
+      group: "Flow A · Sign-up (everyone)",
+      label: "Q3 · Tool",
+      title: "Question 3 — what you brought",
+      sub: "Hands over your starter held item.",
+      net: "ok",
+      html:
+        '<div class="screen">' +
+          '<p class="sub">Reading 3 / 3</p>' +
+          '<h1 class="big">What did you bring?</h1>' +
+          '<div class="opt-grid">' +
+            opt("a5", "💧", "Something to share") +
+            opt("a5", "🔔", "Something loud") +
+            opt("a5", "🫖", "Something warm") +
+            opt("a5", "✋", "Nothing") +
+          "</div>" +
+          '<div class="spacer"></div>' +
+        "</div>",
+      purpose: "Load the avatar's hand and go straight to the badge.",
+      interactions: ["Final tap goes directly to the badge — no interstitial name screen."],
+      state: ["Starter held item: 💧 water bottle, 🔔 metronome, 🫖 kettle, ✋ empty cup."],
+      notes: ["'Nothing' still awards an item (empty cup) — the joke lands and nobody leaves empty-handed."],
+      questions: ["Should the starter item come from the scanned code instead, so different stickers give different starts?"],
+    },
+    {
+      id: "a5",
+      group: "Flow A · Sign-up (everyone)",
+      label: "Badge · unassigned",
+      title: "Badge issued — unassigned",
+      sub: "The default state of the whole festival: a real agent, on the books, with no post.",
+      net: "ok",
+      html:
+        '<div class="screen">' +
+          '<div class="eyebrow">Reading complete</div>' +
+          badge({
+            name: "AGENT KESTREL",
+            code: "—",
+            head: "PROVISIONAL · UNASSIGNED",
+            av: { hat: "", torso: "🦺", held: "💧" },
+            chips: dotchip("#C9F24D", "Nuclear Lime") + ichip("🥾", "Still moving") + ichip("💧", "Water bottle"),
+          }) +
+          noAssign() +
+          pips(2, 34, true) +
+          '<div class="spacer"></div>' +
+          '<div class="stack">' +
+            '<button class="tap tap-primary" data-goto="c1">My badge</button>' +
+            '<button class="tap tap-ghost" data-goto="c1">📲 Add to home screen</button>' +
+          "</div>" +
+        "</div>",
+      purpose:
+        "Complete and satisfying on its own, with one conspicuous hole. The hole is the entire recruitment engine.",
+      interactions: [
+        "Install prompt appears once, here — highest-intent moment for the PWA.",
+        "Name is generated, not typed. Anonymous is the default; naming yourself is something the assignment card unlocks.",
+      ],
+      state: ["Generated name, aura, status, held item. No designation field at all. Offline-capable from here."],
+      notes: [
+        "Badge header reads <b>PROVISIONAL · UNASSIGNED</b> with an em dash where the designation code goes. You can see what's missing without being told.",
+        "Wordlist stays in one register — birds, weather, minerals: KESTREL, VESPER, BASALT, NOVA.",
+        "'Assignments are issued by hand, in the field' is the strongest line in the app: the only way forward is a conversation with a person.",
+      ],
+      questions: [
+        "Is a generated name the right default, or should everyone get to type one and the card instead unlock something else?",
+        "Is 34 the right advertised total? A visible denominator makes completion feel finite.",
+      ],
+    },
+
+    // ============ ASSIGNMENT CARD ============
+    {
+      id: "b1",
+      group: "Flow B · Assignment card",
+      label: "Card recognized",
       title: "Card recognized",
-      sub: "A squad member hands over a physical designation card. The player scans the QR on the back, or taps the NFC sticker.",
+      sub: "Can happen an hour or two days after sign-up. This is the big moment, and it forks.",
       net: "ok",
       html:
         '<div class="screen center">' +
@@ -1138,66 +1298,72 @@
           '<h1 class="big">Your file was opened long before tonight.</h1>' +
           '<p class="sub">Card IN-15-0342 · logged</p>' +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="a2">Begin intake</button>' +
+          '<div class="stack">' +
+            '<button class="tap tap-primary" data-goto="b2">An agent handed me this</button>' +
+            '<button class="tap tap-ghost" data-goto="c5">It&rsquo;s someone else&rsquo;s card</button>' +
+          "</div>" +
         "</div>",
-      purpose: "The first line anyone on the card path ever reads. It has to promise something, not describe what just happened.",
+      purpose:
+        "The Department suddenly having a file on someone who's been an anonymous agent for a day is the payoff the new structure buys.",
       interactions: [
-        "Arrives at <code>/scan?code=IN-15-0342&amp;card=1</code> — the <code>card=1</code> flag skips the quiz.",
-        "One tap forward. No back, no menu — the card chose the path.",
+        "<b>The fork:</b> handed to you → induction. Someone else's → draws a line (C5) instead.",
+        "Only the first card you claim can assign you. Every card after that draws a line, no question asked.",
       ],
-      state: ["Lookup resolves code → designation + its Object + guaranteed swag item. Nothing persisted yet."],
+      state: ["Resolves the card code → designation + Object + guaranteed item. Nothing written until they claim it."],
       notes: [
-        "The line does the deck's premise in seven words: the Department isn't assigning you anything, it's <i>retrieving</i> something already true about you. Mystical, but it's a sentence about filing.",
-        "Mystical headline + dry code underneath (<code>IN-15-0342 · logged</code>) is the tone formula — the bureaucracy is what makes the mysticism land.",
-        "Seal is a sigil, not an envelope: ✉️ is reserved for the HQ easter egg and shouldn't appear anywhere else in the app.",
+        "This fork is how the app tells 'my card' from 'your card' with no server and no identity — it just asks, once.",
+        "Without the fork, the first friend's card you scanned would silently become your post.",
+        "Mystical headline over a dry code is the tone formula: the bureaucracy is what makes the mysticism land.",
       ],
       questions: [
-        "Alternates if this one's too knowing: <i>&ldquo;Something in you was logged a long time ago.&rdquo;</i> / <i>&ldquo;You were in the register before you were on the guest list.&rdquo;</i> / <i>&ldquo;This was true about you before you got here.&rdquo;</i>",
-        "Should the card's printed designation be readable in hand, or is the app the only reveal? Currently the app.",
+        "Should claiming be irreversible? Currently yes. A mis-tap would give you the wrong post forever — though 'the Grid doesn't deal a wrong card' is a fine in-universe answer.",
+        "Alternates for the headline: <i>&ldquo;Something in you was logged a long time ago.&rdquo;</i> / <i>&ldquo;You were in the register before you were on the guest list.&rdquo;</i>",
       ],
     },
     {
-      id: "a2",
-      group: "Flow A · Assignment card",
-      label: "Name",
-      title: "Name",
-      sub: "Stripped to one word and a cursor. Card holders name themselves — that's the privilege the anon path doesn't get.",
+      id: "b2",
+      group: "Flow B · Assignment card",
+      label: "File a name",
+      title: "File a name",
+      sub: "Registration is where you stop being anonymous. Naming yourself is the card's second privilege.",
       net: "ok",
       html:
         '<div class="screen">' +
           '<div class="spacer"></div>' +
           '<div class="eyebrow">Cleared for induction</div>' +
-          '<p class="line">An agent vouched for you, and the post you were handed is a specific one.</p>' +
+          '<p class="line">An agent vouched for you. The post on this card is specific, and it&rsquo;s yours.</p>' +
           '<h1 class="huge">Name?</h1>' +
           '<div class="fake-input">SPACE COWBOY<span class="caret"></span></div>' +
           '<p class="cap">18 / 18</p>' +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="a3">→</button>' +
+          '<div class="stack">' +
+            '<button class="tap tap-primary" data-goto="b3">→</button>' +
+            '<button class="tap tap-ghost" data-goto="b3">Keep AGENT KESTREL</button>' +
+          "</div>" +
         "</div>",
       purpose:
-        "Establish that this was a judgement call by a person before asking for anything. Being vouched for is the reason to keep tapping.",
+        "Establish that a person made a judgement call about them, then let them shed the assigned name if they want.",
       interactions: [
-        "Keyboard up on load, submit on Return. The arrow button is for thumbs, not instruction.",
-        "Empty submit allowed — falls through to a generated name rather than blocking.",
+        "Keyboard up on load, submit on Return.",
+        "Keeping the generated name is a real, equal option — some people will have grown attached to AGENT KESTREL.",
       ],
-      state: ["Name → localStorage. This is the identity key; there's no account behind it."],
+      state: ["Overwrites the generated name if they file a new one. Same localStorage key."],
       notes: [
-        "'An agent vouched for you' is canon, not flattery — Tier 3 induction in the README is explicitly the agent's call, based on what they observed.",
-        "'A specific one' promises the post without naming it, so A3 still has something to hand over.",
-        "Everything else stays cut: no AGENT-prefix explanation, no nickname reassurance. One line, one field, one tap.",
+        "'An agent vouched for you' is canon, not flattery — Tier 3 induction in the README is explicitly the agent's call.",
+        "'A specific one' promises the post without naming it, so B3 still has something to hand over.",
         "18-char cap keeps names legible on HQ board pins.",
       ],
       questions: [
-        "Does naming the agent land harder — 'Agent Marlow vouched for you'? Requires the squad member's name on the card, which is a print-run decision.",
-        "Names surface publicly at HQ and are unpoliced. Want a quiet blocklist?",
+        "Does naming the agent land harder — 'Agent Marlow vouched for you'? Needs their name on the card, which is a print-run decision.",
+        "Should an already-named agent skip this screen entirely on a second card? Probably — but only if a second card can ever reassign you.",
       ],
     },
     {
-      id: "a3",
-      group: "Flow A · Assignment card",
-      label: "Welcome + post",
+      id: "b3",
+      group: "Flow B · Assignment card",
+      label: "The post",
       title: "Welcome, and the post you drew",
-      sub: "Welcome and designation on one screen. Hierarchy keeps it from scattering: the greeting is small, the drawn post is the hero.",
+      sub: "The induction. Hierarchy keeps it from scattering: the greeting is small, the drawn post is the hero.",
       net: "ok",
       html:
         '<div class="screen center">' +
@@ -1210,278 +1376,147 @@
           '<p class="sub">The Mentor · IN-15</p>' +
           '<p class="assignment">See the one still outside the light, and wave them in.</p>' +
           '<p class="reading">&ldquo;Hold the door open behind you.&rdquo;</p>' +
-          '<div class="chipbar" style="justify-content:center">' + ichip("🔑", "OBJECT ISSUED", "lime") + "</div>" +
+          '<div class="chipbar" style="justify-content:center">' +
+            ichip("🔑", "OBJECT ISSUED", "lime") + ichip("✅", "REGISTERED", "lime") +
+          "</div>" +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="a4">Accept the post</button>' +
+          '<button class="tap tap-primary" data-goto="b4">Accept the post</button>' +
         "</div>",
-      purpose:
-        "One induction moment instead of two: you're welcomed by name, then told what the card says you already were.",
+      purpose: "The single biggest moment in the app. Everything before it was preamble; this is what the weekend builds toward.",
       interactions: [
-        "Reveals in one sequence — greeting, rule wipe, Object art, designation, then the reading. ~250ms apart, skippable on tap.",
+        "Reveals in one sequence — greeting, rule wipe, Object art, designation, then the reading. Skippable on tap.",
         "No re-roll. The Grid doesn't deal a wrong card.",
       ],
-      state: ["Writes designation, Object → held-item slot, and the card's guaranteed swag item."],
+      state: ["Writes designation, Object → held item, the card's guaranteed item, and flips the account to registered."],
       notes: [
-        "What keeps this from being the scattered v1 screen is <b>weight</b>, not word count: greeting is eyebrow-sized, the Object art and designation are the hero, assignment and reading are body text under a rule.",
-        "'The card drew you' inverts the usual phrasing on purpose — the card is the actor, which is the deck's premise.",
-        "Assignment trimmed to its first sentence; the printed card keeps both, so the physical object still holds something the app doesn't.",
-        "Card entry is the <b>only</b> path that grants your designation's Object.",
+        "What keeps this from scattering is <b>weight</b>, not word count: greeting eyebrow-sized, Object art and designation as hero, deck's words as body text under a rule.",
+        "'The card drew you' inverts the phrasing on purpose — the card is the actor, which is the deck's premise.",
+        "Assignment trimmed to its first sentence; the printed card keeps both, so the physical object holds something the app doesn't.",
+        "Two chips carry what used to be paragraphs: the Object arrived, and you are now on the books.",
       ],
       questions: [
-        "This is now the longest screen in the app. If it feels crowded on a real phone, the first thing to cut is the field reading — it's the line most likely to be read off the card instead.",
-        "Should the anon path get a welcome too, or does card-only make cards more ceremonial?",
+        "Longest screen in the app. If it crowds on a real phone, cut the field reading first — it's the line most likely to be read off the card anyway.",
+        "Should registration be visible to others at HQ (an unassigned agent's board pin says so)? Strong social pull, mild exclusion.",
       ],
     },
     {
-      id: "a4",
-      group: "Flow A · Assignment card",
-      label: "First badge",
-      title: "Badge issued",
-      sub: "Lands on the object they'll carry all weekend, with two of thirty-four pips lit.",
+      id: "b4",
+      group: "Flow B · Assignment card",
+      label: "Badge · registered",
+      title: "Badge — registered",
+      sub: "The same credential as before, with the hole filled and a standing assignment that wasn't there an hour ago.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="eyebrow">Credential active</div>' +
+          '<div class="eyebrow">Credential updated · registered</div>' +
           badge({
             name: "AGENT SPACE COWBOY",
             code: "IN-15",
             av: { hat: "", torso: "🦺", held: "🔑", aura: "aura-violet" },
-            chips: ichip("🎖", "Induction Officer") + ichip("🔑", "Key") + ichip("📻", "Unread", "amber"),
+            chips: ichip("🎖", "Induction Officer") + ichip("🔑", "Key") + dotchip("#8B5CFF", "Deep Violet"),
           }) +
-          pips(2, 34, true) +
-          orders("c5", "First orders", [
-            { ico: "🔍", text: "Find three traces", done: 0, total: 3 },
-            { ico: "🔗", text: "Draw a line to another agent", done: 0, total: 1 },
-          ], "No lines drawn yet") +
+          assign("Induction Officer", "See the one still outside the light, and wave them in.") +
+          pips(4, 34, true) +
           '<div class="spacer"></div>' +
-          '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">My badge</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">📲 Add to home screen</button>' +
-          "</div>" +
+          '<button class="tap tap-primary" data-goto="c2">My badge</button>' +
         "</div>",
-      purpose: "Turn the reveal into a collection goal and hand them a job in the same breath. 32 dark pips plus two orders do that without a sentence of explanation.",
-      interactions: [
-        "Install prompt appears once, here — highest-intent moment for the PWA.",
-        "Orders arrive at induction so nobody reaches their first badge without knowing what to do next.",
-        "Empty hat slot is visibly empty.",
-      ],
-      state: ["Full agent record persisted; the app is offline-capable from here."],
+      purpose: "Show the upgrade explicitly: header now carries a designation code, and the assignment block exists for the first time.",
+      interactions: ["One way forward. The standing assignment now appears on every home screen visit."],
+      state: ["Registered flag + designation persisted. Everything still local."],
       notes: [
-        "Pips replace '2 / 34' prose and the explanatory paragraph — you can see how much is out there at a glance.",
-        "The standing assignment isn't repeated here — they just read it on A3. Orders are the new information.",
-        "'📻 Unread' chip is the card-path player's reason to still scan an anon sticker: no frequency yet.",
+        "Put A5 and B4 side by side in the rail — the diff between them is the whole pitch for the assignment card.",
+        "Two extra pips: the Object plus the card's guaranteed item.",
       ],
-      questions: ["Is 34 the right advertised total? A visible denominator makes completion feel finite — and makes it obvious when nobody finishes."],
-    },
-
-    // ============ FLOW B ============
-    {
-      id: "b1",
-      group: "Flow B · Anon QR",
-      label: "Cold open",
-      title: "Unregistered signal",
-      sub: "Someone found a sticker on a shade structure. No card, no context, possibly no patience.",
-      net: "ok",
-      html:
-        '<div class="screen center">' +
-          '<div class="art">📡</div>' +
-          '<h1 class="big">You&rsquo;ve been reading on this frequency for a while.</h1>' +
-          '<p class="sub">Unregistered signature · QR-1188</p>' +
-          '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="b2">Take the reading</button>' +
-        "</div>",
-      purpose: "Justify the quiz in one line. 'You've already been doing this' flatters and is in-universe.",
-      interactions: ["One tap to Q1. Four taps total from here to a finished badge."],
-      state: ["Sticker code held in memory, resolved to a starter item after the quiz."],
-      notes: [
-        "No mention of a game, points, or collecting. The framing is a workplace intake.",
-        "Dropped the 'takes about twenty seconds' line — the 1/3 counter on the next screen says it better.",
-      ],
-      questions: ["Allow a bail-out straight to a random badge? Faster, but skips what makes the result feel personal."],
-    },
-    {
-      id: "b2",
-      group: "Flow B · Anon QR",
-      label: "Q1 · Frequency",
-      title: "Question 1 — frequency",
-      sub: "Sets aura tint only. Cheapest slot in the game, so it goes first and feels generous.",
-      net: "ok",
-      html:
-        '<div class="screen">' +
-          '<p class="sub">Reading 1 / 3</p>' +
-          '<h1 class="big">What frequency are you running?</h1>' +
-          '<div class="opt-grid">' +
-            opt("b3", "", "Nuclear Lime", "#C9F24D") +
-            opt("b3", "", "Deep Violet", "#8B5CFF") +
-            opt("b3", "", "Signal Orange", "#F2703D") +
-            opt("b3", "", "Cold Silver", "#B8C4D9") +
-          "</div>" +
-          '<div class="spacer"></div>' +
-        "</div>",
-      purpose: "Establish the answer pattern — 2×2 grid, art first, words second. Nobody is reading a menu.",
-      interactions: [
-        "Tap = commit and advance. No Next button, no back.",
-        "Chosen tint appears on the avatar's aura immediately, so the choice is visible before the badge exists.",
-      ],
-      state: ["→ aura slot. CSS glow tint, no art asset per option."],
-      notes: [
-        "Colour swatches instead of emoji here — the answer IS the colour, so showing it is more honest than an icon.",
-        "Was four stacked text rows; now a grid that reads in one glance.",
-        "Cut the 'no wrong reading' reassurance — it protested too much.",
-      ],
-      questions: ["Four frequencies, or 6–8 for badge variety? Cost is near zero — it's a tint."],
-    },
-    {
-      id: "b3",
-      group: "Flow B · Anon QR",
-      label: "Q2 · Posture",
-      title: "Question 2 — where you are",
-      sub: "First axis of the hidden 4×4 mapping onto the 16 designations.",
-      net: "ok",
-      html:
-        '<div class="screen">' +
-          '<p class="sub">Reading 2 / 3</p>' +
-          '<h1 class="big">Where are you right now?</h1>' +
-          '<div class="opt-grid">' +
-            opt("b4", "🎯", "In the middle of it") +
-            opt("b4", "⛺", "Holding a spot") +
-            opt("b4", "🥾", "Still moving") +
-            opt("b4", "🌙", "Somewhere quiet") +
-          "</div>" +
-          '<div class="spacer"></div>' +
-        "</div>",
-      purpose: "Do the real work of the draw without ever showing a menu of roles — the lore forbids picking off a menu.",
-      interactions: ["Tap to advance. Answer stored as an axis index, never shown back to the player."],
-      state: ["Q2 (4) × Q3 (4) = <b>exactly 16</b> — one cell per designation. Deterministic, complete, no gaps."],
-      notes: [
-        "Icons carry the meaning, so the labels shrink to three words.",
-        "Mapping table ships in the same JSON as the code lookup — tunable without a rebuild.",
-      ],
-      questions: ["Still to build: which 16 pairings map to which designation. 🎯 + 🔔 → The Spark is obvious; the quiet corners need care."],
-    },
-    {
-      id: "b4",
-      group: "Flow B · Anon QR",
-      label: "Q3 · Tool",
-      title: "Question 3 — what you brought",
-      sub: "Second mapping axis, and it hands over the starter held item.",
-      net: "ok",
-      html:
-        '<div class="screen">' +
-          '<p class="sub">Reading 3 / 3</p>' +
-          '<h1 class="big">What did you bring?</h1>' +
-          '<div class="opt-grid">' +
-            opt("b5", "💧", "Something to share") +
-            opt("b5", "🔔", "Something loud") +
-            opt("b5", "🫖", "Something warm") +
-            opt("b5", "✋", "Nothing") +
-          "</div>" +
-          '<div class="spacer"></div>' +
-        "</div>",
-      purpose: "Close the mapping and load the avatar's hand in the same tap.",
-      interactions: ["Final tap goes <b>straight to the badge</b> — no interstitial name screen any more."],
-      state: ["Second axis + starter held item: 💧 water bottle, 🔔 metronome, 🫖 kettle, ✋ empty cup."],
-      notes: [
-        "'Nothing' still awards an item (empty cup) — the joke lands and nobody leaves empty-handed.",
-        "This is the anon path's held item, not your designation's Object.",
-      ],
-      questions: ["Q3 does double duty, so item and designation are correlated. Fine, or should the item come from the sticker code so different stickers vary it?"],
-    },
-    {
-      id: "b5",
-      group: "Flow B · Anon QR",
-      label: "Badge",
-      title: "Badge issued — name and all",
-      sub: "The old 'name assigned' screen is gone. The badge does the reveal.",
-      net: "ok",
-      html:
-        '<div class="screen">' +
-          '<div class="eyebrow">Reading complete</div>' +
-          badge({
-            name: "AGENT KESTREL",
-            code: "FP-07",
-            av: { hat: "", torso: "🦺", held: "💧" },
-            chips: ichip("🎖", "Field Pathfinder") + dotchip("#C9F24D", "Nuclear Lime") + ichip("🥾", "Still moving"),
-          }) +
-          '<div class="callout amber"><span class="ico">🧭</span><span><b>Your Object is a Compass.</b> Objects are handed over by an agent in the field.</span></div>' +
-          pips(2, 34, true) +
-          '<div class="spacer"></div>' +
-          '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">My badge</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">📲 Add to home screen</button>' +
-          "</div>" +
-        "</div>",
-      purpose: "One screen instead of two. You learn your name, your post and your gap in a single glance.",
-      interactions: [
-        "Reaches here directly from Q3. Name and designation can fade in a beat apart to keep some ceremony.",
-        "Both buttons converge on the same home screen as the card path.",
-      ],
-      state: [
-        "Generated name (seeded by answers + sticker code, so a reload is stable), designation, aura, held item, Object recorded as known-but-unissued.",
-      ],
-      notes: [
-        "Cut per your note: the standalone AGENT KESTREL screen. The name now arrives <i>on</i> the credential, which is arguably more institutional anyway.",
-        "Wordlist stays in one register — birds, weather, minerals: KESTREL, VESPER, BASALT, NOVA.",
-        "The amber Object callout is the engine of the whole ARG: the app says the Object exists and that only a human hands it over.",
-      ],
-      questions: [
-        "Without the standalone name beat, is the generated name still a moment? If it needs more, the fix is animation on this screen rather than another screen.",
-        "If an anon player later draws a card with a <b>different</b> designation: overwrite, keep the first, or dual posting?",
-      ],
+      questions: ["Should the badge visually change more on registration — a different header stripe, a seal? Right now only the text changes."],
     },
 
     // ============ CORE ============
     {
       id: "c1",
       group: "Core loop",
-      label: "Badge (home)",
-      title: "Badge — home screen",
-      sub: "Everything starts and returns here. Fully offline. No tab bar.",
+      label: "Home · unassigned",
+      title: "Home — unassigned",
+      sub: "Where most people live for most of the festival. Has to work completely, and still want something.",
       net: "ok",
       html:
         '<div class="screen">' +
           badge({
             name: "AGENT KESTREL",
-            code: "FP-07",
+            code: "—",
+            head: "PROVISIONAL · UNASSIGNED",
             av: { hat: "🍌", torso: "🦺", held: "🔮" },
-            chips: ichip("🎖", "Field Pathfinder") + dotchip("#C9F24D", "Nuclear Lime") + ichip("🧭", "Object pending", "amber"),
+            chips: dotchip("#C9F24D", "Nuclear Lime") + ichip("🥾", "Still moving"),
           }) +
-          assign("Field Pathfinder", "Trust your feet over the map. You always arrive where you&rsquo;re needed.") +
-          orders("c5", "Tonight", [
+          noAssign() +
+          orders("c6", "Tonight", [
             { ico: "🔍", text: "Find three more traces", done: 1, total: 3 },
             { ico: "🔗", text: "Draw a line to another agent", done: 0, total: 1 },
           ], "5 of 16 posts met") +
           pips(7) +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c3">📷 Scan</button>' +
-            '<button class="tap" data-goto="c2"><span class="ico">🎒</span>Locker</button>' +
+            '<button class="tap tap-primary" data-goto="c4">📷 Scan</button>' +
+            '<button class="tap" data-goto="c3"><span class="ico">🎒</span>Locker</button>' +
             '<button class="tap" data-goto="h1"><span class="ico">🛰</span>Report to HQ</button>' +
           "</div>" +
         "</div>",
       purpose:
-        "The badge is the product, and it should always be telling you what to do next — one charge from your post, two orders that get you moving and talking to people.",
+        "Unassigned isn't a lesser mode — you collect, you draw lines, you visit HQ. The amber block is the only thing you can't do alone.",
       interactions: [
-        "The orders block is tappable → your constellation of lines drawn (C5).",
-        "'Report to HQ' is a door, not a tab — leaving the badge should feel like going somewhere.",
-        "Most scans actually arrive from outside the app via the OS camera or an NFC tap.",
+        "Orders block is tappable → your constellation of lines drawn.",
+        "Everything here works with no post and no connection.",
       ],
-      state: [
-        "Standing assignment is the deck's own 'Your Assignment' line for your designation — static, never changes.",
-        "Orders are counters in localStorage. Reset daily; no server needed.",
-      ],
+      state: ["Renders entirely from localStorage. Zero network."],
       notes: [
-        "Two orders, deliberately: one sends you hunting <b>objects</b> ('traces'), one sends you at <b>people</b>. The second is the whole point of the thing.",
-        "'Traces' is doing real work — it covers stickers and NFC trinkets without naming either, so the order stays true wherever they find one.",
-        "Sector and activity chips got cut to make room; the orders earned that space.",
+        "Amber 'no post on file' sits exactly where a registered agent's standing assignment goes, so the upgrade is legible before it happens.",
+        "Orders still work unassigned — they're general readings, which is what an unassigned agent does.",
       ],
       questions: [
-        "Should orders be role-specific too — a Pathfinder told to survey the north camp, a Caretaker told to find someone fading? Much better flavour, 16× the copy to write.",
-        "Do orders reset daily, per-session, or never? Daily gives people a reason to reopen the app on day two.",
+        "Should this screen say outright how to get assigned ('find an agent in a purple vest'), or is the current phrasing enough of a hint?",
+        "Do orders reset daily, per-session, or never? Daily gives people a reason to reopen on day two.",
       ],
     },
     {
       id: "c2",
+      group: "Core loop",
+      label: "Home · registered",
+      title: "Home — registered",
+      sub: "Same screen with a post. The standing assignment is the reward that keeps paying out.",
+      net: "ok",
+      html:
+        '<div class="screen">' +
+          badge({
+            name: "AGENT SPACE COWBOY",
+            code: "IN-15",
+            av: { hat: "🍌", torso: "🦺", held: "🔑", aura: "aura-violet" },
+            chips: ichip("🎖", "Induction Officer") + dotchip("#8B5CFF", "Deep Violet") + ichip("🎯", "Causing it"),
+          }) +
+          assign("Induction Officer", "See the one still outside the light, and wave them in.") +
+          orders("c6", "Tonight", [
+            { ico: "🔍", text: "Find three more traces", done: 2, total: 3 },
+            { ico: "🔗", text: "Draw a line to another agent", done: 1, total: 1 },
+          ], "6 of 16 posts met") +
+          pips(11) +
+          '<div class="spacer"></div>' +
+          '<div class="stack">' +
+            '<button class="tap tap-primary" data-goto="c4">📷 Scan</button>' +
+            '<button class="tap" data-goto="c3"><span class="ico">🎒</span>Locker</button>' +
+            '<button class="tap" data-goto="h1"><span class="ico">🛰</span>Report to HQ</button>' +
+          "</div>" +
+        "</div>",
+      purpose: "The badge should always be telling you what to do next — one charge from your post, two orders that get you moving and talking.",
+      interactions: ["Identical layout to the unassigned home. Only the second block changes."],
+      state: ["Standing assignment is the deck's own line for your designation — static, never changes."],
+      notes: [
+        "Two orders, deliberately: one sends you hunting <b>objects</b>, one sends you at <b>people</b>. The second is the point of the thing.",
+        "'Traces' covers stickers and NFC trinkets without naming either, so the order stays true wherever they find one.",
+      ],
+      questions: [
+        "Should orders be role-specific — a Pathfinder told to survey north camp, a Caretaker told to find someone fading? Much better flavour, 16× the copy.",
+      ],
+    },
+    {
+      id: "c3",
       group: "Core loop",
       label: "Locker",
       title: "Equipment locker",
@@ -1506,7 +1541,7 @@
             '<button class="chip" aria-pressed="true">▦</button><button class="chip locked">?</button>' +
           "</div></div>" +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
+          '<button class="tap tap-ghost" data-goto="c2">← Badge</button>' +
         "</div>",
       purpose: "Newest scan auto-equips, so this screen exists to undo that — put your favourite hat back on.",
       interactions: [
@@ -1515,13 +1550,13 @@
       ],
       state: ["Writes equipped item IDs per slot. Owned set is append-only."],
       notes: [
-        "Slot names became icons: 🎩 👕 ✊ ✨ 🖼. Five rows, whole locker on one screen, still works at 34 items.",
-        "Aura row uses coloured dots since a tint has no object to draw.",
+        "Slot names are icons: 🎩 👕 ✊ ✨ 🖼. Five rows, whole locker on one screen, still works at 34 items.",
+        "Your Object can be unequipped like anything else — the post is on your badge header regardless.",
       ],
       questions: ["Is the '?' chip too close to the locked silhouettes you ruled out? Easy to drop."],
     },
     {
-      id: "c3",
+      id: "c4",
       group: "Core loop",
       label: "New item",
       title: "Scan — new item",
@@ -1536,8 +1571,8 @@
           pips(8, 34, true) +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">← Badge</button>' +
-            '<button class="tap tap-ghost" data-goto="c2">🎒 Locker</button>' +
+            '<button class="tap tap-primary" data-goto="c2">← Badge</button>' +
+            '<button class="tap tap-ghost" data-goto="c3">🎒 Locker</button>' +
           "</div>" +
         "</div>",
       purpose: "Name it, show it, wear it. Three seconds, no network.",
@@ -1549,16 +1584,16 @@
       notes: [
         "Status bar reads <b>⚠ NO LINK</b> here on purpose, proving the core loop needs nothing.",
         "Newest pip glows so you can see the meter move without reading the number.",
-        "'One (1)' does the tone work that a paragraph used to.",
+        "Works identically whether or not you have a post.",
       ],
       questions: ["Sound or haptic on reveal? A short buzz reads well in a loud field; audio is mostly wasted."],
     },
     {
-      id: "c4",
+      id: "c5",
       group: "Core loop",
       label: "Line drawn",
-      title: "Scan — another agent's card",
-      sub: "New. What happens when you scan someone else's assignment card, instead of a sticker.",
+      title: "Scan — someone else's card",
+      sub: "What happens when the card isn't yours. Reached from the fork on B1.",
       net: "off",
       html:
         '<div class="screen center">' +
@@ -1572,37 +1607,34 @@
           "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c5">See my lines</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
+            '<button class="tap tap-primary" data-goto="c6">See my lines</button>' +
+            '<button class="tap tap-ghost" data-goto="c2">← Badge</button>' +
           "</div>" +
         "</div>",
-      purpose:
-        "Make meeting a person mechanically different from finding an object. Objects fill your badge; people fill your constellation.",
+      purpose: "Make meeting a person mechanically different from finding an object. Objects fill your badge; people fill your constellation.",
       interactions: [
-        "Works fully offline: their card code is in your bundled lookup table, so the app knows the <b>post</b> without knowing the person.",
-        "You also receive the item that card grants — people's cards are walking item sources, which is already how the spec's code table works.",
-        "The prompt to hand over your own card is the mutual-scan nudge. Two phones, two cards, both credited, still no server.",
+        "Fully offline: their card code is in your bundled table, so the app learns the <b>post</b> without learning the person.",
+        "You also receive the item that card grants — people's cards are walking item sources, which is already how the code table works.",
+        "Every card after your own claimed one lands here automatically, no fork question.",
       ],
-      state: [
-        "Appends the designation to your met-posts set, plus the card's item. Duplicate cards of the same post are recorded once for the constellation but still grant the item.",
-      ],
+      state: ["Appends the designation to your met-posts set, plus the card's item."],
       notes: [
-        "Offline you meet a <b>function</b>, not a name — which is exactly how the Grid is described. If you later check in at HQ, logged card codes can resolve into the names of agents who've also checked in: the file catches up.",
-        "'Line', not 'squad' — the Linkage Officer's reading already says <i>every stranger is a line waiting to be drawn</i>. The vocabulary was sitting there.",
-        "Nothing is competitive about this. There's no rejecting a line, no removing one, no seeing who declined.",
+        "Offline you meet a <b>function</b>, not a name — exactly how the Grid is described. Check in at HQ and logged codes can resolve into names later: the file catches up.",
+        "'Line', not 'squad' — the Linkage Officer's reading already says <i>every stranger is a line waiting to be drawn</i>.",
+        "Unassigned agents can draw lines too. You don't need a post to meet people.",
+        "Nothing competitive: no rejecting a line, no removing one, no seeing who declined.",
       ],
       questions: [
-        "Should the item come from <b>their</b> card (drawn here — so cards circulate items) or should meeting a new post grant its own reward? Their card is simpler and needs no new table.",
-        "Is the one-way line worth showing at all, or should a line only count once both people have scanned each other? One-way is kinder to shy people; mutual is a better story.",
-        "Does scanning the same person's card twice need to do anything different? Currently it just re-grants the item.",
+        "Should a line count one-way, or only once both people have scanned each other? One-way is kinder to shy people; mutual is a better story.",
+        "An unassigned agent has no card to hand back. Does the nudge change for them — 'go get yourself assigned'?",
       ],
     },
     {
-      id: "c5",
+      id: "c6",
       group: "Core loop",
       label: "Lines",
       title: "Lines drawn",
-      sub: "New. The second collection — 16 posts, and you cannot fill it alone.",
+      sub: "The second collection — 16 posts, and you cannot fill it alone.",
       net: "off",
       html:
         '<div class="screen">' +
@@ -1614,25 +1646,23 @@
           "</div>" +
           '<p class="reading">&ldquo;Every stranger is a line waiting to be drawn.&rdquo;</p>' +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
+          '<button class="tap tap-ghost" data-goto="c2">← Badge</button>' +
         "</div>",
-      purpose:
-        "One screen that only gets more beautiful the more people you actually talk to. That's the whole thesis of the game in a single graphic.",
+      purpose: "One screen that only gets more beautiful the more people you actually talk to. The thesis of the game in a single graphic.",
       interactions: [
         "Reached from the orders block on home, or straight after drawing a line.",
         "Tap a lit star → which post, when you met it, and the agent's name if HQ has since resolved it.",
-        "Unmet posts are faint dots, never labelled — you can see there are sixteen without knowing what's missing.",
+        "Unmet posts are faint dots, never labelled — you see there are sixteen without knowing what's missing.",
       ],
       state: ["Met-posts set in localStorage. Fully offline; HQ only enriches it with names."],
       notes: [
-        "The Grid is organized by constellations (locked decision), so drawing your connections as a star map isn't decoration — it's the actual cosmology.",
-        "16 posts is a naturally finite set that <b>cannot</b> be completed alone or by scanning objects. Nobody fills this at their tent.",
-        "The quote is the Linkage Officer's field reading, verbatim from the deck.",
+        "The Grid is organized by constellations (locked decision), so drawing connections as a star map isn't decoration — it's the cosmology.",
+        "Lines should connect in the order you met them, so the shape is a record of your night's path.",
+        "16 posts is a naturally finite set that cannot be completed alone or by scanning objects.",
       ],
       questions: [
-        "Filling all 16 should mean <i>something</i> — an item, a title, a line on your badge. What? This is the one reward in the app that would be genuinely hard to earn.",
-        "Should HQ standings rank by lines drawn as well as items held? Ranking connection feels slightly against the spirit, but it would drive the behaviour you want.",
-        "Do lines expire? Items don't. I'd say lines are permanent — they're the one thing in the app that shouldn't age off.",
+        "Filling all 16 should mean <i>something</i> — an item, a title, a line on your badge. What? It's the one genuinely hard thing to earn.",
+        "Do lines expire? Items don't. I'd say lines are permanent — the one thing that shouldn't age off.",
       ],
     },
 
@@ -1689,7 +1719,7 @@
             '<button class="envelope" data-goto="h5" aria-label="A small glowing envelope">✉️</button>' +
           "</div>" +
           '<div class="toast">👥 14 on the board · refreshed 40s ago</div>' +
-          '<button class="tap tap-ghost" data-goto="c1">← Leave HQ</button>' +
+          '<button class="tap tap-ghost" data-goto="c2">← Leave HQ</button>' +
         "</div>",
       purpose: "One shared surface that proves other real people are doing this right now, with no live-presence machinery.",
       interactions: [
@@ -1818,7 +1848,7 @@
           "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-lime" data-goto="c1">Take it with you</button>' +
+            '<button class="tap tap-lime" data-goto="c2">Take it with you</button>' +
             '<button class="tap tap-ghost" data-goto="h2">← Board</button>' +
           "</div>" +
         "</div>",
@@ -1848,7 +1878,7 @@
           '<div class="callout"><span class="ico">🤝</span><span><b>Pass it on.</b> Codes work for everybody, every time.</span></div>' +
           pips(8) +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="c1">← Badge</button>' +
+          '<button class="tap tap-primary" data-goto="c2">← Badge</button>' +
         "</div>",
       purpose: "Turn a dead end into a referral. The duplicate scan is the best moment to ask someone to recruit.",
       interactions: ["Re-equips the item if it's currently off, so the tap still does something.", "No error styling — this is not a failure."],
@@ -1875,8 +1905,8 @@
           '<div class="callout amber"><span class="ico">🦺</span><span>If an agent handed you this, show them the screen.</span></div>' +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c3">📷 Scan another</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
+            '<button class="tap tap-primary" data-goto="c4">📷 Scan another</button>' +
+            '<button class="tap tap-ghost" data-goto="c2">← Badge</button>' +
           "</div>" +
         "</div>",
       purpose: "Fail in-universe, never blame the player, route them to a human in a purple vest.",
@@ -1903,7 +1933,7 @@
           '<div class="chipbar" style="justify-content:center">' + ichip("✅", "Your badge still works", "lime") + "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">← My badge</button>' +
+            '<button class="tap tap-primary" data-goto="c2">← My badge</button>' +
             '<button class="tap tap-ghost" data-goto="h1">🔄 Try again</button>' +
           "</div>" +
         "</div>",
