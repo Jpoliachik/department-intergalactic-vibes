@@ -377,8 +377,16 @@
   .statusbar .net { color: #C9F24D; }
   .statusbar .net.off { color: #F2A23D; }
 
+  .screen-host {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
   .screen {
     flex: 1;
+    min-height: 0;
     padding: 22px 20px;
     overflow-y: auto;
     display: flex;
@@ -886,7 +894,7 @@
           <span>D.I.V. FIELD TERMINAL</span>
           <span class="net" id="net">GRID LINK OK</span>
         </div>
-        <div class="screen" id="screen"></div>
+        <div class="screen-host" id="screenHost"></div>
       </div>
     </div>
 
@@ -1766,7 +1774,7 @@
   // ---------- render ----------
 
   const railEl = document.getElementById("rail");
-  const screenEl = document.getElementById("screen");
+  const hostEl = document.getElementById("screenHost");
   const notesEl = document.getElementById("notes");
   const netEl = document.getElementById("net");
   const posEl = document.getElementById("pos");
@@ -1808,11 +1816,8 @@
     current = (i + SCREENS.length) % SCREENS.length;
     const s = SCREENS[current];
 
-    screenEl.outerHTML = s.html;
-    // re-bind: outerHTML replaced the node
-    const fresh = document.querySelector(".glass .screen");
-    fresh.id = "screen";
-    fresh.querySelectorAll("[data-goto]").forEach((el) => {
+    hostEl.innerHTML = s.html;
+    hostEl.querySelectorAll("[data-goto]").forEach((el) => {
       el.addEventListener("click", () => {
         const idx = SCREENS.findIndex((x) => x.id === el.dataset.goto);
         if (idx > -1) show(idx);
@@ -1853,15 +1858,13 @@
   });
 
   // locker + board chips: local toggle so the wireframe feels alive
-  document.addEventListener("click", (e) => {
+  hostEl.addEventListener("click", (e) => {
     const chip = e.target.closest(".chip");
-    if (!chip || chip.classList.contains("locked") || chip.closest(".screen") === null) return;
-    if (chip.hasAttribute("aria-pressed") || chip.closest(".slot-row")) {
-      const row = chip.closest(".slot-row");
-      if (!row) return;
-      row.querySelectorAll(".chip").forEach((c) => c.removeAttribute("aria-pressed"));
-      chip.setAttribute("aria-pressed", "true");
-    }
+    if (!chip || chip.classList.contains("locked")) return;
+    const row = chip.closest(".slot-row");
+    if (!row) return; // chips on another agent's card are read-only
+    row.querySelectorAll(".chip").forEach((c) => c.removeAttribute("aria-pressed"));
+    chip.setAttribute("aria-pressed", "true");
   });
 
   show(0);

@@ -6,7 +6,7 @@
 
 Storyboard for the D.I.V. collection game. Open `festival-game-v1.html` to tap through it.
 
-20 screens, 5 flows. Wireframe fidelity — art is placeholder boxes, structure and copy are real.
+22 screens, 5 flows. Wireframe fidelity — art is placeholder boxes, structure and copy are real.
 
 ## Flows
 
