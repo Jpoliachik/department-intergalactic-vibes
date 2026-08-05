@@ -1,4 +1,4 @@
-<title>D.I.V. Field App — Wireframes v1</title>
+<title>D.I.V. Field App — Wireframes v2</title>
 
 <style>
   :root {
@@ -74,7 +74,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ---------- workbench masthead ---------- */
+  /* ---------- workbench chrome ---------- */
+
+  .stripe {
+    height: 10px;
+    background-image: repeating-linear-gradient(-45deg, var(--purple) 0 10px, transparent 10px 20px);
+    opacity: .55;
+  }
 
   .masthead {
     border-bottom: 1px solid var(--line);
@@ -98,18 +104,7 @@
     margin: 4px 0 0;
     color: var(--muted);
     font-size: 13.5px;
-    max-width: 60ch;
-  }
-
-  .stripe {
-    height: 10px;
-    width: 100%;
-    background-image: repeating-linear-gradient(
-      -45deg,
-      var(--purple) 0 10px,
-      transparent 10px 20px
-    );
-    opacity: .55;
+    max-width: 62ch;
   }
 
   .masthead-meta {
@@ -131,17 +126,14 @@
     font-weight: 600;
   }
 
-  /* ---------- 3-column workbench ---------- */
-
   .bench {
     display: grid;
     grid-template-columns: 236px minmax(0, 1fr) minmax(0, 380px);
-    gap: 0;
     align-items: start;
     min-height: calc(100vh - 96px);
   }
 
-  /* ---------- rail: the storyboard index ---------- */
+  /* ---------- rail ---------- */
 
   .rail {
     border-right: 1px solid var(--line);
@@ -165,12 +157,7 @@
   }
 
   .rail-group:first-child { padding-top: 0; }
-  .rail-group::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
+  .rail-group::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
   .rail-item {
     display: flex;
@@ -199,15 +186,10 @@
     font-weight: 600;
   }
 
-  .rail-id {
-    color: var(--faint);
-    font-size: 11px;
-    min-width: 20px;
-  }
-
+  .rail-id { color: var(--faint); font-size: 11px; min-width: 20px; }
   .rail-item[aria-current="true"] .rail-id { color: var(--lime); }
 
-  /* ---------- stage: the phone ---------- */
+  /* ---------- stage ---------- */
 
   .stage {
     padding: 34px 24px 48px;
@@ -238,7 +220,6 @@
     font-size: 13px;
     display: flex;
     flex-direction: column;
-    position: relative;
   }
 
   .stage-nav {
@@ -266,7 +247,16 @@
   .stepper:hover { border-color: var(--purple); color: var(--purple); }
   .stepper:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
 
-  /* ---------- notes panel ---------- */
+  .kbd {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--muted);
+  }
+
+  /* ---------- notes ---------- */
 
   .notes {
     border-left: 1px solid var(--line);
@@ -277,12 +267,7 @@
     overflow-y: auto;
   }
 
-  .notes h2 {
-    font-family: var(--mono);
-    font-size: 17px;
-    letter-spacing: .02em;
-    margin: 0;
-  }
+  .notes h2 { font-family: var(--mono); font-size: 17px; letter-spacing: .02em; margin: 0; }
 
   .notes-kicker {
     font-family: var(--mono);
@@ -293,12 +278,7 @@
     margin-bottom: 6px;
   }
 
-  .notes-sub {
-    color: var(--muted);
-    font-size: 13.5px;
-    margin: 8px 0 0;
-  }
-
+  .notes-sub { color: var(--muted); font-size: 13.5px; margin: 8px 0 0; }
   .note-block { margin-top: 24px; }
 
   .note-label {
@@ -313,12 +293,7 @@
     margin-bottom: 9px;
   }
 
-  .note-label::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
+  .note-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
   .note-block ul {
     margin: 0;
@@ -329,12 +304,7 @@
     gap: 8px;
   }
 
-  .note-block li {
-    font-size: 13.5px;
-    color: var(--muted);
-    padding-left: 15px;
-    position: relative;
-  }
+  .note-block li { font-size: 13.5px; color: var(--muted); padding-left: 15px; position: relative; }
 
   .note-block li::before {
     content: "";
@@ -347,6 +317,7 @@
   }
 
   .note-block li b { color: var(--ink); font-weight: 600; }
+
   .note-block li code {
     font-family: var(--mono);
     font-size: 12px;
@@ -356,16 +327,16 @@
     color: var(--ink);
   }
 
-  .q-block li::before { background: var(--amber); width: 6px; height: 6px; border-radius: 50%; top: .45em; }
   .q-block li { color: var(--ink); }
+  .q-block li::before { background: var(--amber); width: 6px; height: 6px; border-radius: 50%; top: .45em; }
 
-  /* ---------- phone internals ---------- */
+  /* ================= PHONE INTERNALS ================= */
 
   .statusbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px 10px;
+    padding: 11px 15px 9px;
     font-size: 9.5px;
     letter-spacing: .14em;
     text-transform: uppercase;
@@ -377,338 +348,334 @@
   .statusbar .net { color: #C9F24D; }
   .statusbar .net.off { color: #F2A23D; }
 
-  .screen-host {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-  }
+  .screen-host { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 
   .screen {
     flex: 1;
     min-height: 0;
-    padding: 22px 20px;
+    padding: 20px 18px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
-  .screen.center {
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-  }
+  .screen.center { justify-content: center; text-align: center; align-items: center; }
+
+  /* pairs with the trailing .spacer so content optically centers above the buttons
+     instead of hugging the top; collapses to nothing when content is tall */
+  .screen.center::before { content: ""; flex: 1; }
+  .spacer { flex: 1; min-height: 6px; }
+  .rule { height: 1px; background: #241F38; flex: none; }
+  .stack { display: flex; flex-direction: column; gap: 8px; }
 
   .eyebrow {
     font-size: 9.5px;
     letter-spacing: .2em;
     text-transform: uppercase;
     color: #8B5CFF;
+    flex: none;
   }
 
   .big {
-    font-size: 21px;
-    line-height: 1.25;
+    font-size: 22px;
+    line-height: 1.22;
     letter-spacing: .01em;
     text-wrap: balance;
     margin: 0;
   }
 
-  .body-sm {
-    font-size: 12.5px;
-    line-height: 1.6;
-    color: #9A93B5;
+  .huge {
+    font-size: 27px;
+    line-height: 1.15;
+    letter-spacing: .06em;
     margin: 0;
   }
 
-  .rule { height: 1px; background: #241F38; flex: none; }
-
-  .tap {
-    display: block;
-    width: 100%;
-    text-align: left;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: #EDE9F7;
-    background: #171426;
-    border: 1px solid #302A47;
-    border-radius: 4px;
-    padding: 13px 14px;
-    cursor: pointer;
-  }
-
-  .tap:hover { border-color: #8B5CFF; background: #1F1B31; }
-  .tap:focus-visible { outline: 2px solid #C9F24D; outline-offset: 2px; }
-
-  .tap-primary {
-    background: #8B5CFF;
-    border-color: #8B5CFF;
-    color: #0B0912;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    font-size: 11.5px;
-    padding: 14px;
-  }
-
-  .tap-primary:hover { background: #A47CFF; border-color: #A47CFF; }
-
-  .tap-ghost {
-    background: none;
-    border-color: #302A47;
-    color: #9A93B5;
-    text-align: center;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+  .sub {
     font-size: 11px;
-    padding: 12px;
-  }
-
-  .tap-lime {
-    background: #C9F24D;
-    border-color: #C9F24D;
-    color: #0B0912;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: .1em;
+    letter-spacing: .13em;
     text-transform: uppercase;
-    font-size: 11.5px;
-    padding: 14px;
+    color: #6C6489;
+    margin: 0;
   }
 
-  .stack { display: flex; flex-direction: column; gap: 9px; }
-  .spacer { flex: 1; }
+  .line { font-size: 12.5px; line-height: 1.55; color: #9A93B5; margin: 0; }
 
-  /* the badge — the app's central object */
+  /* --- ART: the game-feel layer --- */
+
+  .art {
+    font-size: 68px;
+    line-height: 1;
+    filter: drop-shadow(0 0 18px rgba(139, 92, 255, .75));
+    flex: none;
+  }
+
+  .art.lime { filter: drop-shadow(0 0 20px rgba(201, 242, 77, .8)); }
+  .art.dim { filter: none; opacity: .35; }
+  .art.amber { filter: drop-shadow(0 0 16px rgba(242, 162, 61, .7)); }
+
+  .seal {
+    width: 122px;
+    height: 122px;
+    flex: none;
+    border: 1px solid #8B5CFF;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 52px;
+    line-height: 1;
+    background: radial-gradient(circle, rgba(139, 92, 255, .22), transparent 68%);
+    box-shadow: 0 0 44px -10px rgba(139, 92, 255, .9), inset 0 0 24px -8px rgba(139, 92, 255, .8);
+  }
+
+  .seal.lime {
+    border-color: #C9F24D;
+    background: radial-gradient(circle, rgba(201, 242, 77, .2), transparent 68%);
+    box-shadow: 0 0 44px -10px rgba(201, 242, 77, .9), inset 0 0 24px -8px rgba(201, 242, 77, .7);
+  }
+
+  .seal.grey {
+    border-color: #4A4170;
+    background: none;
+    box-shadow: none;
+    opacity: .6;
+  }
+
+  /* composed character: hat + body + held item */
+
+  .avatar {
+    width: 118px;
+    height: 132px;
+    flex: none;
+    position: relative;
+    border: 1px solid #302A47;
+    border-radius: 6px;
+    background: radial-gradient(circle at 50% 40%, rgba(139, 92, 255, .16), transparent 62%), #0E0C17;
+    overflow: hidden;
+  }
+
+  .avatar.aura { box-shadow: inset 0 0 26px -8px rgba(201, 242, 77, .55), 0 0 16px -6px rgba(201, 242, 77, .5); }
+  .avatar.aura-violet { box-shadow: inset 0 0 26px -8px rgba(139, 92, 255, .6), 0 0 16px -6px rgba(139, 92, 255, .55); }
+
+  .avatar .lyr { position: absolute; line-height: 1; left: 50%; transform: translateX(-50%); }
+  .avatar .hat { top: 12px; font-size: 27px; }
+  .avatar .torso { top: 44px; font-size: 46px; }
+  .avatar .held { bottom: 10px; left: auto; right: 9px; transform: none; font-size: 24px; }
+  .avatar .empty { color: #302A47; font-size: 20px; }
+
+  .avatar-sm {
+    width: 46px;
+    height: 52px;
+    border-radius: 4px;
+  }
+
+  .avatar-sm .hat { top: 4px; font-size: 13px; }
+  .avatar-sm .torso { top: 18px; font-size: 22px; }
+  .avatar-sm .held { bottom: 3px; right: 3px; font-size: 12px; }
+
+  .avatar-xs {
+    width: 26px;
+    height: 30px;
+    border-radius: 3px;
+    flex: none;
+  }
+
+  .avatar-xs .hat { top: 2px; font-size: 8px; }
+  .avatar-xs .torso { top: 10px; font-size: 13px; }
+  .avatar-xs .held { display: none; }
+
+  /* --- badge --- */
 
   .badge-card {
     border: 1px solid #302A47;
     border-radius: 6px;
     background: #12101C;
     overflow: hidden;
+    flex: none;
   }
 
   .badge-head {
-    background-image: repeating-linear-gradient(-45deg, rgba(139,92,255,.5) 0 8px, transparent 8px 16px);
+    background-image: repeating-linear-gradient(-45deg, rgba(139, 92, 255, .5) 0 8px, transparent 8px 16px);
     border-bottom: 1px solid #302A47;
-    padding: 7px 12px;
+    padding: 6px 11px;
     display: flex;
     justify-content: space-between;
     font-size: 9px;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: #EDE9F7;
   }
 
-  .badge-body { padding: 16px 14px; display: flex; gap: 14px; }
+  .badge-body { padding: 14px 12px; display: flex; gap: 13px; align-items: center; }
+  .badge-info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .badge-name { font-size: 16px; letter-spacing: .05em; margin: 0; }
 
-  .sprite {
-    width: 96px;
-    height: 112px;
-    flex: none;
-    border: 1px dashed #4A4170;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    background: #0E0C17;
-    position: relative;
-  }
+  .chipbar { display: flex; flex-wrap: wrap; gap: 5px; }
 
-  .sprite.aura { box-shadow: 0 0 0 1px rgba(201,242,77,.35), 0 0 22px -4px rgba(201,242,77,.5); }
-
-  .sprite-slot {
-    flex: 1;
-    display: flex;
+  .ichip {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-size: 8px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: #6C6489;
-    border-bottom: 1px dashed #302A47;
+    gap: 4px;
+    border: 1px solid #302A47;
+    border-radius: 3px;
+    background: #171426;
+    padding: 3px 6px;
+    font-size: 10px;
+    letter-spacing: .04em;
+    color: #EDE9F7;
+    white-space: nowrap;
   }
 
-  .sprite-slot:last-child { border-bottom: 0; }
-  .sprite-slot.filled { color: #C9F24D; }
+  .ichip.lime { border-color: rgba(201, 242, 77, .5); color: #C9F24D; }
+  .ichip.amber { border-color: rgba(242, 162, 61, .5); color: #F2A23D; }
+  .ichip .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
-  .sprite-tag {
-    position: absolute;
-    bottom: -1px;
-    right: -1px;
-    font-size: 7.5px;
-    letter-spacing: .1em;
-    background: #302A47;
-    color: #9A93B5;
-    padding: 1px 4px;
+  /* --- progress as pips, not prose --- */
+
+  .progress { display: flex; flex-direction: column; gap: 6px; flex: none; }
+
+  .pips { display: flex; flex-wrap: wrap; gap: 3px; }
+
+  .pip {
+    width: 9px;
+    height: 9px;
+    border: 1px solid #302A47;
+    border-radius: 1px;
+    flex: none;
   }
 
-  .field-list { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .pip.on { background: #C9F24D; border-color: #C9F24D; }
+  .pip.new { background: #C9F24D; border-color: #C9F24D; box-shadow: 0 0 8px 1px rgba(201, 242, 77, .9); }
 
-  .field {
+  .progress-cap {
     display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-
-  .field dt {
-    font-size: 8px;
+    justify-content: space-between;
+    font-size: 9px;
     letter-spacing: .16em;
     text-transform: uppercase;
     color: #6C6489;
   }
 
-  .field dd {
-    margin: 0;
-    font-size: 12px;
-    color: #EDE9F7;
-    letter-spacing: .02em;
-  }
+  .progress-cap b { color: #C9F24D; font-variant-numeric: tabular-nums; }
 
-  .field dd.lime { color: #C9F24D; }
-  .field dd.pending { color: #F2A23D; }
+  /* --- buttons --- */
 
-  .agent-name {
-    font-size: 17px;
-    letter-spacing: .06em;
-    margin: 0;
-  }
-
-  .counter {
+  .tap {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: #EDE9F7;
+    background: #171426;
     border: 1px solid #302A47;
     border-radius: 4px;
-    padding: 10px 12px;
-    font-size: 10px;
-    letter-spacing: .14em;
+    padding: 12px 13px;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .tap:hover { border-color: #8B5CFF; background: #1F1B31; }
+  .tap:focus-visible { outline: 2px solid #C9F24D; outline-offset: 2px; }
+  .tap .ico { font-size: 16px; line-height: 1; flex: none; }
+
+  .tap-primary {
+    background: #8B5CFF;
+    border-color: #8B5CFF;
+    color: #0B0912;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    color: #6C6489;
+    font-size: 11.5px;
+    padding: 13px;
   }
 
-  .counter b {
-    font-size: 15px;
-    color: #C9F24D;
-    letter-spacing: .04em;
-    font-variant-numeric: tabular-nums;
+  .tap-primary:hover { background: #A47CFF; border-color: #A47CFF; }
+
+  .tap-lime {
+    background: #C9F24D;
+    border-color: #C9F24D;
+    color: #0B0912;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: 11.5px;
+    padding: 13px;
   }
 
-  .meter { height: 3px; background: #241F38; border-radius: 2px; overflow: hidden; }
-  .meter span { display: block; height: 100%; background: #C9F24D; }
+  .tap-ghost {
+    background: none;
+    border-color: #302A47;
+    color: #9A93B5;
+    justify-content: center;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    padding: 11px;
+  }
 
-  /* quiz */
+  /* --- 2x2 option grid --- */
 
-  .q-count {
+  .opt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: none; }
+
+  .opt {
+    aspect-ratio: 1 / .82;
+    border: 1px solid #302A47;
+    border-radius: 5px;
+    background: #12101C;
+    color: #EDE9F7;
+    font-family: var(--mono);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .opt:hover { border-color: #8B5CFF; background: #1F1B31; }
+  .opt:focus-visible { outline: 2px solid #C9F24D; outline-offset: 2px; }
+  .opt .ico { font-size: 30px; line-height: 1; }
+
+  .opt .lab {
     font-size: 9.5px;
-    letter-spacing: .2em;
+    letter-spacing: .11em;
     text-transform: uppercase;
-    color: #6C6489;
+    text-align: center;
+    line-height: 1.35;
+    color: #9A93B5;
   }
+
+  .opt .swatch { width: 34px; height: 34px; border-radius: 50%; }
+
+  /* --- input --- */
 
   .fake-input {
     border: 1px solid #302A47;
     border-bottom-color: #8B5CFF;
     background: #12101C;
     border-radius: 4px;
-    padding: 14px;
-    font-size: 15px;
+    padding: 15px 14px;
+    font-size: 17px;
+    letter-spacing: .05em;
     color: #EDE9F7;
     display: flex;
     align-items: center;
-    gap: 2px;
+    flex: none;
   }
 
-  .caret {
-    width: 8px;
-    height: 17px;
-    background: #C9F24D;
-    animation: blink 1.1s steps(2, start) infinite;
-  }
-
+  .caret { width: 9px; height: 19px; background: #C9F24D; animation: blink 1.1s steps(2, start) infinite; }
   @keyframes blink { to { visibility: hidden; } }
 
-  .char-cap {
-    font-size: 9px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: #6C6489;
-    text-align: right;
-  }
+  .cap { font-size: 9px; letter-spacing: .14em; color: #6C6489; text-align: right; flex: none; }
 
-  /* HQ board */
+  /* --- HQ board --- */
 
-  .board {
-    flex: 1;
-    border: 1px solid #302A47;
-    border-radius: 6px;
-    background: #0E0C17;
-    background-image: radial-gradient(circle at 18% 24%, rgba(139,92,255,.12), transparent 45%),
-                      radial-gradient(circle at 78% 72%, rgba(201,242,77,.08), transparent 40%);
-    position: relative;
-    overflow: hidden;
-    min-height: 300px;
-  }
-
-  .pin {
-    position: absolute;
-    width: 74px;
-    border: 1px solid #302A47;
-    background: #171426;
-    border-radius: 3px;
-    padding: 5px;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .pin:hover { border-color: #8B5CFF; }
-  .pin:focus-visible { outline: 2px solid #C9F24D; outline-offset: 2px; }
-
-  .pin-sprite {
-    height: 30px;
-    border: 1px dashed #4A4170;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 7px;
-    color: #6C6489;
-    letter-spacing: .1em;
-    margin-bottom: 4px;
-  }
-
-  .pin-name { font-size: 8px; letter-spacing: .06em; color: #EDE9F7; }
-  .pin-msg { font-size: 7.5px; color: #9A93B5; margin-top: 2px; line-height: 1.3; }
-
-  .envelope {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    width: 26px;
-    height: 18px;
-    border: 1px solid #C9F24D;
-    border-radius: 2px;
-    background: rgba(201,242,77,.14);
-    cursor: pointer;
-    box-shadow: 0 0 14px -2px rgba(201,242,77,.7);
-    animation: pulse 2.4s ease-in-out infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-    color: #C9F24D;
-  }
-
-  @keyframes pulse {
-    50% { box-shadow: 0 0 22px 1px rgba(201,242,77,.95); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .envelope, .caret { animation: none; }
-  }
-
-  .tabs { display: flex; gap: 0; border: 1px solid #302A47; border-radius: 4px; overflow: hidden; flex: none; }
+  .tabs { display: flex; border: 1px solid #302A47; border-radius: 4px; overflow: hidden; flex: none; }
 
   .tabs button {
     flex: 1;
@@ -727,136 +694,159 @@
   .tabs button:last-child { border-right: 0; }
   .tabs button[aria-selected="true"] { background: #1F1B31; color: #C9F24D; }
 
-  /* leaderboard */
-
-  .lb { display: flex; flex-direction: column; }
-
-  .lb-row {
-    display: grid;
-    grid-template-columns: 22px 1fr auto;
-    gap: 10px;
-    align-items: center;
-    padding: 10px 2px;
-    border-bottom: 1px solid #241F38;
-    font-size: 12px;
+  .board {
+    flex: 1;
+    min-height: 290px;
+    border: 1px solid #302A47;
+    border-radius: 6px;
+    background: #0E0C17;
+    background-image: radial-gradient(circle at 18% 22%, rgba(139, 92, 255, .14), transparent 46%),
+                      radial-gradient(circle at 80% 74%, rgba(201, 242, 77, .09), transparent 42%);
+    position: relative;
+    overflow: hidden;
   }
 
-  .lb-rank { color: #6C6489; font-variant-numeric: tabular-nums; font-size: 11px; }
-  .lb-row.me { color: #C9F24D; }
-  .lb-count { font-variant-numeric: tabular-nums; color: #9A93B5; }
-  .lb-row.me .lb-count { color: #C9F24D; }
-
-  /* locker */
-
-  .slot-row {
-    border: 1px solid #302A47;
-    border-radius: 4px;
-    padding: 11px 12px;
+  .pin {
+    position: absolute;
+    border: 0;
+    background: none;
+    padding: 0;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-  }
-
-  .slot-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-size: 9px;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: #6C6489;
-  }
-
-  .slot-head b { color: #EDE9F7; font-size: 11.5px; letter-spacing: .04em; font-weight: 600; }
-
-  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
-
-  .chip {
-    border: 1px dashed #4A4170;
-    border-radius: 3px;
-    background: #12101C;
-    width: 38px;
-    height: 38px;
-    font-size: 7px;
-    color: #6C6489;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 3px;
+    width: 66px;
+  }
+
+  .pin:focus-visible { outline: 2px solid #C9F24D; outline-offset: 3px; border-radius: 4px; }
+  .pin:hover .avatar { border-color: #8B5CFF; }
+  .pin-name { font-size: 8px; letter-spacing: .06em; color: #EDE9F7; }
+
+  .pin-msg {
+    font-size: 7.5px;
+    color: #9A93B5;
+    line-height: 1.3;
+    border: 1px solid #302A47;
+    border-radius: 2px;
+    background: #12101C;
+    padding: 1px 3px;
+  }
+
+  .envelope {
+    position: absolute;
+    right: 11px;
+    bottom: 11px;
+    border: 0;
+    background: none;
+    font-size: 21px;
+    line-height: 1;
     cursor: pointer;
-    text-align: center;
-    line-height: 1.2;
+    filter: drop-shadow(0 0 9px rgba(201, 242, 77, .95));
+    animation: pulse 2.4s ease-in-out infinite;
     padding: 2px;
   }
 
-  .chip:hover { border-color: #8B5CFF; }
-  .chip[aria-pressed="true"] { border-style: solid; border-color: #C9F24D; color: #C9F24D; }
-
-  .chip.locked { color: #302A47; border-color: #241F38; cursor: default; }
-
-  /* reveal / edge states */
-
-  .seal {
-    width: 116px;
-    height: 116px;
-    border: 1px solid #8B5CFF;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    font-size: 8px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: #8B5CFF;
-    box-shadow: 0 0 40px -12px rgba(139,92,255,.9);
-  }
-
-  .seal b { font-size: 26px; letter-spacing: .04em; color: #EDE9F7; }
-
-  .callout {
-    border: 1px solid #302A47;
-    border-left: 2px solid #F2A23D;
-    background: #12101C;
-    border-radius: 3px;
-    padding: 11px 12px;
-    font-size: 11.5px;
-    color: #9A93B5;
-    line-height: 1.55;
-  }
-
-  .callout.lime { border-left-color: #C9F24D; }
-  .callout b { color: #EDE9F7; }
-
-  .reading {
-    font-size: 12.5px;
-    color: #C9F24D;
-    line-height: 1.6;
-    font-style: italic;
-  }
-
-  .assignment { font-size: 13px; line-height: 1.65; color: #EDE9F7; margin: 0; }
+  /* glow only — never transform: the envelope must be a stationary tap target */
+  @keyframes pulse { 50% { filter: drop-shadow(0 0 17px rgba(201, 242, 77, 1)); } }
+  @media (prefers-reduced-motion: reduce) { .envelope, .caret { animation: none; } }
 
   .toast {
     border: 1px solid #302A47;
     background: #1F1B31;
     border-radius: 4px;
-    padding: 9px 11px;
-    font-size: 10.5px;
+    padding: 8px 10px;
+    font-size: 10px;
     letter-spacing: .06em;
     color: #9A93B5;
     text-align: center;
     flex: none;
   }
 
-  .kbd {
+  /* --- standings --- */
+
+  .lb { display: flex; flex-direction: column; flex: none; }
+
+  .lb-row {
+    display: grid;
+    grid-template-columns: 20px 26px 1fr auto;
+    gap: 9px;
+    align-items: center;
+    padding: 7px 2px;
+    border-bottom: 1px solid #241F38;
+    font-size: 11.5px;
+    background: none;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    color: #EDE9F7;
     font-family: var(--mono);
-    font-size: 10.5px;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 1px 5px;
-    color: var(--muted);
+    cursor: pointer;
+    text-align: left;
   }
+
+  .lb-row:hover { background: #171426; }
+  .lb-rank { color: #6C6489; font-size: 10px; font-variant-numeric: tabular-nums; }
+  .lb-row.me, .lb-row.me .lb-count { color: #C9F24D; }
+  .lb-count { font-variant-numeric: tabular-nums; color: #9A93B5; }
+
+  /* --- locker --- */
+
+  .slot-row {
+    border: 1px solid #302A47;
+    border-radius: 4px;
+    padding: 9px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: none;
+  }
+
+  .slot-icon { font-size: 15px; line-height: 1; flex: none; width: 20px; text-align: center; }
+  .chips { display: flex; gap: 5px; flex-wrap: wrap; }
+
+  .chip {
+    border: 1px solid #302A47;
+    border-radius: 3px;
+    background: #12101C;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+    color: #EDE9F7;
+  }
+
+  .chip:hover { border-color: #8B5CFF; }
+  .chip:focus-visible { outline: 2px solid #C9F24D; outline-offset: 2px; }
+  .chip[aria-pressed="true"] { border-color: #C9F24D; box-shadow: inset 0 0 12px -4px rgba(201, 242, 77, .8); }
+  .chip.locked { color: #302A47; border-color: #241F38; cursor: default; font-size: 13px; }
+
+  .callout {
+    border: 1px solid #302A47;
+    border-left: 2px solid #C9F24D;
+    background: #12101C;
+    border-radius: 3px;
+    padding: 9px 10px;
+    font-size: 11.5px;
+    color: #9A93B5;
+    line-height: 1.5;
+    flex: none;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .callout.amber { border-left-color: #F2A23D; }
+  .callout b { color: #EDE9F7; }
+  .callout .ico { font-size: 15px; line-height: 1.1; flex: none; }
+
+  .reading { font-size: 12.5px; color: #C9F24D; line-height: 1.5; font-style: italic; margin: 0; }
+  .assignment { font-size: 12.5px; line-height: 1.6; color: #EDE9F7; margin: 0; }
 
   @media (max-width: 1180px) {
     .bench { grid-template-columns: 200px minmax(0, 1fr); }
@@ -874,8 +864,8 @@
 
 <header class="masthead">
   <div>
-    <h1>D.I.V. Field App — Wireframes v1</h1>
-    <p>Storyboard for the Seven Stars collection game. Tap inside the phone — quiz options, buttons and board pins are live. Arrow keys step the whole flow.</p>
+    <h1>D.I.V. Field App — Wireframes v2</h1>
+    <p>Storyboard for the Seven Stars collection game. Tap inside the phone — options, buttons, board pins and locker chips are live. Arrow keys step the whole flow.</p>
   </div>
   <div class="masthead-meta">
     <div>Screens<b id="metaCount">—</b></div>
@@ -892,7 +882,7 @@
       <div class="glass">
         <div class="statusbar">
           <span>D.I.V. FIELD TERMINAL</span>
-          <span class="net" id="net">GRID LINK OK</span>
+          <span class="net" id="net">📡 LINKED</span>
         </div>
         <div class="screen-host" id="screenHost"></div>
       </div>
@@ -910,68 +900,82 @@
 </div>
 
 <script>
-  // ---------- reusable phone chunks ----------
+  // ---------- art helpers ----------
 
-  const sprite = (opts = {}) => {
-    const { hat = "HAT", body = "BODY", item = "ITEM", aura = true, tag = "48×48" } = opts;
-    const slot = (label, filled) =>
-      '<div class="sprite-slot' + (filled ? " filled" : "") + '">' + label + "</div>";
+  const avatar = (o = {}) => {
+    const { hat = "", torso = "🦺", held = "", size = "", aura = "aura" } = o;
     return (
-      '<div class="sprite' + (aura ? " aura" : "") + '">' +
-      slot(hat, hat !== "HAT") +
-      slot(body, body !== "BODY") +
-      slot(item, item !== "ITEM") +
-      '<span class="sprite-tag">' + tag + "</span></div>"
+      '<div class="avatar ' + size + " " + aura + '">' +
+        '<span class="lyr hat' + (hat ? "" : " empty") + '">' + (hat || "·") + "</span>" +
+        '<span class="lyr torso">' + torso + "</span>" +
+        '<span class="lyr held' + (held ? "" : " empty") + '">' + (held || "") + "</span>" +
+      "</div>"
     );
   };
 
-  const field = (label, value, cls = "") =>
-    '<dl class="field"><dt>' + label + '</dt><dd class="' + cls + '">' + value + "</dd></dl>";
+  const pips = (owned, total = 34, flash = false) => {
+    let out = "";
+    for (let i = 0; i < total; i++) {
+      const cls = i < owned ? (flash && i === owned - 1 ? "pip new" : "pip on") : "pip";
+      out += '<span class="' + cls + '"></span>';
+    }
+    return (
+      '<div class="progress">' +
+        '<div class="pips">' + out + "</div>" +
+        '<div class="progress-cap"><span>Issued equipment</span><span><b>' + owned + "</b> / " + total + "</span></div>" +
+      "</div>"
+    );
+  };
 
-  const badge = (opts = {}) => {
+  const ichip = (ico, text, cls = "") =>
+    '<span class="ichip ' + cls + '">' + ico + "<span>" + text + "</span></span>";
+
+  const dotchip = (color, text) =>
+    '<span class="ichip lime"><span class="dot" style="background:' + color + '"></span><span>' + text + "</span></span>";
+
+  const badge = (o = {}) => {
     const {
-      name = "AGENT NOVA",
-      desig = "Signal Lamp Operator",
-      code = "SL-04",
-      freq = "Nuclear Lime",
-      status = "Causing It",
-      held = "Lantern",
-      heldCls = "lime",
-      spriteOpts = { hat: "BANANA", body: "HI-VIS", item: "LANTERN" },
+      name = "AGENT KESTREL",
+      code = "FP-07",
       head = "PROVISIONAL FIELD AGENT",
-    } = opts;
+      av = { hat: "🍌", torso: "🦺", held: "🔮" },
+      chips = "",
+    } = o;
     return (
       '<div class="badge-card">' +
         '<div class="badge-head"><span>' + head + "</span><span>" + code + "</span></div>" +
         '<div class="badge-body">' +
-          sprite(spriteOpts) +
-          '<div class="field-list">' +
-            '<p class="agent-name">' + name + "</p>" +
-            field("Designation", desig) +
-            field("Frequency", freq, "lime") +
-            field("Status", status) +
-            field("Held", held, heldCls) +
-          "</div>" +
+          avatar(av) +
+          '<div class="badge-info"><p class="badge-name">' + name + "</p>" +
+          '<div class="chipbar">' + chips + "</div></div>" +
         "</div>" +
       "</div>"
     );
   };
 
-  const pin = (x, y, name, msg, label = "BADGE") =>
-    '<button class="pin" data-goto="h3" style="left:' + x + "%;top:" + y + '%">' +
-      '<div class="pin-sprite">' + label + "</div>" +
-      '<div class="pin-name">' + name + "</div>" +
-      (msg ? '<div class="pin-msg">' + msg + "</div>" : "") +
+  const opt = (goto, ico, lab, swatch) =>
+    '<button class="opt" data-goto="' + goto + '">' +
+      (swatch ? '<span class="swatch" style="background:' + swatch + '"></span>' : '<span class="ico">' + ico + "</span>") +
+      '<span class="lab">' + lab + "</span>" +
     "</button>";
 
-  const lbRow = (rank, name, count, me = false) =>
-    '<div class="lb-row' + (me ? " me" : "") + '">' +
-      '<span class="lb-rank">' + rank + "</span><span>" + name + '</span><span class="lb-count">' + count + "</span></div>";
+  const pin = (x, y, name, msg, av) =>
+    '<button class="pin" data-goto="h3" style="left:' + x + "%;top:" + y + '%">' +
+      avatar(Object.assign({ size: "avatar-sm", aura: "" }, av)) +
+      '<span class="pin-name">' + name + "</span>" +
+      (msg ? '<span class="pin-msg">' + msg + "</span>" : "") +
+    "</button>";
 
-  // ---------- the storyboard ----------
+  const lbRow = (rank, av, name, count, me) =>
+    '<button class="lb-row' + (me ? " me" : "") + '" data-goto="h3">' +
+      '<span class="lb-rank">' + rank + "</span>" +
+      avatar(Object.assign({ size: "avatar-xs", aura: "" }, av)) +
+      "<span>" + name + '</span><span class="lb-count">' + count + "</span></button>";
+
+  // ---------- storyboard ----------
 
   const SCREENS = [
-    // ============ FLOW A — assignment card ============
+    // ============ FLOW A ============
     {
       id: "a1",
       group: "Flow A · Assignment card",
@@ -982,142 +986,152 @@
       html:
         '<div class="screen center">' +
           '<div class="eyebrow">Transmission received</div>' +
-          '<div class="seal"><b>IN</b><span>Desig. 15</span></div>' +
+          '<div class="seal">📩</div>' +
           '<h1 class="big">This card was issued to you by hand.</h1>' +
-          '<p class="body-sm">Card <b>IN-15-0342</b> logged. The Grid already knows what you are. It just needs your name for the file.</p>' +
+          '<p class="sub">Card IN-15-0342 · logged</p>' +
           '<div class="spacer"></div>' +
           '<button class="tap tap-primary" data-goto="a2">Begin intake</button>' +
         "</div>",
-      purpose:
-        "Confirm the physical object did something. The card is the status item — this screen has to feel like it was expecting them.",
+      purpose: "Confirm the physical object did something. The card is the status item — this screen should feel like it was expecting them.",
       interactions: [
-        "Arrives at <code>/scan?code=IN-15-0342&amp;card=1</code> — the <code>card=1</code> flag skips the quiz entirely.",
-        "Single tap forward. No back, no menu — the card chose the path.",
+        "Arrives at <code>/scan?code=IN-15-0342&amp;card=1</code> — the <code>card=1</code> flag skips the quiz.",
+        "One tap forward. No back, no menu — the card chose the path.",
       ],
-      state: [
-        "Lookup table resolves code → designation (IN-15) + its Object (Key) + guaranteed swag item.",
-        "Nothing written to storage yet; a bail-out here leaves no half-agent record.",
-      ],
+      state: ["Lookup resolves code → designation + its Object + guaranteed swag item. Nothing persisted yet."],
       notes: [
-        "Designation is shown as a sealed code (IN / Desig. 15) but <b>not named</b> yet — the turn in A3 is the payoff.",
-        "Same screen serves a returning player who scans a second card: swap the copy to 'Second card logged'.",
+        "The designation stays hidden until A4 — the seal is a sealed envelope, not a result.",
+        "Copy is down to one line and one code. Everything else was scaffolding.",
       ],
-      questions: [
-        "Should the card's own printed designation be visible before intake, or is the app the reveal? Right now the app is the reveal, which makes the card slightly mysterious in hand.",
-      ],
+      questions: ["Should the card's printed designation be readable in hand, or is the app the only reveal? Currently the app."],
     },
     {
       id: "a2",
       group: "Flow A · Assignment card",
-      label: "Name entry",
-      title: "Free-text name",
-      sub: "Card holders name themselves. This is the privilege the anon path doesn't get.",
+      label: "Name",
+      title: "Name",
+      sub: "Stripped to one word and a cursor. Card holders name themselves — that's the privilege the anon path doesn't get.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="eyebrow">Intake · field 1 of 1</div>' +
-          '<h1 class="big">What do they call you out here?</h1>' +
-          '<p class="body-sm">Any name. The one on your ID is fine. So is the one your friends use at 4am.</p>' +
-          '<div class="fake-input">SPACE COWBOY<span class="caret"></span></div>' +
-          '<div class="char-cap">18 / 18 characters</div>' +
-          '<div class="rule"></div>' +
-          '<p class="body-sm">You&rsquo;ll be issued <b>AGENT</b> as a prefix. Everyone is.</p>' +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="a3">File it</button>' +
+          '<h1 class="huge">Name?</h1>' +
+          '<div class="fake-input">SPACE COWBOY<span class="caret"></span></div>' +
+          '<p class="cap">18 / 18</p>' +
+          '<div class="spacer"></div>' +
+          '<button class="tap tap-primary" data-goto="a3">→</button>' +
         "</div>",
-      purpose: "One field, one tap. Any friction here costs us the reveal.",
+      purpose: "One word, one field, one tap. The absence of explanation is the mystery.",
       interactions: [
-        "Keyboard is up on load — autofocus, <code>enterkeyhint=\"go\"</code>, submit on Return.",
-        "Empty submit is allowed: falls back to a generated name rather than blocking with an error.",
+        "Keyboard up on load, submit on Return. The arrow button is for thumbs, not instruction.",
+        "Empty submit allowed — falls through to a generated name rather than blocking.",
       ],
-      state: ["Name → localStorage. This is the identity primary key; there's no account behind it."],
+      state: ["Name → localStorage. This is the identity key; there's no account behind it."],
       notes: [
-        "18-char cap keeps the name legible on the HQ board pins.",
-        "'AGENT' prefix is system-issued so every name reads as bureaucratic regardless of what they type.",
+        "Cut from v1: the 'what do they call you out here' line, the AGENT-prefix explanation, the reassurance about nicknames. None of it was load-bearing.",
+        "'AGENT' is still prefixed by the system — they just discover it on the next screen instead of being told.",
+        "18-char cap keeps names legible on HQ board pins.",
       ],
-      questions: [
-        "Profanity/length is unpoliced. Fine for a campsite, but names surface publicly on the HQ board — do you want a quiet blocklist?",
-      ],
+      questions: ["Names surface publicly at HQ and are unpoliced. Want a quiet blocklist?"],
     },
     {
       id: "a3",
       group: "Flow A · Assignment card",
-      label: "The turn",
-      title: "The card turns over",
-      sub: "The induction moment. Mirrors the physical card face exactly — same six fields, same order.",
+      label: "Welcome",
+      title: "Welcome",
+      sub: "New screen. The induction needed a threshold moment before the designation — this is it.",
       net: "ok",
       html:
-        '<div class="screen">' +
-          '<div class="eyebrow">Designation confirmed</div>' +
-          '<h1 class="big">Induction Officer</h1>' +
-          '<p class="body-sm">Induction · Desig. IN-15 &nbsp;·&nbsp; Field name: <b>The Mentor</b></p>' +
-          '<div class="rule"></div>' +
-          '<p class="assignment">See the one still outside the light, and wave them in. Someone once did it for you.</p>' +
-          '<p class="reading">&ldquo;Hold the door open behind you.&rdquo;</p>' +
-          '<div class="rule"></div>' +
-          '<div class="callout lime"><b>Object issued: Key.</b> You drew this card in hand, so the Object is yours. It&rsquo;s in your grip now.</div>' +
+        '<div class="screen center">' +
+          '<div class="seal">🪐</div>' +
+          '<div class="eyebrow">Department of Intergalactic Vibrations</div>' +
+          '<h1 class="huge">AGENT<br>SPACE COWBOY</h1>' +
+          '<div class="chipbar" style="justify-content:center">' +
+            ichip("🌍", "SOL-3") + ichip("✨", "PLEIADES") +
+          "</div>" +
+          '<p class="line">You&rsquo;re on the books.</p>' +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="a4">Accept the post</button>' +
+          '<button class="tap tap-primary" data-goto="a4">Receive designation</button>' +
         "</div>",
-      purpose:
-        "The draw IS the induction (per ASSIGNMENTS.md). This screen must read like the card, not like a game result.",
+      purpose: "Being welcomed by an institution is the emotional beat. Splitting it out is what un-scattered the old A3.",
       interactions: [
-        "Fields reveal in sequence — designation, then assignment, then reading — roughly 300ms apart. Skippable on tap.",
-        "No re-roll button. The Grid doesn't deal a wrong card.",
+        "Seal can ride in on a short scale-up; the name types or fades in behind it.",
+        "One forward action only.",
       ],
-      state: ["Writes designation, Object → held-item slot, and the card's guaranteed swag item."],
+      state: ["Nothing new written — this is presentation of what A2 saved."],
       notes: [
-        "Card entry is the <b>only</b> path where your designation's Object becomes your starter held item — that's the trade for the anon path being free.",
-        "Copy lifted verbatim from ASSIGNMENTS.md so the app and the printed deck never drift.",
+        "The old A3 tried to do welcome + designation + assignment + reading + Object on one screen. Now: welcome here, designation next.",
+        "This is the only screen that says the agency's full name — worth it once, at induction.",
+        "Sector chips replace the sentence that used to explain the posting.",
       ],
-      questions: [
-        "Reveal choreography: staged build (drawn here) or one instant flip? Staged feels ceremonial, costs ~1s at the highest-energy moment.",
-      ],
+      questions: ["Should the anon path get this welcome too, or does keeping it card-only make cards feel more ceremonial?"],
     },
     {
       id: "a4",
       group: "Flow A · Assignment card",
+      label: "The turn",
+      title: "The card turns over",
+      sub: "The draw IS the induction. Object art leads; the deck's own words follow.",
+      net: "ok",
+      html:
+        '<div class="screen center">' +
+          '<div class="eyebrow">Your designation</div>' +
+          '<div class="art">🔑</div>' +
+          '<h1 class="big">Induction Officer</h1>' +
+          '<p class="sub">The Mentor · IN-15</p>' +
+          '<div class="rule" style="width:100%"></div>' +
+          '<p class="assignment">See the one still outside the light, and wave them in.</p>' +
+          '<p class="reading">&ldquo;Hold the door open behind you.&rdquo;</p>' +
+          '<div class="chipbar" style="justify-content:center">' + ichip("🔑", "OBJECT ISSUED", "lime") + "</div>" +
+          '<div class="spacer"></div>' +
+          '<button class="tap tap-primary" data-goto="a5">Accept the post</button>' +
+        "</div>",
+      purpose: "One image, one title, two lines, one chip. The Object is the hero, not a bullet in a list.",
+      interactions: [
+        "Object art lands first, then title, then the reading — ~250ms apart, skippable on tap.",
+        "No re-roll. The Grid doesn't deal a wrong card.",
+      ],
+      state: ["Writes designation, Object → held-item slot, and the card's guaranteed swag item."],
+      notes: [
+        "Assignment trimmed to its first sentence; the full two-line version stays on the printed card, so the card still holds something the app doesn't.",
+        "The Object paragraph became a single chip: 🔑 OBJECT ISSUED.",
+        "Card entry is the <b>only</b> path that grants your designation's Object.",
+      ],
+      questions: ["Trimming the assignment to one line — does the printed card keeping the fuller text feel like a reward or a mismatch?"],
+    },
+    {
+      id: "a5",
+      group: "Flow A · Assignment card",
       label: "First badge",
       title: "Badge issued",
-      sub: "Lands on the object they'll carry all weekend, with its first two items already on it.",
+      sub: "Lands on the object they'll carry all weekend, with two of thirty-four pips lit.",
       net: "ok",
       html:
         '<div class="screen">' +
           '<div class="eyebrow">Credential active</div>' +
           badge({
             name: "AGENT SPACE COWBOY",
-            desig: "Induction Officer",
             code: "IN-15",
-            freq: "Not yet read",
-            status: "Newly posted",
-            held: "Key",
-            spriteOpts: { hat: "HAT", body: "HI-VIS", item: "KEY" },
+            av: { hat: "", torso: "🦺", held: "🔑", aura: "aura-violet" },
+            chips: ichip("🎖", "Induction Officer") + ichip("🔑", "Key") + ichip("📻", "Unread", "amber"),
           }) +
-          '<div class="counter"><span>Issued equipment</span><b>2 / 34</b></div>' +
-          '<div class="meter"><span style="width:6%"></span></div>' +
-          '<p class="body-sm">Two on file. Thirty-two more are out there on stickers, trinkets and other agents&rsquo; cards.</p>' +
+          pips(2, 34, true) +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">Go to my badge</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">Install to home screen</button>' +
+            '<button class="tap tap-primary" data-goto="c1">My badge</button>' +
+            '<button class="tap tap-ghost" data-goto="c1">📲 Add to home screen</button>' +
           "</div>" +
         "</div>",
-      purpose: "Convert the reveal into a collection goal within one screen.",
-      interactions: [
-        "Install prompt appears once, here — the highest-intent moment for the PWA add-to-home-screen.",
-        "Two empty slots (hat, backdrop) are visibly empty on purpose.",
-      ],
-      state: ["Full agent record now persisted; app works offline from this point."],
+      purpose: "Turn the reveal into a collection goal without a sentence of explanation. 32 dark pips do that work.",
+      interactions: ["Install prompt appears once, here — highest-intent moment for the PWA.", "Empty hat slot is visibly empty."],
+      state: ["Full agent record persisted; the app is offline-capable from here."],
       notes: [
-        "Per your call, unowned items are a <b>count only</b> — '2 / 34'. No silhouette grid to spoil the lineup.",
-        "'Frequency: Not yet read' gives card-path players a reason to still scan an anon sticker later.",
+        "Pips replace '2 / 34' prose and the explanatory paragraph — you can see how much is out there at a glance.",
+        "'📻 Unread' chip is the card-path player's reason to still scan an anon sticker: no frequency yet.",
       ],
-      questions: [
-        "Is 34 the right total to advertise? A visible denominator makes completion feel finite — and makes it obvious when nobody finishes.",
-      ],
+      questions: ["Is 34 the right advertised total? A visible denominator makes completion feel finite — and makes it obvious when nobody finishes."],
     },
 
-    // ============ FLOW B — anon QR ============
+    // ============ FLOW B ============
     {
       id: "b1",
       group: "Flow B · Anon QR",
@@ -1127,55 +1141,52 @@
       net: "ok",
       html:
         '<div class="screen center">' +
-          '<div class="eyebrow">Sol-3 · Pleiades Field Office</div>' +
+          '<div class="art">📡</div>' +
           '<h1 class="big">You&rsquo;ve been reading on this frequency for a while.</h1>' +
-          '<p class="body-sm">Unregistered signature detected at sticker <b>QR-1188</b>. Three questions and we can put you on the books.</p>' +
+          '<p class="sub">Unregistered signature · QR-1188</p>' +
           '<div class="spacer"></div>' +
           '<button class="tap tap-primary" data-goto="b2">Take the reading</button>' +
-          '<p class="body-sm">Takes about twenty seconds.</p>' +
         "</div>",
-      purpose:
-        "Justify the quiz in one line before asking for anything. 'You've already been doing this' is the hook — it flatters and it's in-universe.",
-      interactions: ["One tap to Q1. The spec's ~2-taps-to-reveal budget starts counting here."],
-      state: ["Sticker code held in memory; resolved to a starter item after the quiz."],
+      purpose: "Justify the quiz in one line. 'You've already been doing this' flatters and is in-universe.",
+      interactions: ["One tap to Q1. Four taps total from here to a finished badge."],
+      state: ["Sticker code held in memory, resolved to a starter item after the quiz."],
       notes: [
         "No mention of a game, points, or collecting. The framing is a workplace intake.",
-        "Deliberately does not name D.I.V. in full — the sticker and the vests do that work in the physical world.",
+        "Dropped the 'takes about twenty seconds' line — the 1/3 counter on the next screen says it better.",
       ],
-      questions: [
-        "Should this screen let people bail straight to a badge with all-random answers? Faster, but skips the part that makes the result feel personal.",
-      ],
+      questions: ["Allow a bail-out straight to a random badge? Faster, but skips what makes the result feel personal."],
     },
     {
       id: "b2",
       group: "Flow B · Anon QR",
       label: "Q1 · Frequency",
       title: "Question 1 — frequency",
-      sub: "Sets aura/trail color only. Cheapest slot in the game, so it goes first and feels generous.",
+      sub: "Sets aura tint only. Cheapest slot in the game, so it goes first and feels generous.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="q-count">Reading 1 / 3</div>' +
-          '<h1 class="big">What frequency are you running tonight?</h1>' +
-          '<div class="stack">' +
-            '<button class="tap" data-goto="b3">Nuclear Lime</button>' +
-            '<button class="tap" data-goto="b3">Deep Violet</button>' +
-            '<button class="tap" data-goto="b3">Signal Orange</button>' +
-            '<button class="tap" data-goto="b3">Cold Silver</button>' +
+          '<p class="sub">Reading 1 / 3</p>' +
+          '<h1 class="big">What frequency are you running?</h1>' +
+          '<div class="opt-grid">' +
+            opt("b3", "", "Nuclear Lime", "#C9F24D") +
+            opt("b3", "", "Deep Violet", "#8B5CFF") +
+            opt("b3", "", "Signal Orange", "#F2703D") +
+            opt("b3", "", "Cold Silver", "#B8C4D9") +
           "</div>" +
           '<div class="spacer"></div>' +
-          '<p class="body-sm">There is no wrong reading. The Grid needs every frequency running at once.</p>' +
         "</div>",
-      purpose: "Establish the answer pattern — evocative, never mechanical. Nobody is picking a class.",
+      purpose: "Establish the answer pattern — 2×2 grid, art first, words second. Nobody is reading a menu.",
       interactions: [
-        "Tap = commit and advance. No Next button, no back — one tap per question.",
-        "Selected color tints the aura on every subsequent screen, so the choice is visible immediately.",
+        "Tap = commit and advance. No Next button, no back.",
+        "Chosen tint appears on the avatar's aura immediately, so the choice is visible before the badge exists.",
       ],
-      state: ["→ aura slot. CSS glow tint, no art asset needed per option."],
-      notes: ["Four options fit above the fold without scrolling on a small phone."],
-      questions: [
-        "Four frequencies enough, or do you want 6–8 for more badge variety? Cost is near zero — it's just a tint.",
+      state: ["→ aura slot. CSS glow tint, no art asset per option."],
+      notes: [
+        "Colour swatches instead of emoji here — the answer IS the colour, so showing it is more honest than an icon.",
+        "Was four stacked text rows; now a grid that reads in one glance.",
+        "Cut the 'no wrong reading' reassurance — it protested too much.",
       ],
+      questions: ["Four frequencies, or 6–8 for badge variety? Cost is near zero — it's a tint."],
     },
     {
       id: "b3",
@@ -1186,132 +1197,93 @@
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="q-count">Reading 2 / 3</div>' +
-          '<h1 class="big">Where are you, right now?</h1>' +
-          '<div class="stack">' +
-            '<button class="tap" data-goto="b4">Right in the middle of it</button>' +
-            '<button class="tap" data-goto="b4">Holding down a spot</button>' +
-            '<button class="tap" data-goto="b4">Still moving, still looking</button>' +
-            '<button class="tap" data-goto="b4">Somewhere quiet, on purpose</button>' +
+          '<p class="sub">Reading 2 / 3</p>' +
+          '<h1 class="big">Where are you right now?</h1>' +
+          '<div class="opt-grid">' +
+            opt("b4", "🎯", "In the middle of it") +
+            opt("b4", "⛺", "Holding a spot") +
+            opt("b4", "🥾", "Still moving") +
+            opt("b4", "🌙", "Somewhere quiet") +
           "</div>" +
           '<div class="spacer"></div>' +
-          '<p class="body-sm">Answer for tonight, not in general.</p>' +
         "</div>",
-      purpose:
-        "Do the real work of the draw without ever showing a menu of roles — the lore forbids picking off a menu.",
+      purpose: "Do the real work of the draw without ever showing a menu of roles — the lore forbids picking off a menu.",
       interactions: ["Tap to advance. Answer stored as an axis index, never shown back to the player."],
-      state: [
-        "Q2 (4) × Q3 (4) = <b>exactly 16</b> — one cell per designation in the deck. Deterministic, complete, no gaps.",
-      ],
+      state: ["Q2 (4) × Q3 (4) = <b>exactly 16</b> — one cell per designation. Deterministic, complete, no gaps."],
       notes: [
-        "Because the mapping is hidden, two friends answering the same way get the same designation — which reads as the Grid being consistent, not as an algorithm.",
-        "Mapping table lives in the same JSON as the code lookup, so it's tunable without a rebuild.",
+        "Icons carry the meaning, so the labels shrink to three words.",
+        "Mapping table ships in the same JSON as the code lookup — tunable without a rebuild.",
       ],
-      questions: [
-        "Worth building: which 16 pairings map to which designation. 'Middle of it' + 'something that makes noise' → The Spark is obvious; the quiet corners need care.",
-      ],
+      questions: ["Still to build: which 16 pairings map to which designation. 🎯 + 🔔 → The Spark is obvious; the quiet corners need care."],
     },
     {
       id: "b4",
       group: "Flow B · Anon QR",
       label: "Q3 · Tool",
       title: "Question 3 — what you brought",
-      sub: "Second axis of the mapping, and it also hands over the starter held item.",
+      sub: "Second mapping axis, and it hands over the starter held item.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="q-count">Reading 3 / 3</div>' +
-          '<h1 class="big">What did you bring with you?</h1>' +
-          '<div class="stack">' +
-            '<button class="tap" data-goto="b5">Something to share</button>' +
-            '<button class="tap" data-goto="b5">Something that makes noise</button>' +
-            '<button class="tap" data-goto="b5">Something to keep me going</button>' +
-            '<button class="tap" data-goto="b5">Nothing. Hands free.</button>' +
+          '<p class="sub">Reading 3 / 3</p>' +
+          '<h1 class="big">What did you bring?</h1>' +
+          '<div class="opt-grid">' +
+            opt("b5", "💧", "Something to share") +
+            opt("b5", "🔔", "Something loud") +
+            opt("b5", "🫖", "Something warm") +
+            opt("b5", "✋", "Nothing") +
           "</div>" +
           '<div class="spacer"></div>' +
-          '<p class="body-sm">Last one.</p>' +
         "</div>",
       purpose: "Close the mapping and load the avatar's hand in the same tap.",
-      interactions: ["Final tap triggers the name assignment and reveal — no submit screen in between."],
-      state: [
-        "Second mapping axis, plus starter held item: share → Water bottle, noise → Metronome, keep going → Kettle, hands free → Empty cup.",
-      ],
+      interactions: ["Final tap goes <b>straight to the badge</b> — no interstitial name screen any more."],
+      state: ["Second axis + starter held item: 💧 water bottle, 🔔 metronome, 🫖 kettle, ✋ empty cup."],
       notes: [
-        "'Nothing. Hands free.' still awards an item (Empty cup) — the joke lands and nobody leaves empty-handed.",
-        "This is the anon path's held item. It is <b>not</b> your designation's Object — see the reveal.",
+        "'Nothing' still awards an item (empty cup) — the joke lands and nobody leaves empty-handed.",
+        "This is the anon path's held item, not your designation's Object.",
       ],
-      questions: [
-        "Q3 does double duty (mapping axis + item), so item and designation are correlated. Acceptable, or should the item come from the sticker code instead so scanning different stickers varies it?",
-      ],
+      questions: ["Q3 does double duty, so item and designation are correlated. Fine, or should the item come from the sticker code so different stickers vary it?"],
     },
     {
       id: "b5",
       group: "Flow B · Anon QR",
-      label: "Name assigned",
-      title: "The Grid names you",
-      sub: "No text field. The name is issued — that asymmetry is what makes card-holders feel special.",
-      net: "ok",
-      html:
-        '<div class="screen center">' +
-          '<div class="eyebrow">Reading complete</div>' +
-          '<div class="seal"><b>07</b><span>Desig. FP</span></div>' +
-          '<h1 class="big">AGENT KESTREL</h1>' +
-          '<p class="body-sm">That&rsquo;s what the file says. We don&rsquo;t choose these either.</p>' +
-          '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="b6">See my designation</button>' +
-        "</div>",
-      purpose: "A beat of its own. Getting named by an institution is funnier and stranger than typing a name.",
-      interactions: [
-        "Name generated from a wordlist seeded by answers + sticker code, so it's stable if they reload.",
-        "No re-roll. Asking again would make it feel arbitrary.",
-      ],
-      state: ["Generated name → localStorage, same field the card path writes."],
-      notes: [
-        "Wordlist should stay in one register — birds, weather, instruments, minerals. KESTREL, VESPER, BASALT, NOVA.",
-        "Deliberately shows the designation code before the name of the post, same withholding trick as A1.",
-      ],
-      questions: [
-        "Truly no re-roll? People will want one, and 'the Grid doesn't deal a wrong card' is the in-universe answer for refusing — but it may sour a first impression.",
-      ],
-    },
-    {
-      id: "b6",
-      group: "Flow B · Anon QR",
-      label: "First badge",
-      title: "Badge issued — Object pending",
-      sub: "Same badge as the card path, with one field deliberately unfilled.",
+      label: "Badge",
+      title: "Badge issued — name and all",
+      sub: "The old 'name assigned' screen is gone. The badge does the reveal.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="eyebrow">Credential active · provisional</div>' +
+          '<div class="eyebrow">Reading complete</div>' +
           badge({
             name: "AGENT KESTREL",
-            desig: "Field Pathfinder",
             code: "FP-07",
-            freq: "Nuclear Lime",
-            status: "Still moving",
-            held: "Water bottle",
-            spriteOpts: { hat: "HAT", body: "HI-VIS", item: "BOTTLE" },
+            av: { hat: "", torso: "🦺", held: "💧" },
+            chips: ichip("🎖", "Field Pathfinder") + dotchip("#C9F24D", "Nuclear Lime") + ichip("🥾", "Still moving"),
           }) +
-          '<div class="callout"><b>Your Object is a Compass. Not yet issued.</b> Objects come from a card, handed over by an agent in the field. Find one.</div>' +
-          '<div class="counter"><span>Issued equipment</span><b>2 / 34</b></div>' +
-          '<div class="meter"><span style="width:6%"></span></div>' +
+          '<div class="callout amber"><span class="ico">🧭</span><span><b>Your Object is a Compass.</b> Objects are handed over by an agent in the field.</span></div>' +
+          pips(2, 34, true) +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">Go to my badge</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">Install to home screen</button>' +
+            '<button class="tap tap-primary" data-goto="c1">My badge</button>' +
+            '<button class="tap tap-ghost" data-goto="c1">📲 Add to home screen</button>' +
           "</div>" +
         "</div>",
-      purpose:
-        "Make the anon path complete and satisfying, while pointing at the one thing it can't give you — which is a person in a purple vest.",
-      interactions: ["Same two actions as A4 so both paths converge on one home screen."],
-      state: ["Object recorded as known-but-unissued, so a later card scan can fill it."],
+      purpose: "One screen instead of two. You learn your name, your post and your gap in a single glance.",
+      interactions: [
+        "Reaches here directly from Q3. Name and designation can fade in a beat apart to keep some ceremony.",
+        "Both buttons converge on the same home screen as the card path.",
+      ],
+      state: [
+        "Generated name (seeded by answers + sticker code, so a reload is stable), designation, aura, held item, Object recorded as known-but-unissued.",
+      ],
       notes: [
-        "This is the engine of the whole ARG: the app tells you the Object exists and that only a human hands it over. Digital screen drives physical interaction.",
-        "'Status: Still moving' derives from their Q2 answer — reuse their own words back at them.",
+        "Cut per your note: the standalone AGENT KESTREL screen. The name now arrives <i>on</i> the credential, which is arguably more institutional anyway.",
+        "Wordlist stays in one register — birds, weather, minerals: KESTREL, VESPER, BASALT, NOVA.",
+        "The amber Object callout is the engine of the whole ARG: the app says the Object exists and that only a human hands it over.",
       ],
       questions: [
-        "Does an anon player's designation stay fixed if they later draw a physical card with a <b>different</b> designation? Overwrite, keep the first, or hold both as a dual posting?",
+        "Without the standalone name beat, is the generated name still a moment? If it needs more, the fix is animation on this screen rather than another screen.",
+        "If an anon player later draws a card with a <b>different</b> designation: overwrite, keep the first, or dual posting?",
       ],
     },
 
@@ -1321,125 +1293,109 @@
       group: "Core loop",
       label: "Badge (home)",
       title: "Badge — home screen",
-      sub: "Everything starts here and comes back here. Fully offline. No tab bar.",
+      sub: "Everything starts and returns here. Fully offline. No tab bar.",
       net: "ok",
       html:
         '<div class="screen">' +
           badge({
             name: "AGENT KESTREL",
-            desig: "Field Pathfinder",
             code: "FP-07",
-            freq: "Nuclear Lime",
-            status: "Still moving",
-            held: "Mysterious orb",
-            spriteOpts: { hat: "BANANA", body: "HI-VIS", item: "ORB" },
+            av: { hat: "🍌", torso: "🦺", held: "🔮" },
+            chips: ichip("🎖", "Field Pathfinder") + dotchip("#C9F24D", "Nuclear Lime") + ichip("🧭", "Object pending", "amber"),
           }) +
-          '<div class="counter"><span>Issued equipment</span><b>7 / 34</b></div>' +
-          '<div class="meter"><span style="width:21%"></span></div>' +
+          pips(7) +
+          '<div class="chipbar">' + ichip("📍", "Camp North") + ichip("📝", "3 readings today") + "</div>" +
+          '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c3">Scan a code</button>' +
-            '<button class="tap" data-goto="c2">Equipment locker</button>' +
-            '<button class="tap" data-goto="h1">Report to HQ</button>' +
+            '<button class="tap tap-primary" data-goto="c3">📷 Scan</button>' +
+            '<button class="tap" data-goto="c2"><span class="ico">🎒</span>Locker</button>' +
+            '<button class="tap" data-goto="h1"><span class="ico">🛰</span>Report to HQ</button>' +
           "</div>" +
-          '<div class="rule"></div>' +
-          '<p class="body-sm">Sector: <b>Pleiades / Camp North</b> &nbsp;·&nbsp; Filed 3 readings today.</p>' +
         "</div>",
-      purpose:
-        "The badge is the product. Three actions, in priority order: scan, arrange, check in.",
+      purpose: "The badge is the product. Three actions in priority order: scan, arrange, check in.",
       interactions: [
-        "'Report to HQ' is a door, not a tab — leaving the badge screen should feel like going somewhere.",
-        "'Scan a code' opens the camera; most scans arrive from outside the app via the OS camera or NFC tap instead.",
+        "'Report to HQ' is a door, not a tab — leaving the badge should feel like going somewhere.",
+        "Most scans actually arrive from outside the app via the OS camera or an NFC tap.",
       ],
       state: ["Renders entirely from localStorage. Zero network."],
       notes: [
-        "No tab bar keeps the app reading as an issued credential rather than software.",
-        "Sector line is flavor now, but it's where a per-camp or per-stage assignment could live later.",
+        "No tab bar keeps this reading as an issued credential rather than software.",
+        "Sector and activity became chips instead of a sentence.",
       ],
-      questions: [
-        "Should the badge screen show your assignment text and field reading again, or is that a one-time induction moment only?",
-      ],
+      questions: ["Should the badge re-show your assignment and field reading, or is that induction-only?"],
     },
     {
       id: "c2",
       group: "Core loop",
       label: "Locker",
       title: "Equipment locker",
-      sub: "Where you arrange what you own. Owned items only — no locked silhouettes.",
+      sub: "Where you arrange what you own. Icon grid, no labels — you recognize your own gear.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="eyebrow">Equipment locker · 7 on file</div>' +
-          '<div class="slot-row">' +
-            '<div class="slot-head"><b>Hat</b><span>3 held</span></div>' +
-            '<div class="chips"><button class="chip" aria-pressed="true">BANANA</button><button class="chip">HARD HAT</button><button class="chip">ANTENNA</button><button class="chip locked">?</button></div>' +
-          "</div>" +
-          '<div class="slot-row">' +
-            '<div class="slot-head"><b>Outfit</b><span>2 held</span></div>' +
-            '<div class="chips"><button class="chip" aria-pressed="true">HI-VIS</button><button class="chip">COVERALL</button><button class="chip locked">?</button></div>' +
-          "</div>" +
-          '<div class="slot-row">' +
-            '<div class="slot-head"><b>Held item</b><span>2 held</span></div>' +
-            '<div class="chips"><button class="chip" aria-pressed="true">ORB</button><button class="chip">BOTTLE</button><button class="chip locked">?</button></div>' +
-          "</div>" +
-          '<div class="slot-row">' +
-            '<div class="slot-head"><b>Frequency</b><span>aura tint</span></div>' +
-            '<div class="chips"><button class="chip" aria-pressed="true">LIME</button><button class="chip">VIOLET</button></div>' +
-          "</div>" +
-          '<div class="slot-row">' +
-            '<div class="slot-head"><b>Backdrop</b><span>1 held</span></div>' +
-            '<div class="chips"><button class="chip" aria-pressed="true">PLAIN</button><button class="chip locked">?</button></div>' +
-          "</div>" +
-          '<button class="tap tap-ghost" data-goto="c1">Back to badge</button>' +
+          '<div class="eyebrow">Locker · 7 on file</div>' +
+          '<div class="slot-row"><span class="slot-icon">🎩</span><div class="chips">' +
+            '<button class="chip" aria-pressed="true">🍌</button><button class="chip">⛑</button><button class="chip">📡</button><button class="chip locked">?</button>' +
+          "</div></div>" +
+          '<div class="slot-row"><span class="slot-icon">👕</span><div class="chips">' +
+            '<button class="chip" aria-pressed="true">🦺</button><button class="chip">🧥</button><button class="chip locked">?</button>' +
+          "</div></div>" +
+          '<div class="slot-row"><span class="slot-icon">✊</span><div class="chips">' +
+            '<button class="chip" aria-pressed="true">🔮</button><button class="chip">💧</button><button class="chip locked">?</button>' +
+          "</div></div>" +
+          '<div class="slot-row"><span class="slot-icon">✨</span><div class="chips">' +
+            '<button class="chip" aria-pressed="true" style="color:#C9F24D">●</button><button class="chip" style="color:#8B5CFF">●</button>' +
+          "</div></div>" +
+          '<div class="slot-row"><span class="slot-icon">🖼</span><div class="chips">' +
+            '<button class="chip" aria-pressed="true">▦</button><button class="chip locked">?</button>' +
+          "</div></div>" +
+          '<div class="spacer"></div>' +
+          '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
         "</div>",
-      purpose:
-        "Newest scan auto-equips, so this screen exists to <i>undo</i> that — put your favorite hat back on.",
+      purpose: "Newest scan auto-equips, so this screen exists to undo that — put your favourite hat back on.",
       interactions: [
-        "Tap a chip = equip instantly. No save button, no confirm.",
-        "Trailing dim '?' chip per slot hints there are more without revealing which — the compromise on count-only.",
+        "Tap a chip = equip instantly. No save, no confirm. (Try it — the lime ring moves.)",
+        "Dim '?' chip per slot hints there's more without revealing what.",
       ],
-      state: ["Writes equipped-item IDs per slot. Owned set is append-only; nothing is ever lost."],
+      state: ["Writes equipped item IDs per slot. Owned set is append-only."],
       notes: [
-        "Five slots, one row each — the whole locker fits one screen at 7 items and still works at 34.",
-        "Frequency has no '?' chip because tints are earned differently from art items.",
+        "Slot names became icons: 🎩 👕 ✊ ✨ 🖼. Five rows, whole locker on one screen, still works at 34 items.",
+        "Aura row uses coloured dots since a tint has no object to draw.",
       ],
-      questions: [
-        "Is that trailing '?' chip per slot too close to the silhouette grid you ruled out? Easy to drop.",
-      ],
+      questions: ["Is the '?' chip too close to the locked silhouettes you ruled out? Easy to drop."],
     },
     {
       id: "c3",
       group: "Core loop",
       label: "New item",
       title: "Scan — new item",
-      sub: "The moment repeated most. Must be fast, legible at arm's length, and worth showing a friend.",
+      sub: "The most-repeated moment. Big art, four words, works with no signal.",
       net: "off",
       html:
         '<div class="screen center">' +
           '<div class="eyebrow">Requisition logged</div>' +
-          sprite({ hat: "BANANA", body: "", item: "", aura: true, tag: "new" }) +
+          '<div class="art lime">🍌</div>' +
           '<h1 class="big">One (1) Banana Hat</h1>' +
-          '<p class="body-sm">Slot: Hat &nbsp;·&nbsp; Issued from sticker <b>QR-0417</b></p>' +
-          '<div class="callout lime">Equipped automatically. Change it any time in your locker.</div>' +
-          '<div class="counter"><span>Issued equipment</span><b>8 / 34</b></div>' +
+          '<div class="chipbar" style="justify-content:center">' + ichip("🎩", "Hat") + ichip("✅", "Equipped", "lime") + "</div>" +
+          pips(8, 34, true) +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">Back to badge</button>' +
-            '<button class="tap tap-ghost" data-goto="c2">Open locker</button>' +
+            '<button class="tap tap-primary" data-goto="c1">← Badge</button>' +
+            '<button class="tap tap-ghost" data-goto="c2">🎒 Locker</button>' +
           "</div>" +
         "</div>",
-      purpose: "Name the thing, show the thing, put it on. Three seconds, works with no signal.",
+      purpose: "Name it, show it, wear it. Three seconds, no network.",
       interactions: [
         "Deep-linked from outside the app; renders offline from the bundled lookup table.",
-        "Item auto-equips on reveal so the badge visibly changes — the payoff is the change, not the notification.",
+        "Auto-equips so the badge visibly changes — the payoff is the change, not the notice.",
       ],
-      state: ["Adds item to owned set, equips it, bumps the counter. All local."],
+      state: ["Adds to owned set, equips, lights one more pip. All local."],
       notes: [
-        "Status bar shows <b>NO GRID LINK</b> in amber here on purpose — proving the core loop needs nothing.",
-        "'One (1)' bureaucratic quantity phrasing does a lot of tone work for a banana hat.",
+        "Status bar reads <b>⚠ NO LINK</b> here on purpose, proving the core loop needs nothing.",
+        "Newest pip glows so you can see the meter move without reading the number.",
+        "'One (1)' does the tone work that a paragraph used to.",
       ],
-      questions: [
-        "Any sound or haptic on reveal? A short buzz reads well in a loud field; audio is mostly wasted.",
-      ],
+      questions: ["Sound or haptic on reveal? A short buzz reads well in a loud field; audio is mostly wasted."],
     },
 
     // ============ HQ ============
@@ -1451,152 +1407,130 @@
       sub: "The toll for entering the board: your badge, and optionally 20 characters.",
       net: "ok",
       html:
-        '<div class="screen">' +
-          '<div class="eyebrow">Reporting in · Pleiades Field Office</div>' +
-          '<h1 class="big">Filing your presence.</h1>' +
-          '<p class="body-sm">Your badge goes up on the board for about four hours, then ages off. Standard retention.</p>' +
-          '<div class="rule"></div>' +
-          '<div class="slot-head"><b>Add to the log</b><span>optional</span></div>' +
-          '<div class="fake-input" style="font-size:13px">LOST MY FRIENDS<span class="caret"></span></div>' +
-          '<div class="char-cap">15 / 20 characters</div>' +
+        '<div class="screen center">' +
+          '<div class="art">🛰</div>' +
+          '<h1 class="big">Report in?</h1>' +
+          '<div class="fake-input" style="font-size:14px">LOST MY FRIENDS<span class="caret"></span></div>' +
+          '<p class="cap">15 / 20 · optional</p>' +
+          '<div class="chipbar" style="justify-content:center">' + ichip("⏳", "Ages off in 4h") + "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
             '<button class="tap tap-primary" data-goto="h2">File and enter</button>' +
-            '<button class="tap tap-ghost" data-goto="h2">Enter without a note</button>' +
+            '<button class="tap tap-ghost" data-goto="h2">Just look</button>' +
           "</div>" +
         "</div>",
       purpose: "Make visiting the board an act of contribution, so the board is never empty.",
       interactions: [
-        "Both buttons enter HQ; only one posts a message. Nobody is blocked from looking.",
-        "This is the only screen that requires connectivity before it can proceed.",
+        "Both buttons enter HQ; only one posts. Nobody is blocked from looking.",
+        "Only screen that requires connectivity before it can proceed.",
       ],
-      state: [
-        "POST badge snapshot + optional message + TTL. Single ~4h expiry covers both presence and message.",
-      ],
+      state: ["POST badge snapshot + optional message + TTL. One ~4h expiry covers presence and message together."],
       notes: [
+        "The retention paragraph became an ⏳ chip.",
         "20-char cap keeps pins small and makes moderation mostly moot.",
-        "'Standard retention' explains the TTL as records policy rather than a technical limit.",
       ],
-      questions: [
-        "TTL of 4h vs 6h changes the board's feel a lot — 4h means a genuinely 'right now' board, 6h means it survives a nap.",
-      ],
+      questions: ["TTL 4h vs 6h: 4h is a genuinely 'right now' board, 6h survives a nap."],
     },
     {
       id: "h2",
       group: "HQ",
       label: "The board",
       title: "HQ — bulletin board",
-      sub: "Scattered badges, not a list. Plus the one hidden thing.",
+      sub: "Scattered avatars, not a list. Plus the one hidden thing.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="tabs"><button aria-selected="true">Board</button><button data-goto="h4">Standings</button></div>' +
+          '<div class="tabs"><button aria-selected="true">🗺 Board</button><button data-goto="h4">🏆 Standings</button></div>' +
           '<div class="board">' +
-            pin(6, 4, "KESTREL", "LOST MY FRIENDS", "YOU") +
-            pin(52, 10, "VESPER", "ORB TRADE?") +
-            pin(28, 34, "BASALT", "") +
-            pin(66, 42, "MARLOW", "CAMP N · TEA") +
-            pin(10, 62, "PIP", "WHO IS SEVEN") +
-            pin(46, 72, "ODESSA", "") +
-            '<button class="envelope" data-goto="h5" aria-label="A small glowing envelope">✉</button>' +
+            pin(3, 3, "KESTREL", "LOST MY FRIENDS", { hat: "🍌", held: "🔮" }) +
+            pin(54, 8, "VESPER", "ORB TRADE?", { hat: "👑", torso: "🧥", held: "✨" }) +
+            pin(26, 32, "BASALT", "", { hat: "⛑", held: "⚓" }) +
+            pin(62, 40, "MARLOW", "CAMP N · TEA", { hat: "📡", held: "🫖" }) +
+            pin(6, 60, "PIP", "WHO IS SEVEN", { hat: "", held: "🔮" }) +
+            pin(44, 70, "ODESSA", "", { hat: "🎩", torso: "🧥", held: "🏮" }) +
+            '<button class="envelope" data-goto="h5" aria-label="A small glowing envelope">✉️</button>' +
           "</div>" +
-          '<div class="toast">14 agents on the board · refreshed 40s ago</div>' +
-          '<button class="tap tap-ghost" data-goto="c1">Leave HQ</button>' +
+          '<div class="toast">👥 14 on the board · refreshed 40s ago</div>' +
+          '<button class="tap tap-ghost" data-goto="c1">← Leave HQ</button>' +
         "</div>",
-      purpose:
-        "One shared surface that makes it obvious other real people are doing this right now, without any live-presence machinery.",
+      purpose: "One shared surface that proves other real people are doing this right now, with no live-presence machinery.",
       interactions: [
-        "Tap any pin → that agent's full card. Tap the envelope → the easter egg.",
-        "Polls on open and on pull-to-refresh only. No sockets, no live sync.",
+        "Tap any avatar → that agent's card. Tap the envelope → the easter egg.",
+        "Polls on open and pull-to-refresh only. No sockets.",
       ],
-      state: ["GET recent check-ins (badge snapshot + message). Read-only after the check-in write."],
+      state: ["GET recent check-ins (badge snapshot + message)."],
       notes: [
-        "Scatter positions are seeded from the check-in ID so pins don't jump between refreshes.",
-        "Your own pin is marked and placed top-left so you can find yourself instantly.",
-        "One pin carries 'WHO IS SEVEN' — the lore leaks into the board through players, not from us.",
+        "Pins now show actual composed avatars instead of boxes labelled BADGE — the board finally looks like the point of collecting.",
+        "Scatter positions seeded from check-in ID so pins don't jump between refreshes.",
+        "One pin carries 'WHO IS SEVEN' — the lore leaks in through players, not from us.",
       ],
-      questions: [
-        "At 100+ check-ins this gets crowded. Cap the board at ~20 most recent, or shrink pins and let it fill up like a real bulletin board?",
-      ],
+      questions: ["At 100+ check-ins this crowds. Cap at ~20 most recent, or let it fill up like a real bulletin board?"],
     },
     {
       id: "h3",
       group: "HQ",
       label: "Agent card",
       title: "Another agent's card",
-      sub: "The payoff for collecting: someone else can see your whole kit.",
+      sub: "The payoff for collecting: someone else sees your whole kit.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="eyebrow">Personnel file · checked in 22m ago</div>' +
+          '<div class="eyebrow">Personnel file · 22m ago</div>' +
           badge({
             name: "AGENT VESPER",
-            desig: "Glamour Technician",
             code: "GL-14",
-            freq: "Deep Violet",
-            status: "Causing It",
-            held: "Fairy lights",
-            spriteOpts: { hat: "CROWN", body: "COVERALL", item: "LIGHTS" },
-            head: "PROVISIONAL FIELD AGENT",
+            av: { hat: "👑", torso: "🧥", held: "✨", aura: "aura-violet" },
+            chips: ichip("🎖", "Glamour Technician") + dotchip("#8B5CFF", "Deep Violet"),
           }) +
-          '<div class="callout lime">&ldquo;ORB TRADE?&rdquo;</div>' +
-          '<div class="counter"><span>Issued equipment</span><b>19 / 34</b></div>' +
-          '<div class="meter"><span style="width:56%"></span></div>' +
-          '<div class="slot-head"><b>On file</b><span>19 items</span></div>' +
+          '<div class="callout"><span class="ico">💬</span><span>&ldquo;ORB TRADE?&rdquo;</span></div>' +
+          pips(19) +
           '<div class="chips">' +
-            '<button class="chip">CROWN</button><button class="chip">COVERALL</button><button class="chip">LIGHTS</button><button class="chip">ORB</button><button class="chip">KETTLE</button><button class="chip">ANTENNA</button><button class="chip">+13</button>' +
+            '<span class="chip">👑</span><span class="chip">🧥</span><span class="chip">✨</span><span class="chip">🔮</span>' +
+            '<span class="chip">🫖</span><span class="chip">📡</span><span class="chip">⚓</span><span class="chip locked">+12</span>' +
           "</div>" +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-ghost" data-goto="h2">Back to board</button>' +
+          '<button class="tap tap-ghost" data-goto="h2">← Board</button>' +
         "</div>",
-      purpose:
-        "Seeing a 19-item kit is the strongest possible argument for scanning more. This screen sells the game.",
-      interactions: [
-        "Read-only. No follow, no message, no friending — nothing to moderate or maintain.",
-        "Their chips are unpressable; it's a file, not your locker.",
-      ],
-      state: ["Rendered from the check-in snapshot — no separate profile fetch."],
+      purpose: "Seeing a 19-pip kit is the strongest argument for scanning more. This screen sells the game.",
+      interactions: ["Read-only. No follow, no message, nothing to moderate.", "Their chips don't respond to taps — it's a file, not your locker."],
+      state: ["Rendered from the check-in snapshot; no separate profile fetch."],
       notes: [
-        "Snapshot means the card shows what they looked like at check-in, which is a feature: the board is a record of a moment.",
-        "Their designation being visible here is how players learn the deck has 16 posts.",
+        "Their gear is a grid of item icons now, which reads as loot instead of a word list.",
+        "Snapshot means the card shows what they looked like at check-in — a record of a moment.",
       ],
-      questions: [
-        "Show what they have that you don't ('4 you haven't been issued')? Strong motivator, mild flex-shaming.",
-      ],
+      questions: ["Show what they have that you don't ('4 you haven't been issued')? Strong motivator, mild flex-shaming."],
     },
     {
       id: "h4",
       group: "HQ",
       label: "Standings",
       title: "Standings",
-      sub: "Ranked by total items, from the same check-in data. No separate system.",
+      sub: "Ranked by items held, from the same check-in data.",
       net: "ok",
       html:
         '<div class="screen">' +
-          '<div class="tabs"><button data-goto="h2">Board</button><button aria-selected="true">Standings</button></div>' +
-          '<div class="eyebrow">Requisition volume · checked in within 4h</div>' +
+          '<div class="tabs"><button data-goto="h2">🗺 Board</button><button aria-selected="true">🏆 Standings</button></div>' +
+          '<p class="sub">Requisition volume · on the board now</p>' +
           '<div class="lb">' +
-            lbRow("01", "AGENT VESPER", "19") +
-            lbRow("02", "AGENT MARLOW", "17") +
-            lbRow("03", "AGENT ODESSA", "15") +
-            lbRow("04", "AGENT BASALT", "12") +
-            lbRow("05", "AGENT SPACE COWBOY", "9") +
-            lbRow("06", "AGENT KESTREL", "8", true) +
-            lbRow("07", "AGENT PIP", "6") +
+            lbRow("01", { hat: "👑", torso: "🧥" }, "VESPER", "19") +
+            lbRow("02", { hat: "📡" }, "MARLOW", "17") +
+            lbRow("03", { hat: "🎩", torso: "🧥" }, "ODESSA", "15") +
+            lbRow("04", { hat: "⛑" }, "BASALT", "12") +
+            lbRow("05", { hat: "" }, "SPACE COWBOY", "9") +
+            lbRow("06", { hat: "🍌" }, "KESTREL", "8", true) +
+            lbRow("07", { hat: "" }, "PIP", "6") +
           "</div>" +
-          '<div class="toast">Only agents currently on the board are ranked</div>' +
-          '<button class="tap tap-ghost" data-goto="h2">Back to board</button>' +
+          '<div class="spacer"></div>' +
+          '<button class="tap tap-ghost" data-goto="h2">← Board</button>' +
         "</div>",
       purpose: "Cheap competitive layer with no extra backend — it's the board data, sorted.",
-      interactions: ["Tap a row → that agent's card. Your row is pinned into view and marked."],
-      state: ["Same GET as the board; sorted client-side by item count."],
+      interactions: ["Tap a row → that agent's card. Your row is marked and scrolled into view."],
+      state: ["Same GET as the board, sorted client-side by item count."],
       notes: [
+        "Every row carries a tiny avatar, so the table still looks like characters rather than a spreadsheet.",
         "'Requisition volume' rather than 'score' — bureaucracy is the joke, not gamification.",
-        "Ranking only living check-ins means the leader is someone who's actually here tonight, not a weekend-long champion.",
       ],
-      questions: [
-        "Because only checked-in agents rank, a big collector who hasn't checked in vanishes. Correct behavior, or do you want an all-weekend high-water table too?",
-      ],
+      questions: ["Only checked-in agents rank, so a big collector who hasn't checked in vanishes. Correct, or add an all-weekend high-water table?"],
     },
     {
       id: "h5",
@@ -1607,10 +1541,9 @@
       net: "ok",
       html:
         '<div class="screen center">' +
-          '<div class="eyebrow">Unfiled correspondence</div>' +
-          '<div class="seal"><b>✉</b><span>No sender</span></div>' +
+          '<div class="seal lime">✉️</div>' +
           '<h1 class="big">You found an envelope.</h1>' +
-          '<p class="body-sm">It&rsquo;s been on this board a while. Nobody has logged it. There&rsquo;s no return address and the handwriting isn&rsquo;t departmental.</p>' +
+          '<p class="line">The handwriting isn&rsquo;t departmental.</p>' +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
             '<button class="tap tap-primary" data-goto="h6">Open it</button>' +
@@ -1619,17 +1552,15 @@
         "</div>",
       purpose: "Reward curiosity. Hand-placed, no traversal, one tap from the board.",
       interactions: [
-        "'Leave it be' must genuinely work and remain findable later — a refusable secret is a better secret.",
-        "Once opened, the envelope stops glowing for that player but stays on the board.",
+        "'Leave it be' genuinely works and stays findable later — a refusable secret is a better secret.",
+        "Once opened it stops glowing for that player but stays on the board.",
       ],
       state: ["Local flag only. Everyone gets their own envelope; it isn't first-come."],
       notes: [
-        "'The handwriting isn't departmental' is the whole Seven gesture — an unexplained presence in the institution's own records. Never named.",
-        "Glow is the only animated element in HQ, so it reads as 'that's interesting' not 'that's decoration'.",
+        "Down to one line, and it's the strangest one: 'the handwriting isn't departmental.' That's the whole Seven gesture, unnamed.",
+        "The glow is the only animation in HQ, so it reads as interesting rather than decorative.",
       ],
-      questions: [
-        "Keep the envelope permanently, or have it move position each day so returning players get a second hunt?",
-      ],
+      questions: ["Keep the envelope in one corner permanently, or move it daily so returning players get a second hunt?"],
     },
     {
       id: "h6",
@@ -1641,62 +1572,55 @@
       html:
         '<div class="screen center">' +
           '<div class="eyebrow">Item issued · unrecorded</div>' +
-          sprite({ hat: "", body: "", item: "SEVEN?", aura: true, tag: "1 of 1" }) +
+          '<div class="art amber">🗝</div>' +
           '<h1 class="big">One (1) Unlabelled Key</h1>' +
-          '<p class="body-sm">It doesn&rsquo;t match any lock the Department maintains. It has been added to your equipment anyway.</p>' +
-          '<div class="callout">No requisition number. No issuing officer. Filed under <b>pending review</b>.</div>' +
+          '<p class="line">It doesn&rsquo;t match any lock the Department maintains.</p>' +
+          '<div class="chipbar" style="justify-content:center">' +
+            ichip("🚫", "No requisition no.", "amber") + ichip("📁", "Pending review", "amber") +
+          "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
             '<button class="tap tap-lime" data-goto="c1">Take it with you</button>' +
-            '<button class="tap tap-ghost" data-goto="h2">Back to board</button>' +
+            '<button class="tap tap-ghost" data-goto="h2">← Board</button>' +
           "</div>" +
         "</div>",
-      purpose:
-        "Make one item unbuyable by scanning. Its value is that it can only be found, and it hints at the deeper lore.",
-      interactions: ["Auto-equips like any item, so it's visible to others on your card at HQ."],
-      state: ["Owned set + the mystery flag. Counts toward the 34."],
+      purpose: "One item that can't be bought by scanning. Its value is that it can only be found.",
+      interactions: ["Auto-equips like any item, so it shows on your card at HQ."],
+      state: ["Owned set + mystery flag. Counts toward the 34."],
       notes: [
         "Anyone at HQ seeing an unlabelled key on someone's card learns a secret exists. That's the word-of-mouth engine.",
         "Stops one step short of naming Seven — the open question stays open.",
       ],
-      questions: [
-        "Should this item be visible on the HQ board to others (spreads the secret) or private (protects it)? Drawn here as visible.",
-      ],
+      questions: ["Visible to others at HQ (spreads the secret) or private (protects it)? Drawn as visible."],
     },
 
-    // ============ EDGE STATES ============
+    // ============ EDGE ============
     {
       id: "e1",
       group: "Edge states",
       label: "Already held",
       title: "Already collected",
-      sub: "Will happen constantly — cards get passed around and stickers get re-scanned.",
+      sub: "Will happen constantly — cards get passed around and stickers re-scanned.",
       net: "off",
       html:
         '<div class="screen center">' +
           '<div class="eyebrow">Duplicate requisition</div>' +
-          sprite({ hat: "BANANA", body: "", item: "", aura: false, tag: "held" }) +
-          '<h1 class="big">You already have the Banana Hat.</h1>' +
-          '<p class="body-sm">Filed twice now. The Department has noted the enthusiasm.</p>' +
-          '<div class="callout lime"><b>Pass it on.</b> Hand this one to someone without a badge yet. Codes work for everybody, every time.</div>' +
-          '<div class="counter"><span>Issued equipment</span><b>8 / 34</b></div>' +
+          '<div class="art dim">🍌</div>' +
+          '<h1 class="big">You already have this one.</h1>' +
+          '<div class="callout"><span class="ico">🤝</span><span><b>Pass it on.</b> Codes work for everybody, every time.</span></div>' +
+          pips(8) +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="c1">Back to badge</button>' +
+          '<button class="tap tap-primary" data-goto="c1">← Badge</button>' +
         "</div>",
-      purpose:
-        "Turn a dead end into a referral. The duplicate scan is the best moment to ask someone to recruit.",
-      interactions: [
-        "Re-equips the item if it's currently off, so the tap still changes something.",
-        "No error styling. This is not a failure.",
-      ],
-      state: ["No writes beyond an equip. Duplicate scanning is explicitly unpoliced."],
+      purpose: "Turn a dead end into a referral. The duplicate scan is the best moment to ask someone to recruit.",
+      interactions: ["Re-equips the item if it's currently off, so the tap still does something.", "No error styling — this is not a failure."],
+      state: ["No writes beyond an equip. Duplicate scanning stays unpoliced."],
       notes: [
-        "The 'pass it on' line is the only piece of growth mechanics in the app, and it's on the screen most likely to be reached.",
-        "Counter deliberately shown unchanged — honest, and reinforces that there's more out there.",
+        "Dimmed art says 'already yours' faster than the sentence that used to.",
+        "Pip row deliberately unchanged — honest, and shows there's more out there.",
+        "'Pass it on' is the app's only growth mechanic, on the screen most likely to be reached.",
       ],
-      questions: [
-        "Worth a tiny consolation on repeat scans (an aura tint after 3 duplicates), or does that break the 'no dupe logic' simplicity you wanted?",
-      ],
+      questions: ["Tiny consolation after 3 duplicates (a spare aura tint), or does that break the no-dupe-logic simplicity?"],
     },
     {
       id: "e2",
@@ -1707,32 +1631,24 @@
       net: "off",
       html:
         '<div class="screen center">' +
-          '<div class="eyebrow">Unreadable</div>' +
-          '<div class="seal" style="border-color:#F2A23D;color:#F2A23D;box-shadow:0 0 40px -12px rgba(242,162,61,.7)"><b>??</b><span>No match</span></div>' +
-          '<h1 class="big">That code isn&rsquo;t in the register.</h1>' +
-          '<p class="body-sm">Code <b>QR-9931</b> returned nothing. Either it&rsquo;s damaged, it&rsquo;s from a different agency, or the register is out of date. All three happen.</p>' +
-          '<div class="callout">If a Department agent handed you this, show them the screen. They can log it manually.</div>' +
+          '<div class="seal grey">❓</div>' +
+          '<h1 class="big">Not in the register.</h1>' +
+          '<p class="sub">QR-9931 · no match</p>' +
+          '<div class="callout amber"><span class="ico">🦺</span><span>If an agent handed you this, show them the screen.</span></div>' +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c3">Scan another</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">Back to badge</button>' +
+            '<button class="tap tap-primary" data-goto="c3">📷 Scan another</button>' +
+            '<button class="tap tap-ghost" data-goto="c1">← Badge</button>' +
           "</div>" +
         "</div>",
-      purpose: "Fail in-universe, never blame the player, and route them to a human in a purple vest.",
-      interactions: [
-        "'Scan another' reopens the camera immediately — most recoveries are a re-scan.",
-        "Shows the code that failed, so a squad member can diagnose it on the spot.",
-      ],
-      state: [
-        "Nothing written. If the player has no badge yet, this instead falls through to the anon quiz so they aren't stranded.",
-      ],
+      purpose: "Fail in-universe, never blame the player, route them to a human in a purple vest.",
+      interactions: ["'Scan another' reopens the camera — most recoveries are a re-scan.", "Shows the failed code so a squad member can diagnose it."],
+      state: ["Nothing written. A first-time visitor falls through to the anon quiz instead, so nobody is stranded."],
       notes: [
-        "'It's from a different agency' is the funniest true explanation and costs nothing.",
-        "Amber, not red. Nothing in this app is an error.",
+        "Grey seal, not red. Nothing in this app is an error.",
+        "The 🦺 chip is the whole recovery path: find a vest.",
       ],
-      questions: [
-        "If an unknown code arrives from a first-time visitor, do you want the quiz fallback drawn as its own frame? It's the worst-case first impression.",
-      ],
+      questions: ["Draw the first-time-visitor fallback as its own frame? It's the worst-case first impression."],
     },
     {
       id: "e3",
@@ -1743,31 +1659,27 @@
       net: "off",
       html:
         '<div class="screen center">' +
-          '<div class="eyebrow">Channel status</div>' +
-          '<div class="seal" style="border-color:#6C6489;color:#6C6489;box-shadow:none"><b>—</b><span>No link</span></div>' +
+          '<div class="seal grey">📵</div>' +
           '<h1 class="big">Can&rsquo;t raise HQ from here.</h1>' +
-          '<p class="body-sm">The channel&rsquo;s just wind. Sometimes HQ answers, sometimes it doesn&rsquo;t. Your badge and everything on it still work — none of that goes through the home office.</p>' +
-          '<div class="callout">Try again from higher ground, or near the main stage where the signal pools.</div>' +
+          '<p class="line">The channel&rsquo;s just wind.</p>' +
+          '<div class="chipbar" style="justify-content:center">' + ichip("✅", "Your badge still works", "lime") + "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">Back to my badge</button>' +
-            '<button class="tap tap-ghost" data-goto="h1">Try again</button>' +
+            '<button class="tap tap-primary" data-goto="c1">← My badge</button>' +
+            '<button class="tap tap-ghost" data-goto="h1">🔄 Try again</button>' +
           "</div>" +
         "</div>",
-      purpose:
-        "Reassure without apologizing. Offline is the app's normal state; only HQ needs a link.",
+      purpose: "Reassure without apologizing. Offline is normal; only HQ needs a link.",
       interactions: [
-        "'Report to HQ' on the badge screen stays enabled and leads here rather than appearing broken or disabled.",
-        "No queued check-in — a check-in filed hours late would pollute a 4-hour board.",
+        "'Report to HQ' stays enabled on the badge screen and leads here rather than looking broken.",
+        "No queued check-in — one filed hours late would pollute a 4-hour board.",
       ],
-      state: ["Detected on the failed GET, not from navigator.onLine, which lies on festival wifi."],
+      state: ["Detected on the failed GET, not navigator.onLine, which lies on festival wifi."],
       notes: [
-        "'The channel's just wind' is lifted from the README's walkie-talkie line — the app and the handbook agree.",
-        "Naming a place to retry ('near the main stage') is real, useful advice disguised as flavor.",
+        "'The channel's just wind' is lifted from the README's walkie-talkie line — app and handbook agree.",
+        "Cut the paragraph explaining what still works; it's a ✅ chip now.",
       ],
-      questions: [
-        "Suggesting real locations means knowing where signal is at Seven Stars. Worth scouting on site so this line is true?",
-      ],
+      questions: ["Old version suggested where to find signal ('near the main stage'). Worth scouting on site so a line like that is true?"],
     },
   ];
 
@@ -1780,10 +1692,8 @@
   const posEl = document.getElementById("pos");
 
   let current = 0;
-
   document.getElementById("metaCount").textContent = SCREENS.length;
 
-  // rail, grouped by flow
   let lastGroup = null;
   SCREENS.forEach((s, i) => {
     if (s.group !== lastGroup) {
@@ -1802,15 +1712,11 @@
     railEl.appendChild(b);
   });
 
-  const list = (items, cls) =>
-    !items || !items.length
-      ? ""
-      : '<ul class="' + (cls || "") + '">' + items.map((t) => "<li>" + t + "</li>").join("") + "</ul>";
-
   const block = (label, items, cls) =>
     !items || !items.length
       ? ""
-      : '<div class="note-block"><div class="note-label"><span>' + label + "</span></div>" + list(items, cls) + "</div>";
+      : '<div class="note-block"><div class="note-label"><span>' + label + "</span></div><ul class=\"" +
+        (cls || "") + "\">" + items.map((t) => "<li>" + t + "</li>").join("") + "</ul></div>";
 
   function show(i) {
     current = (i + SCREENS.length) % SCREENS.length;
@@ -1824,9 +1730,8 @@
       });
     });
 
-    netEl.textContent = s.net === "off" ? "NO GRID LINK" : "GRID LINK OK";
+    netEl.textContent = s.net === "off" ? "⚠ NO LINK" : "📡 LINKED";
     netEl.className = s.net === "off" ? "net off" : "net";
-
     posEl.textContent = current + 1 + " / " + SCREENS.length;
 
     notesEl.innerHTML =
@@ -1857,12 +1762,12 @@
     if (e.key === "ArrowRight") { show(current + 1); e.preventDefault(); }
   });
 
-  // locker + board chips: local toggle so the wireframe feels alive
+  // locker: tapping a chip equips it
   hostEl.addEventListener("click", (e) => {
-    const chip = e.target.closest(".chip");
+    const chip = e.target.closest("button.chip");
     if (!chip || chip.classList.contains("locked")) return;
     const row = chip.closest(".slot-row");
-    if (!row) return; // chips on another agent's card are read-only
+    if (!row) return;
     row.querySelectorAll(".chip").forEach((c) => c.removeAttribute("aria-pressed"));
     chip.setAttribute("aria-pressed", "true");
   });
