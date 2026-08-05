@@ -28,7 +28,9 @@ Put `a5` and `b4` side by side in the prototype's rail — the diff between thos
 ## Flows
 
 **A · Sign-up — everyone** (sticker, trinket, or a first card)
-`a1` cold open → `a2` frequency → `a3` status → `a4` tool → `a5` badge (unassigned)
+`a1` cold open → `a2` frequency → `a3` status → `a4` tool → lands on `c1`
+
+Four taps. There's no separate "badge issued" beat — the quiz drops you straight onto your home screen, so the badge feels like something you have rather than a prize you were handed. The install prompt moved there as a dismissible first-visit banner.
 
 **B · Assignment card** (any time after sign-up — the big moment)
 `b1` card recognized → `b2` file a name → `b3` the post → `b4` badge (registered)
@@ -36,7 +38,7 @@ Put `a5` and `b4` side by side in the prototype's rail — the diff between thos
 `b1` forks: *an agent handed me this* → induction, *it's someone else's* → draws a line (`c5`).
 
 **Core loop**
-`c1` home unassigned · `c2` home registered · `c3` locker · `c4` new item · `c5` line drawn · `c6` lines
+`c1` home unassigned · `c2` home registered · `c3` locker · `c4` new item · `c5` line drawn · `c6` lines · `c7` lines reconciled
 
 **HQ** (needs a connection)
 `h1` check-in → `h2` board → `h3` another agent's card · `h4` standings · `h5` envelope → `h6` mystery item
@@ -48,10 +50,13 @@ Put `a5` and `b4` side by side in the prototype's rail — the diff between thos
 
 **Scanning another agent's assignment card draws a line.** Not a squad, not a friends list. Their card code is already in your bundled lookup table, so offline your app learns *which post they hold* — a Mentor, a Spark — but not who they are. That's the Grid recording functions, not identities.
 
-- **The first card you claim is yours; every card after that draws a line.** `b1` asks once, which is how the app tells "my card" from "your card" with no server and no identity.
+- **The first card you claim is yours; every card after that draws a line.** `b1` asks once — that single question is how the app tells "my card" from "your card" with no server and no identity. Once you hold a post there's no question at all, because a second card can never reassign you.
+- **Second cards are purely additive:** an item, a line, a constellation slot. `c5` says `🎖 Post unchanged` out loud so nobody hesitates to scan a friend's card.
 - **You also receive the item their card grants**, so people's cards are walking item sources. No new rules — that's already how the code table works.
 - **`c6` is a constellation of the 16 posts**, filling in as you meet them. The Grid is organized by constellations, so this isn't decoration, it's the cosmology. Unmet posts are faint unlabelled dots.
 - **It cannot be completed alone.** Objects fill your badge; people fill your constellation. Nobody gets to sixteen at their own tent.
+- **Names arrive later, at HQ** (`c7`). Whether a card was already redeemed is invisible offline — that state lives on its owner's phone. But the app doesn't need it: offline you learn the **post** from the card code, and on your next check-in the **name** resolves. A claimed card's code is published alongside its owner's check-in, your device sends up the codes it has logged, and names come back. No new backend — it's the same shared store the board already uses. Resolved names cache locally and read as people forever after.
+- **A line to someone who never checks in stays a post.** That's a fine outcome, and quietly true to the setting: some encounters never get filed.
 - **One-way by default**, with a nudge: *"A line runs one way until both ends are spliced. Hand them your card."* Two phones, two cards, both credited, still no server.
 - **Unassigned agents can draw lines too.** You don't need a post to meet people.
 - Vocabulary comes from the deck: the Linkage Officer's reading is *"Every stranger is a line waiting to be drawn."*
@@ -75,7 +80,8 @@ Each screen carries its own in the prototype's notes panel. The ones that change
 
 - `c6` — filling all 16 posts should mean *something*. What? It's the one reward in the app that would be genuinely hard to earn.
 - `b1` — should claiming a card be irreversible? Currently yes; a mis-tap gives you the wrong post forever. ("The Grid doesn't deal a wrong card" is a fine in-universe answer.)
-- `b1` — can a second card ever reassign you, or is your first post permanent?
+- `c7` — should reconciliation be announced like this, or silent (names just appear in `c6`)? Announced is a better moment; silent is less interruptive when you only came to see the board.
+- `c7` — there's no way to drop a line once someone resolves into a person. Leave it that way?
 - `c5` — one-way lines, or only count once both people have scanned each other? One-way is kinder to shy people; mutual is a better story.
 - `c5` — an unassigned agent has no card to hand back. Does the nudge change for them?
 - `h2` / `h3` — should unassigned show on the HQ board? Strong social pull toward getting a post, mild exclusion.

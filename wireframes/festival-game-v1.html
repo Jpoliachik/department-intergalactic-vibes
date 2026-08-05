@@ -357,7 +357,7 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 11px;
   }
 
   .screen.center { justify-content: center; text-align: center; align-items: center; }
@@ -834,7 +834,7 @@
     border-left: 2px solid #8B5CFF;
     border-radius: 4px;
     background: #12101C;
-    padding: 10px 11px;
+    padding: 9px 11px;
     flex: none;
     text-align: left;
   }
@@ -848,6 +848,30 @@
   }
 
   .assign-text { font-size: 12.5px; line-height: 1.5; color: #EDE9F7; margin: 0; }
+
+  /* transient first-visit install prompt — a banner, not a button, so it never
+     competes with the three standing actions */
+  .install {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    border: 1px dashed #4A4170;
+    border-radius: 4px;
+    background: none;
+    color: #9A93B5;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    cursor: pointer;
+    flex: none;
+  }
+
+  .install:hover { border-color: #8B5CFF; color: #EDE9F7; }
+  .install:focus-visible { outline: 2px solid #C9F24D; outline-offset: 2px; }
+  .install .x { margin-left: auto; color: #6C6489; }
 
   /* unassigned agents: the gap where a post should be */
   .assign.pending { border-left-color: #F2A23D; }
@@ -912,6 +936,26 @@
   }
 
   .constellation svg { display: block; width: 100%; height: auto; }
+
+  /* --- lines reconciled: posts becoming people --- */
+
+  .rlist { display: flex; flex-direction: column; flex: none; width: 100%; }
+
+  .rrow {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 9px;
+    align-items: center;
+    padding: 8px 2px;
+    border-bottom: 1px solid #241F38;
+    text-align: left;
+  }
+
+  .rrow:last-child { border-bottom: 0; }
+  .rrow .ico { font-size: 15px; line-height: 1; }
+  .rrow .post { font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase; color: #6C6489; }
+  .rrow .who { font-size: 12.5px; color: #C9F24D; letter-spacing: .03em; }
+  .rrow.pending .who { color: #6C6489; }
 
   .callout {
     border: 1px solid #302A47;
@@ -1047,7 +1091,7 @@
 
   const noAssign = () =>
     '<div class="assign pending"><div class="assign-label">No post on file</div>' +
-    '<p class="assign-text">Unassigned agents take general readings. Assignments are issued by hand, in the field.</p></div>';
+    '<p class="assign-text">Assignments are issued by hand, in the field.</p></div>';
 
   const orders = (goto, when, rows, footer) =>
     '<button class="orders" data-goto="' + goto + '">' +
@@ -1108,6 +1152,12 @@
       "</svg></div>"
     );
   };
+
+  const rrow = (ico, post, who, pending) =>
+    '<div class="rrow' + (pending ? " pending" : "") + '">' +
+      '<span class="ico">' + ico + "</span>" +
+      '<span><span class="post">' + post + '</span><br><span class="who">' + who + "</span></span>" +
+    "</div>";
 
   const opt = (goto, ico, lab, swatch) =>
     '<button class="opt" data-goto="' + goto + '">' +
@@ -1227,62 +1277,25 @@
           '<p class="sub">Reading 3 / 3</p>' +
           '<h1 class="big">What did you bring?</h1>' +
           '<div class="opt-grid">' +
-            opt("a5", "💧", "Something to share") +
-            opt("a5", "🔔", "Something loud") +
-            opt("a5", "🫖", "Something warm") +
-            opt("a5", "✋", "Nothing") +
+            opt("c1", "💧", "Something to share") +
+            opt("c1", "🔔", "Something loud") +
+            opt("c1", "🫖", "Something warm") +
+            opt("c1", "✋", "Nothing") +
           "</div>" +
           '<div class="spacer"></div>' +
         "</div>",
       purpose: "Load the avatar's hand and go straight to the badge.",
-      interactions: ["Final tap goes directly to the badge — no interstitial name screen."],
+      interactions: [
+        "Final tap lands <b>straight on the home screen</b> — no separate 'badge issued' beat. Your badge simply exists now.",
+        "Four taps total from cold open to a working credential.",
+      ],
       state: ["Starter held item: 💧 water bottle, 🔔 metronome, 🫖 kettle, ✋ empty cup."],
-      notes: ["'Nothing' still awards an item (empty cup) — the joke lands and nobody leaves empty-handed."],
+      notes: [
+        "'Nothing' still awards an item (empty cup) — the joke lands and nobody leaves empty-handed.",
+        "The old 'badge issued — unassigned' screen was cut: it was the home screen with ceremony on top. Arriving directly at home is faster and makes the badge feel like a thing you have, not a prize you were given.",
+      ],
       questions: ["Should the starter item come from the scanned code instead, so different stickers give different starts?"],
     },
-    {
-      id: "a5",
-      group: "Flow A · Sign-up (everyone)",
-      label: "Badge · unassigned",
-      title: "Badge issued — unassigned",
-      sub: "The default state of the whole festival: a real agent, on the books, with no post.",
-      net: "ok",
-      html:
-        '<div class="screen">' +
-          '<div class="eyebrow">Reading complete</div>' +
-          badge({
-            name: "AGENT KESTREL",
-            code: "—",
-            head: "PROVISIONAL · UNASSIGNED",
-            av: { hat: "", torso: "🦺", held: "💧" },
-            chips: dotchip("#C9F24D", "Nuclear Lime") + ichip("🥾", "Still moving") + ichip("💧", "Water bottle"),
-          }) +
-          noAssign() +
-          pips(2, 34, true) +
-          '<div class="spacer"></div>' +
-          '<div class="stack">' +
-            '<button class="tap tap-primary" data-goto="c1">My badge</button>' +
-            '<button class="tap tap-ghost" data-goto="c1">📲 Add to home screen</button>' +
-          "</div>" +
-        "</div>",
-      purpose:
-        "Complete and satisfying on its own, with one conspicuous hole. The hole is the entire recruitment engine.",
-      interactions: [
-        "Install prompt appears once, here — highest-intent moment for the PWA.",
-        "Name is generated, not typed. Anonymous is the default; naming yourself is something the assignment card unlocks.",
-      ],
-      state: ["Generated name, aura, status, held item. No designation field at all. Offline-capable from here."],
-      notes: [
-        "Badge header reads <b>PROVISIONAL · UNASSIGNED</b> with an em dash where the designation code goes. You can see what's missing without being told.",
-        "Wordlist stays in one register — birds, weather, minerals: KESTREL, VESPER, BASALT, NOVA.",
-        "'Assignments are issued by hand, in the field' is the strongest line in the app: the only way forward is a conversation with a person.",
-      ],
-      questions: [
-        "Is a generated name the right default, or should everyone get to type one and the card instead unlock something else?",
-        "Is 34 the right advertised total? A visible denominator makes completion feel finite.",
-      ],
-    },
-
     // ============ ASSIGNMENT CARD ============
     {
       id: "b1",
@@ -1436,10 +1449,11 @@
       group: "Core loop",
       label: "Home · unassigned",
       title: "Home — unassigned",
-      sub: "Where most people live for most of the festival. Has to work completely, and still want something.",
+      sub: "Where sign-up lands, and where most people live for most of the festival. Has to work completely, and still want something.",
       net: "ok",
       html:
         '<div class="screen">' +
+          '<button class="install" data-goto="c1">📲<span>Add to home screen</span><span class="x">✕</span></button>' +
           badge({
             name: "AGENT KESTREL",
             code: "—",
@@ -1463,6 +1477,8 @@
       purpose:
         "Unassigned isn't a lesser mode — you collect, you draw lines, you visit HQ. The amber block is the only thing you can't do alone.",
       interactions: [
+        "The quiz lands here directly — this screen doubles as the badge-issued moment.",
+        "Install banner shows on first visit only and is dismissible. A banner rather than a button so it never competes with the three standing actions.",
         "Orders block is tappable → your constellation of lines drawn.",
         "Everything here works with no post and no connection.",
       ],
@@ -1603,7 +1619,7 @@
           '<p class="sub">To a Mentor · IN-15</p>' +
           '<div class="callout"><span class="ico">🤝</span><span><b>A line runs one way until both ends are spliced.</b> Hand them your card.</span></div>' +
           '<div class="chipbar" style="justify-content:center">' +
-            ichip("🔑", "Key issued", "lime") + ichip("🔗", "5 of 16 posts met", "lime") +
+            ichip("🔑", "Key issued", "lime") + ichip("🔗", "5 of 16 met", "lime") + ichip("🎖", "Post unchanged") +
           "</div>" +
           '<div class="spacer"></div>' +
           '<div class="stack">' +
@@ -1615,9 +1631,13 @@
       interactions: [
         "Fully offline: their card code is in your bundled table, so the app learns the <b>post</b> without learning the person.",
         "You also receive the item that card grants — people's cards are walking item sources, which is already how the code table works.",
-        "Every card after your own claimed one lands here automatically, no fork question.",
+        "Once you hold a post, <b>every</b> card you scan lands here automatically — no fork question, because a second card can never reassign you.",
+        "Additive, never destructive: an item, a line, a constellation slot. The 'Post unchanged' chip says so out loud so nobody hesitates to scan a friend's card.",
       ],
-      state: ["Appends the designation to your met-posts set, plus the card's item."],
+      state: [
+        "Appends the designation to your met-posts set, plus the card's item. Your own designation is never written here.",
+        "<b>Redemption state is invisible offline</b> — whether that card was ever claimed lives on its owner's phone. The app doesn't need to know: if you already hold a post, the card isn't yours, full stop.",
+      ],
       notes: [
         "Offline you meet a <b>function</b>, not a name — exactly how the Grid is described. Check in at HQ and logged codes can resolve into names later: the file catches up.",
         "'Line', not 'squad' — the Linkage Officer's reading already says <i>every stranger is a line waiting to be drawn</i>.",
@@ -1640,29 +1660,82 @@
         '<div class="screen">' +
           '<div class="eyebrow">Lines drawn · 5 of 16 posts</div>' +
           constellation([1, 3, 7, 10, 15]) +
-          '<div class="chipbar">' +
-            ichip("⚓", "The Anchor") + ichip("🔌", "The Connector") + ichip("🧭", "The Wanderer") +
-            ichip("🔮", "The Oracle") + ichip("🔑", "The Mentor") +
+          '<div class="rlist">' +
+            rrow("⚓", "The Anchor", "AGENT BASALT") +
+            rrow("🔌", "The Connector", "AGENT ODESSA") +
+            rrow("🔑", "The Mentor", "AGENT SPACE COWBOY") +
+            rrow("🧭", "The Wanderer", "Name not yet on file", true) +
+            rrow("🔮", "The Oracle", "Name not yet on file", true) +
           "</div>" +
-          '<p class="reading">&ldquo;Every stranger is a line waiting to be drawn.&rdquo;</p>' +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-ghost" data-goto="c2">← Badge</button>' +
+          '<div class="stack">' +
+            '<button class="tap" data-goto="c7"><span class="ico">🛰</span>Put names to 2 lines</button>' +
+            '<button class="tap tap-ghost" data-goto="c2">← Badge</button>' +
+          "</div>" +
         "</div>",
       purpose: "One screen that only gets more beautiful the more people you actually talk to. The thesis of the game in a single graphic.",
       interactions: [
         "Reached from the orders block on home, or straight after drawing a line.",
-        "Tap a lit star → which post, when you met it, and the agent's name if HQ has since resolved it.",
+        "Tap a lit star → which post, and the agent's name if HQ has resolved it.",
         "Unmet posts are faint dots, never labelled — you see there are sixteen without knowing what's missing.",
       ],
-      state: ["Met-posts set in localStorage. Fully offline; HQ only enriches it with names."],
+      state: [
+        "Met-posts set in localStorage, fully offline. Names are the one part that needs HQ.",
+        "Lines connect in the order you met them, so the shape is a record of your night's path.",
+      ],
       notes: [
         "The Grid is organized by constellations (locked decision), so drawing connections as a star map isn't decoration — it's the cosmology.",
-        "Lines should connect in the order you met them, so the shape is a record of your night's path.",
+        "Two rows sit unresolved in grey: you met the post, not yet the person. That gap is the reason to walk to HQ.",
         "16 posts is a naturally finite set that cannot be completed alone or by scanning objects.",
+        "Cut the Linkage Officer quote from here — it now has nowhere better to live than C7, where the reconciliation actually happens.",
       ],
       questions: [
         "Filling all 16 should mean <i>something</i> — an item, a title, a line on your badge. What? It's the one genuinely hard thing to earn.",
         "Do lines expire? Items don't. I'd say lines are permanent — the one thing that shouldn't age off.",
+      ],
+    },
+    {
+      id: "c7",
+      group: "Core loop",
+      label: "Lines reconciled",
+      title: "Lines reconciled",
+      sub: "Fires on an HQ check-in. The only thing in the app that genuinely needs a connection: turning posts into people.",
+      net: "ok",
+      html:
+        '<div class="screen center">' +
+          '<div class="eyebrow">Reconciled at HQ</div>' +
+          '<div class="art lime">🔗</div>' +
+          '<h1 class="big">Two of your lines have names now.</h1>' +
+          '<div class="rlist">' +
+            rrow("🧭", "The Wanderer", "AGENT MARLOW") +
+            rrow("🔮", "The Oracle", "AGENT PIP") +
+          "</div>" +
+          '<p class="reading">&ldquo;Every stranger is a line waiting to be drawn.&rdquo;</p>' +
+          '<div class="spacer"></div>' +
+          '<div class="stack">' +
+            '<button class="tap tap-primary" data-goto="c6">See my lines</button>' +
+            '<button class="tap tap-ghost" data-goto="h2">← Board</button>' +
+          "</div>" +
+        "</div>",
+      purpose:
+        "The deferred half of the connection mechanic. Offline you met a function; here it becomes a person. That delay is a feature — the Department is slow, and the reveal lands better for having waited.",
+      interactions: [
+        "Runs automatically on check-in when you have unresolved lines. If there are none, this screen never appears.",
+        "Also reachable from C6 — 'put names to 2 lines' is really an instruction to go find signal.",
+      ],
+      state: [
+        "How it works with the HQ store already in scope: a claimed card's code is published alongside its owner's check-in. Your device sends up the card codes you've logged and gets names back for any that match.",
+        "No new backend. It's the same shared read/write store the board and standings already use.",
+        "Names are cached locally, so once resolved a line reads as a person forever — even offline, even after their check-in ages off the board.",
+      ],
+      notes: [
+        "This is the honest answer to 'can the app tell a card was already redeemed?' — not offline, and not at scan time. But it can tell you afterwards <i>who</i>, which is the part you actually wanted.",
+        "A line to someone who never checks in stays a post forever. That's a fine outcome, and quietly true to the setting: some encounters never get filed.",
+        "The Linkage Officer's field reading lives here now, verbatim from the deck, on the screen where strangers literally become names.",
+      ],
+      questions: [
+        "Should reconciliation be silent (names just appear in C6) or announced like this? Announced is a better moment; silent is less interruptive when you only came to see the board.",
+        "If someone resolves into a person you'd rather not be linked to, there's currently no way to drop a line. Leave it that way?",
       ],
     },
 
