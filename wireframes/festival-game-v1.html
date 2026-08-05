@@ -985,24 +985,28 @@
       net: "ok",
       html:
         '<div class="screen center">' +
-          '<div class="eyebrow">Transmission received</div>' +
-          '<div class="seal">📩</div>' +
-          '<h1 class="big">This card was issued to you by hand.</h1>' +
+          '<div class="eyebrow">Record located</div>' +
+          '<div class="seal" style="font-size:60px">✦</div>' +
+          '<h1 class="big">Your file was opened long before tonight.</h1>' +
           '<p class="sub">Card IN-15-0342 · logged</p>' +
           '<div class="spacer"></div>' +
           '<button class="tap tap-primary" data-goto="a2">Begin intake</button>' +
         "</div>",
-      purpose: "Confirm the physical object did something. The card is the status item — this screen should feel like it was expecting them.",
+      purpose: "The first line anyone on the card path ever reads. It has to promise something, not describe what just happened.",
       interactions: [
         "Arrives at <code>/scan?code=IN-15-0342&amp;card=1</code> — the <code>card=1</code> flag skips the quiz.",
         "One tap forward. No back, no menu — the card chose the path.",
       ],
       state: ["Lookup resolves code → designation + its Object + guaranteed swag item. Nothing persisted yet."],
       notes: [
-        "The designation stays hidden until A4 — the seal is a sealed envelope, not a result.",
-        "Copy is down to one line and one code. Everything else was scaffolding.",
+        "The line does the deck's premise in seven words: the Department isn't assigning you anything, it's <i>retrieving</i> something already true about you. Mystical, but it's a sentence about filing.",
+        "Mystical headline + dry code underneath (<code>IN-15-0342 · logged</code>) is the tone formula — the bureaucracy is what makes the mysticism land.",
+        "Seal is a sigil, not an envelope: ✉️ is reserved for the HQ easter egg and shouldn't appear anywhere else in the app.",
       ],
-      questions: ["Should the card's printed designation be readable in hand, or is the app the only reveal? Currently the app."],
+      questions: [
+        "Alternates if this one's too knowing: <i>&ldquo;Something in you was logged a long time ago.&rdquo;</i> / <i>&ldquo;You were in the register before you were on the guest list.&rdquo;</i> / <i>&ldquo;This was true about you before you got here.&rdquo;</i>",
+        "Should the card's printed designation be readable in hand, or is the app the only reveal? Currently the app.",
+      ],
     },
     {
       id: "a2",
@@ -1014,92 +1018,74 @@
       html:
         '<div class="screen">' +
           '<div class="spacer"></div>' +
+          '<div class="eyebrow">Cleared for induction</div>' +
+          '<p class="line">An agent vouched for you, and the post you were handed is a specific one.</p>' +
           '<h1 class="huge">Name?</h1>' +
           '<div class="fake-input">SPACE COWBOY<span class="caret"></span></div>' +
           '<p class="cap">18 / 18</p>' +
           '<div class="spacer"></div>' +
           '<button class="tap tap-primary" data-goto="a3">→</button>' +
         "</div>",
-      purpose: "One word, one field, one tap. The absence of explanation is the mystery.",
+      purpose:
+        "Establish that this was a judgement call by a person before asking for anything. Being vouched for is the reason to keep tapping.",
       interactions: [
         "Keyboard up on load, submit on Return. The arrow button is for thumbs, not instruction.",
         "Empty submit allowed — falls through to a generated name rather than blocking.",
       ],
       state: ["Name → localStorage. This is the identity key; there's no account behind it."],
       notes: [
-        "Cut from v1: the 'what do they call you out here' line, the AGENT-prefix explanation, the reassurance about nicknames. None of it was load-bearing.",
-        "'AGENT' is still prefixed by the system — they just discover it on the next screen instead of being told.",
+        "'An agent vouched for you' is canon, not flattery — Tier 3 induction in the README is explicitly the agent's call, based on what they observed.",
+        "'A specific one' promises the post without naming it, so A3 still has something to hand over.",
+        "Everything else stays cut: no AGENT-prefix explanation, no nickname reassurance. One line, one field, one tap.",
         "18-char cap keeps names legible on HQ board pins.",
       ],
-      questions: ["Names surface publicly at HQ and are unpoliced. Want a quiet blocklist?"],
+      questions: [
+        "Does naming the agent land harder — 'Agent Marlow vouched for you'? Requires the squad member's name on the card, which is a print-run decision.",
+        "Names surface publicly at HQ and are unpoliced. Want a quiet blocklist?",
+      ],
     },
     {
       id: "a3",
       group: "Flow A · Assignment card",
-      label: "Welcome",
-      title: "Welcome",
-      sub: "New screen. The induction needed a threshold moment before the designation — this is it.",
+      label: "Welcome + post",
+      title: "Welcome, and the post you drew",
+      sub: "Welcome and designation on one screen. Hierarchy keeps it from scattering: the greeting is small, the drawn post is the hero.",
       net: "ok",
       html:
         '<div class="screen center">' +
-          '<div class="seal">🪐</div>' +
-          '<div class="eyebrow">Department of Intergalactic Vibrations</div>' +
-          '<h1 class="huge">AGENT<br>SPACE COWBOY</h1>' +
-          '<div class="chipbar" style="justify-content:center">' +
-            ichip("🌍", "SOL-3") + ichip("✨", "PLEIADES") +
-          "</div>" +
-          '<p class="line">You&rsquo;re on the books.</p>' +
-          '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="a4">Receive designation</button>' +
-        "</div>",
-      purpose: "Being welcomed by an institution is the emotional beat. Splitting it out is what un-scattered the old A3.",
-      interactions: [
-        "Seal can ride in on a short scale-up; the name types or fades in behind it.",
-        "One forward action only.",
-      ],
-      state: ["Nothing new written — this is presentation of what A2 saved."],
-      notes: [
-        "The old A3 tried to do welcome + designation + assignment + reading + Object on one screen. Now: welcome here, designation next.",
-        "This is the only screen that says the agency's full name — worth it once, at induction.",
-        "Sector chips replace the sentence that used to explain the posting.",
-      ],
-      questions: ["Should the anon path get this welcome too, or does keeping it card-only make cards feel more ceremonial?"],
-    },
-    {
-      id: "a4",
-      group: "Flow A · Assignment card",
-      label: "The turn",
-      title: "The card turns over",
-      sub: "The draw IS the induction. Object art leads; the deck's own words follow.",
-      net: "ok",
-      html:
-        '<div class="screen center">' +
-          '<div class="eyebrow">Your designation</div>' +
-          '<div class="art">🔑</div>' +
-          '<h1 class="big">Induction Officer</h1>' +
+          '<div class="eyebrow">Welcome aboard</div>' +
+          '<h1 class="big">AGENT SPACE COWBOY</h1>' +
+          '<div class="rule" style="width:70%"></div>' +
+          '<p class="sub">The card drew you</p>' +
+          '<div class="art" style="font-size:56px">🔑</div>' +
+          '<h2 class="big">Induction Officer</h2>' +
           '<p class="sub">The Mentor · IN-15</p>' +
-          '<div class="rule" style="width:100%"></div>' +
           '<p class="assignment">See the one still outside the light, and wave them in.</p>' +
           '<p class="reading">&ldquo;Hold the door open behind you.&rdquo;</p>' +
           '<div class="chipbar" style="justify-content:center">' + ichip("🔑", "OBJECT ISSUED", "lime") + "</div>" +
           '<div class="spacer"></div>' +
-          '<button class="tap tap-primary" data-goto="a5">Accept the post</button>' +
+          '<button class="tap tap-primary" data-goto="a4">Accept the post</button>' +
         "</div>",
-      purpose: "One image, one title, two lines, one chip. The Object is the hero, not a bullet in a list.",
+      purpose:
+        "One induction moment instead of two: you're welcomed by name, then told what the card says you already were.",
       interactions: [
-        "Object art lands first, then title, then the reading — ~250ms apart, skippable on tap.",
+        "Reveals in one sequence — greeting, rule wipe, Object art, designation, then the reading. ~250ms apart, skippable on tap.",
         "No re-roll. The Grid doesn't deal a wrong card.",
       ],
       state: ["Writes designation, Object → held-item slot, and the card's guaranteed swag item."],
       notes: [
-        "Assignment trimmed to its first sentence; the full two-line version stays on the printed card, so the card still holds something the app doesn't.",
-        "The Object paragraph became a single chip: 🔑 OBJECT ISSUED.",
+        "What keeps this from being the scattered v1 screen is <b>weight</b>, not word count: greeting is eyebrow-sized, the Object art and designation are the hero, assignment and reading are body text under a rule.",
+        "'The card drew you' inverts the usual phrasing on purpose — the card is the actor, which is the deck's premise.",
+        "Assignment trimmed to its first sentence; the printed card keeps both, so the physical object still holds something the app doesn't.",
         "Card entry is the <b>only</b> path that grants your designation's Object.",
       ],
-      questions: ["Trimming the assignment to one line — does the printed card keeping the fuller text feel like a reward or a mismatch?"],
+      questions: [
+        "This is now the longest screen in the app. If it feels crowded on a real phone, the first thing to cut is the field reading — it's the line most likely to be read off the card instead.",
+        "Should the anon path get a welcome too, or does card-only make cards more ceremonial?",
+      ],
     },
     {
-      id: "a5",
+      id: "a4",
       group: "Flow A · Assignment card",
       label: "First badge",
       title: "Badge issued",

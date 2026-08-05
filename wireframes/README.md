@@ -6,12 +6,12 @@
 
 Storyboard for the D.I.V. collection game. Open `festival-game-v1.html` to tap through it.
 
-22 screens, 5 flows. Wireframe fidelity — item art is emoji placeholders, structure and copy are real.
+21 screens, 5 flows. Wireframe fidelity — item art is emoji placeholders, structure and copy are real.
 
 ## Flows
 
 **A · Assignment card** (physical card, handed over by an agent)
-`a1` handoff → `a2` name → `a3` welcome → `a4` the turn → `a5` badge
+`a1` handoff → `a2` name → `a3` welcome + post → `a4` badge
 
 **B · Anon QR** (sticker or found NFC trinket)
 `b1` cold open → `b2` frequency → `b3` posture → `b4` tool → `b5` badge
@@ -28,7 +28,9 @@ Storyboard for the D.I.V. collection game. Open `festival-game-v1.html` to tap t
 ## Changed in v2
 
 - **Cut the anon name screen.** Q3 goes straight to the badge, which now reveals the generated name itself. Flow B is four taps from sticker to finished credential.
-- **Added a welcome beat to flow A** (`a3`). The old single designation screen was carrying welcome + designation + assignment + reading + Object all at once. Now: welcome, then the turn.
+- **Flow A opens on a promise, not a description.** `a1` was restating what the player had just done ("this card was issued to you by hand"). Now: *"Your file was opened long before tonight."* Mystical headline, dry code underneath — that pairing is the tone formula.
+- **`a2` establishes trust before asking for anything.** An agent vouched for you, and the post you were handed is a specific one. Canon, not flattery — Tier 3 induction in the README is explicitly the agent's judgement call.
+- **Welcome and designation are one screen** (`a3`). What keeps it from scattering is weight, not word count: the greeting is eyebrow-sized, the Object art and designation are the hero, assignment and reading sit under a rule as body text.
 - **Graphics carry the screens, not text.** Composed emoji avatars (hat + body + held item) instead of labelled boxes, 2×2 icon grids for quiz answers, progress as 34 pips instead of "7 / 34" prose, badge fields as icon chips, item icons in the locker and on other agents' cards.
 - **Copy cut app-wide.** Most screens are down to one headline and at most one line. Explanatory paragraphs became chips: retention is `⏳ Ages off in 4h`, offline reassurance is `✅ Your badge still works`, Object issuance is `🔑 OBJECT ISSUED`.
 
@@ -50,11 +52,12 @@ Each screen carries its own in the prototype's notes panel. The ones that change
 - `b3` / `b4` — which of the 16 answer-pairs maps to which designation. The obvious cells are easy; the quiet corners need care.
 - `b5` — if an anon player later draws a card with a *different* designation: overwrite, keep the first, or dual posting?
 - `b5` — without the standalone name screen, is the generated name still a moment? If it needs more, the fix is animation here rather than another screen.
+- `a3` — now the longest screen in the app. If it crowds on a real phone, cut the field reading first: it's the line most likely to be read off the printed card instead.
 - `a3` — should the anon path get a welcome too, or does card-only make cards more ceremonial?
-- `a4` — the assignment is trimmed to one sentence; the printed card keeps both. Reward, or mismatch?
+- `a2` — does naming the agent land harder ("Agent Marlow vouched for you")? Needs the squad member's name on the card, which is a print-run decision.
 - `h1` — check-in TTL of 4h vs 6h. 4h is a genuinely "right now" board; 6h survives a nap.
 - `h2` — board density past ~100 check-ins: cap at the 20 most recent, or let it fill up like a real bulletin board?
-- `a5` — is 34 the right advertised total? A visible denominator makes completion feel finite.
+- `a4` — is 34 the right advertised total? A visible denominator makes completion feel finite.
 - `h6` — should the mystery item be visible to others at HQ (spreads the secret) or private (protects it)?
 
 ## Not drawn
