@@ -1,0 +1,15 @@
+{
+  "slug": "the-wanderer",
+  "order": 7,
+  "name": "The Wanderer",
+  "designation": "Field Pathfinder",
+  "code": "FP-07",
+  "function": "Survey",
+  "object": "Compass",
+  "fieldReading": "Follow the pull, not the program.",
+  "bio": "A roamer who trusts their feet over the map, drawn always to the pull off the edge of the program.",
+  "sceneStory": "Crossing a desert of violet dunes under a huge low moon, a figure holds a glowing compass flat in one palm and follows its needle. The needle points off the marked path toward a single pulsing light on the far horizon, and their footprints trail behind them across the sand.",
+  "assignment": "Trust your feet over the map. You always arrive where you're needed.",
+  "tagline": "",
+  "imagePrompt": ""
+}

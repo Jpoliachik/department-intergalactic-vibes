@@ -1,0 +1,15 @@
+{
+  "slug": "the-beacon",
+  "order": 4,
+  "name": "The Beacon",
+  "designation": "Signal Lamp Operator",
+  "code": "SL-04",
+  "function": "Radiance",
+  "object": "Lantern",
+  "fieldReading": "Don't chase the signal. Become it.",
+  "bio": "A fixed point of warm light in the dark — one who doesn't chase the crowd but becomes the place it gathers.",
+  "sceneStory": "On a spit of black rock ringed by churning, silver-capped waves, a keeper in a heavy coat raises a lantern high over their head with both hands, its amber beam cutting a wide bright road across the dark water. Far out along that road, a small three-masted ship with torn sails swings its bow around to follow the light in.",
+  "assignment": "Don't chase the crowd — pick your spot and glow. What's meant for you comes to you.",
+  "tagline": "",
+  "imagePrompt": ""
+}

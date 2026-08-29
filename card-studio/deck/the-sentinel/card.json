@@ -1,0 +1,15 @@
+{
+  "slug": "the-sentinel",
+  "order": 13,
+  "name": "The Sentinel",
+  "designation": "Night Watch Officer",
+  "code": "NW-13",
+  "function": "Vigil",
+  "object": "Hourglass",
+  "fieldReading": "The dark doesn't last. You do.",
+  "bio": "The one who holds the watch to dawn, awake to see the dark turn while the last circle sleeps.",
+  "sceneStory": "Alone on a high ridge, a figure holds up an hourglass in which grains of starlight are falling, and faces east. Along the black horizon a thin line has just cracked open into the first blue of dawn.",
+  "assignment": "Stay awake when the others have gone. The dawn belongs to whoever waited for it.",
+  "tagline": "",
+  "imagePrompt": ""
+}

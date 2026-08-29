@@ -1,0 +1,15 @@
+{
+  "slug": "the-spark",
+  "order": 2,
+  "name": "The Spark",
+  "designation": "Ignition Specialist",
+  "code": "IS-02",
+  "function": "Initiation",
+  "object": "Lit match",
+  "fieldReading": "Go before you're ready. Readiness follows.",
+  "bio": "The one who moves first — a small, brave ignition in the dark. Nothing happens until they begin.",
+  "sceneStory": "At the center of an enormous empty stage, its far edges lost in black, a lean figure crouches on one knee and drags a match down a plank, throwing a small fan of sparks. From the lit match-head a thin stem of fire climbs and branches overhead into a glowing tree of flame, its light pushing the dark back to reveal rows of empty seats.",
+  "assignment": "Be the first one moving, before it feels reasonable. The moment was only ever waiting for you.",
+  "tagline": "",
+  "imagePrompt": ""
+}

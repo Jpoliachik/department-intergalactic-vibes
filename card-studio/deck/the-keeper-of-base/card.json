@@ -1,0 +1,15 @@
+{
+  "slug": "the-keeper-of-base",
+  "order": 11,
+  "name": "The Keeper of Base",
+  "designation": "Quartermaster",
+  "code": "QM-11",
+  "function": "Provision",
+  "object": "Kettle",
+  "fieldReading": "Keep the kettle on. They all come back.",
+  "bio": "Keeper of the hearth — the warm center every orbit returns to, with something good always waiting.",
+  "sceneStory": "In the middle of an endless dark plain, a figure crouches over a small campfire and lifts the lid of a steaming kettle. Theirs is the only spot of warmth for miles, and a single lit path winds out of the darkness straight to the fire.",
+  "assignment": "Be the place everyone drifts back to. Everything that wanders comes home.",
+  "tagline": "",
+  "imagePrompt": ""
+}
