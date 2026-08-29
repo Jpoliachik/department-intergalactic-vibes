@@ -1,0 +1,15 @@
+{
+  "slug": "the-enchanter",
+  "order": 14,
+  "name": "The Enchanter",
+  "designation": "Glamour Technician",
+  "code": "GL-14",
+  "function": "Glamour",
+  "object": "Fairy lights",
+  "fieldReading": "Beauty is a frequency. Broadcast it.",
+  "bio": "A weaver of beauty who turns bare ground enchanted — to whom beauty is not decoration but the work itself.",
+  "sceneStory": "Crossing a cracked grey wasteland, a figure trails a long string of fairy lights from one hand. In the line behind every footstep, glowing flowers are bursting up out of the dead ground and opening.",
+  "assignment": "Make one plain corner beautiful. People become the magic a place promises them.",
+  "tagline": "",
+  "imagePrompt": ""
+}

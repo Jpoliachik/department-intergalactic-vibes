@@ -1,0 +1,15 @@
+{
+  "slug": "the-connector",
+  "order": 3,
+  "name": "The Connector",
+  "designation": "Linkage Officer",
+  "code": "LS-03",
+  "function": "Linkage",
+  "object": "Splice",
+  "fieldReading": "Every stranger is a line waiting to be drawn.",
+  "bio": "A closer of gaps, forever splicing new lines between strangers who were always meant to meet.",
+  "sceneStory": "On a dark plain between two far hills, each crowned by a single lonely star, a figure holds a glowing thread pulled down from each one. They twist the two ends together and the join flares white, a taut line of light snapping into place between the two stars.",
+  "assignment": "Introduce the two who were always going to find each other. You're simply the moment it happens.",
+  "tagline": "",
+  "imagePrompt": ""
+}

@@ -1,0 +1,15 @@
+{
+  "slug": "the-witness",
+  "order": 12,
+  "name": "The Witness",
+  "designation": "Field Recorder",
+  "code": "OC-12",
+  "function": "Record",
+  "object": "Film camera",
+  "fieldReading": "What you carry home is the only copy.",
+  "bio": "The one who remembers the night so everyone else can vanish into it — keeper of the only copy.",
+  "sceneStory": "At the rim of a canyon overlooking a valley flooded with glowing light, a figure cranks the handle of an old film camera. The whole scene below lifts and spools up into the lens as a long ribbon of light, wound frame by frame onto the reel.",
+  "assignment": "Don't just live the night — keep it. What's remembered never really ends.",
+  "tagline": "",
+  "imagePrompt": ""
+}

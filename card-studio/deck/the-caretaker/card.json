@@ -1,0 +1,15 @@
+{
+  "slug": "the-caretaker",
+  "order": 6,
+  "name": "The Caretaker",
+  "designation": "Field Medic",
+  "code": "FM-06",
+  "function": "Maintenance",
+  "object": "Water bottle",
+  "fieldReading": "Look after the people, and the night looks after itself.",
+  "bio": "The tender of dimming lights — the one who reaches the fading before they think to ask.",
+  "sceneStory": "In a wide dark meadow where dozens of fallen stars lie half-buried and barely glowing in the grass, a figure kneels and lifts one cold, flickering star into cupped hands. They bend close and breathe on it until it flares awake in their palms — bright enough now to show three more dim ones waiting nearby.",
+  "assignment": "Reach the person fading before they ask. No light stays lit alone.",
+  "tagline": "",
+  "imagePrompt": ""
+}

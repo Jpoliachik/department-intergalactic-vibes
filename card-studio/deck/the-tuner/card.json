@@ -1,0 +1,15 @@
+{
+  "slug": "the-tuner",
+  "order": 5,
+  "name": "The Tuner",
+  "designation": "Resonance Listener",
+  "code": "RL-05",
+  "function": "Reception",
+  "object": "Tuning fork",
+  "fieldReading": "Listen all the way to one, and you've heard the night.",
+  "bio": "A deep listener who gives one soul their whole frequency, and hears the quiet signal everyone else danced past.",
+  "sceneStory": "On the black shore of a perfectly still lake, a figure strikes a great tuning fork and lowers it toward the water. Out on the mirrored surface a single reflected star begins to ring and brighten, answering the note.",
+  "assignment": "Give one person your whole signal. The universe says its deepest things quietly.",
+  "tagline": "",
+  "imagePrompt": ""
+}

@@ -1,0 +1,15 @@
+{
+  "slug": "the-mentor",
+  "order": 15,
+  "name": "The Mentor",
+  "designation": "Induction Officer",
+  "code": "IN-15",
+  "function": "Induction",
+  "object": "Key",
+  "fieldReading": "Hold the door open behind you.",
+  "bio": "The one who holds the door open behind them — welcoming the hesitant in as if they'd always belonged.",
+  "sceneStory": "In the middle of an empty dark field stands a single freestanding door, warm light pouring out around its edges. Beside it a figure hung with a hundred keys holds one out to a hesitant newcomer just stepping in from the dark.",
+  "assignment": "See the one still outside the light, and wave them in. Someone once did it for you.",
+  "tagline": "",
+  "imagePrompt": ""
+}

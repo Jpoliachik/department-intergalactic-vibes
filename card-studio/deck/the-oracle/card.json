@@ -1,0 +1,15 @@
+{
+  "slug": "the-oracle",
+  "order": 10,
+  "name": "The Oracle",
+  "designation": "Divination Officer",
+  "code": "DV-10",
+  "function": "Divination",
+  "object": "Crystal ball",
+  "fieldReading": "Read the air, not the clock.",
+  "bio": "A reader of what's coming before it arrives — part meteorologist, part mystic, wholly trusting the thing they can't explain.",
+  "sceneStory": "On a bare hilltop under a clear and perfectly calm night sky, a hooded figure bends over a crystal ball cupped in both hands. Inside the glass a violent storm is already breaking — lightning, black cloud — none of which has reached the still night around them yet.",
+  "assignment": "Trust the hunch before it makes sense. Knowing always arrives before the proof.",
+  "tagline": "",
+  "imagePrompt": ""
+}
