@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readCard, readGlobals, writeCard } from "@/lib/deck";
+import { readAllCards, readCard, readGlobals, writeCard } from "@/lib/deck";
 import { generateText } from "@/lib/anthropic";
 import { render } from "@/lib/prompts";
 import {
@@ -46,8 +46,29 @@ export async function POST(req: Request) {
     if (!slug) {
       return NextResponse.json({ error: "Expected { slug }." }, { status: 400 });
     }
-    const [card, globals] = await Promise.all([readCard(slug), readGlobals()]);
-    const prompt = render(globals.assignmentPrompt, card);
+    const [card, globals, deck] = await Promise.all([
+      readCard(slug),
+      readGlobals(),
+      readAllCards(),
+    ]);
+
+    // A card is generated on its own, so the model cannot see that the other
+    // fifteen already open every inward line with "Notice" or "Catch". Left to
+    // itself it picks the single best verb for the brief every time and the
+    // deck collapses onto it. Hand it what the rest of the deck already uses.
+    const takenOpeners = Array.from(
+      new Set(
+        deck
+          .filter((c) => c.slug !== slug)
+          .flatMap((c) => c.assignments ?? [])
+          .map((line) => line.trim().split(/\s+/)[0]?.toLowerCase().replace(/[^a-z']/g, ""))
+          .filter((w): w is string => !!w),
+      ),
+    ).sort();
+    const basePrompt = render(globals.assignmentPrompt, card);
+    const prompt = takenOpeners.length
+      ? `${basePrompt}\n\nDECK VARIETY: other cards in this deck already open assignment lines with these words — ${takenOpeners.join(", ")}. Do not open either of your two lines with any of them. Find a different way in.`
+      : basePrompt;
 
     // The plate fits one line per entry, so over-length output is a failure,
     // not a style nit. Ask again with the offenders quoted back rather than

@@ -122,14 +122,14 @@ export function CardFace({ card, className }: { card: Card; className?: string }
                     className="shrink-0 translate-y-[0.9cqw] text-deck-brick"
                     style={{ width: "4.4cqw", height: "4.4cqw" }}
                   />
-                  <span className="text-[3.7cqw] leading-snug text-deck-cream">
+                  <span className="font-mono text-[3.4cqw] leading-snug text-deck-cream">
                     {entry}
                   </span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-[3.7cqw] italic text-deck-teal/60">— no assignment yet —</p>
+            <p className="font-mono text-[3.4cqw] italic text-deck-teal/60">— no assignment yet —</p>
           )}
         </div>
       </div>

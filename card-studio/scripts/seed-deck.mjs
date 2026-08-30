@@ -27,33 +27,34 @@ Composition: a CLOSE CROP of a much larger scene. The camera is pushed in tight 
 
 Illustration only. No lettering or captions anywhere.`;
 
-const ASSIGNMENT_TEMPLATE = `You are a field officer of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Crew hand these cards to festival-goers in the field. Tone: warm, plain-spoken, quietly official — never winking, never mystical here.
+const ASSIGNMENT_TEMPLATE = `You are a field officer of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Crew hand these cards to festival-goers in the field. Tone: warm, plain-spoken, quietly official — never winking.
 
 Write the TWO standing assignments printed on this card.
 
-What an assignment is: a short order a person can carry all weekend and act on over and over. It names a way to participate, not a task to complete. The card's field reading carries the mystery; these two lines carry the doing.
+WHAT AN ASSIGNMENT IS: a practice, not a task. It is a way of paying attention that a person can return to at any moment of the weekend — in a queue, mid-conversation, walking between stages, at 4am — and do again five minutes later, differently. These are mindfulness practices in plain clothes. They direct attention: what to notice, how to meet what is in front of you, what to let go of. Vibe Corp's work is attention; the Grid runs on presence.
+
+AVOID BOTH FAILURE MODES:
+- TOO PRESCRIPTIVE — a single named act that gets done once and is then over. "Walk somebody back to camp." "Miss the headliner on purpose." "Feed the sunrise stragglers." Nobody should finish reading their card feeling they now owe someone a specific errand.
+- TOO NEBULOUS — pretty words where a person cannot tell what to actually do. "Glitter the dark corners." "Log the good weird." "Be wrong with your whole chest."
+
+THE TEST, both halves must pass: a person knows what to do in the next thirty seconds, AND could do it a hundred times across the weekend, differently every time.
+
+Good examples of the register:
+Say yes before you know why
+Ask the obvious question
+Notice who has gone quiet
+Let the silence sit
+Be easy to find
+Stay put on purpose
 
 Rules:
 - EXACTLY 2 assignments, one per line. No numbering, no bullets, no blank lines.
 - Each is a short imperative: 2 to 6 words, at most 34 characters including spaces. Count them.
-- Plain, spoken language — what one person would actually say to another. Wry is welcome. Keep the deep mysticism out; the field reading carries that.
-- Open, never prescriptive: nothing scheduled, counted, or crossable off a list. A person should be able to act on it ten times in a night and never be finished.
-- These are handed out at a psychedelic festival, so let the language live there. Festival texture is welcome and wanted: side quests, sunrise, sound systems, strangers in costume, the long walk back to camp, glitter, the dark between stages, the good weird. Cosmic is fine too — Vibe Corp genuinely believes the Grid is real.
-- Be playful. A little absurd, a little loose, a little sideways beats tidy every time. THE TEST: if a line could appear in a corporate handbook or a wellness app, it is too bland — rewrite it with more colour.
-- The two must differ in kind. One is usually the outward move; the other is the permission that makes it possible.
+- The two differ in kind. One turns outward — how to meet other people. One turns inward — how to meet yourself, or what to catch in your own head.
+- Vary the verb. "Notice" is one option among many and must not be the default — reach for catch, watch, let, keep, ask, stay, hold, give, follow, leave, trust, name. The two lines must not open with the same word.
+- Plain, spoken language, the way one person actually talks to another. Warm. A little wry is welcome. Keep the deep mysticism out; the field reading carries that.
+- Nothing scheduled, counted, located, or crossable off a list. No named errand, no specific person, no set, no place.
 - No end punctuation, no quotation marks.
-
-Examples of the register — short, human, actionable, a little bold, unmistakably of this world:
-
-For The Spark (the one who always goes first):
-Get the party started
-Act a fool
-
-For The Wanderer (the one who wanders off and comes back with a story):
-Take the side quest
-Get gloriously lost
-
-Match that exactly.
 
 Character: {{name}} ({{designation}})
 Who they are: {{bio}}
