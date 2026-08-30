@@ -7,7 +7,7 @@
   "function": "Survey",
   "object": "Compass",
   "fieldReading": "Follow the pull, not the program.",
-  "bio": "Treats being lost as a method rather than a mistake. Goes where the schedule isn't, alone and unbothered, and comes back carrying what no one else found.",
+  "bio": "Follows the pull past the edge of the marked path, and comes back carrying what they found.",
   "sceneStory": "Crossing a desert of violet dunes under a huge low moon, a figure steps off a clearly marked path and strikes out into open sand. Their footprints trail behind them away from the path, aimed at a single pulsing light on the far horizon.",
   "assignments": [
     "The path is only where others have been.",
