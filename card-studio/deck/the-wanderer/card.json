@@ -7,7 +7,7 @@
   "function": "Survey",
   "object": "Compass",
   "fieldReading": "Follow the pull, not the program.",
-  "bio": "Follows the pull past the edge of the marked path, and comes back carrying what they found.",
+  "bio": "The one who wanders off and comes back with a story. Follows whatever pulls them past the marked path, and finds what nobody else did.",
   "sceneStory": "Crossing a desert of violet dunes under a huge low moon, a figure steps off a clearly marked path and strikes out into open sand. Their footprints trail behind them away from the path, aimed at a single pulsing light on the far horizon.",
   "assignments": [
     "The path is only where others have been.",
