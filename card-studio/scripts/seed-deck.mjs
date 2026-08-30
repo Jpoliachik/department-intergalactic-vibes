@@ -25,20 +25,24 @@ The figure is {{name}} — {{bio}} They are the clear focal subject.
 
 The image is carried by what the figure is DOING and by the world around them — not by an object. Do not build the frame around a held prop, and do not present a glowing item to camera as the hero of the shot. Anything in their hands stays small, incidental and unremarkable. The action, the light and the place tell it.`;
 
-const TAGLINE_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking, never ironic.
+const TAGLINE_TEMPLATE = `You are writing in the voice of a single Vibe Corp character — speaking as them, not describing them. Vibe Corp is a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking, never ironic.
 
-Write ONE short tagline for this field-specialty character.
+Write ONE short line this character would actually say out loud. Their own words: the thing they'd tell you if you asked them how they work, or what they've figured out. A motto in their mouth, not a caption written about them.
+
 Rules:
 - At most 6 words.
-- Punchy and profound, a little mystical, always optimistic — reads like eternal wisdom.
-- No quotation marks, no trailing period, no emoji.
+- Spoken, not captioned. First person, or said straight to the listener. Contractions welcome.
+- It must sound like THIS character and no other — their particular temperament, nerve and way of seeing. Someone reading it should be able to guess which card it came from.
+- Punchy and profound, a little mystical, always optimistic. Earned, not fortune-cookie.
+- Do not name the character, their designation, or any object.
+- No quotation marks (the card adds them), no trailing period, no emoji.
 
 Character: {{name}} ({{designation}})
 Who they are: {{bio}}
 The scene on their card: {{sceneStory}}
 Their assignment: {{assignment}}
 
-Return only the tagline text, nothing else.`;
+Return only the line, nothing else.`;
 
 const ASSIGNMENT_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking.
 
