@@ -35,9 +35,6 @@ export interface Card {
    * Exactly two, each 1-2 lines: one concrete directive, one turn of wisdom.
    */
   assignments: string[];
-  /** The image-generation prompt for this card (editable; built from the global template). */
-  imagePrompt: string;
-
   // --- Runtime-only (not persisted; computed on read) ---
   /** True if deck/<slug>/image.png exists. */
   hasImage?: boolean;

@@ -6,7 +6,7 @@ repo's [`ASSIGNMENTS.md`](../ASSIGNMENTS.md).
 
 For each card you can see the composited card face, **regenerate** the art
 (Nano Banana / Gemini) and the text (tagline + assignment, via Claude), and
-view/edit every piece — bio, scene story, the image prompt, and metadata.
+view/edit every piece — bio, scene story, and metadata.
 Everything is stored as files under [`deck/`](deck/) and committed to git, so you
 use `git commit` to "save" a set you like and `git checkout` to go back.
 
@@ -16,7 +16,7 @@ use `git commit` to "save" a set you like and `git checkout` to go back.
 deck/
   globals.json            # the three generation prompt templates + model ids
   <slug>/card.json        # one per card: metadata, bio, scene story, tagline,
-                          #   assignment, image prompt
+                          #   assignments
   <slug>/image.png        # the generated art (created on first generate)
 app/                      # Next.js app + API routes
 components/               # UI (shadcn/ui) + studio components
@@ -58,11 +58,17 @@ each card — `{{name}}`, `{{bio}}`, `{{sceneStory}}`, `{{object}}`, etc.:
 - **Image prompt** — assembles the locked visual style + the card's scene story
   and bio, sent to Gemini `gemini-2.5-flash-image`.
 - **Tagline prompt** — Claude writes the short tagline.
-- **Assignment prompt** — Claude writes the two-sentence "Your Assignment" line.
+- **Assignment prompt** — Claude writes the two "Your Assignment" entries.
 
-**Per card**, `bio` and `sceneStory` are the source you hand-edit; `tagline`,
-`assignment`, and `imagePrompt` are generated outputs (the image prompt is also
-directly editable — "Rebuild from template" refills it from the global template).
+**Per card**, `bio` and `sceneStory` are the source you hand-edit; `tagline`
+and `assignments` are generated outputs.
+
+There is no per-card image prompt. The prompt sent to the image model is always
+the global template with that card's variables filled in, rendered fresh at
+generate time — so a change to the template applies to every card immediately,
+with nothing stored per card to drift out of sync. The Edit panel shows the
+resolved prompt read-only. To change the art direction, edit the template under
+**Global prompts**; to change one card, edit its `bio` / `sceneStory`.
 
 **Regenerating:** each card tile has Image / Tagline / Assignment buttons; the
 Edit panel has the same plus full field editing. Editing a field and hitting a

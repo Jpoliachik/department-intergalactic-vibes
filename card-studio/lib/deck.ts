@@ -49,9 +49,15 @@ function splitLegacyAssignment(text: string): string[] {
   return parts;
 }
 
-/** Tolerate card.json written before `assignments` replaced `assignment`. */
-function normalize(stored: StoredCard & { assignment?: string }): StoredCard {
-  const { assignment, ...rest } = stored;
+/**
+ * Tolerate older card.json shapes: `assignment` before it became `assignments`,
+ * and the per-card `imagePrompt` that the global template replaced. Both are
+ * dropped on the next write.
+ */
+function normalize(
+  stored: StoredCard & { assignment?: string; imagePrompt?: string },
+): StoredCard {
+  const { assignment, imagePrompt, ...rest } = stored;
   let assignments = Array.isArray(rest.assignments) ? rest.assignments : [];
   if (assignments.length === 0 && typeof assignment === "string" && assignment.trim()) {
     assignments = splitLegacyAssignment(assignment);

@@ -364,7 +364,7 @@ async function main() {
   await fs.mkdir(DECK_DIR, { recursive: true });
   await writeIfMissing(path.join(DECK_DIR, "globals.json"), GLOBALS);
   for (const card of CARDS) {
-    const full = { ...card, tagline: "", imagePrompt: "" };
+    const full = { ...card, tagline: "" };
     await writeIfMissing(path.join(DECK_DIR, card.slug, "card.json"), full);
   }
   console.log(`\nDone. ${CARDS.length} cards.`);

@@ -67,7 +67,6 @@ const FIELDS: (keyof StoredCard)[] = [
   "sceneStory",
   "tagline",
   "assignments",
-  "imagePrompt",
 ];
 
 /** Field-level equality that also handles the `assignments` array. */
@@ -104,7 +103,6 @@ function EditorBody({
   // without clobbering in-progress edits to the source fields.
   React.useEffect(() => setDraft((d) => ({ ...d, tagline: card.tagline })), [card.tagline]);
   React.useEffect(() => setDraft((d) => ({ ...d, assignments: card.assignments })), [card.assignments]);
-  React.useEffect(() => setDraft((d) => ({ ...d, imagePrompt: card.imagePrompt })), [card.imagePrompt]);
 
   const dirty = FIELDS.some((f) => !same(draft[f], card[f]));
 
@@ -140,11 +138,6 @@ function EditorBody({
     await onGenerate(kind);
   }
 
-  function rebuildImagePrompt() {
-    const built = render(globals.imagePrompt, { ...card, ...draft } as Card);
-    set("imagePrompt", built);
-  }
-
   return (
     <>
       <SheetHeader className="sticky top-0 z-10 border-b bg-card/95 px-5 py-4 backdrop-blur">
@@ -155,8 +148,8 @@ function EditorBody({
           <SheetTitle>{card.name}</SheetTitle>
         </div>
         <SheetDescription>
-          {card.function} · {card.object}. Edit the source, tune the prompt, or
-          regenerate any piece.
+          {card.function} · {card.object}. Edit the source, then regenerate any
+          piece.
         </SheetDescription>
       </SheetHeader>
 
@@ -234,32 +227,27 @@ function EditorBody({
 
         <Separator />
 
-        {/* Image prompt */}
+        {/* Image */}
         <section className="space-y-3">
           <SectionTitle>Image</SectionTitle>
-          <Field label="Image prompt">
-            <Textarea
-              value={draft.imagePrompt}
-              onChange={(e) => set("imagePrompt", e.target.value)}
-              rows={8}
-              className="font-mono text-xs leading-relaxed"
-              placeholder="Empty = built from the global template on generate."
-            />
+          <p className="text-xs text-muted-foreground">
+            The prompt is always the global template with this card&apos;s
+            variables filled in — edit the character source above, or the
+            template under Global prompts.
+          </p>
+          <Field label="Prompt sent (read-only)">
+            <pre className="max-h-56 overflow-y-auto whitespace-pre-wrap rounded-md border bg-muted/40 p-3 font-mono text-xs leading-relaxed text-muted-foreground">
+              {render(globals.imagePrompt, { ...card, ...draft } as Card)}
+            </pre>
           </Field>
-          <div className="flex flex-wrap gap-2">
-            <Button variant="secondary" size="sm" onClick={rebuildImagePrompt}>
-              <RefreshCw />
-              Rebuild from template
-            </Button>
-            <Button
-              size="sm"
-              onClick={() => saveThenGenerate("image")}
-              disabled={!!busy.image}
-            >
-              {busy.image ? <Loader2 className="animate-spin" /> : <ImageIcon />}
-              Generate image
-            </Button>
-          </div>
+          <Button
+            size="sm"
+            onClick={() => saveThenGenerate("image")}
+            disabled={!!busy.image}
+          >
+            {busy.image ? <Loader2 className="animate-spin" /> : <ImageIcon />}
+            Generate image
+          </Button>
         </section>
 
         <Separator />
