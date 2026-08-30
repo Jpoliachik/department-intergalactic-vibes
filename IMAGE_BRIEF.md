@@ -4,7 +4,7 @@
 
 # Card Image Brief
 
-_Department of Intergalactic Vibrations — Field Specialty deck_
+_Vibe Corp — Field Specialty deck_
 
 Art direction for the 16 card images in [`ASSIGNMENTS.md`](ASSIGNMENTS.md). The whole point of this doc: make sixteen images feel like **one deck**, not sixteen experiments. We do that by locking most of the prompt and varying only a few slots per card.
 
@@ -16,21 +16,21 @@ Art direction for the 16 card images in [`ASSIGNMENTS.md`](ASSIGNMENTS.md). The 
 
 Every image is a tarot composition:
 
-> **One agent figure · their Object · a scene with depth.**
+> **One crew figure · their Object · a scene with depth.**
 
-Character *and* scene, fused — the way a Rider-Waite card is always a figure performing one symbolic action, but the world behind them earns its keep. The agent is a little bit _the person receiving the card_ — it names who they already are — so the figure stays **universal**, not a specific named character.
+Character *and* scene, fused — the way a Rider-Waite card is always a figure performing one symbolic action, but the world behind them earns its keep. The figure is a little bit _the person receiving the card_ — it names who they already are — so the figure stays **universal**, not a specific named character.
 
 **Render the illustration ONLY.** No card border, no field-name banner, no designation code baked into the image. Those are composited in layout afterward. Prompt for the art.
 
-**Visored, not faced.** Every agent wears the purple hard hat with a tinted reflective visor down. This (1) is peak cosmic-industrial, (2) keeps the figure universal so any festival-goer projects onto it, and (3) sidesteps the hardest problem in a 16-image series: face consistency. No face to keep, no drift. Bonus: the visor catches the glow of whatever they carry.
+**Visored, not faced.** Every figure wears the purple hard hat with a tinted reflective visor down. This (1) is peak cosmic-industrial, (2) keeps the figure universal so any festival-goer projects onto it, and (3) sidesteps the hardest problem in a 16-image series: face consistency. No face to keep, no drift. Bonus: the visor catches the glow of whatever they carry.
 
 ---
 
 ## Locked (identical on all 16)
 
-- **Framing:** tighter than full-body — roughly three-quarter length, the agent large and **popping forward** off the scene. Character-forward, not a small figure lost in a field. The Object is the brightest point.
-- **Costume + gear:** purple high-visibility utility vest with reflective silver striping that catches the light; purple hard hat with a small circular agency seal; tinted reflective visor down; ID badge on a lanyard; a loaded tool belt — a beeping resonance meter with little dials and indicator lights, a coiled cable, a walkie-talkie; work gloves; sturdy boots; embroidered patches (agency seal, a seven-star Pleiades patch, an agent number). Weathered, well-used, believable.
-- **Palette:** agency purple · one warm amber "signal" glow · deep cosmic indigo · star-white. Nothing else.
+- **Framing:** tighter than full-body — roughly three-quarter length, the figure large and **popping forward** off the scene. Character-forward, not a small figure lost in a field. The Object is the brightest point.
+- **Costume + gear:** purple high-visibility utility vest with reflective silver striping that catches the light; purple hard hat with a small circular Vibe Corp seal; tinted reflective visor down; ID badge on a lanyard; a loaded tool belt — a beeping resonance meter with little dials and indicator lights, a coiled cable, a walkie-talkie; work gloves; sturdy boots; embroidered patches (the Vibe Corp seal, a seven-star Pleiades patch, a crew number). Weathered, well-used, believable.
+- **Palette:** Vibe Corp purple · one warm amber "signal" glow · deep cosmic indigo · star-white. Nothing else.
 - **Texture:** riso / screenprint halftone grain, flat bold shapes, a slight ink-misregistration glow around any light source.
 
 ## Scene depth (the background must be a WORLD, not a flat void)
@@ -40,7 +40,7 @@ Build the scene in layers so the character pops but the world is alive behind th
 - **The sky / the Grid:** a glowing geometric lattice of ley-lines arcing across a deep-indigo sky — the Resonance Grid drawn as a constellation power grid. Stars, and one oversized retro-space-program planet or moon low on the horizon.
 - **Midground:** small silhouettes, festival structures — stage scaffolding and truss towers, strings of lights, pennants and flags, tents.
 - **Atmosphere:** volumetric haze and light beams catching amber and purple, drifting embers or dust, depth and glow.
-- **Foreground:** the agent and their Object, sharp and lit.
+- **Foreground:** the figure and their Object, sharp and lit.
 
 ## Variable (per card)
 
@@ -55,7 +55,7 @@ Build the scene in layers so the character pops but the world is alive behind th
 
 Keep the style, costume, palette and texture identical card to card; swap the **[bracketed]** slots. Illustration only — no card frame or text.
 
-> Mid-century screenprint illustration, 1960s NASA space-program poster crossed with a WPA labor-union poster. Tight three-quarter framing of a single field agent, large in frame and popping forward, `[ACTION]`, holding `[OBJECT]`. The agent wears a purple high-visibility utility vest with reflective silver striping, a purple hard hat with a small circular agency seal, a tinted reflective visor down, a loaded tool belt with a beeping resonance meter, coiled cable and walkie-talkie, embroidered mission patches. Behind them, a living festival-at-night scene: `[SCENE CUE]`, stage scaffolding and string lights, small drifting silhouettes, volumetric haze catching amber and purple light. Deep cosmic-indigo sky with a glowing geometric Resonance-Grid lattice and `[CONSTELLATION]`, one oversized retro planet low on the horizon. Flat bold shapes, limited palette of purple, warm amber, indigo and star-white, riso halftone grain, slight ink-misregistration glow, the object the brightest point. No border, no text.
+> Mid-century screenprint illustration, 1960s NASA space-program poster crossed with a WPA labor-union poster. Tight three-quarter framing of a single utility-crew figure, large in frame and popping forward, `[ACTION]`, holding `[OBJECT]`. The figure wears a purple high-visibility utility vest with reflective silver striping, a purple hard hat with a small circular Vibe Corp seal, a tinted reflective visor down, a loaded tool belt with a beeping resonance meter, coiled cable and walkie-talkie, embroidered mission patches. Behind them, a living festival-at-night scene: `[SCENE CUE]`, stage scaffolding and string lights, small drifting silhouettes, volumetric haze catching amber and purple light. Deep cosmic-indigo sky with a glowing geometric Resonance-Grid lattice and `[CONSTELLATION]`, one oversized retro planet low on the horizon. Flat bold shapes, limited palette of purple, warm amber, indigo and star-white, riso halftone grain, slight ink-misregistration glow, the object the brightest point. No border, no text.
 
 ---
 

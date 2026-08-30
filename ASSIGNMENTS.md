@@ -5,15 +5,15 @@
 
 # Field Specialty Designations
 
-_Department of Intergalactic Vibrations — Provisional Agent Reference_
+_Vibe Corp — Provisional Crew Reference_
 
 ---
 
 ## On assignment
 
-The Department does not assign specialties. It never has.
+Vibe Corp does not assign specialties. It never has.
 
-Every agent already carries one — set the moment they first fed the [Grid](lore/resonance-grid.md) without knowing they were doing it. Our job in the field isn't to _give_ someone a role. It's to let them find the one they already are.
+Everyone already carries one — set the moment they first fed the [Grid](lore/resonance-grid.md) without knowing they were doing it. Our job in the field isn't to _give_ someone a role. It's to let them find the one they already are.
 
 So we don't pick for them — and we don't let them pick off a menu, either. We let the Grid choose. They **draw** from the deck: one card, face down, divine choice. They turn it over, and it names what was already set in them. The Grid doesn't deal a wrong card. _(If the draw surprises them — sit with it. That's the reading working.)_
 
@@ -25,9 +25,9 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 
 ## How to read a card
 
-- **Designation** — the official post. What's printed on the badge. (Bureaucracy leads.)
+- **Designation** — the post. What's printed on the badge.
 - **Function** — where it sits on the Grid, plus its classification code.
-- **Field name** — what agents actually call the post. The face of the card.
+- **Field name** — what the crew actually calls the post. The face of the card.
 - **Object** — the post's symbol. The single recognizable thing it carries.
 - **Your Assignment** — the charge of the post. A direction, not a task list. Yours to interpret.
 - **Field Reading** — issued with the draw. Half instruction, half forecast. Concise on purpose.

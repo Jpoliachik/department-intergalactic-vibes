@@ -1,4 +1,4 @@
-// Shared types for the D.I.V. card studio.
+// Shared types for the Vibe Corp card studio.
 
 /** A single card / character in the deck. Persisted at deck/<slug>/card.json. */
 export interface Card {

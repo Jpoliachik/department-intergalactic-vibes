@@ -48,7 +48,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // D.I.V. deck palette (fixed, for the rendered card faces)
+        // Vibe Corp deck palette (fixed, for the rendered card faces)
         div: {
           indigo: "#161033",
           "indigo-deep": "#0c0820",

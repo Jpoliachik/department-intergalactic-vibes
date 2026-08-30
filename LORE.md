@@ -1,6 +1,6 @@
 ---
 name: lore-index
-description: Map of the D.I.V. lore web. One line per file. Add to it as the web grows.
+description: Map of the Vibe Corp lore web. One line per file. Add to it as the web grows.
 ---
 
 # The Lore Web
@@ -11,11 +11,11 @@ This is the index. Every file in `lore/` is reachable from here. Files cross-lin
 
 - **Frontmatter** on every file: `type` (entity / concept / thread), `status` (canon / draft / open-question), short `description`.
 - **Canon** = locked, don't undo without a reason. **Draft** = working. **Open-question** = deliberately unresolved; the mystery lives here. Don't accidentally close these.
-- **Tone:** a real field agent wrote it. Bureaucratic-but-warm, technical-but-mystical. No winks at the reader.
+- **Tone:** someone who actually works the Grid wrote it. Warm, technical-but-mystical, sincere. No winks at the reader.
 
 ## Entities
 
-- [[the-department]] — the agency itself. D.I.V. Old. Loves paperwork. Includes a short note on HQ.
+- [[vibe-corp]] — the outfit itself. Old. Accreted. Nobody's sure what kind of thing it is. Includes a short note on HQ.
 - [[seven]] — the Recurring Agent. Shows up across centuries. Manifests differently for everyone.
 
 ## Concepts
@@ -24,5 +24,5 @@ This is the index. Every file in `lore/` is reachable from here. Files cross-lin
 
 ## Threads (open questions, deliberately unresolved)
 
-- [[empty-hq]] — is anyone actually running the agency? Has anyone been, for a long time?
+- [[empty-hq]] — is anyone actually running Vibe Corp? Has anyone been, for a long time?
 - [[who-is-seven]] — first tuner? signal in a body? something else?

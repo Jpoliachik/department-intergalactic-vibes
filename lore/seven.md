@@ -12,7 +12,7 @@ Seven shows up. Serves a tour. Disappears. The pattern is in the records as far 
 
 ## How Seven is recognized
 
-Seven is **never** recognized by appearance. Agents who try to describe what they looked like end up describing a feeling instead. Photographs come back blurred, turned, or just not Seven. The signatures are behavioral and atmospheric:
+Seven is **never** recognized by appearance. Anyone who tries to describe what they looked like end up describing a feeling instead. Photographs come back blurred, turned, or just not Seven. The signatures are behavioral and atmospheric:
 
 - **The question.** Seven asks something that lands strangely. Not "how are you" — something like *"what's the most alive thing you've seen today?"* or *"what are you listening for?"* You remember the question for years.
 - **The hand-off.** Seven gives you something. It doesn't have to be a physical object. It can be a sentence, a glance, a song they hum, a direction to walk. Whatever Seven hands you, you know you've been handed something.
@@ -32,7 +32,7 @@ See [[who-is-seven]]. Field doctrine: don't resolve it. The mystery is load-bear
 
 - Not in costume. Not in uniform. Seven appears as a regular festival-goer, a passing stranger, a friend you didn't realize you had.
 - Not summonable. Not findable. Showing up looking for Seven is the surest way not to find them.
-- Not a single fixed person. Seven manifests differently for everyone. Two agents comparing notes will not describe the same encounter.
+- Not a single fixed person. Seven manifests differently for everyone. Two people comparing notes will not describe the same encounter.
 
 ## Field guidance
 

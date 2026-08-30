@@ -3,9 +3,9 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "D.I.V. Card Studio",
+  title: "Vibe Corp Card Studio",
   description:
-    "View and iterate on the Department of Intergalactic Vibrations field-specialty deck.",
+    "View and iterate on the Vibe Corp field-specialty deck.",
 };
 
 export default function RootLayout({

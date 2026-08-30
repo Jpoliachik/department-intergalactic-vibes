@@ -124,7 +124,7 @@ export function DeckStudio() {
             <Sparkles className="h-5 w-5 text-accent" />
             <div>
               <h1 className="text-base font-semibold leading-tight">
-                D.I.V. Card Studio
+                Vibe Corp Card Studio
               </h1>
               <p className="text-xs text-muted-foreground">
                 Field Specialty deck · {state.cards.length} cards

@@ -10,7 +10,7 @@ The central open question of [[seven|Seven]]. Field doctrine: **do not resolve.*
 
 ## Theories in circulation
 
-The Department's records contain (at least) the following theories. None are official. All are quietly held.
+Vibe Corp's records contain (at least) the following theories. None are official. All are quietly held.
 
 ### 1. Seven is the First Tuner.
 
@@ -18,7 +18,7 @@ The being who first heard the [[resonance-grid|Grid]] and started listening on p
 
 ### 2. Seven is the signal itself, briefly embodied.
 
-Not a person who recurs but a *frequency* that occasionally takes a shape long enough to have a conversation with you. Would explain the no-face, no-name, no-photograph pattern. Would also explain why two agents never describe the same encounter.
+Not a person who recurs but a *frequency* that occasionally takes a shape long enough to have a conversation with you. Would explain the no-face, no-name, no-photograph pattern. Would also explain why two people never describe the same encounter.
 
 ### 3. Seven is a role, passed quietly between many beings.
 
@@ -30,7 +30,7 @@ When you are entirely there with another person — no agenda, no name, no time 
 
 ### 5. Seven is something we don't have a word for.
 
-Comes up in older reports. Generally treated as the most likely answer by agents who have actually had an encounter. Agents who haven't tend to prefer the cleaner theories.
+Comes up in older reports. Generally treated as the most likely answer by crew who have actually had an encounter. Those who haven't tend to prefer the cleaner theories.
 
 ## Why we don't resolve
 

@@ -2,7 +2,7 @@
   "name": "card-studio",
   "version": "0.1.0",
   "private": true,
-  "description": "D.I.V. Field Specialty deck — view & iterate on card art and content",
+  "description": "Vibe Corp Field Specialty deck — view & iterate on card art and content",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

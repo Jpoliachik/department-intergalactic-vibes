@@ -1,7 +1,7 @@
-# D.I.V. Card Studio
+# Vibe Corp Card Studio
 
-A tiny local web app for viewing and iterating on the **Department of
-Intergalactic Vibrations** Field Specialty deck — the 16 cards defined in the
+A tiny local web app for viewing and iterating on the **Vibe Corp** Field
+Specialty deck — the 16 cards defined in the
 repo's [`ASSIGNMENTS.md`](../ASSIGNMENTS.md).
 
 For each card you can see the composited card face, **regenerate** the art

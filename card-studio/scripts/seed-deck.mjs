@@ -14,7 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DECK_DIR = path.join(__dirname, "..", "deck");
 const FORCE = process.env.FORCE === "1";
 
-const IMAGE_TEMPLATE = `Mid-century screenprint poster illustration crossed with 1960s psychedelic cosmic art. Bold flat shapes, heavy riso halftone grain, deliberate ink misregistration, high contrast. Mostly deep-indigo darkness with generous negative space. Strictly limited palette: deep cosmic indigo, agency purple, warm amber glow, star-white — and no other colors.
+const IMAGE_TEMPLATE = `Mid-century screenprint poster illustration crossed with 1960s psychedelic cosmic art. Bold flat shapes, heavy riso halftone grain, deliberate ink misregistration, high contrast. Mostly deep-indigo darkness with generous negative space. Strictly limited palette: deep cosmic indigo, Vibe Corp purple, warm amber glow, star-white — and no other colors.
 
 Render exactly this moment as a single, decisive image:
 {{sceneStory}}
@@ -23,7 +23,7 @@ The figure is {{name}} — {{bio}} They are the clear focal subject, and the glo
 
 One figure, one symbol, one place. No text, no lettering, no border, no card frame — illustration only.`;
 
-const TAGLINE_TEMPLATE = `You are the copy desk of the Department of Intergalactic Vibrations, a fictional but sincere cosmic agency. Tone: bureaucratic-but-warm, technical-but-mystical, sincere — never winking, never ironic.
+const TAGLINE_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking, never ironic.
 
 Write ONE short tagline for this field-specialty character.
 Rules:
@@ -38,7 +38,7 @@ Their assignment: {{assignment}}
 
 Return only the tagline text, nothing else.`;
 
-const ASSIGNMENT_TEMPLATE = `You are the copy desk of the Department of Intergalactic Vibrations, a fictional but sincere cosmic agency. Tone: bureaucratic-but-warm, technical-but-mystical, sincere — never winking.
+const ASSIGNMENT_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking.
 
 Write the "Your Assignment" line handed to a festival-goer who draws this card.
 Rules:
