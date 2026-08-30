@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ImageIcon, Loader2, RefreshCw, Wand2 } from "lucide-react";
+import { ASSIGNMENT_COUNT } from "@/lib/types";
 import type { Card, GenerateKind, Globals, StoredCard } from "@/lib/types";
 import { render } from "@/lib/prompts";
 import {
@@ -65,9 +66,23 @@ const FIELDS: (keyof StoredCard)[] = [
   "bio",
   "sceneStory",
   "tagline",
-  "assignment",
+  "assignments",
   "imagePrompt",
 ];
+
+/** Field-level equality that also handles the `assignments` array. */
+function same(a: unknown, b: unknown): boolean {
+  if (Array.isArray(a) || Array.isArray(b)) {
+    return JSON.stringify(a ?? []) === JSON.stringify(b ?? []);
+  }
+  return a === b;
+}
+
+/** Always render exactly ASSIGNMENT_COUNT slots, padding short/legacy cards. */
+function assignmentSlots(entries: string[] | undefined): string[] {
+  const list = entries ?? [];
+  return Array.from({ length: ASSIGNMENT_COUNT }, (_, i) => list[i] ?? "");
+}
 
 function EditorBody({
   card,
@@ -88,10 +103,10 @@ function EditorBody({
   // Sync generated outputs back into the draft when regeneration updates them,
   // without clobbering in-progress edits to the source fields.
   React.useEffect(() => setDraft((d) => ({ ...d, tagline: card.tagline })), [card.tagline]);
-  React.useEffect(() => setDraft((d) => ({ ...d, assignment: card.assignment })), [card.assignment]);
+  React.useEffect(() => setDraft((d) => ({ ...d, assignments: card.assignments })), [card.assignments]);
   React.useEffect(() => setDraft((d) => ({ ...d, imagePrompt: card.imagePrompt })), [card.imagePrompt]);
 
-  const dirty = FIELDS.some((f) => draft[f] !== card[f]);
+  const dirty = FIELDS.some((f) => !same(draft[f], card[f]));
 
   function set<K extends keyof StoredCard>(key: K, value: StoredCard[K]) {
     setDraft((d) => ({ ...d, [key]: value }));
@@ -99,7 +114,7 @@ function EditorBody({
 
   function currentPatch(): Partial<StoredCard> {
     const patch: Partial<StoredCard> = {};
-    for (const f of FIELDS) if (draft[f] !== card[f]) (patch as any)[f] = draft[f];
+    for (const f of FIELDS) if (!same(draft[f], card[f])) (patch as any)[f] = draft[f];
     return patch;
   }
 
@@ -164,14 +179,27 @@ function EditorBody({
             </div>
           </Field>
 
-          <Field label="Assignment">
+          <Field label="Your Assignment">
             <div className="flex gap-2">
-              <Textarea
-                value={draft.assignment}
-                onChange={(e) => set("assignment", e.target.value)}
-                rows={3}
-                placeholder="Two-sentence assignment…"
-              />
+              <div className="flex-1 space-y-2">
+                {assignmentSlots(draft.assignments).map((entry, i) => (
+                  <Textarea
+                    key={i}
+                    value={entry}
+                    onChange={(e) => {
+                      const next = assignmentSlots(draft.assignments);
+                      next[i] = e.target.value;
+                      set("assignments", next);
+                    }}
+                    rows={2}
+                    placeholder={
+                      i === 0
+                        ? "Entry 1 — a concrete directive…"
+                        : "Entry 2 — a turn of wisdom…"
+                    }
+                  />
+                ))}
+              </div>
               <RegenButton
                 busy={!!busy.assignment}
                 onClick={() => saveThenGenerate("assignment")}

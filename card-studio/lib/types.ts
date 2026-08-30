@@ -30,8 +30,11 @@ export interface Card {
   // --- Generated / editable outputs ---
   /** The card's tagline (AI-generatable). */
   tagline: string;
-  /** The "Your Assignment" line shown on the card (AI-generatable). */
-  assignment: string;
+  /**
+   * The "Your Assignment" entries shown on the card (AI-generatable).
+   * Exactly two, each 1-2 lines: one concrete directive, one turn of wisdom.
+   */
+  assignments: string[];
   /** The image-generation prompt for this card (editable; built from the global template). */
   imagePrompt: string;
 
@@ -44,6 +47,9 @@ export interface Card {
 
 /** The persisted card.json shape (everything except runtime-only fields). */
 export type StoredCard = Omit<Card, "hasImage" | "imageUpdatedAt">;
+
+/** How many "Your Assignment" entries a card carries. */
+export const ASSIGNMENT_COUNT = 2;
 
 /** Deck-wide, editable generation prompts + model choices. deck/globals.json. */
 export interface Globals {

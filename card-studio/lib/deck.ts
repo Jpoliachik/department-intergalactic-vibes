@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { ASSIGNMENT_COUNT } from "./types";
 import type { Card, Globals, StoredCard, StudioState } from "./types";
 
 // The deck data directory (JSON + PNGs), committed to git.
@@ -29,6 +30,33 @@ async function fileStat(file: string) {
   } catch {
     return null;
   }
+}
+
+/**
+ * Split a legacy single-string assignment into entries on sentence boundaries.
+ * Old cards stored one two-sentence line; the card now shows two entries.
+ */
+function splitLegacyAssignment(text: string): string[] {
+  const parts = text
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (parts.length >= ASSIGNMENT_COUNT) {
+    // Fold any overflow into the final entry so nothing is silently dropped.
+    const head = parts.slice(0, ASSIGNMENT_COUNT - 1);
+    return [...head, parts.slice(ASSIGNMENT_COUNT - 1).join(" ")];
+  }
+  return parts;
+}
+
+/** Tolerate card.json written before `assignments` replaced `assignment`. */
+function normalize(stored: StoredCard & { assignment?: string }): StoredCard {
+  const { assignment, ...rest } = stored;
+  let assignments = Array.isArray(rest.assignments) ? rest.assignments : [];
+  if (assignments.length === 0 && typeof assignment === "string" && assignment.trim()) {
+    assignments = splitLegacyAssignment(assignment);
+  }
+  return { ...rest, assignments };
 }
 
 async function hydrate(stored: StoredCard): Promise<Card> {
@@ -67,7 +95,7 @@ export async function listCardSlugs(): Promise<string[]> {
 
 export async function readCard(slug: string): Promise<Card> {
   const stored = await readJson<StoredCard>(cardPath(slug));
-  return hydrate(stored);
+  return hydrate(normalize(stored));
 }
 
 export async function readAllCards(): Promise<Card[]> {
@@ -77,7 +105,7 @@ export async function readAllCards(): Promise<Card[]> {
 }
 
 export async function writeCard(slug: string, patch: Partial<StoredCard>): Promise<Card> {
-  const current = await readJson<StoredCard>(cardPath(slug));
+  const current = normalize(await readJson<StoredCard>(cardPath(slug)));
   const next: StoredCard = { ...current, ...patch, slug: current.slug };
   await writeJson(cardPath(slug), next);
   return hydrate(next);

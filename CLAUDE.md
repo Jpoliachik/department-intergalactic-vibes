@@ -57,6 +57,15 @@ Every lore file should pass the **"would someone who actually works the Grid wri
 - **No DMV energy.** Avoid the bureaucratic-comedy register: forms, paperwork, filing cabinets, citations, memos, clearance levels, red tape. The old-institution feel comes from age and accretion, not from process.
 - **Deliberately vague about what Vibe Corp *is*.** Company, guild, lineage, long-running misunderstanding — never settle it. Keep institutional vocabulary light: people are **crew**, not agents or employees. (Exception: Seven is "the Recurring Agent" — an older designation that predates the current scheme. Canon, keep it.)
 
+## Card layout rules
+
+These apply to every printed artifact — the field-specialty deck, commendation cards, anything that goes to a printer.
+
+- **Print margin is mandatory.** Art may bleed to the trim edge. **Readable content never may.** Every text element, plate, code and mark sits inside a safe margin of **5% of the card width** on all four edges. A trim that drifts should eat artwork, never meaning.
+- **Size everything relative to the card, not the screen.** Card faces use a container query (`container-type: inline-size`) and `cqw` units, so the grid preview and the printed 63×88mm card are the same design at different scales. No fixed `px` type on a card face.
+- **Current deck face:** full-bleed art on the top 65%; name + designation in a rounded plate over the art, top left; Vibe Corp seal circle top right; tagline and the two left-aligned "Your Assignment" entries on the plate below.
+- **Two assignment entries**, each 1–2 lines: entry one a concrete directive, entry two a turn of wisdom. Stored as `assignments: string[]` in `card.json`.
+
 ## Locked decisions (project memory)
 
 - Name = **Vibe Corp** (renamed from Department of Intergalactic Vibrations / D.I.V.)
