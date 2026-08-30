@@ -77,10 +77,11 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         <Seal style={{ right: SAFE_MARGIN, top: SAFE_MARGIN }} />
       </div>
 
-      {/* Text plate — thick double rule, then a cosmic gradient rather than flat
-          black, so the panel reads as its own field against the art above. */}
+      {/* Text plate — a hairline rule matching the name plate border, then a
+          cosmic gradient rather than flat black, so the panel reads as its own
+          field against the art above. */}
       <div
-        className="relative flex flex-1 flex-col justify-center gap-[2.5cqw] border-t-[0.9cqw] border-deck-mustard"
+        className="relative flex flex-1 flex-col justify-center gap-[2.5cqw] border-t-[0.45cqw] border-deck-mustard"
         style={{
           paddingLeft: SAFE_MARGIN,
           paddingRight: SAFE_MARGIN,
@@ -91,9 +92,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           backgroundImage: PLATE_GRADIENT,
         }}
       >
-        {/* Thin brick line under the mustard rule — the second half of the
-            double rule, and a diamond straddling it like a tarot divider. */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[0.25cqw] bg-deck-brick" />
+        {/* Diamond straddling the rule, like a tarot divider. */}
         <div className="pointer-events-none absolute left-1/2 top-0 h-[3cqw] w-[3cqw] -translate-x-1/2 -translate-y-1/2 rotate-45 border-[0.4cqw] border-deck-black bg-deck-mustard" />
 
         {card.tagline ? (
