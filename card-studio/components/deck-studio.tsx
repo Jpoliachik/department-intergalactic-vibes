@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { Loader2, Settings2, Sparkles } from "lucide-react";
+import { Loader2, Settings2 } from "lucide-react";
 import type {
   Card,
   GenerateKind,
@@ -13,6 +13,7 @@ import type {
 import { fetchState, generate, saveCard, saveGlobals } from "@/lib/client";
 import { Button } from "@/components/ui/button";
 import { CardTile } from "@/components/card-tile";
+import { Star } from "@/components/star";
 import { CardEditor } from "@/components/card-editor";
 import { GlobalsEditor } from "@/components/globals-editor";
 
@@ -120,7 +121,9 @@ export function DeckStudio() {
       <header className="sticky top-0 z-20 border-b border-border/60 bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-6 py-4">
           <div className="flex items-center gap-3">
-            <Sparkles className="h-5 w-5 text-accent" />
+            {/* The deck's own mark, not a stock icon — same star that
+                sits on every card divider. */}
+            <Star points={7} className="h-5 w-5 shrink-0 text-accent" />
             <div>
               <h1 className="text-base font-semibold leading-tight">
                 Vibe Corp Card Studio

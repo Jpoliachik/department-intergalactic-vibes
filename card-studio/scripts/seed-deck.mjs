@@ -34,16 +34,24 @@ What an assignment is: a short order a person can carry all weekend and act on o
 Rules:
 - EXACTLY 2 assignments, one per line. No numbering, no bullets, no blank lines.
 - Each is a short imperative: 2 to 6 words, at most 34 characters including spaces. Count them.
-- Plain, spoken language — what one person would actually say to another. Wry is welcome. No mysticism, no metaphor, no poetry.
-- Open, never prescriptive: no times, places, counts, named people, or festival logistics. Nothing that can be finished and ticked off — a person should be able to do it ten times in a night.
+- Plain, spoken language — what one person would actually say to another. Wry is welcome. Keep the deep mysticism out; the field reading carries that.
+- Open, never prescriptive: nothing scheduled, counted, or crossable off a list. A person should be able to act on it ten times in a night and never be finished.
+- These are handed out at a psychedelic festival, so let the language live there. Festival texture is welcome and wanted: side quests, sunrise, sound systems, strangers in costume, the long walk back to camp, glitter, the dark between stages, the good weird. Cosmic is fine too — Vibe Corp genuinely believes the Grid is real.
+- Be playful. A little absurd, a little loose, a little sideways beats tidy every time. THE TEST: if a line could appear in a corporate handbook or a wellness app, it is too bland — rewrite it with more colour.
 - The two must differ in kind. One is usually the outward move; the other is the permission that makes it possible.
 - No end punctuation, no quotation marks.
 
-For The Spark (the one who always goes first), the two assignments are:
+Examples of the register — short, human, actionable, a little bold, unmistakably of this world:
+
+For The Spark (the one who always goes first):
 Get the party started
 Act a fool
 
-Match that register exactly: short, human, actionable, a little bold.
+For The Wanderer (the one who wanders off and comes back with a story):
+Take the side quest
+Get gloriously lost
+
+Match that exactly.
 
 Character: {{name}} ({{designation}})
 Who they are: {{bio}}

@@ -1,6 +1,7 @@
 "use client";
 
 import { ImageOff } from "lucide-react";
+import { Star } from "@/components/star";
 import type { Card } from "@/lib/types";
 import { imageUrl } from "@/lib/client";
 import { cn } from "@/lib/utils";
@@ -25,13 +26,14 @@ import { ART_HEIGHT_FRACTION, SAFE_MARGIN } from "@/lib/card-format";
  */
 /**
  * The plate is not flat black: a warm spill from the art fades down through a
- * deep cosmic blue into black, so the panel has depth and separates from the
- * image above instead of merging with it.
+ * deep cosmic purple into near-black, so the panel has depth and separates from
+ * the image above instead of merging with it. The purple is the vibrant end of
+ * the palette — it should read as lit, not as a grey wash.
  */
 const PLATE_GRADIENT = [
-  "radial-gradient(110% 70% at 50% 0%, rgba(232,169,41,0.16) 0%, rgba(232,169,41,0) 62%)",
-  "radial-gradient(90% 60% at 50% 0%, rgba(51,88,196,0.22) 0%, rgba(51,88,196,0) 70%)",
-  "linear-gradient(180deg, #171a3a 0%, #0b0b18 52%, #000000 100%)",
+  "radial-gradient(110% 70% at 50% 0%, rgba(232,169,41,0.22) 0%, rgba(232,169,41,0) 62%)",
+  "radial-gradient(95% 65% at 50% 0%, rgba(138,60,215,0.46) 0%, rgba(138,60,215,0) 76%)",
+  "linear-gradient(180deg, #341a66 0%, #1d0f3d 48%, #0a0514 100%)",
 ].join(", ");
 
 export function CardFace({ card, className }: { card: Card; className?: string }) {
@@ -104,7 +106,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           {card.fieldReading}
         </p>
 
-        {/* Standing assignments, numbered so they read as issued. */}
+        {/* Standing assignments, each marked with the deck's star. */}
         <div className="flex flex-1 flex-col justify-center gap-[1.6cqw]">
           <div className="font-mono text-[2.2cqw] uppercase tracking-[0.28em] text-deck-teal">
             Assignment
@@ -113,9 +115,13 @@ export function CardFace({ card, className }: { card: Card; className?: string }
             <ul className="space-y-[1.4cqw]">
               {assignments.map((entry, i) => (
                 <li key={i} className="flex items-baseline gap-[2.2cqw]">
-                  <span className="font-mono text-[2.8cqw] leading-none text-deck-brick">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  {/* Nudged down off the baseline so the star centres on the
+                      first line of text rather than sitting on it. */}
+                  <Star
+                    points={7}
+                    className="shrink-0 translate-y-[0.5cqw] text-deck-brick"
+                    style={{ width: "2.8cqw", height: "2.8cqw" }}
+                  />
                   <span className="text-[3.5cqw] leading-snug text-deck-cream">
                     {entry}
                   </span>
@@ -143,59 +149,42 @@ function nameSize(name: string) {
 }
 
 /**
- * The divider ornament: seven stars straddling the rule — one bright star at
- * centre with three smaller ones tapering away on each side, the Seven Stars
- * cluster read as a mark. Tarot-plate decoration — it is the one flourish on
- * an otherwise plain plate, so it carries the whole "this is a card, not a
- * label" read.
+ * The divider ornament: seven stars straddling the rule, every one of them
+ * seven-pointed — a big one at centre with three tapering away on each side,
+ * the Seven Stars cluster read as a mark. Tarot-plate decoration — it is the
+ * one flourish on an otherwise plain plate, so it carries the whole "this is a
+ * card, not a label" read.
  */
 function Ornament() {
   // Sizes taper outward from the centre star; six flankers + the centre = seven.
-  const FLANK = [1.5, 2.1, 2.9];
+  const FLANK = [2.5, 3.4, 4.7];
 
   return (
-    <div className="pointer-events-none absolute left-1/2 top-0 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[1.5cqw]">
+    <div className="pointer-events-none absolute left-1/2 top-0 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[2.8cqw] text-deck-mustard">
       {FLANK.map((size, i) => (
-        <Star key={`l${i}`} size={size} />
+        <OrnamentStar key={`l${i}`} size={size} />
       ))}
-      <Star size={6.2} outlined />
+      <OrnamentStar size={10.6} />
       {[...FLANK].reverse().map((size, i) => (
-        <Star key={`r${i}`} size={size} />
+        <OrnamentStar key={`r${i}`} size={size} />
       ))}
     </div>
   );
 }
 
-/** Four concave arms — a spark of light rather than a compass rose. */
-const SPARK =
-  "M50 2 C54 34 66 46 98 50 C66 54 54 66 50 98 C46 66 34 54 2 50 C34 46 46 34 50 2 Z";
-
-/** Seven points, one per star of the cluster — the mark at the centre. */
-const SEVEN_POINT =
-  "M50.0 6.0 L58.2 32.9 L84.4 22.6 L68.5 45.8 L92.9 59.8 L64.9 61.8 L69.1 89.6 L50.0 69.0 L30.9 89.6 L35.1 61.8 L7.1 59.8 L31.5 45.8 L15.6 22.6 L41.8 32.9 Z";
-
 /**
- * A star on the divider. `outlined` gives the centre star the black keyline it
- * needs to hold against the mustard rule behind it, and switches it to the
- * seven-pointed form.
+ * Every star on the divider carries the same black keyline. The stroke is in
+ * viewBox units, so it scales with the star — the small ones read as the same
+ * mark as the centre, not as a thicker-outlined variant of it.
  */
-function Star({ size, outlined = false }: { size: number; outlined?: boolean }) {
+function OrnamentStar({ size }: { size: number }) {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      className="shrink-0 text-deck-mustard"
+    <Star
+      points={7}
+      outlined
+      className="shrink-0"
       style={{ width: `${size}cqw`, height: `${size}cqw` }}
-      aria-hidden
-    >
-      <path
-        d={outlined ? SEVEN_POINT : SPARK}
-        fill="currentColor"
-        stroke={outlined ? "#000000" : "none"}
-        strokeWidth={outlined ? 7 : 0}
-        strokeLinejoin="round"
-        paintOrder="stroke"
-      />
-    </svg>
+    />
   );
 }
 
