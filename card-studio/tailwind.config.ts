@@ -48,13 +48,19 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Vibe Corp deck palette (fixed, for the rendered card faces)
-        div: {
-          indigo: "#161033",
-          "indigo-deep": "#0c0820",
-          purple: "#6d4bd8",
-          amber: "#f4b350",
-          star: "#f5f3ff",
+        // Vibe Corp deck palette (fixed, for the rendered card faces).
+        // Tracks the art direction: 70s cosmic revival — flat vector shapes,
+        // thick black outlines, mustard / teal / blue / rose / brick red on a
+        // black cosmic backdrop.
+        deck: {
+          black: "#000000",
+          ink: "#0b0b0c",
+          mustard: "#e8a929",
+          teal: "#2fa090",
+          blue: "#3358c4",
+          rose: "#dd8296",
+          brick: "#c4462a",
+          cream: "#f3e9d6",
         },
       },
       borderRadius: {

@@ -1,4 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
+import { ART_ASPECT_RATIO } from "./card-format";
 
 let ai: GoogleGenAI | null = null;
 
@@ -20,10 +21,16 @@ function getClient(): GoogleGenAI {
 export async function generateImage(opts: {
   model: string;
   prompt: string;
+  aspectRatio?: string;
 }): Promise<Buffer> {
   const response = await getClient().models.generateContent({
     model: opts.model,
     contents: opts.prompt,
+    config: {
+      // Without this the model defaults to 1:1 regardless of the card layout,
+      // and the art gets cropped to fit the slot.
+      imageConfig: { aspectRatio: opts.aspectRatio ?? ART_ASPECT_RATIO },
+    },
   });
 
   const parts = response.candidates?.[0]?.content?.parts ?? [];

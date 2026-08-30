@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { readCard, readGlobals, writeImage } from "@/lib/deck";
 import { generateImage } from "@/lib/gemini";
 import { render } from "@/lib/prompts";
+import { ART_ASPECT_RATIO } from "@/lib/card-format";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,7 +20,11 @@ export async function POST(req: Request) {
 
     const prompt = render(globals.imagePrompt, card);
 
-    const bytes = await generateImage({ model: globals.imageModel, prompt });
+    const bytes = await generateImage({
+      model: globals.imageModel,
+      prompt,
+      aspectRatio: ART_ASPECT_RATIO,
+    });
     const updated = await writeImage(slug, bytes);
     return NextResponse.json({ card: updated });
   } catch (err) {

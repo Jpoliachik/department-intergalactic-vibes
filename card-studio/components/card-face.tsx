@@ -4,24 +4,25 @@ import { ImageOff } from "lucide-react";
 import type { Card } from "@/lib/types";
 import { imageUrl } from "@/lib/client";
 import { cn } from "@/lib/utils";
+import { ART_HEIGHT_FRACTION, SAFE_MARGIN } from "@/lib/card-format";
 
 /**
- * The composited card face: full-bleed art on the top 65%, with the name plate
+ * The composited card face: full-bleed art across the top, with the name plate
  * and seal floating over it, and a text plate below.
+ *
+ * ART SLOT — the art band is exactly as tall as the card is wide, so it is a
+ * square and matches the 1:1 aspect ratio requested from the image model. Both
+ * numbers come from lib/card-format.ts; if they ever disagree the art gets
+ * cropped and the framing drifts.
  *
  * PRINT MARGIN — the rule for this deck: art may bleed to the trim edge, but no
  * readable content ever may. Every text element, plate and mark sits inside a
  * 5% safe margin on all four edges, so a trim that drifts eats only artwork.
- * `SAFE` below is that margin; use it for anything new that carries meaning.
  *
  * Everything is sized in `cqw` (percent of card width) against a container
  * query on the root, so the face is resolution-independent: the grid preview
  * and a 63x88mm print are the same design, not two different ones.
  */
-
-/** Print safe margin, as a percentage of card width. */
-const SAFE = "5cqw";
-
 export function CardFace({ card, className }: { card: Card; className?: string }) {
   const src = imageUrl(card);
   const assignments = card.assignments ?? [];
@@ -29,79 +30,84 @@ export function CardFace({ card, className }: { card: Card; className?: string }
   return (
     <div
       className={cn(
-        "relative flex aspect-[63/88] w-full flex-col overflow-hidden rounded-xl border border-div-purple/40 bg-div-indigo-deep text-div-star shadow-lg [container-type:inline-size]",
+        "relative flex aspect-[63/88] w-full flex-col overflow-hidden rounded-xl border border-deck-mustard/30 bg-deck-black text-deck-cream shadow-lg [container-type:inline-size]",
         className,
       )}
     >
-      {/* Art — full bleed, top 65% */}
-      <div className="relative h-[65%] shrink-0 overflow-hidden">
+      {/* Art — full bleed, square band across the top */}
+      <div
+        className="relative shrink-0 overflow-hidden"
+        style={{ height: `${ART_HEIGHT_FRACTION * 100}%` }}
+      >
         {src ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={src} alt={card.name} className="h-full w-full object-cover" />
         ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center gap-[2cqw] bg-gradient-to-b from-div-indigo to-div-indigo-deep text-div-purple/70">
+          <div className="flex h-full w-full flex-col items-center justify-center gap-[2cqw] bg-deck-ink text-deck-teal">
             <ImageOff className="h-[10cqw] w-[10cqw]" />
             <span className="text-[3cqw] uppercase tracking-widest">{card.object}</span>
           </div>
         )}
 
-        {/* Scrim so the overlays stay readable over any art */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/55 to-transparent" />
-
-        {/* Name plate — top left, inside the safe margin */}
+        {/* Name plate — flat black, top left, inside the safe margin */}
         <div
-          className="absolute max-w-[60cqw] rounded-[2cqw] border border-div-purple/40 bg-black/45 px-[2.5cqw] py-[1.4cqw] backdrop-blur-sm"
-          style={{ left: SAFE, top: SAFE }}
+          className="absolute max-w-[60cqw] rounded-[2cqw] bg-deck-black px-[2.5cqw] py-[1.4cqw]"
+          style={{ left: SAFE_MARGIN, top: SAFE_MARGIN }}
         >
-          <div className="truncate text-[4.4cqw] font-semibold uppercase leading-tight tracking-[0.16em] text-div-star">
+          <div className="truncate text-[4.4cqw] font-semibold uppercase leading-tight tracking-[0.16em] text-deck-cream">
             {card.name}
           </div>
-          <div className="truncate text-[2.6cqw] uppercase leading-tight tracking-[0.2em] text-div-purple/90">
+          <div className="truncate text-[2.6cqw] uppercase leading-tight tracking-[0.2em] text-deck-mustard">
             {card.designation}
           </div>
         </div>
 
         {/* Seal — top right, inside the safe margin */}
-        <Seal style={{ right: SAFE, top: SAFE }} />
+        <Seal style={{ right: SAFE_MARGIN, top: SAFE_MARGIN }} />
       </div>
 
-      {/* Text plate — content vertically centred in the remaining 35% */}
+      {/* Text plate — flat black, content vertically centred */}
       <div
-        className="flex flex-1 flex-col justify-center gap-[3cqw] border-t border-div-purple/30 bg-gradient-to-b from-div-indigo to-div-indigo-deep"
-        style={{ paddingLeft: SAFE, paddingRight: SAFE, paddingBottom: SAFE, paddingTop: SAFE }}
+        className="flex flex-1 flex-col justify-center gap-[2cqw] border-t border-deck-mustard/25 bg-deck-black"
+        style={{
+          paddingLeft: SAFE_MARGIN,
+          paddingRight: SAFE_MARGIN,
+          paddingBottom: SAFE_MARGIN,
+          paddingTop: SAFE_MARGIN,
+        }}
       >
         {card.tagline ? (
-          <div className="text-center text-[4cqw] italic leading-snug text-div-amber">
+          <div className="text-center text-[3.8cqw] italic leading-snug text-deck-mustard">
             “{card.tagline}”
           </div>
         ) : (
-          <div className="text-center text-[4cqw] italic text-div-purple/50">
+          <div className="text-center text-[3.8cqw] italic text-deck-teal/60">
             — no tagline yet —
           </div>
         )}
 
-        <div className="mx-auto h-px w-[12cqw] shrink-0 bg-div-purple/40" />
+        <div className="mx-auto h-px w-[12cqw] shrink-0 bg-deck-brick" />
 
-        <div className="space-y-[2cqw] text-left">
-          <div className="text-[2.6cqw] uppercase tracking-[0.22em] text-div-purple/70">
+        <div className="space-y-[1.6cqw] text-left">
+          <div className="text-[2.4cqw] uppercase tracking-[0.22em] text-deck-teal">
             Your Assignment
           </div>
           {assignments.length > 0 ? (
-            <ul className="space-y-[2cqw]">
+            <ul className="space-y-[1.6cqw]">
               {assignments.map((entry, i) => (
                 <li key={i} className="flex gap-[2cqw]">
                   <span
                     aria-hidden
-                    className="mt-[1.5cqw] h-[1.1cqw] w-[1.1cqw] shrink-0 rounded-full bg-div-amber/80"
+                    className="mt-[1.5cqw] h-[1.1cqw] w-[1.1cqw] shrink-0 rounded-full bg-deck-brick"
                   />
-                  <span className="text-[4cqw] leading-snug text-div-star/90">
+                  <span className="text-[3.6cqw] leading-snug text-deck-cream">
                     {entry}
                   </span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-[4cqw] italic text-div-purple/50">— no assignment yet —</p>
+            <p className="text-[3.6cqw] italic text-deck-teal/60">— no assignment yet —</p>
           )}
         </div>
       </div>
@@ -117,9 +123,9 @@ function Seal({ style }: { style?: React.CSSProperties }) {
   return (
     <div
       style={style}
-      className="absolute flex h-[11cqw] w-[11cqw] items-center justify-center rounded-full border border-div-star/50 bg-black/40 backdrop-blur-sm"
+      className="absolute flex h-[11cqw] w-[11cqw] items-center justify-center rounded-full bg-deck-black"
     >
-      <span className="text-[3cqw] font-semibold tracking-[0.08em] text-div-star/80">
+      <span className="text-[3cqw] font-semibold tracking-[0.08em] text-deck-mustard">
         VC
       </span>
     </div>

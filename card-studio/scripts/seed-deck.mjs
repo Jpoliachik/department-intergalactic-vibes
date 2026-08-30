@@ -14,16 +14,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DECK_DIR = path.join(__dirname, "..", "deck");
 const FORCE = process.env.FORCE === "1";
 
-const IMAGE_TEMPLATE = `Mid-century screenprint poster illustration crossed with 1960s psychedelic cosmic art. Bold flat shapes, heavy riso halftone grain, deliberate ink misregistration, high contrast. Mostly deep-indigo darkness with generous negative space.
-
-Pick a two-toned palette. Build depth with layered gradients, blended halftone transitions and colored light falloff; let the glow bleed warm at its core and cool at its edges, and let the misregistration split into neighbouring hues. Lean psychedelic — iridescent, hallucinatory, aurora-like washes in the dark.
+const IMAGE_TEMPLATE = `70s cosmic revival — LARGE flat vector shapes, thick black outlines, vibrant retro palette of mustard, teal, blue, rose, brick red, black cosmic backdrop. Rainbow space vibes. retro-psychedelic meets modern flat illustration, with a mystical/occult flavor to it.
 
 Render exactly this moment as a single, decisive image:
 {{sceneStory}}
 
-The figure is {{name}} — {{bio}} They are the clear focal subject.
+The figure is {{name}} — {{bio}} They are the clear focal subject. 
 
-The image is carried by what the figure is DOING and by the world around them — not by an object. Do not build the frame around a held prop, and do not present a glowing item to camera as the hero of the shot. Anything in their hands stays small, incidental and unremarkable. The action, the light and the place tell it.`;
+The image is carried by what the figure is DOING and by the world around them — not by an object. Do not build the frame around a held prop, and do not present a glowing item to camera as the hero of the shot. Anything in their hands stays small, incidental and unremarkable. The action, the light and the place tell it.
+
+Fill the entire square frame edge to edge — full bleed. No border, no frame, no outer keyline, no matte, no white margin, no rounded corners, no card frame, no vignette of empty background. No text, no lettering, no title, no caption, no signature, no watermark. No card borders. Just illustration.`;
 
 const TAGLINE_TEMPLATE = `You are writing in the voice of a single Vibe Corp character — speaking as them, not describing them. Vibe Corp is a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking, never ironic.
 
@@ -49,8 +49,8 @@ const ASSIGNMENT_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but
 Write the two "Your Assignment" entries handed to a festival-goer who draws this card.
 Rules:
 - Exactly TWO entries, one per line. No numbering, no bullets, no blank lines between them.
-- HARD LIMIT: at most 80 characters per entry, including spaces. Count them. Entries that run longer do not fit on the printed card and will be rejected.
-- One short sentence each is usually right; two only if both are very short. No semicolons, no em-dash asides, no compound clauses stacked up.
+- HARD LIMIT: at most 48 characters per entry, including spaces. Count them before you answer. The printed plate fits exactly one line per entry; anything longer is cut off on the card.
+- ONE short sentence each. No semicolons, no em-dash asides, no compound clauses, no lists. If it needs a comma to hold together, it is too long.
 - Entry 1: a concrete, do-able instruction for the weekend.
 - Entry 2: one turn of eternal, optimistic wisdom.
 - The two must be distinct — not a restatement of each other.
