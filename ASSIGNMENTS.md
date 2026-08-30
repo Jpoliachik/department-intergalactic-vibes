@@ -28,7 +28,7 @@ There are no bad designations and no hierarchy. The Grid needs every function ru
 - **Designation** — the post. What's printed on the badge.
 - **Function** — where it sits on the Grid, plus its classification code.
 - **Field name** — what the crew actually calls the post. The face of the card.
-- **Object** — the post's symbol. The single recognizable thing it carries.
+- **Object** — a loose seed for the post, used when writing its scene. Not printed on the card, and not the subject of its image.
 - **Your Assignment** — the charge of the post. A direction, not a task list. Yours to interpret.
 - **Field Reading** — issued with the draw. Half instruction, half forecast. Concise on purpose.
 

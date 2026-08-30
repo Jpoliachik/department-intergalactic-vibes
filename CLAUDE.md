@@ -63,6 +63,7 @@ These apply to every printed artifact — the field-specialty deck, commendation
 
 - **Print margin is mandatory.** Art may bleed to the trim edge. **Readable content never may.** Every text element, plate, code and mark sits inside a safe margin of **5% of the card width** on all four edges. A trim that drifts should eat artwork, never meaning.
 - **Size everything relative to the card, not the screen.** Card faces use a container query (`container-type: inline-size`) and `cqw` units, so the grid preview and the printed 63×88mm card are the same design at different scales. No fixed `px` type on a card face.
+- **Cards are carried by the figure's action and the world around them — never by a held object.** No hero props, nothing presented to camera. The per-card `object` is a loose seed for writing scenes, not a thing that has to appear.
 - **Current deck face:** full-bleed art on the top 65%; name + designation in a rounded plate over the art, top left; Vibe Corp seal circle top right; tagline and the two left-aligned "Your Assignment" entries on the plate below.
 - **Two assignment entries**, each 1–2 lines: entry one a concrete directive, entry two a turn of wisdom. Stored as `assignments: string[]` in `card.json`.
 

@@ -16,9 +16,9 @@ Art direction for the 16 card images in [`ASSIGNMENTS.md`](ASSIGNMENTS.md). The 
 
 Every image is a tarot composition:
 
-> **One crew figure · their Object · a scene with depth.**
+> **One crew figure · what they are doing · a scene with depth.**
 
-Character *and* scene, fused — the way a Rider-Waite card is always a figure performing one symbolic action, but the world behind them earns its keep. The figure is a little bit _the person receiving the card_ — it names who they already are — so the figure stays **universal**, not a specific named character.
+Character *and* scene, fused — the way a Rider-Waite card is always a figure performing one symbolic action, but the world behind them earns its keep. **The action carries the card, not a prop.** Rider-Waite leans on held symbols; we don't. Nothing is presented to camera as the hero object, and anything in the figure's hands stays small and incidental — if the image only works because of the thing they're holding, rewrite the scene. The figure is a little bit _the person receiving the card_ — it names who they already are — so the figure stays **universal**, not a specific named character.
 
 **Render the illustration ONLY.** No card border, no field-name banner, no designation code baked into the image. Those are composited in layout afterward. Prompt for the art.
 
@@ -28,7 +28,7 @@ Character *and* scene, fused — the way a Rider-Waite card is always a figure p
 
 ## Locked (identical on all 16)
 
-- **Framing:** tighter than full-body — roughly three-quarter length, the figure large and **popping forward** off the scene. Character-forward, not a small figure lost in a field. The Object is the brightest point.
+- **Framing:** tighter than full-body — roughly three-quarter length, the figure large and **popping forward** off the scene. Character-forward, not a small figure lost in a field. The brightest point is wherever the *action* happens — light they are causing, not light they are holding.
 - **Costume + gear:** purple high-visibility utility vest with reflective silver striping that catches the light; purple hard hat with a small circular Vibe Corp seal; tinted reflective visor down; ID badge on a lanyard; a loaded tool belt — a beeping resonance meter with little dials and indicator lights, a coiled cable, a walkie-talkie; work gloves; sturdy boots; embroidered patches (the Vibe Corp seal, a seven-star Pleiades patch, a crew number). Weathered, well-used, believable.
 - **Palette:** a *range* of purples (violet, magenta-leaning fuchsia, deep plum, blue-violet) · warm amber and gold glow · deep cosmic indigo · star-white. Stay in the purple-and-gold family, but don't sit on one flat purple — gradate, blend, let light fall off warm at the core and cool at the edges. A teal or rose edge where light bends is fine; full-spectrum rainbow is not.
 - **Texture:** riso / screenprint halftone grain, flat bold shapes, layered gradients and blended halftone transitions for depth, ink misregistration that splits into neighbouring hues. Lean psychedelic — iridescent, aurora-like washes in the dark.
@@ -40,12 +40,12 @@ Build the scene in layers so the character pops but the world is alive behind th
 - **The sky / the Grid:** a glowing geometric lattice of ley-lines arcing across a deep-indigo sky — the Resonance Grid drawn as a constellation power grid. Stars, and one oversized retro-space-program planet or moon low on the horizon.
 - **Midground:** small silhouettes, festival structures — stage scaffolding and truss towers, strings of lights, pennants and flags, tents.
 - **Atmosphere:** volumetric haze and light beams catching amber and purple, drifting embers or dust, depth and glow.
-- **Foreground:** the figure and their Object, sharp and lit.
+- **Foreground:** the figure mid-action, sharp and lit.
 
 ## Variable (per card)
 
-- **Action / pose** — what the figure is doing
-- **Object** — the single symbol they carry
+- **Action / pose** — what the figure is doing. This is the card.
+- **Object** — a loose seed for writing the scene, nothing more. It does not have to appear in the image, and usually shouldn't.
 - **Scene cue** — the specific festival moment behind them
 - **Constellation** — the pattern in the Grid-sky _(optional layer; the crew's own cluster is the Pleiades / Seven Stars)_
 
@@ -55,13 +55,13 @@ Build the scene in layers so the character pops but the world is alive behind th
 
 Keep the style, costume, palette and texture identical card to card; swap the **[bracketed]** slots. Illustration only — no card frame or text.
 
-> Mid-century screenprint illustration, 1960s NASA space-program poster crossed with a WPA labor-union poster. Tight three-quarter framing of a single utility-crew figure, large in frame and popping forward, `[ACTION]`, holding `[OBJECT]`. The figure wears a purple high-visibility utility vest with reflective silver striping, a purple hard hat with a small circular Vibe Corp seal, a tinted reflective visor down, a loaded tool belt with a beeping resonance meter, coiled cable and walkie-talkie, embroidered mission patches. Behind them, a living festival-at-night scene: `[SCENE CUE]`, stage scaffolding and string lights, small drifting silhouettes, volumetric haze catching amber and purple light. Deep cosmic-indigo sky with a glowing geometric Resonance-Grid lattice and `[CONSTELLATION]`, one oversized retro planet low on the horizon. Flat bold shapes, a range of purples through violet, fuchsia and plum into deep indigo with warm amber and gold glow and star-white highlights, layered gradients and iridescent psychedelic washes, riso halftone grain, ink-misregistration glow splitting into neighbouring hues, the object the brightest point. No border, no text.
+> Mid-century screenprint illustration, 1960s NASA space-program poster crossed with a WPA labor-union poster. Tight three-quarter framing of a single utility-crew figure, large in frame and popping forward, `[ACTION]`. The figure wears a purple high-visibility utility vest with reflective silver striping, a purple hard hat with a small circular Vibe Corp seal, a tinted reflective visor down, a loaded tool belt with a beeping resonance meter, coiled cable and walkie-talkie, embroidered mission patches. Behind them, a living festival-at-night scene: `[SCENE CUE]`, stage scaffolding and string lights, small drifting silhouettes, volumetric haze catching amber and purple light. Deep cosmic-indigo sky with a glowing geometric Resonance-Grid lattice and `[CONSTELLATION]`, one oversized retro planet low on the horizon. Flat bold shapes, a range of purples through violet, fuchsia and plum into deep indigo with warm amber and gold glow and star-white highlights, layered gradients and iridescent psychedelic washes, riso halftone grain, ink-misregistration glow splitting into neighbouring hues, the brightest point at the action itself. No border, no text.
 
 ---
 
 ## Per-card slot reference
 
-| Card | Code | Object | Action | Scene cue |
+| Card | Code | Object *(loose seed)* | Action | Scene cue |
 |---|---|---|---|---|
 | The Fool | 00 | empty cup | stepping forward, cup upturned and offered | an open, glowing threshold at the field's edge |
 | The Anchor | GT-01 | anchor | planted, one hand on a heavy anchor | a blurred crowd swirling around a figure held sharp and still |
@@ -86,6 +86,6 @@ _Optional constellation layer (astrology as operational framework): map each pos
 
 ## Workflow
 
-1. Lock **framing + scene richness** on the pilot card (**The Beacon** — it exercises figure, object, scene, glow, and Grid-sky all at once).
+1. Lock **framing + scene richness** on the pilot card (**The Beacon** — it exercises figure, action, scene, glow, and Grid-sky all at once).
 2. Generate variations, pick the winner, freeze the style + scene-depth blocks.
 3. Only then roll out all 16 by swapping slots. Curate for consistency.
