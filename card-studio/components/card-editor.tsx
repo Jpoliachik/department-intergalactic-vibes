@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import { ImageIcon, Loader2, RefreshCw, Wand2 } from "lucide-react";
-import { ASSIGNMENT_COUNT } from "@/lib/types";
-import { MAX_ASSIGNMENT_CHARS } from "@/lib/card-format";
+import {
+  ASSIGNMENT_MAX_LINES,
+  MAX_ASSIGNMENT_CHARS,
+} from "@/lib/card-format";
 import type { Card, GenerateKind, Globals, StoredCard } from "@/lib/types";
 import { render } from "@/lib/prompts";
 import {
@@ -78,10 +80,14 @@ function same(a: unknown, b: unknown): boolean {
   return a === b;
 }
 
-/** Always render exactly ASSIGNMENT_COUNT slots, padding short/legacy cards. */
+/**
+ * Render a slot per existing line plus one spare, up to the max — so a 2-line
+ * passage can be grown to 3 by typing, and blank slots are dropped on save.
+ */
 function assignmentSlots(entries: string[] | undefined): string[] {
-  const list = entries ?? [];
-  return Array.from({ length: ASSIGNMENT_COUNT }, (_, i) => list[i] ?? "");
+  const list = (entries ?? []).slice(0, ASSIGNMENT_MAX_LINES);
+  const count = Math.min(Math.max(list.length + 1, 2), ASSIGNMENT_MAX_LINES);
+  return Array.from({ length: count }, (_, i) => list[i] ?? "");
 }
 
 function EditorBody({
@@ -173,7 +179,7 @@ function EditorBody({
             </div>
           </Field>
 
-          <Field label="Your Assignment">
+          <Field label="Wisdom (2–3 lines)">
             <div className="flex gap-2">
               <div className="flex-1 space-y-2">
                 {assignmentSlots(draft.assignments).map((entry, i) => (
@@ -188,8 +194,8 @@ function EditorBody({
                       rows={2}
                       placeholder={
                         i === 0
-                          ? "Entry 1 — the orientation…"
-                          : "Entry 2 — the truth underneath it…"
+                          ? "Line 1 of the wisdom passage…"
+                          : `Line ${i + 1}${i === ASSIGNMENT_MAX_LINES - 1 ? " (optional)" : ""}…`
                       }
                     />
                     <div

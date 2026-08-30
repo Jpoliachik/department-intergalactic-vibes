@@ -2,8 +2,11 @@ import { NextResponse } from "next/server";
 import { readCard, readGlobals, writeCard } from "@/lib/deck";
 import { generateText } from "@/lib/anthropic";
 import { render } from "@/lib/prompts";
-import { ASSIGNMENT_COUNT } from "@/lib/types";
-import { MAX_ASSIGNMENT_CHARS } from "@/lib/card-format";
+import {
+  ASSIGNMENT_MAX_LINES,
+  ASSIGNMENT_MIN_LINES,
+  MAX_ASSIGNMENT_CHARS,
+} from "@/lib/card-format";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,10 +29,11 @@ function parseAssignments(text: string): string[] {
     .map((line) => line.replace(/^\s*(?:entry\s*\d*|your assignment)\s*[:.\u2014-]\s*/i, ""))
     .map(clean)
     .filter(Boolean)
-    .slice(0, ASSIGNMENT_COUNT);
-  if (entries.length < ASSIGNMENT_COUNT) {
+    .slice(0, ASSIGNMENT_MAX_LINES);
+  if (entries.length < ASSIGNMENT_MIN_LINES) {
     throw new Error(
-      `Expected ${ASSIGNMENT_COUNT} assignment lines, got ${entries.length}. Raw output:\n${text}`,
+      `Expected ${ASSIGNMENT_MIN_LINES}-${ASSIGNMENT_MAX_LINES} wisdom lines, ` +
+        `got ${entries.length}. Raw output:\n${text}`,
     );
   }
   return entries;

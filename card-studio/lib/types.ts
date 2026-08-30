@@ -31,8 +31,8 @@ export interface Card {
   /** The card's tagline (AI-generatable). */
   tagline: string;
   /**
-   * The "Your Assignment" entries shown on the card (AI-generatable).
-   * Exactly two, each 1-2 lines: one concrete directive, one turn of wisdom.
+   * The wisdom passage shown on the card (AI-generatable). 2-3 short lines,
+   * each authored as its own line so the breaks are deliberate.
    */
   assignments: string[];
   // --- Runtime-only (not persisted; computed on read) ---
@@ -45,7 +45,7 @@ export interface Card {
 /** The persisted card.json shape (everything except runtime-only fields). */
 export type StoredCard = Omit<Card, "hasImage" | "imageUpdatedAt">;
 
-/** How many "Your Assignment" entries a card carries. */
+/** Lines in the wisdom passage. See ASSIGNMENT_MIN/MAX_LINES in card-format. */
 export const ASSIGNMENT_COUNT = 2;
 
 /** Deck-wide, editable generation prompts + model choices. deck/globals.json. */

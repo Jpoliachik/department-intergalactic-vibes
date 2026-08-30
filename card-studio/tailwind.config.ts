@@ -70,6 +70,8 @@ const config: Config = {
       },
       fontFamily: {
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+        // Ornate serif for the card's wisdom passage.
+        "card-serif": ["var(--font-card-serif)", "ui-serif", "Georgia", "serif"],
       },
     },
   },

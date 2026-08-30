@@ -46,23 +46,22 @@ Return only the line, nothing else.`;
 
 const ASSIGNMENT_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking.
 
-Write the two "Your Assignment" entries handed to a festival-goer who draws this card.
+Write the passage of wisdom printed under the tagline on this card. It is the still centre of the card — what the person carries away, set in a serif like an inscription.
+
 Rules:
-- Exactly TWO entries, one per line. No numbering, no bullets, no blank lines between them.
-- HARD LIMIT: at most 48 characters per entry, including spaces. Count them before you answer. The printed plate fits exactly one line per entry; anything longer is cut off on the card.
-- ONE short sentence each. No semicolons, no em-dash asides, no compound clauses, no lists. If it needs a comma to hold together, it is too long.
-- This is spiritual guidance, not a to-do list. It tells someone how to BE, and why that holds — the way a tarot card speaks. Never a task, an errand, or anything that could be ticked off.
-- Entry 1: the orientation. The way this person is being asked to meet the world.
-- Entry 2: the truth underneath it. Why that way of being works.
-- BANNED: any time, place, count or festival logistic — no "tonight", "this weekend", "for three songs", "the dancefloor", "find someone and...". Nothing scheduled, nothing countable, nothing you could finish. If it reads like an instruction for the evening, rewrite it.
-- The two must be distinct — not a restatement of each other.
-- Glanceable, profound, plain language. No quotation marks, no emoji.
+- 2 or 3 lines, one per line of output. No numbering, no bullets, no blank lines between them.
+- The lines form ONE passage that builds. Not separate aphorisms, not a restatement of the same thought twice. Line by line it should turn, deepen, or land.
+- HARD LIMIT: at most 42 characters per line, including spaces. Count them before you answer. Each line is set on its own printed line; anything longer is cut off.
+- Spiritual guidance, not a to-do list. It tells someone how to BE, and why that holds — the way a tarot card speaks. Never a task, an errand, or anything that could be ticked off.
+- BANNED: any time, place, count or festival logistic — no "tonight", "this weekend", "for three songs", "the dancefloor". Nothing scheduled, nothing countable, nothing you could finish.
+- Plain, weighted language. Short words. It should read as though it has been true for a long time.
+- No quotation marks, no emoji, no title, no label.
 
 Character: {{name}} ({{designation}})
 Who they are: {{bio}}
 The scene on their card: {{sceneStory}}
 
-Return only the two lines, nothing else.`;
+Return only the lines, nothing else.`;
 
 const GLOBALS = {
   imagePrompt: IMAGE_TEMPLATE,

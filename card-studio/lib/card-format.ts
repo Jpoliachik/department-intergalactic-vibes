@@ -19,11 +19,15 @@ export const ART_ASPECT_RATIO = "1:1";
 export const ART_HEIGHT_FRACTION = CARD_WIDTH_MM / CARD_HEIGHT_MM;
 
 /** Print safe margin for readable content, as a percentage of card width. */
-export const SAFE_MARGIN = "5cqw";
+export const SAFE_MARGIN = "7cqw";
 
 /**
- * Max characters per "Your Assignment" entry. The plate fits exactly one line
- * per entry at the current type size, so this is a hard limit, not a style
- * preference — it is enforced when generating and surfaced in the editor.
+ * The wisdom passage under the tagline: 2-3 short lines, each set on its own
+ * line so the line breaks are authored rather than left to wrapping. The
+ * character limit is what one line holds at the current type size, so it is a
+ * hard limit, not a style preference — enforced when generating and surfaced
+ * as a counter in the editor.
  */
-export const MAX_ASSIGNMENT_CHARS = 48;
+export const MAX_ASSIGNMENT_CHARS = 42;
+export const ASSIGNMENT_MIN_LINES = 2;
+export const ASSIGNMENT_MAX_LINES = 3;

@@ -81,50 +81,64 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           cosmic gradient rather than flat black, so the panel reads as its own
           field against the art above. */}
       <div
-        className="relative flex flex-1 flex-col justify-center gap-[2.5cqw] border-t-[0.45cqw] border-deck-mustard"
+        className="relative flex flex-1 flex-col border-t-[0.45cqw] border-deck-mustard"
         style={{
           paddingLeft: SAFE_MARGIN,
           paddingRight: SAFE_MARGIN,
           paddingBottom: SAFE_MARGIN,
           // The plate's top edge is the internal divider, not a card edge, so
           // the print safe margin does not apply here.
-          paddingTop: "3cqw",
+          paddingTop: "3.5cqw",
           backgroundImage: PLATE_GRADIENT,
         }}
       >
-        {/* Diamond straddling the rule, like a tarot divider. */}
-        <div className="pointer-events-none absolute left-1/2 top-0 h-[3cqw] w-[3cqw] -translate-x-1/2 -translate-y-1/2 rotate-45 border-[0.4cqw] border-deck-black bg-deck-mustard" />
+        <Ornament />
 
+        {/* Tagline sits static directly under the rule. */}
         {card.tagline ? (
-          <div className="text-center text-[3.8cqw] italic leading-snug text-deck-mustard">
+          <div className="shrink-0 text-center text-[3.6cqw] italic leading-snug text-deck-mustard">
             “{card.tagline}”
           </div>
         ) : (
-          <div className="text-center text-[3.8cqw] italic text-deck-teal/60">
+          <div className="shrink-0 text-center text-[3.6cqw] italic text-deck-teal/60">
             — no tagline yet —
           </div>
         )}
 
-        <div className="text-left">
+        {/* The wisdom passage owns the rest of the plate. */}
+        <div className="flex flex-1 flex-col justify-center">
           {assignments.length > 0 ? (
-            <ul className="space-y-[1.6cqw]">
-              {assignments.map((entry, i) => (
-                <li key={i} className="flex gap-[2cqw]">
-                  <span
-                    aria-hidden
-                    className="mt-[1.5cqw] h-[1.1cqw] w-[1.1cqw] shrink-0 rounded-full bg-deck-brick"
-                  />
-                  <span className="text-[3.6cqw] leading-snug text-deck-cream">
-                    {entry}
-                  </span>
-                </li>
+            <p className="text-center font-card-serif text-[4.6cqw] font-medium leading-[1.42] text-deck-cream">
+              {assignments.map((line, i) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
               ))}
-            </ul>
+            </p>
           ) : (
-            <p className="text-[3.6cqw] italic text-deck-teal/60">— no assignment yet —</p>
+            <p className="text-center font-card-serif text-[4.6cqw] italic text-deck-teal/60">
+              — no wisdom yet —
+            </p>
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+/**
+ * The divider ornament: a large diamond straddling the rule, flanked by two
+ * small ones. Tarot-plate decoration — it is the one flourish on an otherwise
+ * plain plate, so it carries the whole "this is a card, not a label" read.
+ */
+function Ornament() {
+  return (
+    <div className="pointer-events-none absolute left-1/2 top-0 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[1.8cqw]">
+      <span className="h-[1.6cqw] w-[1.6cqw] rotate-45 bg-deck-mustard" />
+      <span className="flex h-[5.4cqw] w-[5.4cqw] rotate-45 items-center justify-center border-[0.45cqw] border-deck-black bg-deck-mustard">
+        <span className="h-[2.2cqw] w-[2.2cqw] border-[0.32cqw] border-deck-black" />
+      </span>
+      <span className="h-[1.6cqw] w-[1.6cqw] rotate-45 bg-deck-mustard" />
     </div>
   );
 }
