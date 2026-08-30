@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     const [card, globals] = await Promise.all([readCard(slug), readGlobals()]);
     const prompt = render(globals.assignmentPrompt, card);
     const assignments = parseAssignments(
-      await generateText({ model: globals.textModel, prompt, maxTokens: 512 }),
+      await generateText({ model: globals.textModel, prompt, maxTokens: 4096 }),
     );
     const updated = await writeCard(slug, { assignments });
     return NextResponse.json({ card: updated });

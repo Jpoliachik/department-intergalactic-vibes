@@ -49,7 +49,8 @@ const ASSIGNMENT_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but
 Write the two "Your Assignment" entries handed to a festival-goer who draws this card.
 Rules:
 - Exactly TWO entries, one per line. No numbering, no bullets, no blank lines between them.
-- Each entry is 1-2 short sentences and must fit on 1-2 printed lines. Keep them tight.
+- HARD LIMIT: at most 80 characters per entry, including spaces. Count them. Entries that run longer do not fit on the printed card and will be rejected.
+- One short sentence each is usually right; two only if both are very short. No semicolons, no em-dash asides, no compound clauses stacked up.
 - Entry 1: a concrete, do-able instruction for the weekend.
 - Entry 2: one turn of eternal, optimistic wisdom.
 - The two must be distinct — not a restatement of each other.
