@@ -50,14 +50,16 @@ const config: Config = {
         },
         // Vibe Corp deck palette (fixed, for the rendered card faces).
         // Tracks the art direction: 70s cosmic revival — flat vector shapes,
-        // thick black outlines, mustard / teal / blue / rose / brick red on a
-        // black cosmic backdrop.
+        // thick black outlines, mustard / teal / blue / purple / rose / brick red
+        // on a black cosmic backdrop. `plum` is the dark purple the plates sit on.
         deck: {
           black: "#000000",
           ink: "#0b0b0c",
           mustard: "#e8a929",
           teal: "#2fa090",
           blue: "#3358c4",
+          purple: "#a274d6",
+          plum: "#251435",
           rose: "#dd8296",
           brick: "#c4462a",
           cream: "#f3e9d6",

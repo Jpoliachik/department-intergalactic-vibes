@@ -62,9 +62,9 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           </div>
         )}
 
-        {/* Name plate — flat black, top left, inside the safe margin */}
+        {/* Name plate — dark plum, top left, inside the safe margin */}
         <div
-          className="absolute max-w-[66cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-black px-[2.5cqw] py-[1.2cqw]"
+          className="absolute max-w-[66cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-plum px-[2.5cqw] py-[1.2cqw]"
           style={{ left: SAFE_MARGIN, top: SAFE_MARGIN }}
         >
           {/* The name is never clipped — long names step down a size rather
@@ -102,13 +102,13 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         <Ornament />
 
         {/* Field reading — the reading issued with the draw. */}
-        <p className="shrink-0 text-center font-card-serif text-[4cqw] leading-[1.3] text-deck-mustard">
+        <p className="shrink-0 text-center font-card-serif text-[3.8cqw] leading-[1.3] text-deck-mustard">
           {card.fieldReading}
         </p>
 
         {/* Standing assignments, each marked with the deck's star. */}
         <div className="flex flex-1 flex-col justify-center gap-[1.6cqw]">
-          <div className="font-mono text-[2.2cqw] uppercase tracking-[0.28em] text-deck-teal">
+          <div className="font-mono text-[2.8cqw] uppercase tracking-[0.42em] text-deck-purple">
             Assignment
           </div>
           {assignments.length > 0 ? (
@@ -119,17 +119,17 @@ export function CardFace({ card, className }: { card: Card; className?: string }
                       first line of text rather than sitting on it. */}
                   <Star
                     points={7}
-                    className="shrink-0 translate-y-[0.5cqw] text-deck-brick"
-                    style={{ width: "2.8cqw", height: "2.8cqw" }}
+                    className="shrink-0 translate-y-[0.9cqw] text-deck-brick"
+                    style={{ width: "4.4cqw", height: "4.4cqw" }}
                   />
-                  <span className="text-[3.5cqw] leading-snug text-deck-cream">
+                  <span className="text-[3.7cqw] leading-snug text-deck-cream">
                     {entry}
                   </span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-[3.5cqw] italic text-deck-teal/60">— no assignment yet —</p>
+            <p className="text-[3.7cqw] italic text-deck-teal/60">— no assignment yet —</p>
           )}
         </div>
       </div>
@@ -196,7 +196,7 @@ function CodeBubble({ code, style }: { code: string; style?: React.CSSProperties
   return (
     <div
       style={style}
-      className="absolute rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-black px-[2.2cqw] py-[1.2cqw]"
+      className="absolute rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-plum px-[2.2cqw] py-[1.2cqw]"
     >
       <span className="font-mono text-[3.4cqw] font-medium leading-none tracking-[0.1em] text-deck-mustard">
         {code}
