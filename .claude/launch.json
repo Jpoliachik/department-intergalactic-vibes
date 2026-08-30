@@ -4,8 +4,14 @@
     {
       "name": "card-studio",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "card-studio"],
-      "port": 3000
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "card-studio"
+      ],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }
