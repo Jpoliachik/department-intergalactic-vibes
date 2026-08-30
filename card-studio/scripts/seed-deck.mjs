@@ -117,7 +117,7 @@ const CARDS = [
     fieldReading: "Go before you're ready. Readiness follows.",
     bio: "The one who moves first — a small, brave ignition in the dark. Nothing happens until they begin.",
     sceneStory:
-      "At the center of an enormous empty stage, its far edges lost in black, a lean figure crouches on one knee and strikes their heel hard against the boards, throwing a small fan of sparks. From that one point a thin stem of fire climbs and branches overhead into a glowing tree of flame, its light pushing the dark back to reveal rows of empty seats.",
+      "A figure steps out onto a bridge of dark, unlit stones suspended over a black gulf, one foot already committed to the next stone ahead. Every stone behind them burns gold where they have trodden, and the whole span in front stays cold and unlit, waiting on the step they have not taken yet.",
     assignments: [
       "Be the first one moving, before it feels reasonable.",
       "The moment was only ever waiting for you.",
