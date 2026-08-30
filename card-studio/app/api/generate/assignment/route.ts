@@ -3,6 +3,7 @@ import { readCard, readGlobals, writeCard } from "@/lib/deck";
 import { generateText } from "@/lib/anthropic";
 import { render } from "@/lib/prompts";
 import { ASSIGNMENT_COUNT } from "@/lib/types";
+import { MAX_ASSIGNMENT_CHARS } from "@/lib/card-format";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -43,9 +44,30 @@ export async function POST(req: Request) {
     }
     const [card, globals] = await Promise.all([readCard(slug), readGlobals()]);
     const prompt = render(globals.assignmentPrompt, card);
-    const assignments = parseAssignments(
-      await generateText({ model: globals.textModel, prompt, maxTokens: 4096 }),
-    );
+
+    // The plate fits one line per entry, so over-length output is a failure,
+    // not a style nit. Ask again with the offenders quoted back rather than
+    // erroring out on the first miss — the model reliably lands it on a retry.
+    let assignments: string[] = [];
+    let attemptPrompt = prompt;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      assignments = parseAssignments(
+        await generateText({ model: globals.textModel, prompt: attemptPrompt, maxTokens: 4096 }),
+      );
+      const tooLong = assignments.filter((e) => e.length > MAX_ASSIGNMENT_CHARS);
+      if (tooLong.length === 0) break;
+      if (attempt === 2) {
+        throw new Error(
+          `Could not get both entries under ${MAX_ASSIGNMENT_CHARS} characters in 3 tries. ` +
+            `Last attempt: ${tooLong.map((e) => `"${e}" (${e.length})`).join(", ")}`,
+        );
+      }
+      attemptPrompt =
+        `${prompt}\n\nYour last attempt was too long: ` +
+        `${tooLong.map((e) => `"${e}" (${e.length} chars)`).join(", ")}. ` +
+        `Every entry must be ${MAX_ASSIGNMENT_CHARS} characters or fewer. Cut words, don't rephrase longer.`;
+    }
+
     const updated = await writeCard(slug, { assignments });
     return NextResponse.json({ card: updated });
   } catch (err) {

@@ -80,12 +80,14 @@ export function CardFace({ card, className }: { card: Card; className?: string }
       {/* Text plate — thick double rule, then a cosmic gradient rather than flat
           black, so the panel reads as its own field against the art above. */}
       <div
-        className="relative flex flex-1 flex-col justify-center gap-[2cqw] border-t-[0.9cqw] border-deck-mustard"
+        className="relative flex flex-1 flex-col justify-center gap-[2.5cqw] border-t-[0.9cqw] border-deck-mustard"
         style={{
           paddingLeft: SAFE_MARGIN,
           paddingRight: SAFE_MARGIN,
           paddingBottom: SAFE_MARGIN,
-          paddingTop: SAFE_MARGIN,
+          // The plate's top edge is the internal divider, not a card edge, so
+          // the print safe margin does not apply here.
+          paddingTop: "3cqw",
           backgroundImage: PLATE_GRADIENT,
         }}
       >
@@ -104,12 +106,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           </div>
         )}
 
-        <div className="mx-auto h-px w-[12cqw] shrink-0 bg-deck-brick" />
-
-        <div className="space-y-[1.6cqw] text-left">
-          <div className="text-[2.4cqw] uppercase tracking-[0.22em] text-deck-teal">
-            Your Assignment
-          </div>
+        <div className="text-left">
           {assignments.length > 0 ? (
             <ul className="space-y-[1.6cqw]">
               {assignments.map((entry, i) => (

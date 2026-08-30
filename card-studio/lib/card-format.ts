@@ -20,3 +20,10 @@ export const ART_HEIGHT_FRACTION = CARD_WIDTH_MM / CARD_HEIGHT_MM;
 
 /** Print safe margin for readable content, as a percentage of card width. */
 export const SAFE_MARGIN = "5cqw";
+
+/**
+ * Max characters per "Your Assignment" entry. The plate fits exactly one line
+ * per entry at the current type size, so this is a hard limit, not a style
+ * preference — it is enforced when generating and surfaced in the editor.
+ */
+export const MAX_ASSIGNMENT_CHARS = 48;

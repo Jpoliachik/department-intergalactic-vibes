@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ImageIcon, Loader2, RefreshCw, Wand2 } from "lucide-react";
 import { ASSIGNMENT_COUNT } from "@/lib/types";
+import { MAX_ASSIGNMENT_CHARS } from "@/lib/card-format";
 import type { Card, GenerateKind, Globals, StoredCard } from "@/lib/types";
 import { render } from "@/lib/prompts";
 import {
@@ -176,21 +177,32 @@ function EditorBody({
             <div className="flex gap-2">
               <div className="flex-1 space-y-2">
                 {assignmentSlots(draft.assignments).map((entry, i) => (
-                  <Textarea
-                    key={i}
-                    value={entry}
-                    onChange={(e) => {
-                      const next = assignmentSlots(draft.assignments);
-                      next[i] = e.target.value;
-                      set("assignments", next);
-                    }}
-                    rows={2}
-                    placeholder={
-                      i === 0
-                        ? "Entry 1 — a concrete directive…"
-                        : "Entry 2 — a turn of wisdom…"
-                    }
-                  />
+                  <div key={i} className="space-y-1">
+                    <Textarea
+                      value={entry}
+                      onChange={(e) => {
+                        const next = assignmentSlots(draft.assignments);
+                        next[i] = e.target.value;
+                        set("assignments", next);
+                      }}
+                      rows={2}
+                      placeholder={
+                        i === 0
+                          ? "Entry 1 — the orientation…"
+                          : "Entry 2 — the truth underneath it…"
+                      }
+                    />
+                    <div
+                      className={
+                        entry.length > MAX_ASSIGNMENT_CHARS
+                          ? "text-right text-xs font-medium text-destructive"
+                          : "text-right text-xs text-muted-foreground"
+                      }
+                    >
+                      {entry.length}/{MAX_ASSIGNMENT_CHARS}
+                      {entry.length > MAX_ASSIGNMENT_CHARS ? " — wraps to a second line" : ""}
+                    </div>
+                  </div>
                 ))}
               </div>
               <RegenButton
