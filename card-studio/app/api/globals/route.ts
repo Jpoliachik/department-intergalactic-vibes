@@ -12,7 +12,6 @@ export async function PUT(req: Request) {
     const current = await readGlobals();
     const next: Globals = {
       imagePrompt: body.imagePrompt ?? current.imagePrompt,
-      taglinePrompt: body.taglinePrompt ?? current.taglinePrompt,
       assignmentPrompt: body.assignmentPrompt ?? current.assignmentPrompt,
       textModel: body.textModel ?? current.textModel,
       imageModel: body.imageModel ?? current.imageModel,

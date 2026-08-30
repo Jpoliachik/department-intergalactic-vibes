@@ -8,7 +8,7 @@ import { ART_HEIGHT_FRACTION, SAFE_MARGIN } from "@/lib/card-format";
 
 /**
  * The composited card face: full-bleed art across the top, with the name plate
- * and seal floating over it, and a text plate below.
+ * and code bubble floating over it, and a text plate below.
  *
  * ART SLOT — the art band is exactly as tall as the card is wide, so it is a
  * square and matches the 1:1 aspect ratio requested from the image model. Both
@@ -62,10 +62,15 @@ export function CardFace({ card, className }: { card: Card; className?: string }
 
         {/* Name plate — flat black, top left, inside the safe margin */}
         <div
-          className="absolute max-w-[60cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-black px-[2.5cqw] py-[1.2cqw]"
+          className="absolute max-w-[66cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-black px-[2.5cqw] py-[1.2cqw]"
           style={{ left: SAFE_MARGIN, top: SAFE_MARGIN }}
         >
-          <div className="truncate text-[4.4cqw] font-semibold uppercase leading-tight tracking-[0.16em] text-deck-cream">
+          {/* The name is never clipped — long names step down a size rather
+              than truncate, and wrap before they reach the code bubble. */}
+          <div
+            className="font-semibold uppercase leading-tight tracking-[0.16em] text-deck-cream"
+            style={{ fontSize: `${nameSize(card.name)}cqw` }}
+          >
             {card.name}
           </div>
           <div className="truncate text-[2.6cqw] uppercase leading-tight tracking-[0.2em] text-deck-mustard">
@@ -73,8 +78,8 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           </div>
         </div>
 
-        {/* Seal — top right, inside the safe margin */}
-        <Seal style={{ right: SAFE_MARGIN, top: SAFE_MARGIN }} />
+        {/* Code bubble — top right, matching the name plate */}
+        <CodeBubble code={card.code} style={{ right: SAFE_MARGIN, top: SAFE_MARGIN }} />
       </div>
 
       {/* Text plate — a hairline rule matching the name plate border, then a
@@ -94,31 +99,31 @@ export function CardFace({ card, className }: { card: Card; className?: string }
       >
         <Ornament />
 
-        {/* Tagline sits static directly under the rule. */}
-        {card.tagline ? (
-          <div className="shrink-0 text-center text-[3.6cqw] italic leading-snug text-deck-mustard">
-            “{card.tagline}”
-          </div>
-        ) : (
-          <div className="shrink-0 text-center text-[3.6cqw] italic text-deck-teal/60">
-            — no tagline yet —
-          </div>
-        )}
+        {/* Field reading — the reading issued with the draw. */}
+        <p className="shrink-0 text-center font-card-serif text-[4cqw] leading-[1.3] text-deck-mustard">
+          {card.fieldReading}
+        </p>
 
-        {/* The wisdom passage owns the rest of the plate. */}
-        <div className="flex flex-1 flex-col justify-center">
+        {/* Standing assignments, numbered so they read as issued. */}
+        <div className="flex flex-1 flex-col justify-center gap-[1.6cqw]">
+          <div className="font-mono text-[2.2cqw] uppercase tracking-[0.28em] text-deck-teal">
+            Assignment
+          </div>
           {assignments.length > 0 ? (
-            <p className="text-center font-card-serif text-[4.6cqw] font-medium leading-[1.42] text-deck-cream">
-              {assignments.map((line, i) => (
-                <span key={i} className="block">
-                  {line}
-                </span>
+            <ul className="space-y-[1.4cqw]">
+              {assignments.map((entry, i) => (
+                <li key={i} className="flex items-baseline gap-[2.2cqw]">
+                  <span className="font-mono text-[2.8cqw] leading-none text-deck-brick">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[3.5cqw] leading-snug text-deck-cream">
+                    {entry}
+                  </span>
+                </li>
               ))}
-            </p>
+            </ul>
           ) : (
-            <p className="text-center font-card-serif text-[4.6cqw] italic text-deck-teal/60">
-              — no wisdom yet —
-            </p>
+            <p className="text-[3.5cqw] italic text-deck-teal/60">— no assignment yet —</p>
           )}
         </div>
       </div>
@@ -127,34 +132,85 @@ export function CardFace({ card, className }: { card: Card; className?: string }
 }
 
 /**
- * The divider ornament: a large diamond straddling the rule, flanked by two
- * small ones. Tarot-plate decoration — it is the one flourish on an otherwise
- * plain plate, so it carries the whole "this is a card, not a label" read.
+ * Long names step down in size so the plate stays on one or two lines and
+ * never runs under the code bubble. Tuned against the longest names in the
+ * deck ("The Keeper of Base").
+ */
+function nameSize(name: string) {
+  if (name.length > 16) return 3.5;
+  if (name.length > 12) return 4.0;
+  return 4.4;
+}
+
+/**
+ * The divider ornament: seven stars straddling the rule — one bright star at
+ * centre with three smaller ones tapering away on each side, the Seven Stars
+ * cluster read as a mark. Tarot-plate decoration — it is the one flourish on
+ * an otherwise plain plate, so it carries the whole "this is a card, not a
+ * label" read.
  */
 function Ornament() {
+  // Sizes taper outward from the centre star; six flankers + the centre = seven.
+  const FLANK = [1.5, 2.1, 2.9];
+
   return (
-    <div className="pointer-events-none absolute left-1/2 top-0 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[1.8cqw]">
-      <span className="h-[1.6cqw] w-[1.6cqw] rotate-45 bg-deck-mustard" />
-      <span className="flex h-[5.4cqw] w-[5.4cqw] rotate-45 items-center justify-center border-[0.45cqw] border-deck-black bg-deck-mustard">
-        <span className="h-[2.2cqw] w-[2.2cqw] border-[0.32cqw] border-deck-black" />
-      </span>
-      <span className="h-[1.6cqw] w-[1.6cqw] rotate-45 bg-deck-mustard" />
+    <div className="pointer-events-none absolute left-1/2 top-0 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[1.5cqw]">
+      {FLANK.map((size, i) => (
+        <Star key={`l${i}`} size={size} />
+      ))}
+      <Star size={6.2} outlined />
+      {[...FLANK].reverse().map((size, i) => (
+        <Star key={`r${i}`} size={size} />
+      ))}
     </div>
   );
 }
 
+/** Four concave arms — a spark of light rather than a compass rose. */
+const SPARK =
+  "M50 2 C54 34 66 46 98 50 C66 54 54 66 50 98 C46 66 34 54 2 50 C34 46 46 34 50 2 Z";
+
+/** Seven points, one per star of the cluster — the mark at the centre. */
+const SEVEN_POINT =
+  "M50.0 6.0 L58.2 32.9 L84.4 22.6 L68.5 45.8 L92.9 59.8 L64.9 61.8 L69.1 89.6 L50.0 69.0 L30.9 89.6 L35.1 61.8 L7.1 59.8 L31.5 45.8 L15.6 22.6 L41.8 32.9 Z";
+
 /**
- * Placeholder for the Vibe Corp seal. Swap the inner mark for the real logo
- * once it exists — the ring and sizing are the slot it has to fit.
+ * A star on the divider. `outlined` gives the centre star the black keyline it
+ * needs to hold against the mustard rule behind it, and switches it to the
+ * seven-pointed form.
  */
-function Seal({ style }: { style?: React.CSSProperties }) {
+function Star({ size, outlined = false }: { size: number; outlined?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className="shrink-0 text-deck-mustard"
+      style={{ width: `${size}cqw`, height: `${size}cqw` }}
+      aria-hidden
+    >
+      <path
+        d={outlined ? SEVEN_POINT : SPARK}
+        fill="currentColor"
+        stroke={outlined ? "#000000" : "none"}
+        strokeWidth={outlined ? 7 : 0}
+        strokeLinejoin="round"
+        paintOrder="stroke"
+      />
+    </svg>
+  );
+}
+
+/**
+ * The card's classification code, set in mono so it reads as issued rather
+ * than designed. Same plate treatment as the name, top right.
+ */
+function CodeBubble({ code, style }: { code: string; style?: React.CSSProperties }) {
   return (
     <div
       style={style}
-      className="absolute flex h-[11cqw] w-[11cqw] items-center justify-center rounded-full border-[0.45cqw] border-deck-mustard bg-deck-black"
+      className="absolute rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-black px-[2.2cqw] py-[1.2cqw]"
     >
-      <span className="text-[3cqw] font-semibold tracking-[0.08em] text-deck-mustard">
-        VC
+      <span className="font-mono text-[3.4cqw] font-medium leading-none tracking-[0.1em] text-deck-mustard">
+        {code}
       </span>
     </div>
   );

@@ -3,7 +3,6 @@
 import {
   ImageIcon,
   Loader2,
-  Quote,
   ScrollText,
   SlidersHorizontal,
 } from "lucide-react";
@@ -24,7 +23,7 @@ export function CardTile({
   onGenerate: (kind: GenerateKind) => void;
   onEdit: () => void;
 }) {
-  const anyBusy = !!(busy.image || busy.tagline || busy.assignment);
+  const anyBusy = !!(busy.image || busy.assignment);
 
   return (
     <div className="flex flex-col gap-3">
@@ -37,13 +36,6 @@ export function CardTile({
           busy={!!busy.image}
           disabled={anyBusy}
           onClick={() => onGenerate("image")}
-        />
-        <GenButton
-          label="Tagline"
-          icon={<Quote />}
-          busy={!!busy.tagline}
-          disabled={anyBusy}
-          onClick={() => onGenerate("tagline")}
         />
         <GenButton
           label="Assignment"

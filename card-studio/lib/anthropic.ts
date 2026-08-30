@@ -14,7 +14,7 @@ function getClient(): Anthropic {
 
 /**
  * Run a text-generation prompt and return the trimmed plain-text result.
- * Used for taglines and assignment lines — short, single-shot completions.
+ * Used for the assignment lines — short, single-shot completions.
  *
  * Note on max_tokens: on Opus-class models thinking is ON by default and its
  * tokens come out of the same max_tokens budget as the reply. A budget sized

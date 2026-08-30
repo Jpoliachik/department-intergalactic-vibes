@@ -75,9 +75,8 @@ export function GlobalsEditor({
         </div>
 
         <Tabs defaultValue="image" className="mt-2">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="image">Image</TabsTrigger>
-            <TabsTrigger value="tagline">Tagline</TabsTrigger>
             <TabsTrigger value="assignment">Assignment</TabsTrigger>
             <TabsTrigger value="models">Models</TabsTrigger>
           </TabsList>
@@ -86,14 +85,6 @@ export function GlobalsEditor({
             <Textarea
               value={draft.imagePrompt}
               onChange={(e) => set("imagePrompt", e.target.value)}
-              rows={14}
-              className="font-mono text-xs leading-relaxed"
-            />
-          </TabsContent>
-          <TabsContent value="tagline">
-            <Textarea
-              value={draft.taglinePrompt}
-              onChange={(e) => set("taglinePrompt", e.target.value)}
               rows={14}
               className="font-mono text-xs leading-relaxed"
             />
@@ -115,7 +106,7 @@ export function GlobalsEditor({
                 className="font-mono"
               />
               <p className="text-xs text-muted-foreground">
-                Used for taglines and assignments. Overridden by{" "}
+                Used for assignments. Overridden by{" "}
                 <code>TEXT_MODEL</code> if set in the environment.
               </p>
             </div>

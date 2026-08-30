@@ -25,47 +25,34 @@ The image is carried by what the figure is DOING and by the world around them �
 
 Fill the entire square frame edge to edge — full bleed. No border, no frame, no outer keyline, no matte, no white margin, no rounded corners, no card frame, no vignette of empty background. No text, no lettering, no title, no caption, no signature, no watermark. No card borders. Just illustration.`;
 
-const TAGLINE_TEMPLATE = `You are writing in the voice of a single Vibe Corp character — speaking as them, not describing them. Vibe Corp is a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking, never ironic.
+const ASSIGNMENT_TEMPLATE = `You are a field officer of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Crew hand these cards to festival-goers in the field. Tone: warm, plain-spoken, quietly official — never winking, never mystical here.
 
-Write ONE short line this character would actually say out loud. Their own words: the thing they'd tell you if you asked them how they work, or what they've figured out. A motto in their mouth, not a caption written about them.
+Write the TWO standing assignments printed on this card.
+
+What an assignment is: a short order a person can carry all weekend and act on over and over. It names a way to participate, not a task to complete. The card's field reading carries the mystery; these two lines carry the doing.
 
 Rules:
-- At most 6 words.
-- Spoken, not captioned. First person, or said straight to the listener. Contractions welcome.
-- It must sound like THIS character and no other — their particular temperament, nerve and way of seeing. Someone reading it should be able to guess which card it came from.
-- Punchy and profound, a little mystical, always optimistic. Earned, not fortune-cookie.
-- Do not name the character, their designation, or any object.
-- No quotation marks (the card adds them), no trailing period, no emoji.
+- EXACTLY 2 assignments, one per line. No numbering, no bullets, no blank lines.
+- Each is a short imperative: 2 to 6 words, at most 34 characters including spaces. Count them.
+- Plain, spoken language — what one person would actually say to another. Wry is welcome. No mysticism, no metaphor, no poetry.
+- Open, never prescriptive: no times, places, counts, named people, or festival logistics. Nothing that can be finished and ticked off — a person should be able to do it ten times in a night.
+- The two must differ in kind. One is usually the outward move; the other is the permission that makes it possible.
+- No end punctuation, no quotation marks.
+
+For The Spark (the one who always goes first), the two assignments are:
+Get the party started
+Act a fool
+
+Match that register exactly: short, human, actionable, a little bold.
 
 Character: {{name}} ({{designation}})
 Who they are: {{bio}}
-The scene on their card: {{sceneStory}}
-Their assignment: {{assignment}}
+Their field reading: {{fieldReading}}
 
-Return only the line, nothing else.`;
-
-const ASSIGNMENT_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Tone: warm, technical-but-mystical, sincere — never winking.
-
-Write the passage of wisdom printed under the tagline on this card. It is the still centre of the card — what the person carries away, set in a serif like an inscription.
-
-Rules:
-- EXACTLY 2 lines, one per line of output. Not three. No numbering, no bullets, no blank lines between them.
-- The two lines form ONE passage: the first opens it, the second turns and lands it. Not two separate aphorisms, and not the same thought said twice.
-- HARD LIMIT: at most 42 characters per line, including spaces. Count them before you answer. Each line is set on its own printed line; anything longer is cut off.
-- Spiritual guidance, not a to-do list. It tells someone how to BE, and why that holds — the way a tarot card speaks. Never a task, an errand, or anything that could be ticked off.
-- BANNED: any time, place, count or festival logistic — no "tonight", "this weekend", "for three songs", "the dancefloor". Nothing scheduled, nothing countable, nothing you could finish.
-- Plain, weighted language. Short words. It should read as though it has been true for a long time.
-- No quotation marks, no emoji, no title, no label.
-
-Character: {{name}} ({{designation}})
-Who they are: {{bio}}
-The scene on their card: {{sceneStory}}
-
-Return only the lines, nothing else.`;
+Return only the two lines, nothing else.`;
 
 const GLOBALS = {
   imagePrompt: IMAGE_TEMPLATE,
-  taglinePrompt: TAGLINE_TEMPLATE,
   assignmentPrompt: ASSIGNMENT_TEMPLATE,
   textModel: "claude-opus-5",
   imageModel: "gemini-2.5-flash-image",
@@ -365,7 +352,7 @@ async function main() {
   await fs.mkdir(DECK_DIR, { recursive: true });
   await writeIfMissing(path.join(DECK_DIR, "globals.json"), GLOBALS);
   for (const card of CARDS) {
-    const full = { ...card, tagline: "" };
+    const full = { ...card };
     await writeIfMissing(path.join(DECK_DIR, card.slug, "card.json"), full);
   }
   console.log(`\nDone. ${CARDS.length} cards.`);

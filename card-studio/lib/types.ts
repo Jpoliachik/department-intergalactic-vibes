@@ -28,11 +28,9 @@ export interface Card {
   sceneStory: string;
 
   // --- Generated / editable outputs ---
-  /** The card's tagline (AI-generatable). */
-  tagline: string;
   /**
-   * The wisdom passage shown on the card (AI-generatable). 2-3 short lines,
-   * each authored as its own line so the breaks are deliberate.
+   * The two standing assignments printed on the card (AI-generatable). Short
+   * imperatives — actionable, open-ended, never something to tick off.
    */
   assignments: string[];
   // --- Runtime-only (not persisted; computed on read) ---
@@ -52,8 +50,6 @@ export const ASSIGNMENT_COUNT = 2;
 export interface Globals {
   /** Template for the image prompt. Interpolates card variables. */
   imagePrompt: string;
-  /** Template for the Anthropic tagline generation prompt. */
-  taglinePrompt: string;
   /** Template for the Anthropic assignment generation prompt. */
   assignmentPrompt: string;
   /** Anthropic model id for text generation. */
@@ -67,4 +63,4 @@ export interface StudioState {
   globals: Globals;
 }
 
-export type GenerateKind = "tagline" | "assignment" | "image";
+export type GenerateKind = "assignment" | "image";

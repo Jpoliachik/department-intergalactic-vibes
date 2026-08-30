@@ -61,14 +61,13 @@ export function CardEditor({
 
 const FIELDS: (keyof StoredCard)[] = [
   "name",
+  "fieldReading",
   "designation",
   "code",
   "function",
   "object",
-  "fieldReading",
   "bio",
   "sceneStory",
-  "tagline",
   "assignments",
 ];
 
@@ -108,7 +107,6 @@ function EditorBody({
 
   // Sync generated outputs back into the draft when regeneration updates them,
   // without clobbering in-progress edits to the source fields.
-  React.useEffect(() => setDraft((d) => ({ ...d, tagline: card.tagline })), [card.tagline]);
   React.useEffect(() => setDraft((d) => ({ ...d, assignments: card.assignments })), [card.assignments]);
 
   const dirty = FIELDS.some((f) => !same(draft[f], card[f]));
@@ -165,18 +163,12 @@ function EditorBody({
         <section className="space-y-3">
           <SectionTitle>On the card</SectionTitle>
 
-          <Field label="Tagline">
-            <div className="flex gap-2">
-              <Input
-                value={draft.tagline}
-                onChange={(e) => set("tagline", e.target.value)}
-                placeholder="Short, mystical tagline…"
-              />
-              <RegenButton
-                busy={!!busy.tagline}
-                onClick={() => saveThenGenerate("tagline")}
-              />
-            </div>
+          <Field label="Field reading">
+            <Input
+              value={draft.fieldReading}
+              onChange={(e) => set("fieldReading", e.target.value)}
+              placeholder="The reading issued with the draw…"
+            />
           </Field>
 
           <Field label="Wisdom (2–3 lines)">

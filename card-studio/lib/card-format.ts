@@ -22,12 +22,10 @@ export const ART_HEIGHT_FRACTION = CARD_WIDTH_MM / CARD_HEIGHT_MM;
 export const SAFE_MARGIN = "7cqw";
 
 /**
- * The wisdom passage under the tagline: two short lines, each set on its own
- * line so the line breaks are authored rather than left to wrapping. The
- * character limit is what one line holds at the current type size, so it is a
- * hard limit, not a style preference — enforced when generating and surfaced
- * as a counter in the editor.
+ * The two standing assignments printed on the card. Short imperatives, one
+ * printed line each — the limit is what one line holds at the current type
+ * size, enforced when generating and surfaced as a counter in the editor.
  */
-export const MAX_ASSIGNMENT_CHARS = 42;
+export const MAX_ASSIGNMENT_CHARS = 34;
 export const ASSIGNMENT_MIN_LINES = 2;
 export const ASSIGNMENT_MAX_LINES = 2;

@@ -19,7 +19,6 @@ import { GlobalsEditor } from "@/components/globals-editor";
 type BusyMap = Partial<Record<GenerateKind, boolean>>;
 const KIND_LABEL: Record<GenerateKind, string> = {
   image: "Image",
-  tagline: "Tagline",
   assignment: "Assignment",
 };
 

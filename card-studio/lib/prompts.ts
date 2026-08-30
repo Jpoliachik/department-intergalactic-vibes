@@ -14,7 +14,6 @@ export function render(template: string, card: Card): string {
     fieldReading: card.fieldReading,
     bio: card.bio,
     sceneStory: card.sceneStory,
-    tagline: card.tagline,
     assignment: (card.assignments ?? []).join(" "),
   };
   return template.replace(/\{\{\s*(\w+)\s*\}\}/g, (match, key: string) => {
