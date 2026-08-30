@@ -23,6 +23,17 @@ import { ART_HEIGHT_FRACTION, SAFE_MARGIN } from "@/lib/card-format";
  * query on the root, so the face is resolution-independent: the grid preview
  * and a 63x88mm print are the same design, not two different ones.
  */
+/**
+ * The plate is not flat black: a warm spill from the art fades down through a
+ * deep cosmic blue into black, so the panel has depth and separates from the
+ * image above instead of merging with it.
+ */
+const PLATE_GRADIENT = [
+  "radial-gradient(110% 70% at 50% 0%, rgba(232,169,41,0.16) 0%, rgba(232,169,41,0) 62%)",
+  "radial-gradient(90% 60% at 50% 0%, rgba(51,88,196,0.22) 0%, rgba(51,88,196,0) 70%)",
+  "linear-gradient(180deg, #171a3a 0%, #0b0b18 52%, #000000 100%)",
+].join(", ");
+
 export function CardFace({ card, className }: { card: Card; className?: string }) {
   const src = imageUrl(card);
   const assignments = card.assignments ?? [];
@@ -51,7 +62,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
 
         {/* Name plate — flat black, top left, inside the safe margin */}
         <div
-          className="absolute max-w-[60cqw] rounded-[2cqw] bg-deck-black px-[2.5cqw] py-[1.4cqw]"
+          className="absolute max-w-[60cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-black px-[2.5cqw] py-[1.2cqw]"
           style={{ left: SAFE_MARGIN, top: SAFE_MARGIN }}
         >
           <div className="truncate text-[4.4cqw] font-semibold uppercase leading-tight tracking-[0.16em] text-deck-cream">
@@ -66,16 +77,23 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         <Seal style={{ right: SAFE_MARGIN, top: SAFE_MARGIN }} />
       </div>
 
-      {/* Text plate — flat black, content vertically centred */}
+      {/* Text plate — thick double rule, then a cosmic gradient rather than flat
+          black, so the panel reads as its own field against the art above. */}
       <div
-        className="flex flex-1 flex-col justify-center gap-[2cqw] border-t border-deck-mustard/25 bg-deck-black"
+        className="relative flex flex-1 flex-col justify-center gap-[2cqw] border-t-[0.9cqw] border-deck-mustard"
         style={{
           paddingLeft: SAFE_MARGIN,
           paddingRight: SAFE_MARGIN,
           paddingBottom: SAFE_MARGIN,
           paddingTop: SAFE_MARGIN,
+          backgroundImage: PLATE_GRADIENT,
         }}
       >
+        {/* Thin brick line under the mustard rule — the second half of the
+            double rule, and a diamond straddling it like a tarot divider. */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[0.25cqw] bg-deck-brick" />
+        <div className="pointer-events-none absolute left-1/2 top-0 h-[3cqw] w-[3cqw] -translate-x-1/2 -translate-y-1/2 rotate-45 border-[0.4cqw] border-deck-black bg-deck-mustard" />
+
         {card.tagline ? (
           <div className="text-center text-[3.8cqw] italic leading-snug text-deck-mustard">
             “{card.tagline}”
@@ -123,7 +141,7 @@ function Seal({ style }: { style?: React.CSSProperties }) {
   return (
     <div
       style={style}
-      className="absolute flex h-[11cqw] w-[11cqw] items-center justify-center rounded-full bg-deck-black"
+      className="absolute flex h-[11cqw] w-[11cqw] items-center justify-center rounded-full border-[0.45cqw] border-deck-mustard bg-deck-black"
     >
       <span className="text-[3cqw] font-semibold tracking-[0.08em] text-deck-mustard">
         VC
