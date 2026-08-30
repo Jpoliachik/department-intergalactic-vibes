@@ -81,7 +81,7 @@ const CARDS = [
     function: "Beginner's Mind",
     object: "Empty cup",
     fieldReading: "An empty cup holds the most.",
-    bio: "The newest soul on the Grid, and the clearest channel because of it — arriving empty-handed, unburdened by what's supposed to be impossible. Beginner's mind made flesh.",
+    bio: "Asks the question everyone else is too embarrassed to ask, and gets the answer for all of them. Hasn't yet learned what is supposed to be impossible, and is in no hurry to.",
     sceneStory:
       "At the crumbling edge of a floating clifftop, a figure steps out into open air with both arms flung wide and their head tipped back. From a rip in the sky above, a waterfall of stars pours straight down over them, catching them mid-stride.",
     assignments: [
@@ -98,7 +98,7 @@ const CARDS = [
     function: "Stabilization",
     object: "Anchor",
     fieldReading: "Hold your ground, and others are free to lose theirs.",
-    bio: "The steady weight the night orbits — calm, unhurried, fully present. Where they stand, other people find their feet.",
+    bio: "Gives up their own abandon so that other people can have theirs. Absorbs whatever the night throws without joining it, and asks nobody to notice.",
     sceneStory:
       "A wide river of liquid light pours across the frame, sweeping loose stars and tumbling figures along in its current. Braced dead-center against the flow with boots planted and knees bent, a figure holds their ground while the rushing light splits into two smooth curves around them.",
     assignments: [
@@ -132,7 +132,7 @@ const CARDS = [
     function: "Linkage",
     object: "Splice",
     fieldReading: "Every stranger is a line waiting to be drawn.",
-    bio: "A closer of gaps, forever splicing new lines between strangers who were always meant to meet.",
+    bio: "Remembers what people said and notices who needs to hear it. Puts two strangers together and then steps out of the middle, which is the part most people forget.",
     sceneStory:
       "On a dark plain between two far hills, each crowned by a single lonely star, a figure holds a glowing thread pulled down from each one. They twist the two ends together and the join flares white, a taut line of light snapping into place between the two stars.",
     assignments: [
@@ -149,7 +149,7 @@ const CARDS = [
     function: "Radiance",
     object: "Lantern",
     fieldReading: "Don't chase the signal. Become it.",
-    bio: "A fixed point of warm light in the dark — one who doesn't chase the crowd but becomes the place it gathers.",
+    bio: "Stays put when every instinct says go looking. Being findable is the whole discipline, and it means being willing to stand lit and alone for a while.",
     sceneStory:
       "On a spit of black rock ringed by churning, silver-capped waves, a figure stands with feet apart and chest open, light pouring out of them in a wide amber road across the dark water. Far out along that road, a small three-masted ship with torn sails swings its bow around to come in.",
     assignments: [
@@ -166,7 +166,7 @@ const CARDS = [
     function: "Reception",
     object: "Tuning fork",
     fieldReading: "Listen all the way to one, and you've heard the night.",
-    bio: "A deep listener who gives one soul their whole frequency, and hears the quiet signal everyone else danced past.",
+    bio: "Gives one person the whole of their attention and lets the rest of the night go by unwatched. Missing things is the price, and they pay it without counting.",
     sceneStory:
       "On the black shore of a perfectly still lake, a figure crouches and touches one fingertip to the water. Out on the mirrored surface a single reflected star begins to ring and brighten, answering the touch with a slow spreading circle of light.",
     assignments: [
@@ -183,7 +183,7 @@ const CARDS = [
     function: "Maintenance",
     object: "Water bottle",
     fieldReading: "Look after the people, and the night looks after itself.",
-    bio: "The tender of dimming lights — the one who reaches the fading before they think to ask.",
+    bio: "Notices before anyone asks, because the ones who need it most never do. Handles it quietly, so no one is made a patient in front of their friends.",
     sceneStory:
       "In a wide dark meadow where dozens of fallen stars lie half-buried and barely glowing in the grass, a figure kneels and lifts one cold, flickering star into cupped hands. They bend close and breathe on it until it flares awake in their palms — bright enough now to show three more dim ones waiting nearby.",
     assignments: [
@@ -200,7 +200,7 @@ const CARDS = [
     function: "Survey",
     object: "Compass",
     fieldReading: "Follow the pull, not the program.",
-    bio: "A roamer who trusts their feet over the map, drawn always to the pull off the edge of the program.",
+    bio: "Treats being lost as a method rather than a mistake. Goes where the schedule isn't, alone and unbothered, and comes back carrying what no one else found.",
     sceneStory:
       "Crossing a desert of violet dunes under a huge low moon, a figure steps off a clearly marked path and strikes out into open sand. Their footprints trail behind them away from the path, aimed at a single pulsing light on the far horizon.",
     assignments: [
@@ -217,7 +217,7 @@ const CARDS = [
     function: "Buoyancy",
     object: "Balloon",
     fieldReading: "Laughter keeps the night afloat.",
-    bio: "Keeper of lightness — the one who breaks the tension and keeps the whole night afloat on laughter.",
+    bio: "Has felt the weight, which is exactly why the lightness works. Knows the moment a heavy thing needs turning, and the moments it must be left alone.",
     sceneStory:
       "Head thrown back mid-laugh, a harlequin lifts off the floor of a deep, dark canyon, carried upward by nothing at all. They tumble head-over-heels into a field of stars, laughter streaming behind them like the tail of a comet.",
     assignments: [
@@ -234,7 +234,7 @@ const CARDS = [
     function: "Cadence",
     object: "Metronome",
     fieldReading: "Find the beat beneath the beat.",
-    bio: "Holder of the rhythm beneath the rhythm — the steady beat a long night organizes itself around.",
+    bio: "Never the loudest energy anywhere — just the one still going at the same rate at hour six. Everyone else paces against it without noticing they do.",
     sceneStory:
       "Sitting cross-legged at the exact center of a vast, glass-still black lake, a figure brings one open hand down onto the water. A single ring of light springs from the strike and races outward across the whole mirrored surface toward the horizon.",
     assignments: [
@@ -251,7 +251,7 @@ const CARDS = [
     function: "Divination",
     object: "Crystal ball",
     fieldReading: "Read the air, not the clock.",
-    bio: "A reader of what's coming before it arrives — part meteorologist, part mystic, wholly trusting the thing they can't explain.",
+    bio: "Feels the shift before there is anything to point at, and says so anyway. The nerve isn't in the knowing; it's in speaking early enough to be doubted.",
     sceneStory:
       "On a bare hilltop under a clear and perfectly calm night sky, a hooded figure stands with their face lifted and their eyes shut. In the small patch of sky directly above them a violent storm is already breaking — lightning, black cloud — while the night for miles around stays entirely still.",
     assignments: [
@@ -268,7 +268,7 @@ const CARDS = [
     function: "Provision",
     object: "Kettle",
     fieldReading: "Keep the kettle on. They all come back.",
-    bio: "Keeper of the hearth — the warm center every orbit returns to, with something good always waiting.",
+    bio: "Misses the thing everyone else went to see, on purpose. Keeps a place where coming back costs nothing — no questions, no ledger, no account of where you went.",
     sceneStory:
       "In the middle of an endless dark plain, a figure crouches low and feeds a small campfire back up into a blaze. Theirs is the only spot of warmth for miles, and a single lit path winds out of the darkness straight to the fire.",
     assignments: [
@@ -285,7 +285,7 @@ const CARDS = [
     function: "Record",
     object: "Film camera",
     fieldReading: "What you carry home is the only copy.",
-    bio: "The one who remembers the night so everyone else can vanish into it — keeper of the only copy.",
+    bio: "Stands a half-step outside so that everyone else can disappear into it. Gives the night back to them later, when they need to know it was real.",
     sceneStory:
       "At the rim of a canyon overlooking a valley flooded with glowing light, a figure raises both hands and draws them slowly upward. The whole scene below lifts and spools into a long ribbon of light that winds up and coils around them.",
     assignments: [
@@ -302,7 +302,7 @@ const CARDS = [
     function: "Vigil",
     object: "Hourglass",
     fieldReading: "The dark doesn't last. You do.",
-    bio: "The one who holds the watch to dawn, awake to see the dark turn while the last circle sleeps.",
+    bio: "Stays past the point where it stops being fun. Not brave, exactly — just unwilling to leave while anyone is still out there in the cold.",
     sceneStory:
       "Alone on a high ridge, a figure stands facing east with grains of starlight falling steadily through the air all around them. Along the black horizon a thin line has just cracked open into the first blue of dawn.",
     assignments: [
@@ -319,7 +319,7 @@ const CARDS = [
     function: "Glamour",
     object: "Fairy lights",
     fieldReading: "Beauty is a frequency. Broadcast it.",
-    bio: "A weaver of beauty who turns bare ground enchanted — to whom beauty is not decoration but the work itself.",
+    bio: "Does the small unasked work and never signs it. Knows people turn gentler in a place that has obviously been cared for, and that this is not decoration.",
     sceneStory:
       "Crossing a cracked grey wasteland, a figure walks steadily with one hand trailing low at their side. In the line behind every footstep, glowing flowers are bursting up out of the dead ground and opening.",
     assignments: [
@@ -336,7 +336,7 @@ const CARDS = [
     function: "Induction",
     object: "Key",
     fieldReading: "Hold the door open behind you.",
-    bio: "The one who holds the door open behind them — welcoming the hesitant in as if they'd always belonged.",
+    bio: "Remembers being the one outside, and never stopped watching the edge for whoever is there now. Not seniority — memory.",
     sceneStory:
       "In the middle of an empty dark field stands a single freestanding door, warm light pouring out around its edges. A figure leans into it holding it wide open, one arm stretched out, waving a hesitant newcomer in from the dark.",
     assignments: [
