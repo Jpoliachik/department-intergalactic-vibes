@@ -19,11 +19,13 @@ const IMAGE_TEMPLATE = `70s cosmic revival — LARGE flat vector shapes, thick b
 Render exactly this moment as a single, decisive image:
 {{sceneStory}}
 
-The figure is {{name}} — {{bio}} They are the clear focal subject. 
+The figure is {{name}} — {{bio}} They are the clear focal subject.
 
-The image is carried by what the figure is DOING and by the world around them — not by an object. Do not build the frame around a held prop, and do not present a glowing item to camera as the hero of the shot. Anything in their hands stays small, incidental and unremarkable. The action, the light and the place tell it.
+The image is carried by what the figure is DOING and by the world around them, not by an object. Anything in their hands stays small, incidental and unremarkable. The action, the light and the place tell it.
 
-Fill the entire square frame edge to edge — full bleed. No border, no frame, no outer keyline, no matte, no white margin, no rounded corners, no card frame, no vignette of empty background. No text, no lettering, no title, no caption, no signature, no watermark. No card borders. Just illustration.`;
+Composition: a CLOSE CROP of a much larger scene. The camera is pushed in tight and the scene overflows the square on every side. REQUIRED: at least one major shape is sliced clean through by each of the four edges — something is cut by the top, something by the bottom, something by the left, something by the right. Nothing curves back on itself to sit neatly inside; nothing is centred within a surrounding field of empty backdrop. Paint continues to the outermost pixel on all four sides, the way a photograph taken too close does.
+
+Illustration only. No lettering or captions anywhere.`;
 
 const ASSIGNMENT_TEMPLATE = `You are a field officer of Vibe Corp, a fictional but sincere cosmic outfit that tends the Resonance Grid. Crew hand these cards to festival-goers in the field. Tone: warm, plain-spoken, quietly official — never winking, never mystical here.
 
