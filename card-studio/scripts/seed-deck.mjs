@@ -115,7 +115,7 @@ const CARDS = [
     function: "Initiation",
     object: "Lit match",
     fieldReading: "Go before you're ready. Readiness follows.",
-    bio: "The one who moves first — a small, brave ignition in the dark. Nothing happens until they begin.",
+    bio: "Not fearless — simply faster than fear. They go first so that no one else has to, then vanish into the crowd they started. A match, never the bonfire.",
     sceneStory:
       "A figure steps out onto a bridge of dark, unlit stones suspended over a black gulf, one foot already committed to the next stone ahead. Every stone behind them burns gold where they have trodden, and the whole span in front stays cold and unlit, waiting on the step they have not taken yet.",
     assignments: [
