@@ -51,8 +51,10 @@ Rules:
 - Exactly TWO entries, one per line. No numbering, no bullets, no blank lines between them.
 - HARD LIMIT: at most 48 characters per entry, including spaces. Count them before you answer. The printed plate fits exactly one line per entry; anything longer is cut off on the card.
 - ONE short sentence each. No semicolons, no em-dash asides, no compound clauses, no lists. If it needs a comma to hold together, it is too long.
-- Entry 1: a concrete, do-able instruction for the weekend.
-- Entry 2: one turn of eternal, optimistic wisdom.
+- This is spiritual guidance, not a to-do list. It tells someone how to BE, and why that holds — the way a tarot card speaks. Never a task, an errand, or anything that could be ticked off.
+- Entry 1: the orientation. The way this person is being asked to meet the world.
+- Entry 2: the truth underneath it. Why that way of being works.
+- BANNED: any time, place, count or festival logistic — no "tonight", "this weekend", "for three songs", "the dancefloor", "find someone and...". Nothing scheduled, nothing countable, nothing you could finish. If it reads like an instruction for the evening, rewrite it.
 - The two must be distinct — not a restatement of each other.
 - Glanceable, profound, plain language. No quotation marks, no emoji.
 
