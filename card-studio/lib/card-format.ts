@@ -22,7 +22,7 @@ export const ART_HEIGHT_FRACTION = CARD_WIDTH_MM / CARD_HEIGHT_MM;
 export const SAFE_MARGIN = "7cqw";
 
 /**
- * The wisdom passage under the tagline: 2-3 short lines, each set on its own
+ * The wisdom passage under the tagline: two short lines, each set on its own
  * line so the line breaks are authored rather than left to wrapping. The
  * character limit is what one line holds at the current type size, so it is a
  * hard limit, not a style preference — enforced when generating and surfaced
@@ -30,4 +30,4 @@ export const SAFE_MARGIN = "7cqw";
  */
 export const MAX_ASSIGNMENT_CHARS = 42;
 export const ASSIGNMENT_MIN_LINES = 2;
-export const ASSIGNMENT_MAX_LINES = 3;
+export const ASSIGNMENT_MAX_LINES = 2;

@@ -49,8 +49,8 @@ const ASSIGNMENT_TEMPLATE = `You are the copy desk of Vibe Corp, a fictional but
 Write the passage of wisdom printed under the tagline on this card. It is the still centre of the card — what the person carries away, set in a serif like an inscription.
 
 Rules:
-- 2 or 3 lines, one per line of output. No numbering, no bullets, no blank lines between them.
-- The lines form ONE passage that builds. Not separate aphorisms, not a restatement of the same thought twice. Line by line it should turn, deepen, or land.
+- EXACTLY 2 lines, one per line of output. Not three. No numbering, no bullets, no blank lines between them.
+- The two lines form ONE passage: the first opens it, the second turns and lands it. Not two separate aphorisms, and not the same thought said twice.
 - HARD LIMIT: at most 42 characters per line, including spaces. Count them before you answer. Each line is set on its own printed line; anything longer is cut off.
 - Spiritual guidance, not a to-do list. It tells someone how to BE, and why that holds — the way a tarot card speaks. Never a task, an errand, or anything that could be ticked off.
 - BANNED: any time, place, count or festival logistic — no "tonight", "this weekend", "for three songs", "the dancefloor". Nothing scheduled, nothing countable, nothing you could finish.

@@ -88,7 +88,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           paddingBottom: SAFE_MARGIN,
           // The plate's top edge is the internal divider, not a card edge, so
           // the print safe margin does not apply here.
-          paddingTop: "3.5cqw",
+          paddingTop: "5.5cqw",
           backgroundImage: PLATE_GRADIENT,
         }}
       >
