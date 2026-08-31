@@ -1,0 +1,19 @@
+{
+  "slug": "the-patchwork",
+  "order": 12,
+  "name": "The Patchwork",
+  "designation": "Mending Technician",
+  "code": "MD-12",
+  "function": "Mending",
+  "object": "Darning needle",
+  "tagline": "The mend is the best part",
+  "wisdomRoot": "Wabi-sabi — the beauty of the imperfect, impermanent and incomplete; kintsugi fills the break with gold instead of hiding it.",
+  "bio": "Fixes what tore and leaves the seam showing. Likes a thing better once it has been broken.",
+  "sceneStory": "A figure kneels on a wide plain of cracked dark ground and presses one palm flat to a fault line, and the crack lights gold under their hand and runs off glowing all the way to the horizon. Every other fracture across the plain is already filled with the same molten seam, so the whole broken surface reads as a map made of light.",
+  "assignments": [
+    "Praise the flaw out loud.",
+    "Let one thing stay unfinished."
+  ],
+  "imageScale": 1,
+  "imageOffsetY": 0
+}
