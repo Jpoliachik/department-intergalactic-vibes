@@ -6,11 +6,14 @@
   "code": "FP-07",
   "function": "Survey",
   "object": "Compass",
-  "fieldReading": "Follow the pull, not the program.",
-  "bio": "The one who wanders off and comes back with a story. Follows whatever pulls them past the marked path, and finds what nobody else did.",
+  "tagline": "No fixed plans. No missed moment.",
+  "wisdomRoot": "Tao Te Ching 27 — a good traveler has no fixed plans and is not intent on arriving. Solvitur ambulando: it is solved by walking.",
+  "bio": "The one who wanders off and comes back with a story. Follows the pull past the marked path.",
   "sceneStory": "Crossing a desert of violet dunes under a huge low moon, a figure steps off a clearly marked path and strikes out into open sand. Their footprints trail behind them away from the path, aimed at a single pulsing light on the far horizon.",
   "assignments": [
-    "Invite whoever's nearby along",
-    "Wander off before you're sure"
-  ]
+    "Get lost. Intentionally.",
+    "Go follow that thing over there..."
+  ],
+  "imageScale": 1,
+  "imageOffsetY": 0
 }

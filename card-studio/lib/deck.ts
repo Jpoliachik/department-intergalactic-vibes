@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { ASSIGNMENT_COUNT } from "./types";
+import { imageOffsetOf, imageScaleOf } from "./card-format";
 import type { Card, Globals, StoredCard, StudioState } from "./types";
 
 // The deck data directory (JSON + PNGs), committed to git.
@@ -51,18 +52,27 @@ function splitLegacyAssignment(text: string): string[] {
 
 /**
  * Tolerate older card.json shapes: `assignment` before it became `assignments`,
- * the per-card `imagePrompt` that the global template replaced, and `tagline`
- * from before the field reading took its place. All dropped on the next write.
+ * the per-card `imagePrompt` that the global template replaced, and
+ * `fieldReading` from before it was renamed to `tagline`. Migrated or dropped
+ * on the next write.
  */
 function normalize(
-  stored: StoredCard & { assignment?: string; imagePrompt?: string; tagline?: string },
+  stored: StoredCard & { assignment?: string; imagePrompt?: string; fieldReading?: string },
 ): StoredCard {
-  const { assignment, imagePrompt, tagline, ...rest } = stored;
+  const { assignment, imagePrompt, fieldReading, ...rest } = stored;
   let assignments = Array.isArray(rest.assignments) ? rest.assignments : [];
   if (assignments.length === 0 && typeof assignment === "string" && assignment.trim()) {
     assignments = splitLegacyAssignment(assignment);
   }
-  return { ...rest, assignments };
+  return {
+    ...rest,
+    tagline: rest.tagline ?? fieldReading ?? "",
+    assignments,
+    // Framing is clamped on the way in, so a hand-edited card.json can't push
+    // the art somewhere the studio's controls could never bring it back from.
+    imageScale: imageScaleOf(rest.imageScale),
+    imageOffsetY: imageOffsetOf(rest.imageOffsetY),
+  };
 }
 
 async function hydrate(stored: StoredCard): Promise<Card> {

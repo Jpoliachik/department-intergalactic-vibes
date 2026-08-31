@@ -6,11 +6,14 @@
   "code": "IS-02",
   "function": "Initiation",
   "object": "Lit match",
-  "fieldReading": "Go before you're ready. Readiness follows.",
-  "bio": "The one who always goes first. Moves before the fear catches up, and the moment they do, everyone else finds they were ready too.",
+  "tagline": "The path appears underfoot",
+  "wisdomRoot": "Tao Te Ching 64 — a journey of a thousand miles begins beneath one's feet. Machado: the way is made by walking.",
+  "bio": "The one who goes first. The moment they move, everyone else finds they were ready too.",
   "sceneStory": "A figure steps out onto a bridge of dark, unlit stones suspended over a black gulf, one foot already committed to the next stone ahead. Every stone behind them burns gold where they have trodden, and the whole span in front stays cold and unlit, waiting on the step they have not taken yet.",
   "assignments": [
-    "Go first so someone else can",
-    "Trust the flinch and move anyway"
-  ]
+    "Send the signal. Then let it go",
+    "Start before you're ready"
+  ],
+  "imageScale": 1,
+  "imageOffsetY": 0
 }

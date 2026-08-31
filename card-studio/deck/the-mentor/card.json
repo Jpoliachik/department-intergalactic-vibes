@@ -6,11 +6,14 @@
   "code": "IN-15",
   "function": "Induction",
   "object": "Key",
-  "fieldReading": "Hold the door open behind you.",
-  "bio": "The one who brings new people in. Watches the edge of the group for whoever is standing alone, and waves them over.",
+  "tagline": "Someone else once showed you the way",
+  "wisdomRoot": "The bodhisattva vow — having crossed, you wait at the threshold for the next one. Lift as you climb.",
+  "bio": "The one who brings new people in. Spots whoever's standing at the edge and waves them over.",
   "sceneStory": "In the middle of an empty dark field stands a single freestanding door, warm light pouring out around its edges. A figure leans into it holding it wide open, one arm stretched out, waving a hesitant newcomer in from the dark.",
   "assignments": [
-    "Widen the circle by one",
-    "Remember you were new once"
-  ]
+    "Hold the door you just came through",
+    "Lead others down the divine path"
+  ],
+  "imageScale": 1,
+  "imageOffsetY": 0
 }

@@ -1,0 +1,19 @@
+{
+  "slug": "the-deep-diver",
+  "order": 13,
+  "name": "The Deep Diver",
+  "designation": "Immersion Specialist",
+  "code": "IM-13",
+  "function": "Immersion",
+  "object": "Diving bell",
+  "tagline": "Nothing deep happens at the surface",
+  "wisdomRoot": "Bhakti — the path of devotion: surrender as a way of knowing. You don't study the current; you give yourself to it.",
+  "bio": "The one who goes all the way in. When the music takes them, they let it.",
+  "sceneStory": "From the surface of a dark, starlit sea, a figure dives headfirst into water that glows brighter the deeper it goes. Far below, a vast slow shape of light turns like a sunken galaxy, and the diver swims straight for it.",
+  "assignments": [
+    "Feel what lives below the surface",
+    "Close your eyes. Get deep."
+  ],
+  "imageScale": 1,
+  "imageOffsetY": 0
+}

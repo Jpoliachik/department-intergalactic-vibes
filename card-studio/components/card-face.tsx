@@ -5,16 +5,24 @@ import { Star } from "@/components/star";
 import type { Card } from "@/lib/types";
 import { imageUrl } from "@/lib/client";
 import { cn } from "@/lib/utils";
-import { ART_HEIGHT_FRACTION, SAFE_MARGIN } from "@/lib/card-format";
+import {
+  ART_HEIGHT_FRACTION,
+  PLATE_PAD_BOTTOM,
+  PLATE_PAD_TOP,
+  SAFE_MARGIN,
+  TITLE_INSET_TOP,
+  imageOffsetOf,
+  imageScaleOf,
+} from "@/lib/card-format";
 
 /**
  * The composited card face: full-bleed art across the top, with the name plate
  * and code bubble floating over it, and a text plate below.
  *
- * ART SLOT — the art band is exactly as tall as the card is wide, so it is a
- * square and matches the 1:1 aspect ratio requested from the image model. Both
- * numbers come from lib/card-format.ts; if they ever disagree the art gets
- * cropped and the framing drifts.
+ * ART SLOT — the art is generated square but shown in a band slightly shorter
+ * than a square, so the text plate has room. object-cover trims the difference
+ * evenly top and bottom; each card's own imageScale / imageOffsetY decides what
+ * survives the trim. Both numbers come from lib/card-format.ts.
  *
  * PRINT MARGIN — the rule for this deck: art may bleed to the trim edge, but no
  * readable content ever may. Every text element, plate and mark sits inside a
@@ -24,21 +32,13 @@ import { ART_HEIGHT_FRACTION, SAFE_MARGIN } from "@/lib/card-format";
  * query on the root, so the face is resolution-independent: the grid preview
  * and a 63x88mm print are the same design, not two different ones.
  */
-/**
- * The plate is not flat black: a warm spill from the art fades down through a
- * deep cosmic purple into near-black, so the panel has depth and separates from
- * the image above instead of merging with it. The purple is the vibrant end of
- * the palette — it should read as lit, not as a grey wash.
- */
-const PLATE_GRADIENT = [
-  "radial-gradient(110% 70% at 50% 0%, rgba(232,169,41,0.22) 0%, rgba(232,169,41,0) 62%)",
-  "radial-gradient(95% 65% at 50% 0%, rgba(138,60,215,0.46) 0%, rgba(138,60,215,0) 76%)",
-  "linear-gradient(180deg, #341a66 0%, #1d0f3d 48%, #0a0514 100%)",
-].join(", ");
-
 export function CardFace({ card, className }: { card: Card; className?: string }) {
   const src = imageUrl(card);
   const assignments = card.assignments ?? [];
+  // Per-card framing correction. Transforms read right-to-left: the picture is
+  // zoomed about its centre first, then nudged by a percentage of the band's
+  // own height — so the offset means the same thing at any zoom.
+  const artTransform = `translateY(${imageOffsetOf(card.imageOffsetY)}%) scale(${imageScaleOf(card.imageScale)})`;
 
   return (
     <div
@@ -54,7 +54,12 @@ export function CardFace({ card, className }: { card: Card; className?: string }
       >
         {src ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={src} alt={card.name} className="h-full w-full object-cover" />
+          <img
+            src={src}
+            alt={card.name}
+            className="h-full w-full object-cover"
+            style={{ transform: artTransform }}
+          />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-[2cqw] bg-deck-ink text-deck-teal">
             <ImageOff className="h-[10cqw] w-[10cqw]" />
@@ -65,7 +70,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         {/* Name plate — dark plum, top left, inside the safe margin */}
         <div
           className="absolute max-w-[66cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-plum px-[2.5cqw] py-[1.2cqw]"
-          style={{ left: SAFE_MARGIN, top: SAFE_MARGIN }}
+          style={{ left: SAFE_MARGIN, top: TITLE_INSET_TOP }}
         >
           {/* The name is never clipped — long names step down a size rather
               than truncate, and wrap before they reach the code bubble. */}
@@ -81,60 +86,88 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         </div>
 
         {/* Code bubble — top right, matching the name plate */}
-        <CodeBubble code={card.code} style={{ right: SAFE_MARGIN, top: SAFE_MARGIN }} />
+        <CodeBubble code={card.code} style={{ right: SAFE_MARGIN, top: TITLE_INSET_TOP }} />
       </div>
 
-      {/* Text plate — a hairline rule matching the name plate border, then a
-          cosmic gradient rather than flat black, so the panel reads as its own
-          field against the art above. */}
+      {/* Text plate — a hairline rule matching the name plate border, over a
+          flat deep purple. The plate is the same plum as the name plate and
+          code bubble, so the whole card reads as one issued system; internal
+          hairline rules section the reading from the assignments, which is
+          what makes the panel feel official rather than atmospheric. */}
       <div
-        className="relative flex flex-1 flex-col border-t-[0.45cqw] border-deck-mustard"
+        className="relative flex flex-1 flex-col border-t-[0.45cqw] border-deck-mustard bg-deck-plum"
         style={{
           paddingLeft: SAFE_MARGIN,
           paddingRight: SAFE_MARGIN,
-          paddingBottom: SAFE_MARGIN,
-          // The plate's top edge is the internal divider, not a card edge, so
-          // the print safe margin does not apply here.
-          paddingTop: "5.5cqw",
-          backgroundImage: PLATE_GRADIENT,
+          // Wider than the print margin at the bottom, so the last assignment
+          // ends with air under it rather than on the margin line. The top edge
+          // is the internal divider, not a card edge, so the print safe margin
+          // does not apply there.
+          paddingBottom: PLATE_PAD_BOTTOM,
+          paddingTop: PLATE_PAD_TOP,
         }}
       >
         <Ornament />
 
-        {/* Field reading — the reading issued with the draw. */}
-        <p className="shrink-0 text-center font-card-serif text-[3.8cqw] leading-[1.3] text-deck-mustard">
-          {card.fieldReading}
+        {/* Tagline — the character's truth in a sentence. */}
+        <p
+          className="shrink-0 text-center font-card-serif leading-[1.3] text-deck-mustard"
+          style={{ fontSize: `${readingSize(card.tagline)}cqw` }}
+        >
+          {card.tagline}
         </p>
 
-        {/* Standing assignments, each marked with the deck's star. */}
-        <div className="flex flex-1 flex-col justify-center gap-[1.6cqw]">
-          <div className="font-mono text-[2.8cqw] uppercase tracking-[0.42em] text-deck-purple">
-            Assignment
+        {/* Section rule — the ASSIGNMENT label set into a hairline that runs
+            the full plate width, so the label reads as a ruled-off section
+            heading rather than a floating caption. The hairlines are dimmer
+            than the top rule: internal structure, not the card's frame. */}
+        {/* Held off the reading — the two are different voices and need air
+            between them, not just a line break. The plate is tight: this
+            offset, the padding and the line spacing together leave well under
+            a line of slack, which is why a reading that wrapped to two lines
+            would push the last assignment into the bottom margin. readingSize
+            below is what stops that happening. */}
+        <div className="mt-[4cqw] flex flex-1 flex-col gap-[1.4cqw]">
+          <div className="flex items-center gap-[2.2cqw]">
+            <div className="h-[0.3cqw] flex-1 bg-deck-mustard/40" />
+            <div className="font-mono text-[2.8cqw] uppercase leading-none tracking-[0.42em] text-deck-purple">
+              Assignments
+            </div>
+            <div className="h-[0.3cqw] flex-1 bg-deck-mustard/40" />
           </div>
           {assignments.length > 0 ? (
-            <ul className="space-y-[1.4cqw]">
+            <ul className="flex flex-1 flex-col justify-center space-y-[0.4cqw]">
               {assignments.map((entry, i) => (
-                <li key={i} className="flex items-baseline gap-[2.2cqw]">
-                  {/* Nudged down off the baseline so the star centres on the
-                      first line of text rather than sitting on it. */}
-                  <Star
-                    points={7}
-                    className="shrink-0 translate-y-[0.9cqw] text-deck-brick"
-                    style={{ width: "4.4cqw", height: "4.4cqw" }}
-                  />
-                  <span className="text-[3.4cqw] uppercase leading-snug tracking-[0.06em] text-deck-cream">
-                    {entry}
-                  </span>
+                // Unbulleted and left-aligned — the lines carry themselves,
+                // set in the card serif, uppercase and letterspaced: the same
+                // voice as the field reading above, pitched as an inscription
+                // rather than a UI label. The size is what lets a full-length
+                // line (MAX_ASSIGNMENT_CHARS) hold one line.
+                <li
+                  key={i}
+                  className="font-card-serif text-[3.5cqw] font-semibold uppercase leading-snug tracking-[0.09em] text-deck-cream"
+                >
+                  {entry}
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-[3.4cqw] uppercase tracking-[0.06em] text-deck-teal/60">— no assignment yet —</p>
+            <p className="font-card-serif text-[3.5cqw] uppercase tracking-[0.09em] text-deck-teal/60">— no assignment yet —</p>
           )}
         </div>
       </div>
     </div>
   );
+}
+
+/**
+ * The field reading must hold one line: the plate has no room for a second, and
+ * a wrap would push the last assignment inside the bottom print margin. A
+ * reading longer than the deck has used so far steps down rather than wrapping.
+ * ~54 characters fit at 4.2cqw, ~60 at 3.8cqw.
+ */
+function readingSize(reading: string) {
+  return reading.length > 52 ? 3.8 : 4.2;
 }
 
 /**

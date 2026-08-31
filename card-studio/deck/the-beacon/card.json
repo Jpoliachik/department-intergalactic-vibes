@@ -6,11 +6,14 @@
   "code": "SL-04",
   "function": "Radiance",
   "object": "Lantern",
-  "fieldReading": "Don't chase the signal. Become it.",
-  "bio": "The one who picks a spot and stays there all night. Easy to find on purpose, so everyone has somewhere to come back to.",
+  "tagline": "The lighthouse never chases the ship",
+  "wisdomRoot": "The fixed star — sailors steer by Polaris because it does not move. Constancy as a form of service.",
+  "bio": "The one who picks a spot and stays. Easy to find on purpose.",
   "sceneStory": "On a spit of black rock ringed by churning, silver-capped waves, a figure stands with feet apart and chest open, light pouring out of them in a wide amber road across the dark water. Far out along that road, a small three-masted ship with torn sails swings its bow around to come in.",
   "assignments": [
-    "Give people a place to land",
-    "Hold still when you'd rather bolt"
-  ]
+    "Emit your light for others to follow",
+    "Shine steady. They'll find their way"
+  ],
+  "imageScale": 1,
+  "imageOffsetY": 0
 }

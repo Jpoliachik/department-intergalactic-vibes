@@ -6,11 +6,14 @@
   "code": "DV-10",
   "function": "Divination",
   "object": "Crystal ball",
-  "fieldReading": "Read the air, not the clock.",
-  "bio": "The friend with the uncanny gut. Calls the shift in a night before anything has visibly changed, and is usually right.",
+  "tagline": "Your first instinct already knew",
+  "wisdomRoot": "Pascal — the heart has its reasons which reason knows not. Knowing that arrives before explanation.",
+  "bio": "The friend with the uncanny gut. Feels the night turn before it does, and is usually right.",
   "sceneStory": "On a bare hilltop under a clear and perfectly calm night sky, a hooded figure stands with their face lifted and their eyes shut. In the small patch of sky directly above them a violent storm is already breaking — lightning, black cloud — while the night for miles around stays entirely still.",
   "assignments": [
-    "Meet the mood you walk into",
-    "Clock your own weather first"
-  ]
+    "Follow the feel, not the logic",
+    "Don't overthink. Just do."
+  ],
+  "imageScale": 1.14,
+  "imageOffsetY": 7.5
 }

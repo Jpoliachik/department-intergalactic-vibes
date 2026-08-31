@@ -6,11 +6,14 @@
   "code": "TR-09",
   "function": "Cadence",
   "object": "Metronome",
-  "fieldReading": "Find the beat beneath the beat.",
-  "bio": "The one still going long after the others flagged. Holds the same steady pace all night, and everyone finds their rhythm off it.",
+  "tagline": "The music is the space between the notes",
+  "wisdomRoot": "Ecclesiastes 3 — to everything there is a season. The music is in the space between the notes.",
+  "bio": "The one still going after everyone else flagged. Sets a pace the whole night keeps.",
   "sceneStory": "Sitting cross-legged at the exact center of a vast, glass-still black lake, a figure brings one open hand down onto the water. A single ring of light springs from the strike and races outward across the whole mirrored surface toward the horizon.",
   "assignments": [
-    "Match the pace of whoever's near",
-    "Slow down before you have to"
-  ]
+    "Find the noise behind the signal",
+    "Dance with the highs. Ride the lows"
+  ],
+  "imageScale": 1,
+  "imageOffsetY": 14
 }

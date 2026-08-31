@@ -18,10 +18,15 @@ export interface Card {
   function: string;
   /** The post's symbol object. e.g. "Lantern". */
   object: string;
-  /** The one-line koan issued with the draw. */
-  fieldReading: string;
+  /** The card's one-liner — the character's truth in a sentence. */
+  tagline: string;
 
   // --- Source variables (edited by hand; feed the generators) ---
+  /**
+   * The classic wisdom the card points back to — tradition plus essence.
+   * Grounds the bio, reading, and assignments; never printed or quoted.
+   */
+  wisdomRoot?: string;
   /** Short in-world description of who this character is. */
   bio: string;
   /** The two-sentence, present-tense scene the card depicts. */
@@ -33,6 +38,13 @@ export interface Card {
    * imperatives — actionable, open-ended, never something to tick off.
    */
   assignments: string[];
+
+  // --- Art framing (hand-tuned per card; see lib/card-format.ts) ---
+  /** Zoom applied to the art inside its band. 1 = the image fits exactly. */
+  imageScale?: number;
+  /** Vertical nudge as a percentage of the band's height. Negative = up. */
+  imageOffsetY?: number;
+
   // --- Runtime-only (not persisted; computed on read) ---
   /** True if deck/<slug>/image.png exists. */
   hasImage?: boolean;

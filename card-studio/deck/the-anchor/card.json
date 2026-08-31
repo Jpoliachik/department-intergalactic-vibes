@@ -6,11 +6,14 @@
   "code": "GT-01",
   "function": "Stabilization",
   "object": "Anchor",
-  "fieldReading": "Hold your ground, and others are free to lose theirs.",
-  "bio": "The steady friend everyone drifts back to. Keeps their feet when the night tilts, and holds the spot where others can lose theirs.",
-  "sceneStory": "A wide river of liquid light pours across the frame, sweeping loose stars and tumbling figures along in its current. Braced dead-center against the flow with boots planted and knees bent, a figure holds their ground while the rushing light splits into two smooth curves around them.",
+  "tagline": "Slow is smooth. Smooth is virtuous",
+  "wisdomRoot": "Equanimity — Buddhist upekkha, the Stoic inner citadel. Tao Te Ching: who can wait until the mud settles and the water is clear?",
+  "bio": "The rock-solid friend everyone drifts back to. Keeps their feet so others can lose theirs.",
+  "sceneStory": "A wide river of liquid light pours across the frame, sweeping loose stars and tumbling figures along in its current. Braced dead-center against the flow with boots planted, a figure holds steady, anchoring the rushing light splits into two smooth curves around them.",
   "assignments": [
-    "Let people lean a minute",
-    "Watch your own hurry rise"
-  ]
+    "Be someone's solid ground",
+    "When it speeds up, slow down"
+  ],
+  "imageScale": 1.06,
+  "imageOffsetY": 0
 }

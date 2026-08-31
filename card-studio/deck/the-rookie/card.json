@@ -1,0 +1,19 @@
+{
+  "slug": "the-rookie",
+  "order": 0,
+  "name": "The Rookie",
+  "designation": "Open Channel",
+  "code": "AA-00",
+  "function": "Beginner's Mind",
+  "object": "Empty cup",
+  "tagline": "An empty cup holds the most",
+  "wisdomRoot": "Shoshin — Zen beginner's mind (Shunryu Suzuki): in the beginner's mind there are many possibilities; in the expert's, few.",
+  "bio": "The wide-eyed first-timer. Says yes first, and asks what everyone else was too proud to.",
+  "sceneStory": "At the crumbling edge of a floating clifftop, a figure steps out into open air with both arms flung wide and their head tipped back. From a rip in the sky above, a waterfall of stars pours straight down over them, catching them mid-stride.",
+  "assignments": [
+    "Act a fool so others can follow",
+    "Accept the unknown frequencies"
+  ],
+  "imageScale": 1.15,
+  "imageOffsetY": 4.5
+}

@@ -6,11 +6,14 @@
   "code": "RL-05",
   "function": "Reception",
   "object": "Tuning fork",
-  "fieldReading": "Listen all the way to one, and you've heard the night.",
-  "bio": "The one who hears you deeply. Hears the music deeply. Hears everything deeply. Gives you their whole attention and hears the thing underneath what you said.",
+  "tagline": "Being heard is being loved",
+  "wisdomRoot": "Simone Weil — attention is the rarest and purest form of generosity. Thich Nhat Hanh: deep listening.",
+  "bio": "The one who really listens. Hears the thing underneath what you said.",
   "sceneStory": "On the black shore of a perfectly still lake, a figure crouches and touches one fingertip to the water. Out on the mirrored surface a single reflected star begins to ring and brighten, answering the touch with a slow spreading circle of light.",
   "assignments": [
-    "Hear the thing under the words",
-    "Keep an ear on your own noise"
-  ]
+    "Hear what they aren't saying",
+    "Tap in. Feel the inner pulse."
+  ],
+  "imageScale": 1.15,
+  "imageOffsetY": 9.5
 }

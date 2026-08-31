@@ -6,11 +6,14 @@
   "code": "GL-14",
   "function": "Glamour",
   "object": "Fairy lights",
-  "fieldReading": "Beauty is a frequency. Broadcast it.",
-  "bio": "The one who makes any space feel special. Tends the corner nobody else noticed until people soften just from being in it.",
+  "tagline": "Beauty isn't rare. Noticing is.",
+  "wisdomRoot": "Hózhó — the Navajo Beauty Way: beauty as harmony you walk in and restore. Dostoevsky: beauty will save the world.",
+  "bio": "Makes beauty wherever they stand. The corner nobody noticed becomes the spot nobody leaves.",
   "sceneStory": "Crossing a cracked grey wasteland, a figure walks steadily with one hand trailing low at their side. In the line behind every footstep, glowing flowers are bursting up out of the dead ground and opening.",
   "assignments": [
-    "Point out the pretty thing",
-    "Linger where it feels good"
-  ]
+    "Find beauty in the ordinary",
+    "Amplify the immaculate frequencies"
+  ],
+  "imageScale": 1.11,
+  "imageOffsetY": 4.5
 }

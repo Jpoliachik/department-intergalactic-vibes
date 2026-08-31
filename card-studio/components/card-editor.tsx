@@ -1,13 +1,22 @@
 "use client";
 
 import * as React from "react";
-import { ImageIcon, Loader2, RefreshCw, Wand2 } from "lucide-react";
+import { ImageIcon, Loader2, RefreshCw, RotateCcw, Wand2 } from "lucide-react";
 import {
   ASSIGNMENT_MAX_LINES,
+  IMAGE_OFFSET_DEFAULT,
+  IMAGE_OFFSET_MAX,
+  IMAGE_OFFSET_MIN,
+  IMAGE_SCALE_DEFAULT,
+  IMAGE_SCALE_MAX,
+  IMAGE_SCALE_MIN,
   MAX_ASSIGNMENT_CHARS,
+  imageOffsetOf,
+  imageScaleOf,
 } from "@/lib/card-format";
 import type { Card, GenerateKind, Globals, StoredCard } from "@/lib/types";
 import { render } from "@/lib/prompts";
+import { CardFace } from "@/components/card-face";
 import {
   Sheet,
   SheetContent,
@@ -61,14 +70,17 @@ export function CardEditor({
 
 const FIELDS: (keyof StoredCard)[] = [
   "name",
-  "fieldReading",
+  "tagline",
   "designation",
   "code",
   "function",
   "object",
+  "wisdomRoot",
   "bio",
   "sceneStory",
   "assignments",
+  "imageScale",
+  "imageOffsetY",
 ];
 
 /** Field-level equality that also handles the `assignments` array. */
@@ -163,11 +175,11 @@ function EditorBody({
         <section className="space-y-3">
           <SectionTitle>On the card</SectionTitle>
 
-          <Field label="Field reading">
+          <Field label="Tagline">
             <Input
-              value={draft.fieldReading}
-              onChange={(e) => set("fieldReading", e.target.value)}
-              placeholder="The reading issued with the draw…"
+              value={draft.tagline}
+              onChange={(e) => set("tagline", e.target.value)}
+              placeholder="The character's truth in a sentence…"
             />
           </Field>
 
@@ -219,6 +231,13 @@ function EditorBody({
           <p className="text-xs text-muted-foreground">
             These feed the generators. Edit, then regenerate.
           </p>
+          <Field label="Wisdom root (never printed — the classic idea the card points back to)">
+            <Textarea
+              value={draft.wisdomRoot ?? ""}
+              onChange={(e) => set("wisdomRoot", e.target.value)}
+              rows={2}
+            />
+          </Field>
           <Field label="Bio">
             <Textarea
               value={draft.bio}
@@ -258,6 +277,8 @@ function EditorBody({
             {busy.image ? <Loader2 className="animate-spin" /> : <ImageIcon />}
             Generate image
           </Button>
+
+          <Framing draft={draft} card={card} set={set} />
         </section>
 
         <Separator />
@@ -287,10 +308,10 @@ function EditorBody({
             <Field label="Object">
               <Input value={draft.object} onChange={(e) => set("object", e.target.value)} />
             </Field>
-            <Field label="Field reading">
+            <Field label="Tagline">
               <Input
-                value={draft.fieldReading}
-                onChange={(e) => set("fieldReading", e.target.value)}
+                value={draft.tagline}
+                onChange={(e) => set("tagline", e.target.value)}
               />
             </Field>
           </div>
@@ -307,6 +328,119 @@ function EditorBody({
         </Button>
       </div>
     </>
+  );
+}
+
+/**
+ * Art framing — zoom and vertical nudge for the picture inside its square band.
+ * The image model frames the figure where it likes; this is the hand correction,
+ * shown against a live card face so the crop is judged on the card, not on the
+ * raw image. Zooming past 1 is what buys room to move without exposing an edge.
+ */
+function Framing({
+  draft,
+  card,
+  set,
+}: {
+  draft: StoredCard;
+  card: Card;
+  set: <K extends keyof StoredCard>(key: K, value: StoredCard[K]) => void;
+}) {
+  const scale = imageScaleOf(draft.imageScale);
+  const offset = imageOffsetOf(draft.imageOffsetY);
+  const neutral = scale === IMAGE_SCALE_DEFAULT && offset === IMAGE_OFFSET_DEFAULT;
+
+  return (
+    <div className="space-y-3 rounded-md border bg-muted/20 p-3">
+      <div className="flex items-center justify-between">
+        <Label className="text-xs uppercase tracking-widest text-muted-foreground">
+          Framing
+        </Label>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 px-2 text-xs"
+          onClick={() => {
+            set("imageScale", IMAGE_SCALE_DEFAULT);
+            set("imageOffsetY", IMAGE_OFFSET_DEFAULT);
+          }}
+          disabled={neutral}
+        >
+          <RotateCcw className="size-3" />
+          Reset
+        </Button>
+      </div>
+
+      <div className="flex gap-4">
+        {/* Live face, so the crop is judged with the plate and marks in place. */}
+        <div className="w-36 shrink-0">
+          <CardFace card={{ ...card, ...draft } as Card} />
+        </div>
+
+        <div className="flex-1 space-y-4 pt-1">
+          <Slider
+            label="Scale"
+            value={scale}
+            min={IMAGE_SCALE_MIN}
+            max={IMAGE_SCALE_MAX}
+            step={0.01}
+            format={(v) => `${v.toFixed(2)}x`}
+            onChange={(v) => set("imageScale", v)}
+          />
+          <Slider
+            label="Vertical"
+            value={offset}
+            min={IMAGE_OFFSET_MIN}
+            max={IMAGE_OFFSET_MAX}
+            step={0.5}
+            format={(v) => `${v > 0 ? "+" : ""}${v.toFixed(1)}%`}
+            onChange={(v) => set("imageOffsetY", v)}
+          />
+          <p className="text-xs text-muted-foreground">
+            Negative moves the art up. Scale above 1x to gain room to move
+            without pulling an edge into the band.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Slider({
+  label,
+  value,
+  min,
+  max,
+  step,
+  format,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  format: (value: number) => string;
+  onChange: (value: number) => void;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-baseline justify-between">
+        <Label className="text-xs">{label}</Label>
+        <span className="font-mono text-xs text-muted-foreground">
+          {format(value)}
+        </span>
+      </div>
+      <input
+        type="range"
+        value={value}
+        min={min}
+        max={max}
+        step={step}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-muted accent-primary"
+      />
+    </div>
   );
 }
 
