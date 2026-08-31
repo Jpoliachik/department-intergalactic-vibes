@@ -58,3 +58,21 @@ export function imageUrl(card: Card): string | null {
   const v = card.imageUpdatedAt ? encodeURIComponent(card.imageUpdatedAt) : "1";
   return `/api/image/${card.slug}?t=${v}`;
 }
+
+export interface ExportResult {
+  dir: string;
+  dpi: number;
+  widthPx: number;
+  written: string[];
+  failed: { slug: string; error: string }[];
+}
+
+/** Rasterise the deck (or a subset) to print-resolution PNGs on disk. */
+export async function exportDeck(slugs?: string[]): Promise<ExportResult> {
+  const res = await fetch("/api/export", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ slugs }),
+  });
+  return jsonOrThrow<ExportResult>(res);
+}

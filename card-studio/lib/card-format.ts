@@ -89,3 +89,15 @@ export function imageOffsetOf(value: unknown): number {
   const n = typeof value === "number" && Number.isFinite(value) ? value : IMAGE_OFFSET_DEFAULT;
   return clamp(n, IMAGE_OFFSET_MIN, IMAGE_OFFSET_MAX);
 }
+
+/**
+ * PRINT EXPORT — the deck is rasterised at print resolution by rendering the
+ * same card face at an exact pixel width and screenshotting it. 63mm at 300dpi
+ * is 744px; the height follows from the aspect ratio, so only the width is set.
+ *
+ * No bleed is added: the face already carries a generous safe margin (see
+ * SIDE_MARGIN), and the art runs to the trim edge, so a printer that wants
+ * bleed can be given the same file to extend.
+ */
+export const EXPORT_DPI = 300;
+export const EXPORT_WIDTH_PX = Math.round((CARD_WIDTH_MM / 25.4) * EXPORT_DPI);

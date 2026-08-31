@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { Loader2, Settings2 } from "lucide-react";
+import { Download, Loader2, Settings2 } from "lucide-react";
 import type {
   Card,
   GenerateKind,
@@ -10,7 +10,7 @@ import type {
   StoredCard,
   StudioState,
 } from "@/lib/types";
-import { fetchState, generate, saveCard, saveGlobals } from "@/lib/client";
+import { exportDeck, fetchState, generate, saveCard, saveGlobals } from "@/lib/client";
 import { Button } from "@/components/ui/button";
 import { CardTile } from "@/components/card-tile";
 import { Star } from "@/components/star";
@@ -29,6 +29,7 @@ export function DeckStudio() {
   const [busy, setBusy] = React.useState<Record<string, BusyMap>>({});
   const [editingSlug, setEditingSlug] = React.useState<string | null>(null);
   const [globalsOpen, setGlobalsOpen] = React.useState(false);
+  const [exporting, setExporting] = React.useState(false);
 
   React.useEffect(() => {
     fetchState()
@@ -94,6 +95,36 @@ export function DeckStudio() {
     }
   }
 
+  /**
+   * Print export. Slow by nature — it drives a headless browser over every
+   * card — so the button holds a spinner rather than firing and forgetting.
+   */
+  async function handleExport() {
+    setExporting(true);
+    const pending = toast.loading("Exporting deck at print resolution…");
+    try {
+      const result = await exportDeck();
+      toast.dismiss(pending);
+      if (result.failed.length > 0) {
+        toast.warning(
+          `Exported ${result.written.length}, failed ${result.failed.length}`,
+          { description: result.failed.map((f) => f.slug).join(", ") },
+        );
+      } else {
+        toast.success(`Exported ${result.written.length} cards`, {
+          description: `${result.widthPx}px wide · ${result.dpi}dpi · ${result.dir}`,
+        });
+      }
+    } catch (err) {
+      toast.dismiss(pending);
+      toast.error("Couldn't export", {
+        description: err instanceof Error ? err.message : String(err),
+      });
+    } finally {
+      setExporting(false);
+    }
+  }
+
   if (loadError) {
     return (
       <div className="mx-auto max-w-lg px-6 py-24 text-center">
@@ -133,10 +164,16 @@ export function DeckStudio() {
               </p>
             </div>
           </div>
-          <Button variant="secondary" onClick={() => setGlobalsOpen(true)}>
-            <Settings2 />
-            Global prompts
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="secondary" onClick={() => setGlobalsOpen(true)}>
+              <Settings2 />
+              Global prompts
+            </Button>
+            <Button onClick={handleExport} disabled={exporting}>
+              {exporting ? <Loader2 className="animate-spin" /> : <Download />}
+              Export for print
+            </Button>
+          </div>
         </div>
       </header>
 

@@ -28,3 +28,6 @@ yarn-error.log*
 # NOTE: /deck is intentionally NOT ignored.
 # Card content, prompts, and generated images are committed so you can
 # `git commit` the sets you like and diff/restore between generations.
+
+# print export — regenerated from /deck on demand, large, not source
+/export
