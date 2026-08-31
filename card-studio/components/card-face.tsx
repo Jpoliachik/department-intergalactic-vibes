@@ -9,7 +9,7 @@ import {
   ART_HEIGHT_FRACTION,
   PLATE_PAD_BOTTOM,
   PLATE_PAD_TOP,
-  SAFE_MARGIN,
+  SIDE_MARGIN,
   TITLE_INSET_TOP,
   imageOffsetOf,
   imageScaleOf,
@@ -70,7 +70,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         {/* Name plate — dark plum, top left, inside the safe margin */}
         <div
           className="absolute max-w-[66cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-plum px-[2.5cqw] py-[1.2cqw]"
-          style={{ left: SAFE_MARGIN, top: TITLE_INSET_TOP }}
+          style={{ left: SIDE_MARGIN, top: TITLE_INSET_TOP }}
         >
           {/* The name is never clipped — long names step down a size rather
               than truncate, and wrap before they reach the code bubble. */}
@@ -86,7 +86,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         </div>
 
         {/* Code bubble — top right, matching the name plate */}
-        <CodeBubble code={card.code} style={{ right: SAFE_MARGIN, top: TITLE_INSET_TOP }} />
+        <CodeBubble code={card.code} style={{ right: SIDE_MARGIN, top: TITLE_INSET_TOP }} />
       </div>
 
       {/* Text plate — a hairline rule matching the name plate border, over a
@@ -97,8 +97,8 @@ export function CardFace({ card, className }: { card: Card; className?: string }
       <div
         className="relative flex flex-1 flex-col border-t-[0.45cqw] border-deck-mustard bg-deck-plum"
         style={{
-          paddingLeft: SAFE_MARGIN,
-          paddingRight: SAFE_MARGIN,
+          paddingLeft: SIDE_MARGIN,
+          paddingRight: SIDE_MARGIN,
           // Wider than the print margin at the bottom, so the last assignment
           // ends with air under it rather than on the margin line. The top edge
           // is the internal divider, not a card edge, so the print safe margin
@@ -131,7 +131,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
           <div className="flex items-center gap-[2.2cqw]">
             <div className="h-[0.3cqw] flex-1 bg-deck-mustard/40" />
             <div className="font-mono text-[2.8cqw] uppercase leading-none tracking-[0.42em] text-deck-purple">
-              Assignments
+              Assignment
             </div>
             <div className="h-[0.3cqw] flex-1 bg-deck-mustard/40" />
           </div>
@@ -142,10 +142,10 @@ export function CardFace({ card, className }: { card: Card; className?: string }
                 // set in the card serif, uppercase and letterspaced: the same
                 // voice as the field reading above, pitched as an inscription
                 // rather than a UI label. The size is what lets a full-length
-                // line (MAX_ASSIGNMENT_CHARS) hold one line.
+                // line (MAX_ASSIGNMENT_CHARS) hold one line inside SIDE_MARGIN.
                 <li
                   key={i}
-                  className="font-card-serif text-[3.5cqw] font-semibold uppercase leading-snug tracking-[0.09em] text-deck-cream"
+                  className="font-card-serif text-[3.2cqw] font-semibold uppercase leading-snug tracking-[0.09em] text-deck-cream"
                 >
                   {entry}
                 </li>
@@ -164,10 +164,10 @@ export function CardFace({ card, className }: { card: Card; className?: string }
  * The field reading must hold one line: the plate has no room for a second, and
  * a wrap would push the last assignment inside the bottom print margin. A
  * reading longer than the deck has used so far steps down rather than wrapping.
- * ~54 characters fit at 4.2cqw, ~60 at 3.8cqw.
+ * Inside SIDE_MARGIN, ~49 characters fit at 4.2cqw, ~54 at 3.8cqw.
  */
 function readingSize(reading: string) {
-  return reading.length > 52 ? 3.8 : 4.2;
+  return reading.length > 47 ? 3.8 : 4.2;
 }
 
 /**

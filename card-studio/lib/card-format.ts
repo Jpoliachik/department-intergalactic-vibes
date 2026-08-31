@@ -27,6 +27,13 @@ export const ART_HEIGHT_FRACTION = 0.68;
 export const SAFE_MARGIN = "7cqw";
 
 /**
+ * Where readable content actually sits from the left and right trim: the print
+ * safe margin plus a visual margin on top of it, the same reasoning as
+ * TITLE_INSET_TOP. Must never go below SAFE_MARGIN.
+ */
+export const SIDE_MARGIN = "11cqw";
+
+/**
  * The text plate's own padding. The bottom sits deliberately wider than
  * SAFE_MARGIN so the last assignment has air under it rather than ending on
  * the margin line; it must never go below it. The top edge is the internal
@@ -41,7 +48,7 @@ export const PLATE_PAD_BOTTOM = "11cqw";
  * print safe margin plus a visual margin on top of it, so the title reads as
  * placed rather than as pushed up against the trim.
  */
-export const TITLE_INSET_TOP = "11cqw";
+export const TITLE_INSET_TOP = "13cqw";
 
 /**
  * The two standing assignments printed on the card. Short imperatives, one
