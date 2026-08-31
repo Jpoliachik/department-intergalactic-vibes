@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
-import { EXPORT_DPI, EXPORT_WIDTH_PX } from "@/lib/card-format";
+import {
+  EXPORT_BLEED_HEIGHT_PX,
+  EXPORT_BLEED_WIDTH_PX,
+  EXPORT_DPI,
+} from "@/lib/card-format";
 import { readAllCards } from "@/lib/deck";
 
 export const dynamic = "force-dynamic";
@@ -50,8 +54,8 @@ export async function POST(request: Request) {
   try {
     const page = await browser.newPage();
     await page.setViewport({
-      width: EXPORT_WIDTH_PX,
-      height: Math.round((EXPORT_WIDTH_PX * 88) / 63),
+      width: EXPORT_BLEED_WIDTH_PX,
+      height: EXPORT_BLEED_HEIGHT_PX,
       deviceScaleFactor: 1,
     });
 
@@ -81,7 +85,7 @@ export async function POST(request: Request) {
         );
       });
 
-      const element = await page.$("#card");
+      const element = await page.$("#card-canvas");
       if (!element) throw new Error("Card face did not render");
 
       const file = path.join(EXPORT_DIR, `${card.code}-${card.slug}.png`);
@@ -112,7 +116,8 @@ export async function POST(request: Request) {
   return NextResponse.json({
     dir: EXPORT_DIR,
     dpi: EXPORT_DPI,
-    widthPx: EXPORT_WIDTH_PX,
+    widthPx: EXPORT_BLEED_WIDTH_PX,
+    heightPx: EXPORT_BLEED_HEIGHT_PX,
     written,
     failed,
   });

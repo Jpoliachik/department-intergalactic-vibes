@@ -112,7 +112,7 @@ export function DeckStudio() {
         );
       } else {
         toast.success(`Exported ${result.written.length} cards`, {
-          description: `${result.widthPx}px wide · ${result.dpi}dpi · ${result.dir}`,
+          description: `${result.widthPx}×${result.heightPx}px · ${result.dpi}dpi with bleed · ${result.dir}`,
         });
       }
     } catch (err) {

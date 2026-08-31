@@ -100,4 +100,28 @@ export function imageOffsetOf(value: unknown): number {
  * bleed can be given the same file to extend.
  */
 export const EXPORT_DPI = 300;
+
+/** The trim box at print resolution: 63 x 88mm at 300dpi. */
 export const EXPORT_WIDTH_PX = Math.round((CARD_WIDTH_MM / 25.4) * EXPORT_DPI);
+export const EXPORT_HEIGHT_PX = Math.round((CARD_HEIGHT_MM / 25.4) * EXPORT_DPI);
+
+/**
+ * The uploaded file is the trim box plus 3mm of bleed on every edge — the size
+ * the printer asks for. 744 + 2x36 = 816, 1039 + 2x35.5 = 1110.
+ *
+ * The design is NOT scaled up to fill this. The trim box stays exactly what the
+ * studio shows, and the two full-width bands (the art and the plum plate) are
+ * pushed out past it, so a guillotine that drifts eats bleed and every margin
+ * inside the trim survives at the width it was set to.
+ */
+export const EXPORT_BLEED_WIDTH_PX = 816;
+export const EXPORT_BLEED_HEIGHT_PX = 1110;
+
+/**
+ * How far the bands overhang the trim box, as a percentage of card width —
+ * cqw, like everything else on the face, so the bleed is the same design at
+ * any scale. The two differ by half a pixel's worth because the printer's
+ * pixel dimensions are round numbers and the card's aspect ratio is not.
+ */
+export const BLEED_X = `${((EXPORT_BLEED_WIDTH_PX - EXPORT_WIDTH_PX) / 2 / EXPORT_WIDTH_PX) * 100}cqw`;
+export const BLEED_Y = `${((EXPORT_BLEED_HEIGHT_PX - EXPORT_HEIGHT_PX) / 2 / EXPORT_WIDTH_PX) * 100}cqw`;

@@ -7,6 +7,8 @@ import { imageUrl } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import {
   ART_HEIGHT_FRACTION,
+  BLEED_X,
+  BLEED_Y,
   PLATE_PAD_BOTTOM,
   PLATE_PAD_TOP,
   SIDE_MARGIN,
@@ -32,9 +34,28 @@ import {
  * query on the root, so the face is resolution-independent: the grid preview
  * and a 63x88mm print are the same design, not two different ones.
  */
-export function CardFace({ card, className }: { card: Card; className?: string }) {
+export function CardFace({
+  card,
+  className,
+  bleed = false,
+}: {
+  card: Card;
+  className?: string;
+  /**
+   * Print bleed. Off on screen; on for the export, where the printer wants the
+   * trim box surrounded by 3mm of overhang. The trim box is unchanged either
+   * way — only the two full-width bands grow, and every inset inside them is
+   * compensated by the same amount, so no text moves relative to the trim.
+   */
+  bleed?: boolean;
+}) {
   const src = imageUrl(card);
   const assignments = card.assignments ?? [];
+  // Nothing to add when bleed is off, and `calc(x + 0cqw)` everywhere would be
+  // noise; `out` is the overhang and `in` puts an inset back where it was.
+  const outX = bleed ? BLEED_X : "0cqw";
+  const outY = bleed ? BLEED_Y : "0cqw";
+  const inset = (value: string, by: string) => `calc(${value} + ${by})`;
   // Per-card framing correction. Transforms read right-to-left: the picture is
   // zoomed about its centre first, then nudged by a percentage of the band's
   // own height — so the offset means the same thing at any zoom.
@@ -43,14 +64,24 @@ export function CardFace({ card, className }: { card: Card; className?: string }
   return (
     <div
       className={cn(
-        "relative flex aspect-[63/88] w-full flex-col overflow-hidden rounded-xl border border-deck-mustard/30 bg-deck-black text-deck-cream shadow-lg [container-type:inline-size]",
+        "relative flex aspect-[63/88] w-full flex-col rounded-xl border border-deck-mustard/30 bg-deck-black text-deck-cream shadow-lg [container-type:inline-size]",
+        // In bleed mode the bands hang outside the trim box on purpose, and the
+        // export canvas is what clips them back to the printer's page.
+        bleed ? "overflow-visible" : "overflow-hidden",
         className,
       )}
     >
       {/* Art — full bleed, square band across the top */}
       <div
         className="relative shrink-0 overflow-hidden"
-        style={{ height: `${ART_HEIGHT_FRACTION * 100}%` }}
+        style={{
+          // Percent of the trim height, plus the top bleed it hangs into. The
+          // divider with the text plate stays exactly where it was.
+          height: inset(`${ART_HEIGHT_FRACTION * 100}%`, outY),
+          marginTop: `-${outY}`,
+          marginLeft: `-${outX}`,
+          marginRight: `-${outX}`,
+        }}
       >
         {src ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -70,7 +101,7 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         {/* Name plate — dark plum, top left, inside the safe margin */}
         <div
           className="absolute max-w-[66cqw] rounded-[2cqw] border-[0.45cqw] border-deck-mustard bg-deck-plum px-[2.5cqw] py-[1.2cqw]"
-          style={{ left: SIDE_MARGIN, top: TITLE_INSET_TOP }}
+          style={{ left: inset(SIDE_MARGIN, outX), top: inset(TITLE_INSET_TOP, outY) }}
         >
           {/* The name is never clipped — long names step down a size rather
               than truncate, and wrap before they reach the code bubble. */}
@@ -86,7 +117,10 @@ export function CardFace({ card, className }: { card: Card; className?: string }
         </div>
 
         {/* Code bubble — top right, matching the name plate */}
-        <CodeBubble code={card.code} style={{ right: SIDE_MARGIN, top: TITLE_INSET_TOP }} />
+        <CodeBubble
+          code={card.code}
+          style={{ right: inset(SIDE_MARGIN, outX), top: inset(TITLE_INSET_TOP, outY) }}
+        />
       </div>
 
       {/* Text plate — a hairline rule matching the name plate border, over a
@@ -97,13 +131,16 @@ export function CardFace({ card, className }: { card: Card; className?: string }
       <div
         className="relative flex flex-1 flex-col border-t-[0.45cqw] border-deck-mustard bg-deck-plum"
         style={{
-          paddingLeft: SIDE_MARGIN,
-          paddingRight: SIDE_MARGIN,
+          marginLeft: `-${outX}`,
+          marginRight: `-${outX}`,
+          marginBottom: `-${outY}`,
+          paddingLeft: inset(SIDE_MARGIN, outX),
+          paddingRight: inset(SIDE_MARGIN, outX),
           // Wider than the print margin at the bottom, so the last assignment
           // ends with air under it rather than on the margin line. The top edge
           // is the internal divider, not a card edge, so the print safe margin
           // does not apply there.
-          paddingBottom: PLATE_PAD_BOTTOM,
+          paddingBottom: inset(PLATE_PAD_BOTTOM, outY),
           paddingTop: PLATE_PAD_TOP,
         }}
       >

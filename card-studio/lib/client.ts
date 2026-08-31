@@ -63,6 +63,7 @@ export interface ExportResult {
   dir: string;
   dpi: number;
   widthPx: number;
+  heightPx: number;
   written: string[];
   failed: { slug: string; error: string }[];
 }
