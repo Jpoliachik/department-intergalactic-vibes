@@ -1,0 +1,65 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 520,
+      "h": 640
+    },
+    {
+      "file": "Struck.dc.html",
+      "x": 620,
+      "y": 0,
+      "w": 520,
+      "h": 640
+    },
+    {
+      "file": "Notarial.dc.html",
+      "x": 1240,
+      "y": 0,
+      "w": 520,
+      "h": 640
+    },
+    {
+      "file": "FieldStamp.dc.html",
+      "x": 0,
+      "y": 780,
+      "w": 520,
+      "h": 640
+    },
+    {
+      "file": "Ribbon.dc.html",
+      "x": 620,
+      "y": 780,
+      "w": 520,
+      "h": 640
+    },
+    {
+      "file": "Monogram.dc.html",
+      "x": 1240,
+      "y": 780,
+      "w": 520,
+      "h": 640
+    },
+    {
+      "file": "LabelTest.dc.html",
+      "x": 0,
+      "y": 1560,
+      "w": 1060,
+      "h": 400
+    }
+  ],
+  "annotations": [
+    {
+      "id": "brief",
+      "x": 1860,
+      "y": 0,
+      "w": 300,
+      "text": "Six seal constructions, same palette, same mark geometry, same type treatment.\n\nOnly the construction changes \u2014 so whatever you react to here is the construction, not a font or a colour.\n\nType is still the open fork (#2 on /brand), deliberately held constant."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}
