@@ -9,11 +9,12 @@
  */
 
 /** Four concave arms — a spark of light rather than a compass rose. */
-const SPARK =
+export const SPARK =
   "M50 2 C54 34 66 46 98 50 C66 54 54 66 50 98 C46 66 34 54 2 50 C34 46 46 34 50 2 Z";
 
-/** Seven points, one per star of the cluster. The mark proper. */
-const SEVEN_POINT =
+/** Seven points, one per star of the cluster. The mark proper.
+ *  Exported so the band field draws the same star the cards do. */
+export const SEVEN_POINT =
   "M50.0 6.0 L58.1 32.9 L84.2 22.5 L68.3 45.5 L92.7 59.6 L64.6 61.5 L69.0 89.2 L50.0 68.5 L31.0 89.2 L35.4 61.5 L7.3 59.6 L31.7 45.5 L15.8 22.5 L41.9 32.9 Z";
 
 export function Star({

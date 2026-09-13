@@ -1,0 +1,14 @@
+/* Vibe Corp brand tokens. Generated — do not hand-edit.
+   Source: card-studio/lib/brand.ts */
+:root {
+  --vc-black: #000000; /* Deep ground. Cosmic backdrop, sticker die-cut ground. */
+  --vc-ink: #0b0b0c; /* The disc. Near-black with a hint of warmth. */
+  --vc-plum: #251435; /* The working ground. Plates, panels, page. */
+  --vc-cream: #f3e9d6; /* Body ink on dark. Never pure white. */
+  --vc-mustard: #e8a929; /* SIGNAL. Rules, borders, the one true line, the seal's type. */
+  --vc-teal: #2fa090; /* Band. */
+  --vc-blue: #3358c4; /* Band. */
+  --vc-purple: #a274d6; /* Band. Also the uniform — crew hi-vis. */
+  --vc-rose: #dd8296; /* Band. */
+  --vc-brick: #c4462a; /* Band. */
+}
