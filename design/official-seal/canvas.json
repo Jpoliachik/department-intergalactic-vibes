@@ -175,6 +175,38 @@
       "page": "page-2"
     },
     {
+      "file": "StickerUnder.dc.html",
+      "x": 0,
+      "y": 3980,
+      "w": 480,
+      "h": 690,
+      "page": "page-2"
+    },
+    {
+      "file": "StickerArc.dc.html",
+      "x": 580,
+      "y": 3980,
+      "w": 480,
+      "h": 690,
+      "page": "page-2"
+    },
+    {
+      "file": "StickerBetween.dc.html",
+      "x": 1160,
+      "y": 3980,
+      "w": 480,
+      "h": 690,
+      "page": "page-2"
+    },
+    {
+      "file": "StickerSpec.dc.html",
+      "x": 0,
+      "y": 4810,
+      "w": 900,
+      "h": 560,
+      "page": "page-2"
+    },
+    {
       "file": "Beads.dc.html",
       "x": 0,
       "y": 0,
