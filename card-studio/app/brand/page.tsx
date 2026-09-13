@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { Badge, Glyph, Seal, type MarkTreatment } from "@/components/brand/mark";
+import { Stamp } from "@/components/brand/stamp";
 import { BandField } from "@/components/brand/bands";
 import { Star } from "@/components/star";
-import { BAND_KEYS, PALETTE, TYPE_VOICES, type PaletteKey } from "@/lib/brand";
+import { BAND_KEYS, PALETTE, STAMP_MIN_PX, STAMP_PLAIN_MIN_PX, TYPE_VOICES, type PaletteKey } from "@/lib/brand";
 
 /**
  * BRAND EXPLORATIONS — /brand
@@ -193,6 +194,52 @@ export default function BrandPage() {
             ))}
           </div>
         </div>
+      </Section>
+
+      {/* ---------------------------------------------------------------- */}
+      <Section
+        n="04b"
+        title="The stamp — locked"
+        note="Ink on paper, and the one mark that does not live on the dark ground. Crew stamp this onto something; it needs a light surface under it. Two constructions: beaded for anywhere it can be printed large, plain where it has to hold small."
+      >
+        <div className="flex flex-wrap items-start gap-12">
+          <div className="flex flex-col items-center gap-4">
+            <div className="rounded-lg bg-white p-6">
+              <Stamp className="h-52 w-52" />
+            </div>
+            <div className="text-center">
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-deck-mustard">Beaded</div>
+              <div className="mt-1 text-xs text-deck-cream/45">Floor {STAMP_MIN_PX}px</div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <div className="rounded-lg bg-white p-6">
+              <Stamp className="h-52 w-52" beaded={false} />
+            </div>
+            <div className="text-center">
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-deck-mustard">Plain</div>
+              <div className="mt-1 text-xs text-deck-cream/45">Floor {STAMP_PLAIN_MIN_PX}px</div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <div className="rounded-lg bg-white p-6">
+              <Stamp className="h-52 w-52" guides />
+            </div>
+            <div className="text-center">
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-deck-mustard">Banded</div>
+              <div className="mt-1 max-w-[13rem] text-xs leading-relaxed text-deck-cream/45">
+                Red: the band both words fill. Teal: the waves.
+              </div>
+            </div>
+          </div>
+        </div>
+        <p className="mt-8 max-w-2xl rounded border border-deck-mustard/25 bg-deck-plum/60 p-4 text-xs leading-relaxed text-deck-cream/60">
+          <strong className="text-deck-mustard">Two traps, both encoded in lib/brand.ts.</strong> Glyphs on a
+          top arc grow outward from their baseline and glyphs on a bottom arc grow inward, so two lines
+          sharing one radius land in two different bands — <code>ringTypeBaseline</code> pushes each half a
+          cap height the other way. And the waves centre at (75.87, 74.05), not at the canvas centre, so
+          anything placing them uses <code>GLYPH_CENTER</code>.
+        </p>
       </Section>
 
       {/* ---------------------------------------------------------------- */}

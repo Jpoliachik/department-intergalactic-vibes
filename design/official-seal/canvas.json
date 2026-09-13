@@ -2,16 +2,20 @@
   "pages": [
     {
       "id": "page-1",
-      "name": "Vibes Certified"
+      "name": "Stamp \u2014 locked"
     },
     {
       "id": "page-2",
+      "name": "Emblem"
+    },
+    {
+      "id": "page-3",
       "name": "Earlier directions"
     }
   ],
   "artboards": [
     {
-      "file": "Main.dc.html",
+      "file": "BalanceA.dc.html",
       "x": 0,
       "y": 0,
       "w": 480,
@@ -19,7 +23,7 @@
       "page": "page-1"
     },
     {
-      "file": "Shoulders.dc.html",
+      "file": "Main.dc.html",
       "x": 580,
       "y": 0,
       "w": 480,
@@ -27,7 +31,7 @@
       "page": "page-1"
     },
     {
-      "file": "BalanceA.dc.html",
+      "file": "Shoulders.dc.html",
       "x": 1160,
       "y": 0,
       "w": 480,
@@ -52,11 +56,51 @@
     },
     {
       "file": "ScaleTest.dc.html",
-      "x": 0,
-      "y": 1740,
+      "x": 1120,
+      "y": 760,
       "w": 900,
       "h": 940,
       "page": "page-1"
+    },
+    {
+      "file": "EmblemB.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 480,
+      "h": 660,
+      "page": "page-2"
+    },
+    {
+      "file": "EmblemA.dc.html",
+      "x": 580,
+      "y": 0,
+      "w": 480,
+      "h": 660,
+      "page": "page-2"
+    },
+    {
+      "file": "EmblemC.dc.html",
+      "x": 1160,
+      "y": 0,
+      "w": 480,
+      "h": 660,
+      "page": "page-2"
+    },
+    {
+      "file": "EmblemD.dc.html",
+      "x": 1740,
+      "y": 0,
+      "w": 480,
+      "h": 660,
+      "page": "page-2"
+    },
+    {
+      "file": "Applications.dc.html",
+      "x": 0,
+      "y": 800,
+      "w": 900,
+      "h": 620,
+      "page": "page-2"
     },
     {
       "file": "Beads.dc.html",
@@ -64,7 +108,7 @@
       "y": 0,
       "w": 480,
       "h": 600,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "BeadsStars.dc.html",
@@ -72,7 +116,7 @@
       "y": 0,
       "w": 480,
       "h": 600,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "Full.dc.html",
@@ -80,7 +124,7 @@
       "y": 0,
       "w": 480,
       "h": 600,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "WithStars.dc.html",
@@ -88,7 +132,7 @@
       "y": 0,
       "w": 480,
       "h": 600,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "SingleRule.dc.html",
@@ -96,7 +140,7 @@
       "y": 0,
       "w": 480,
       "h": 600,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "Inked.dc.html",
@@ -104,7 +148,7 @@
       "y": 0,
       "w": 480,
       "h": 600,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "FieldStamp.dc.html",
@@ -112,7 +156,7 @@
       "y": 740,
       "w": 520,
       "h": 640,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "Struck.dc.html",
@@ -120,7 +164,7 @@
       "y": 740,
       "w": 520,
       "h": 640,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "Notarial.dc.html",
@@ -128,7 +172,7 @@
       "y": 740,
       "w": 520,
       "h": 640,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "Cluster.dc.html",
@@ -136,7 +180,7 @@
       "y": 740,
       "w": 520,
       "h": 640,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "Ribbon.dc.html",
@@ -144,7 +188,7 @@
       "y": 740,
       "w": 520,
       "h": 640,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "Monogram.dc.html",
@@ -152,7 +196,7 @@
       "y": 740,
       "w": 520,
       "h": 640,
-      "page": "page-2"
+      "page": "page-3"
     },
     {
       "file": "LabelTest.dc.html",
@@ -160,29 +204,29 @@
       "y": 1520,
       "w": 1060,
       "h": 400,
-      "page": "page-2"
+      "page": "page-3"
     }
   ],
   "annotations": [
     {
-      "id": "why",
+      "id": "locked",
       "x": 2320,
       "y": 0,
       "w": 300,
       "page": "page-1",
-      "text": "Second balance pass, pushed further.\n\nType 19.5, stars 19, waves down to 72 (88 unbeaded).\n\nThe governing ratio is the type band depth against the centre width: 9.7 vs 79 at the start, 12.2 vs 76 after the first pass, 14 vs 68 now. The ring has gone from caption to the loudest thing in the mark.\n\nOptions A and B take one more step in the same direction if this is still short."
+      "text": "LOCKED: the leftmost, Beaded pushed further.\\n\\nNow in the codebase as STAMP in lib/brand.ts and the Stamp component. The ring geometry went in with it \u2014 ringTypeBaseline and GLYPH_CENTER, plus a note recording the letter-spacing correction that is measurably wrong and should not be re-added.\\n\\nThe other three stay for reference."
     },
     {
-      "id": "history",
-      "x": 3700,
+      "id": "emblem",
+      "x": 2320,
       "y": 0,
-      "w": 280,
+      "w": 300,
       "page": "page-2",
-      "text": "Everything earlier, kept for the record. The beaded stamp on page one came out of these."
+      "text": "VIBE over CORP, from the unbeaded construction.\\n\\nShort words change the problem. CERTIFIED filled about three quarters of its arc; VIBE fills a third at the same size, so the shoulders open and the ring goes slack. The fix is bigger, wider-tracked type \u2014 or more stars.\\n\\nThe two applications disagree: the hat wants shape, the badge wants words. Option B is the compromise."
     }
   ],
   "launch": {
     "view": "canvas",
-    "page": "page-1"
+    "page": "page-2"
   }
 }

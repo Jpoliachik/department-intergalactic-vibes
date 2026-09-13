@@ -42,6 +42,154 @@ export const WAVE_PATHS = [
 export const GLYPH_VIEWBOX = "32.9 31.1 86 86";
 
 /**
+ * The waves' own bounding box, measured in a browser with getBBox — not
+ * derived from the 150 grid and not eyeballed.
+ *
+ * THIS IS NOT THE CANVAS CENTRE. The artwork centres at (75.87, 74.05), while
+ * the canvas centres at (75, 75) and the disc and ring centre at MARK_CENTER.
+ * Placing the waves on any of the other three leaves them visibly off-centre
+ * inside a ring — which is exactly the bug this constant exists to prevent.
+ * Anything that centres the waves in something must use GLYPH_CENTER.
+ */
+export const GLYPH_BBOX = { x: 34.51, y: 34.9, w: 82.72, h: 78.3 } as const;
+export const GLYPH_CENTER = {
+  x: GLYPH_BBOX.x + GLYPH_BBOX.w / 2, // 75.87
+  y: GLYPH_BBOX.y + GLYPH_BBOX.h / 2, // 74.05
+} as const;
+
+/* -------------------------------------------------------------------------
+ * RING TYPE GEOMETRY
+ *
+ * Setting two lines of type around a circle has two traps in it. Both were
+ * found the hard way, and both are encoded here so nothing has to find them
+ * again.
+ * ---------------------------------------------------------------------- */
+
+/** Cap height as a fraction of font size. Close enough across the grotesques
+ *  we set ring type in, and the only number the baseline maths needs. */
+export const CAP_RATIO = 0.72;
+
+/**
+ * TRAP 1 — the two lines do not sit on the same radius.
+ *
+ * Glyphs on a top arc grow OUTWARD from their baseline; glyphs on a bottom arc
+ * grow INWARD. So two lines sharing one radius occupy two different bands, the
+ * top one a whole cap height further out than the bottom. It reads as subtly
+ * wrong with no obvious culprit.
+ *
+ * The fix: pick the radius of the BAND you want the type to fill, then push
+ * each baseline half a cap height the other way. Both lines then sit centred
+ * in that one band.
+ */
+export function ringTypeBaseline(bandRadius: number, fontSize: number, place: "top" | "bottom") {
+  const half = (fontSize * CAP_RATIO) / 2;
+  return place === "top" ? bandRadius - half : bandRadius + half;
+}
+
+/**
+ * The half-circle a line of ring type runs along. Both arcs travel LEFT to
+ * RIGHT so both lines read clockwise the way a struck seal does: the top one
+ * over the top (sweep 1, heads pointing out), the bottom one under the bottom
+ * (sweep 0, heads pointing back in toward the middle).
+ */
+export function ringTypeArc(cx: number, cy: number, radius: number, place: "top" | "bottom") {
+  const sweep = place === "top" ? 1 : 0;
+  return `M ${cx - radius} ${cy} A ${radius} ${radius} 0 0 ${sweep} ${cx + radius} ${cy}`;
+}
+
+/**
+ * TRAP 2 — the correction that is NOT needed. Recorded because it is the
+ * obvious next move and it is wrong.
+ *
+ * SVG letter-spacing adds a space after the LAST glyph as well, so it looks as
+ * though `text-anchor: middle` must be centring an advance one space too wide,
+ * leaving the ink half a space to the left — and as though startOffset should
+ * add half a track back.
+ *
+ * Measured in Chrome on a 200-unit box: plain `startOffset="50%"` lands the ink
+ * at 100.2, and adding the half-track correction moves it to 101.8. The engine
+ * has already handled it. Always set startOffset to "50%" and leave it alone.
+ */
+export const RING_TYPE_START_OFFSET = "50%";
+
+/**
+ * THE STAMP — locked.
+ *
+ * The "Vibes Certified" seal, in mark units on its own 200-unit box (the stamp
+ * is not drawn on the 150 grid the badge uses; it is its own construction).
+ *
+ * These proportions are the end of a deliberate sequence. The ratio that
+ * governs the whole thing is the depth of the type band against the width of
+ * the centre: it began at 9.7 against 79, which read as a caption wrapped
+ * around a logo, and finished at 15.5 against 64, where the ring leads and the
+ * waves sit inside it as the quiet centre. Moving `size` without moving
+ * `band`, `innerRule` and `waveWidth` with it will undo that.
+ */
+export const STAMP = {
+  /** The stamp's own square canvas, and its centre. */
+  viewBox: "0 0 200 200",
+  center: 100,
+  /** Heavy outer rule. */
+  ruleRadius: 96,
+  ruleWidth: 5,
+  /** The bead ring — borrowed from the notarial direction. At size the eye
+   *  reads the BAND, not the individual beads, which is what makes the stamp
+   *  look struck rather than drawn. */
+  beadRadius: 85,
+  beadCount: 60,
+  beadSize: 2.1,
+  /** Light inner rule. Without beads this closes up — see STAMP_PLAIN.
+   *  The width is set by the RUBBER, not by taste: see STAMP_DIE_MM below. */
+  innerRule: 76,
+  innerRuleWidth: 2.2,
+  /** The band the two words fill, and what fills it. */
+  band: 59,
+  fontSize: 23.5,
+  tracking: 0.18,
+  starSize: 22,
+  /** Width of the waves across the middle. */
+  waveWidth: 62,
+} as const;
+
+/**
+ * The physical die this stamp is cut for: a Trodat 4630 / 46030, 30mm round.
+ *
+ * That number is a real constraint, not a note. At 30mm the 200-unit box makes
+ * ONE UNIT = 0.15mm, and a polymer stamp die will not reliably hold a line
+ * under about 0.3mm — it fills in with ink, or crumbles. So:
+ *
+ *   ruleWidth      5    = 0.75mm  fine
+ *   innerRuleWidth 2.2  = 0.33mm  just over the floor (was 1.8 = 0.27mm, under it)
+ *   beadSize       2.1r = 0.63mm  fine, with 0.7mm gaps between beads
+ *   fontSize       23.5 = 2.54mm cap height, about 7pt
+ *
+ * Anything here that shrinks must be re-checked against MIN_STROKE_MM before
+ * it goes to a stamp maker.
+ */
+export const STAMP_DIE_MM = 30;
+export const STAMP_UNIT_MM = STAMP_DIE_MM / 200;
+export const MIN_STROKE_MM = 0.3;
+
+/**
+ * The same stamp without the bead ring. Not just STAMP with beads switched off:
+ * an empty 20-unit band between the rules reads as a missing element, so the
+ * rules close from 20 apart to 8 and everything inside moves out into the room
+ * the beads were using.
+ */
+export const STAMP_PLAIN = {
+  ...STAMP,
+  innerRule: 88,
+  band: 68,
+  waveWidth: 80,
+} as const;
+
+/** Smallest the stamp survives, measured off the render rather than hoped for:
+ *  below this the beads close up and the longer word fills in. Under it, use
+ *  the bare glyph — never a shrunk stamp. */
+export const STAMP_MIN_PX = 64;
+export const STAMP_PLAIN_MIN_PX = 48;
+
+/**
  * PALETTE.
  *
  * Lifted out of the deck, where it was already locked, and given roles. The

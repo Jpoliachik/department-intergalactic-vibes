@@ -3,6 +3,9 @@
 import {
   DISC_PATH,
   GLYPH_VIEWBOX,
+  RING_TYPE_START_OFFSET,
+  ringTypeArc,
+  ringTypeBaseline,
   GRADIENT_STOPS,
   MARK_CENTER,
   MARK_VIEWBOX,
@@ -177,9 +180,11 @@ export function Seal({
   // its letters stand with their heads pointing out. The bottom runs
   // left→right under the bottom (sweep 0), so its letters point back in
   // toward the waves. Both read normally, clockwise, as a struck seal does.
-  const r = typeRadius;
-  const topPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
-  const botPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 0 ${cx + r} ${cy}`;
+  // `typeRadius` is the BAND both lines fill, not their baseline. Top-arc
+  // glyphs grow outward and bottom-arc glyphs grow inward, so each baseline is
+  // pushed half a cap height the other way — see ringTypeBaseline in
+  // lib/brand.ts, which is where that reasoning is written down.
+  const topPath = ringTypeArc(cx, cy, ringTypeBaseline(typeRadius, topSize, "top"), "top");
 
   // The bottom line is auto-fitted, because the whole value of this component
   // is that the label is a prop — and a prop that silently overruns the arc is
@@ -190,8 +195,10 @@ export function Seal({
   // than shrinking forever. A label that needs the floor size is too long —
   // shorten the words, not the type.
   const ARC_SHARE = 0.72;
-  const fitted = (ARC_SHARE * Math.PI * r) / Math.max(bottom.length, 1) / 0.8;
+  const fitted = (ARC_SHARE * Math.PI * typeRadius) / Math.max(bottom.length, 1) / 0.8;
   const botSize = bottomSize ?? Math.max(6.8, Math.min(10.5, fitted));
+  // Resolved after the fit, since the offset depends on the size it ends up.
+  const botPath = ringTypeArc(cx, cy, ringTypeBaseline(typeRadius, botSize, "bottom"), "bottom");
 
   return (
     <svg
@@ -235,14 +242,14 @@ export function Seal({
       <g fill={PALETTE.mustard.hex} fontWeight={700} textAnchor="middle">
         {top && (
           <text fontSize={topSize} letterSpacing={topSize * 0.16}>
-            <textPath href={`#${topArc}`} startOffset="50%">
+            <textPath href={`#${topArc}`} startOffset={RING_TYPE_START_OFFSET}>
               {top.toUpperCase()}
             </textPath>
           </text>
         )}
         {bottom && (
           <text fontSize={botSize} letterSpacing={botSize * 0.18}>
-            <textPath href={`#${botArc}`} startOffset="50%">
+            <textPath href={`#${botArc}`} startOffset={RING_TYPE_START_OFFSET}>
               {bottom.toUpperCase()}
             </textPath>
           </text>
