@@ -1,65 +1,156 @@
 {
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "Vibes Certified"
+    },
+    {
+      "id": "page-2",
+      "name": "Earlier directions"
+    }
+  ],
   "artboards": [
     {
       "file": "Main.dc.html",
       "x": 0,
       "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-1"
+    },
+    {
+      "file": "WithStars.dc.html",
+      "x": 580,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-1"
+    },
+    {
+      "file": "SingleRule.dc.html",
+      "x": 1160,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-1"
+    },
+    {
+      "file": "Inked.dc.html",
+      "x": 1740,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-1"
+    },
+    {
+      "file": "Beads.dc.html",
+      "x": 0,
+      "y": 740,
+      "w": 480,
+      "h": 600,
+      "page": "page-1"
+    },
+    {
+      "file": "BeadsStars.dc.html",
+      "x": 580,
+      "y": 740,
+      "w": 480,
+      "h": 600,
+      "page": "page-1"
+    },
+    {
+      "file": "Full.dc.html",
+      "x": 1160,
+      "y": 740,
+      "w": 480,
+      "h": 600,
+      "page": "page-1"
+    },
+    {
+      "file": "ScaleTest.dc.html",
+      "x": 0,
+      "y": 1480,
+      "w": 1220,
+      "h": 560,
+      "page": "page-1"
+    },
+    {
+      "file": "FieldStamp.dc.html",
+      "x": 0,
+      "y": 0,
       "w": 520,
-      "h": 640
+      "h": 640,
+      "page": "page-2"
     },
     {
       "file": "Struck.dc.html",
       "x": 620,
       "y": 0,
       "w": 520,
-      "h": 640
+      "h": 640,
+      "page": "page-2"
     },
     {
       "file": "Notarial.dc.html",
       "x": 1240,
       "y": 0,
       "w": 520,
-      "h": 640
+      "h": 640,
+      "page": "page-2"
     },
     {
-      "file": "FieldStamp.dc.html",
-      "x": 0,
-      "y": 780,
+      "file": "Cluster.dc.html",
+      "x": 1860,
+      "y": 0,
       "w": 520,
-      "h": 640
+      "h": 640,
+      "page": "page-2"
     },
     {
       "file": "Ribbon.dc.html",
-      "x": 620,
+      "x": 0,
       "y": 780,
       "w": 520,
-      "h": 640
+      "h": 640,
+      "page": "page-2"
     },
     {
       "file": "Monogram.dc.html",
-      "x": 1240,
+      "x": 620,
       "y": 780,
       "w": 520,
-      "h": 640
+      "h": 640,
+      "page": "page-2"
     },
     {
       "file": "LabelTest.dc.html",
-      "x": 0,
-      "y": 1560,
+      "x": 1240,
+      "y": 780,
       "w": 1060,
-      "h": 400
+      "h": 400,
+      "page": "page-2"
     }
   ],
   "annotations": [
     {
-      "id": "brief",
-      "x": 1860,
+      "id": "why",
+      "x": 2320,
       "y": 0,
       "w": 300,
-      "text": "Six seal constructions, same palette, same mark geometry, same type treatment.\n\nOnly the construction changes \u2014 so whatever you react to here is the construction, not a font or a colour.\n\nType is still the open fork (#2 on /brand), deliberately held constant."
+      "page": "page-1",
+      "text": "Black on white, VIBES / CERTIFIED.\n\nTop row: the plain stamp. Bottom row: Notarial's elements borrowed back in, in increasing doses.\n\nThe text placement is rebuilt. Top-arc glyphs grow outward from their baseline and bottom-arc glyphs grow inward, so putting both on one radius lands them in two different bands \u2014 that was the wrongness. Each baseline is now offset half a cap height the other way.\n\nThe waves are placed by their measured bounding box, not by the canvas centre: the artwork's centre is (75.87, 74.05) on a 150 grid, not (75, 75)."
+    },
+    {
+      "id": "history",
+      "x": 2400,
+      "y": 0,
+      "w": 280,
+      "page": "page-2",
+      "text": "The six constructions, kept for the record. Field Stamp is the one that was picked."
     }
   ],
   "launch": {
-    "view": "canvas"
+    "view": "canvas",
+    "page": "page-1"
   }
 }
