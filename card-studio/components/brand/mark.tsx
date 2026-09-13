@@ -139,32 +139,29 @@ export function Seal({
   className,
   style,
   top = "Vibe Corp",
-  bottom = "Official Field Assignment",
-  middle,
+  bottom = "Field Assignment",
   treatment = "flat",
-  /** Radii of the two type baselines, in mark units (the disc's outer edge is
-   *  ~68). They differ on purpose: the bottom ring is longer and quieter, so it
-   *  is pushed out to hug the disc edge, which clears the middle line. */
-  topRadius = 56,
-  bottomRadius = 62,
+  /** Radius of the type baseline, in mark units (the disc's outer edge is ~68).
+   *  One radius, shared by both lines, so the seal reads as a single struck
+   *  ring of type rather than two rings that nearly agree. */
+  typeRadius = 57,
   topSize = 15,
-  bottomSize = 8.5,
+  /** Leave unset — the bottom line is auto-fitted to the arc. See below. */
+  bottomSize,
   /** How far the ring-and-waves core shrinks to open a type zone around it.
    *  At 1 the core fills the disc and there is nowhere for type to go. */
-  coreScale = 0.55,
-  /** The core rides slightly high, which is what leaves room for the URL. */
-  coreOffsetY = -6,
+  coreScale = 0.68,
+  /** The core rides a touch high: the bottom line is the longer of the two, so
+   *  the optical centre of the type ring sits above the geometric one. */
+  coreOffsetY = -3,
   title,
 }: {
   className?: string;
   style?: React.CSSProperties;
   top?: string;
   bottom?: string;
-  /** Small line under the waves, inside the ring — a URL, usually. */
-  middle?: string;
   treatment?: MarkTreatment;
-  topRadius?: number;
-  bottomRadius?: number;
+  typeRadius?: number;
   topSize?: number;
   bottomSize?: number;
   coreScale?: number;
@@ -180,8 +177,21 @@ export function Seal({
   // its letters stand with their heads pointing out. The bottom runs
   // left→right under the bottom (sweep 0), so its letters point back in
   // toward the waves. Both read normally, clockwise, as a struck seal does.
-  const topPath = `M ${cx - topRadius} ${cy} A ${topRadius} ${topRadius} 0 0 1 ${cx + topRadius} ${cy}`;
-  const botPath = `M ${cx - bottomRadius} ${cy} A ${bottomRadius} ${bottomRadius} 0 0 0 ${cx + bottomRadius} ${cy}`;
+  const r = typeRadius;
+  const topPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
+  const botPath = `M ${cx - r} ${cy} A ${r} ${r} 0 0 0 ${cx + r} ${cy}`;
+
+  // The bottom line is auto-fitted, because the whole value of this component
+  // is that the label is a prop — and a prop that silently overruns the arc is
+  // not a prop, it is a trap. Every label is sized to occupy the same share of
+  // the bottom arc, so "Vibes Certified" and "Pleiades Field Office" sit with
+  // the same air at the shoulders. Clamped at both ends: a two-word label must
+  // not balloon past the top line, and a long one has to stay legible rather
+  // than shrinking forever. A label that needs the floor size is too long —
+  // shorten the words, not the type.
+  const ARC_SHARE = 0.72;
+  const fitted = (ARC_SHARE * Math.PI * r) / Math.max(bottom.length, 1) / 0.8;
+  const botSize = bottomSize ?? Math.max(6.8, Math.min(10.5, fitted));
 
   return (
     <svg
@@ -231,21 +241,10 @@ export function Seal({
           </text>
         )}
         {bottom && (
-          <text fontSize={bottomSize} letterSpacing={bottomSize * 0.18}>
+          <text fontSize={botSize} letterSpacing={botSize * 0.18}>
             <textPath href={`#${botArc}`} startOffset="50%">
               {bottom.toUpperCase()}
             </textPath>
-          </text>
-        )}
-        {middle && (
-          <text
-            x={cx}
-            y={cy + 30}
-            fontSize={6.5}
-            letterSpacing={1.4}
-            fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-          >
-            {middle.toUpperCase()}
           </text>
         )}
       </g>

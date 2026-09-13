@@ -41,14 +41,17 @@ function Option({ label, caption, children }: { label: string; caption?: string;
 
 export default function BrandPage() {
   const [treatment, setTreatment] = useState<MarkTreatment>("flat");
-  const [bottom, setBottom] = useState("Official Field Assignment");
+  const [bottom, setBottom] = useState("Field Assignment");
 
+  // Short is not a style preference — it is what the arc holds. The seal
+  // auto-fits any label, but one that needs the floor size has lost the
+  // argument and should be reworded.
   const RING_TEXTS = [
-    "Official Field Assignment",
+    "Field Assignment",
     "Vibes Certified",
     "Pleiades Field Office",
     "Provisional Induction",
-    "Resonance Grid Maintenance",
+    "Grid Maintenance",
   ];
 
   return (
@@ -81,7 +84,7 @@ export default function BrandPage() {
             <Badge className="h-32 w-32 text-deck-cream" treatment={treatment} />
           </Option>
           <Option label="Seal" caption="Badge wearing circular type. The bottom ring is swappable — that is what makes it an artifact engine.">
-            <Seal className="h-32 w-32 text-deck-cream" bottom={bottom} middle="vibecorp.live" treatment={treatment} />
+            <Seal className="h-32 w-32 text-deck-cream" bottom={bottom} treatment={treatment} />
           </Option>
         </div>
       </Section>
@@ -150,7 +153,7 @@ export default function BrandPage() {
         <div className="grid grid-cols-3 gap-10">
           {RING_TEXTS.slice(0, 3).map((t) => (
             <Option key={t} label={t}>
-              <Seal className="h-40 w-40 text-deck-cream" bottom={t} middle="vibecorp.live" treatment={treatment} />
+              <Seal className="h-40 w-40 text-deck-cream" bottom={t} treatment={treatment} />
             </Option>
           ))}
         </div>
@@ -269,7 +272,7 @@ export default function BrandPage() {
           ))}
           <div className="overflow-hidden rounded-lg border border-deck-mustard/20">
             <BandField seed={7} width={300} height={420} clearCenter={0.75}>
-              <Seal className="h-[55%] w-[55%] text-deck-cream" bottom={bottom} middle="vibecorp.live" />
+              <Seal className="h-[55%] w-[55%] text-deck-cream" bottom={bottom} />
             </BandField>
           </div>
         </div>
