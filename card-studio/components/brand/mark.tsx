@@ -21,8 +21,8 @@ import { useId } from "react";
  *   Badge  — disc + ring + waves. The primary mark.
  *   Seal   — badge + circular type, with a SWAPPABLE bottom ring. This is the
  *            one that generates artifacts: change two strings and the same
- *            seal issues a field assignment, certifies a vibe, or stamps a
- *            field office.
+ *            seal issues a field assignment, certifies a vibe, or records a
+ *            commendation.
  *
  * Colour is never baked in. The waves and ring take `currentColor`, so a mark
  * is coloured by the thing it sits in. `treatment` opts into the gradient,
@@ -184,7 +184,7 @@ export function Seal({
   // The bottom line is auto-fitted, because the whole value of this component
   // is that the label is a prop — and a prop that silently overruns the arc is
   // not a prop, it is a trap. Every label is sized to occupy the same share of
-  // the bottom arc, so "Vibes Certified" and "Pleiades Field Office" sit with
+  // the bottom arc, so "Commendation" and "Provisional Induction" sit with
   // the same air at the shoulders. Clamped at both ends: a two-word label must
   // not balloon past the top line, and a long one has to stay legible rather
   // than shrinking forever. A label that needs the floor size is too long —

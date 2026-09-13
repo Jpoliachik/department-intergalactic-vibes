@@ -49,7 +49,7 @@ export default function BrandPage() {
   const RING_TEXTS = [
     "Field Assignment",
     "Vibes Certified",
-    "Pleiades Field Office",
+    "Commendation",
     "Provisional Induction",
     "Grid Maintenance",
   ];
@@ -293,7 +293,7 @@ export default function BrandPage() {
               <div>
                 <div className="text-xl font-semibold uppercase tracking-[0.18em]">Vibe Corp</div>
                 <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-deck-mustard">
-                  Pleiades Field Office
+                  Field Crew
                 </div>
                 <div className="mt-4 flex items-center gap-2">
                   <Star points={7} className="h-3 w-3 text-deck-mustard" />

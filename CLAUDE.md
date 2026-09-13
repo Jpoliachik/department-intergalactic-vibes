@@ -77,7 +77,8 @@ These apply to every printed artifact — the field-specialty deck, commendation
 - Earth festivals = grid spikes; we get assigned because we love it here (no conspiracy)
 - Aesthetic = cosmic industrial (trade union + retro space program) + psychedelic texture
 - Astrology = operational framework, not mysticism (Grid is organized by constellations)
-- Seven Stars = the Pleiades cluster; this weekend's crew = Pleiades Field Office
+- Seven Stars = the Pleiades cluster
+- **No "field office."** Dropped — it read as a branch of something, which raised questions (branch of what? how many? who runs it?) that the brand should not be answering. Crew are crew wherever they are. No regional structure, no posting, no HQ-and-branches.
 - Interaction tiers: sticker → commendation card → provisional induction
 - On-duty in uniform, off-duty at campsite
 
