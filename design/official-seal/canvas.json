@@ -15,69 +15,101 @@
       "x": 0,
       "y": 0,
       "w": 480,
-      "h": 600,
+      "h": 620,
       "page": "page-1"
     },
     {
-      "file": "WithStars.dc.html",
+      "file": "Shoulders.dc.html",
       "x": 580,
       "y": 0,
       "w": 480,
-      "h": 600,
+      "h": 620,
       "page": "page-1"
     },
     {
-      "file": "SingleRule.dc.html",
+      "file": "BalanceA.dc.html",
       "x": 1160,
       "y": 0,
       "w": 480,
-      "h": 600,
+      "h": 620,
       "page": "page-1"
     },
     {
-      "file": "Inked.dc.html",
+      "file": "BalanceB.dc.html",
       "x": 1740,
       "y": 0,
       "w": 480,
-      "h": 600,
+      "h": 620,
       "page": "page-1"
     },
     {
-      "file": "Beads.dc.html",
+      "file": "BeforeAfter.dc.html",
       "x": 0,
-      "y": 740,
-      "w": 480,
-      "h": 600,
-      "page": "page-1"
-    },
-    {
-      "file": "BeadsStars.dc.html",
-      "x": 580,
-      "y": 740,
-      "w": 480,
-      "h": 600,
-      "page": "page-1"
-    },
-    {
-      "file": "Full.dc.html",
-      "x": 1160,
-      "y": 740,
-      "w": 480,
-      "h": 600,
+      "y": 760,
+      "w": 1020,
+      "h": 900,
       "page": "page-1"
     },
     {
       "file": "ScaleTest.dc.html",
       "x": 0,
-      "y": 1480,
-      "w": 1220,
-      "h": 560,
+      "y": 1740,
+      "w": 900,
+      "h": 940,
       "page": "page-1"
+    },
+    {
+      "file": "Beads.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-2"
+    },
+    {
+      "file": "BeadsStars.dc.html",
+      "x": 580,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-2"
+    },
+    {
+      "file": "Full.dc.html",
+      "x": 1160,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-2"
+    },
+    {
+      "file": "WithStars.dc.html",
+      "x": 1740,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-2"
+    },
+    {
+      "file": "SingleRule.dc.html",
+      "x": 2320,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-2"
+    },
+    {
+      "file": "Inked.dc.html",
+      "x": 2900,
+      "y": 0,
+      "w": 480,
+      "h": 600,
+      "page": "page-2"
     },
     {
       "file": "FieldStamp.dc.html",
       "x": 0,
-      "y": 0,
+      "y": 740,
       "w": 520,
       "h": 640,
       "page": "page-2"
@@ -85,7 +117,7 @@
     {
       "file": "Struck.dc.html",
       "x": 620,
-      "y": 0,
+      "y": 740,
       "w": 520,
       "h": 640,
       "page": "page-2"
@@ -93,7 +125,7 @@
     {
       "file": "Notarial.dc.html",
       "x": 1240,
-      "y": 0,
+      "y": 740,
       "w": 520,
       "h": 640,
       "page": "page-2"
@@ -101,31 +133,31 @@
     {
       "file": "Cluster.dc.html",
       "x": 1860,
-      "y": 0,
+      "y": 740,
       "w": 520,
       "h": 640,
       "page": "page-2"
     },
     {
       "file": "Ribbon.dc.html",
-      "x": 0,
-      "y": 780,
+      "x": 2480,
+      "y": 740,
       "w": 520,
       "h": 640,
       "page": "page-2"
     },
     {
       "file": "Monogram.dc.html",
-      "x": 620,
-      "y": 780,
+      "x": 3100,
+      "y": 740,
       "w": 520,
       "h": 640,
       "page": "page-2"
     },
     {
       "file": "LabelTest.dc.html",
-      "x": 1240,
-      "y": 780,
+      "x": 0,
+      "y": 1520,
       "w": 1060,
       "h": 400,
       "page": "page-2"
@@ -138,15 +170,15 @@
       "y": 0,
       "w": 300,
       "page": "page-1",
-      "text": "Black on white, VIBES / CERTIFIED.\n\nTop row: the plain stamp. Bottom row: Notarial's elements borrowed back in, in increasing doses.\n\nThe text placement is rebuilt. Top-arc glyphs grow outward from their baseline and bottom-arc glyphs grow inward, so putting both on one radius lands them in two different bands \u2014 that was the wrongness. Each baseline is now offset half a cap height the other way.\n\nThe waves are placed by their measured bounding box, not by the canvas centre: the artwork's centre is (75.87, 74.05) on a 150 grid, not (75, 75)."
+      "text": "Balance pass on the two constructions with star shoulders.\n\nOne measure was wrong: the type band was 9.7 units deep against a 79-unit centre. A ring that thin next to a centre that big reads as a caption around a logo, not as half of one mark.\n\nType 13.5 to 17, stars 10.8 to 16, waves 84 to 80 \u2014 and the rules move in too, since growing type without moving the rules just crowds it."
     },
     {
       "id": "history",
-      "x": 2400,
+      "x": 3700,
       "y": 0,
       "w": 280,
       "page": "page-2",
-      "text": "The six constructions, kept for the record. Field Stamp is the one that was picked."
+      "text": "Everything earlier, kept for the record. The beaded stamp on page one came out of these."
     }
   ],
   "launch": {
