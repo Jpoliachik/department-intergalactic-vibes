@@ -10,6 +10,7 @@ import {
   WAVE_PATHS,
   ringTypeArc,
   ringTypeBaseline,
+  ringTypeTracking,
 } from "@/lib/brand";
 import { SEVEN_POINT } from "@/components/star";
 import { useId } from "react";
@@ -98,27 +99,27 @@ export function Stamp({
           />
         ))}
       </defs>
+      {/* Tracking is per line, not shared: the two baselines sit on different
+          radii, so one letter-spacing value gives them two different optical
+          rhythms. ringTypeTracking divides that back out. */}
       <g
         fill={ink}
         fontWeight={700}
         textAnchor="middle"
         fontSize={S.fontSize}
-        letterSpacing={S.fontSize * S.tracking}
         fontFamily="ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', sans-serif"
       >
-        {top && (
-          <text>
-            <textPath href={`#${uid}-top`} startOffset={RING_TYPE_START_OFFSET}>
-              {top.toUpperCase()}
-            </textPath>
-          </text>
-        )}
-        {bottom && (
-          <text>
-            <textPath href={`#${uid}-bottom`} startOffset={RING_TYPE_START_OFFSET}>
-              {bottom.toUpperCase()}
-            </textPath>
-          </text>
+        {([
+          ["top", top],
+          ["bottom", bottom],
+        ] as const).map(([place, word]) =>
+          word ? (
+            <text key={place} letterSpacing={ringTypeTracking(S.band, S.fontSize, place, S.tracking)}>
+              <textPath href={`#${uid}-${place}`} startOffset={RING_TYPE_START_OFFSET}>
+                {word.toUpperCase()}
+              </textPath>
+            </text>
+          ) : null,
         )}
       </g>
 

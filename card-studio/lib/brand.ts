@@ -98,6 +98,33 @@ export function ringTypeArc(cx: number, cy: number, radius: number, place: "top"
 }
 
 /**
+ * TRAP 3 — the two lines need DIFFERENT tracking to look equally tracked.
+ *
+ * Letter-spacing is a distance along the BASELINE, and the two baselines sit on
+ * different radii (that is trap 1). The same spacing therefore subtends a
+ * bigger angle on the tighter top arc than on the wider bottom one.
+ *
+ * What the eye actually reads is not the gap at the baseline but the gap
+ * through the middle of the letters — and because the glyphs stand radially,
+ * gaps FAN OPEN with height on the top arc and PINCH SHUT on the bottom one.
+ * Measured at mid-cap (which is the band radius for both lines), the gap comes
+ * out as `track * band / baseline`. Top is looser, bottom is tighter, and the
+ * two words look like they were set by different people.
+ *
+ * Dividing that back out gives both lines the same optical rhythm: the top
+ * line's tracking is reduced and the bottom line's increased, by exactly the
+ * ratio of its baseline to the band.
+ */
+export function ringTypeTracking(
+  bandRadius: number,
+  fontSize: number,
+  place: "top" | "bottom",
+  tracking: number,
+) {
+  return fontSize * tracking * (ringTypeBaseline(bandRadius, fontSize, place) / bandRadius);
+}
+
+/**
  * TRAP 2 — the correction that is NOT needed. Recorded because it is the
  * obvious next move and it is wrong.
  *

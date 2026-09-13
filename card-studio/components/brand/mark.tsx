@@ -6,6 +6,7 @@ import {
   RING_TYPE_START_OFFSET,
   ringTypeArc,
   ringTypeBaseline,
+  ringTypeTracking,
   GRADIENT_STOPS,
   MARK_CENTER,
   MARK_VIEWBOX,
@@ -241,14 +242,14 @@ export function Seal({
           are meant to read, and mustard is what "read this" looks like. */}
       <g fill={PALETTE.mustard.hex} fontWeight={700} textAnchor="middle">
         {top && (
-          <text fontSize={topSize} letterSpacing={topSize * 0.16}>
+          <text fontSize={topSize} letterSpacing={ringTypeTracking(typeRadius, topSize, "top", 0.16)}>
             <textPath href={`#${topArc}`} startOffset={RING_TYPE_START_OFFSET}>
               {top.toUpperCase()}
             </textPath>
           </text>
         )}
         {bottom && (
-          <text fontSize={botSize} letterSpacing={botSize * 0.18}>
+          <text fontSize={botSize} letterSpacing={ringTypeTracking(typeRadius, botSize, "bottom", 0.18)}>
             <textPath href={`#${botArc}`} startOffset={RING_TYPE_START_OFFSET}>
               {bottom.toUpperCase()}
             </textPath>
