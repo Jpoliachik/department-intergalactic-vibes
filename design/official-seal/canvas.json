@@ -207,6 +207,30 @@
       "page": "page-2"
     },
     {
+      "file": "StickerOutside.dc.html",
+      "x": 0,
+      "y": 5490,
+      "w": 480,
+      "h": 660,
+      "page": "page-2"
+    },
+    {
+      "file": "StickerOutsideLow.dc.html",
+      "x": 580,
+      "y": 5490,
+      "w": 480,
+      "h": 660,
+      "page": "page-2"
+    },
+    {
+      "file": "StickerOutsideSpec.dc.html",
+      "x": 1160,
+      "y": 5490,
+      "w": 480,
+      "h": 660,
+      "page": "page-2"
+    },
+    {
       "file": "Beads.dc.html",
       "x": 0,
       "y": 0,
