@@ -46,11 +46,12 @@ Every path ends somewhere the device remembers, and a return visit picks up ther
 | `src/content.ts` | Site-only copy that isn't a single screen: daily readings, return greetings, tuning labels, rare lines, calibration questions, and each post's portrait and wisdom root. |
 | `src/engine.ts` | How screens play: typing, skip, transitions, choices, the code field, the tuning bar. |
 | `src/deck.json` | **Generated.** Card facts from `card-studio/deck`. Don't hand-edit it; run `npm run sync`. |
-| `src/deck.ts` | Lookups over the deck, plus art preloading. |
+| `src/deck.ts` | Lookups over the deck, the card-art `<picture>`, and preloading it. |
+| `src/brand/` | **Generated.** Copies of `brand/mark/glyph.svg` (injected into both pages at build) and `brand/tokens.css` (imported by the CSS). |
 | `src/state.ts` | What the device remembers: `{ card?, leaning?, listened? }` in localStorage. |
 | `src/hz.ts` | The 7.83 Hz reading and its occasional surge. |
 | `src/style.css` | All styling. One dark look, on purpose. |
-| `scripts/sync-deck.mjs` | Deck → `deck.json`, card art → `public/cards/`, fonts → `public/fonts/`, `icon-512.png`. |
+| `scripts/sync-deck.mjs` | Deck → `deck.json`, card art → `public/cards/`, fonts → `public/fonts/`, and the brand glyph and tokens → `src/brand/`. |
 | `scripts/og.mjs` | Renders `public/og.png` (the link preview) in real Plex Mono using card-studio's puppeteer. |
 | `public/favicon.svg`, `public/apple-touch-icon.png` | **Generated** by `card-studio/scripts/export-brand.mjs`, not by this folder. |
 
@@ -58,12 +59,12 @@ Every path ends somewhere the device remembers, and a return visit picks up ther
 
 The Vercel project is `vibecorp`, with root directory `site/`. **Pushing to `main` deploys to production.** Vercel skips the build when nothing in `site/` changed. Run `npm run build` before pushing; a failed build leaves the previous deploy live.
 
-`vercel.json` pins the Vite preset and rewrites `/XX-00`-shaped paths to the channel. It also caches `/assets`, `/cards` and `/fonts` immutably for a year. Card art and bundles have content-hashed names, so that's safe. **Fonts don't**: if you ever replace a font file, give it a new name.
+`vercel.json` pins the Vite preset and rewrites `/XX-00`-shaped paths to the channel. It caches `/assets` and `/cards` immutably for a year, which is safe because their names are content-hashed. Fonts have fixed names, so they're cached for 30 days instead.
 
 ## Performance notes
 
 - The app is about 15KB of gzipped JS. Most of that is copy.
 - Card art is AVIF (WebP fallback) at 440 and 880px, roughly 20–100KB per card. Only the card being shown is fetched.
-- The two Plex weights used for body text are preloaded. All fonts use `font-display: swap`.
+- Only Plex 400, the first screen's face, is preloaded. The other three faces load while the tuning bar runs, so nothing re-lays out mid-type. All fonts use `font-display: swap`.
 - There are no spinners. The tuning bar is the loader: it runs at least 1.4s, waits for the art to decode (8s at most), then completes. On a slow connection it just reads as a weak signal.
 - There's no analytics, no backend, no cookies, and no accounts.

@@ -2,7 +2,7 @@
 // out, then two to four choices. Everything else — transitions, the caret,
 // skipping, the tuning bar — lives here so screens.ts can read like a script.
 
-import { ART_SIZES, type Card } from "./deck";
+import { artPicture, type Card } from "./deck";
 
 export type Block =
   | { kind: "p"; text: string; dim?: boolean }
@@ -20,6 +20,8 @@ export type Screen = {
   input?: (code: string) => void;
   /** Show "Let the channel forget me" in the footer. */
   forget?: () => void;
+  /** This screen may, rarely, offer "Did you hear that?"; this is where it goes. */
+  rare?: () => void;
 };
 
 export const p = (text: string): Block => ({ kind: "p", text });
@@ -33,6 +35,10 @@ export const card = (c: Card, opts: { faded?: boolean; resolve?: boolean } = {})
   ...opts,
 });
 
+/** The rare "Did you hear that?". `force` is set by #rare; screens.ts sets `go`. */
+export const rare = { chance: 0.04, force: false, go: (_back: () => void) => {} };
+
+const wrap = document.querySelector<HTMLElement>(".wrap")!;
 const main = document.getElementById("screen")!;
 const foot = document.getElementById("foot")!;
 const motion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -42,32 +48,46 @@ const CPS = 120;
 /** Extra beats after punctuation, so sentences land. */
 const PAUSE: Record<string, number> = { ".": 90, "?": 90, "!": 90, "…": 140, ":": 60, ",": 35 };
 
-let run = 0; // bumps on every new screen; stale async work checks it and stops
-let fast = false; // true once the reader taps to skip
-let finishLine: (() => void) | null = null; // completes the line being typed
+/**
+ * One per screen. A newer screen makes the old one stale (`alive` goes
+ * false and its pending work stops). A tap skips: every beat still to come
+ * on this screen, typing and pauses alike, resolves at once.
+ */
+type Run = { alive: () => boolean; skipped: boolean; skip: () => void; onSkip: Promise<void> };
 
-/** Skip ahead: the current line lands whole, the rest of the screen follows at once. */
-function skip() {
-  fast = true;
-  finishLine?.();
+let current: Run;
+
+function begin(): Run {
+  let resolve!: () => void;
+  const onSkip = new Promise<void>((r) => (resolve = r));
+  const run: Run = {
+    alive: () => current === run,
+    skipped: false,
+    skip: () => ((run.skipped = true), resolve()),
+    onSkip,
+  };
+  current = run;
+  if (motion.matches) run.skip();
+  return run;
 }
 
-const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, fast ? 0 : ms));
+begin();
+
+const wait = (run: Run, ms: number) =>
+  run.skipped ? Promise.resolve() : Promise.race([new Promise<void>((r) => setTimeout(r, ms)), run.onSkip]);
 
 /* ---------- skipping and keys ---------- */
 
 main.addEventListener("pointerdown", (e) => {
-  if (!(e.target as Element).closest("button, input, a")) skip();
+  if (!(e.target as Element).closest("button, input, a")) current.skip();
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
-  const buttons = [...main.querySelectorAll<HTMLButtonElement>(".choice")];
-  if (e.key === " " || e.key === "Enter") {
-    if (!buttons.length) {
-      skip();
-      e.preventDefault();
-    }
+  if ((e.target as Element).closest("input, button, a") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const buttons = main.querySelectorAll<HTMLButtonElement>(".choice");
+  if ((e.key === " " || e.key === "Enter") && !buttons.length) {
+    current.skip();
+    e.preventDefault();
   } else if (/^[1-9]$/.test(e.key)) {
     buttons[Number(e.key) - 1]?.click(); // a small DOS courtesy
   }
@@ -75,77 +95,91 @@ document.addEventListener("keydown", (e) => {
 
 /* ---------- screens ---------- */
 
-async function clear(id: number) {
-  fast = motion.matches;
-  if (main.childElementCount && !motion.matches) {
-    main.classList.add("leaving");
-    foot.classList.add("leaving");
+/** Fade the old screen out; hand back a fresh run, or null if superseded. */
+async function clear(): Promise<Run | null> {
+  const run = begin();
+  const hadFocus = main.contains(document.activeElement);
+  if (main.querySelector(":scope > :not(noscript)") && !motion.matches) {
+    wrap.classList.add("leaving");
     await new Promise((r) => setTimeout(r, 160));
   }
-  if (id !== run) return false;
+  if (!run.alive()) return null;
   main.replaceChildren();
   foot.replaceChildren();
-  main.classList.remove("leaving");
-  foot.classList.remove("leaving");
+  wrap.classList.remove("leaving");
   window.scrollTo({ top: 0 });
-  return true;
+  if (hadFocus) main.focus({ preventScroll: true }); // keep keyboard users on the page
+  return run;
 }
 
-export async function show(s: Screen) {
-  const id = ++run;
-  const alive = () => id === run;
-  if (!(await clear(id))) return;
+export function show(s: Screen): void {
+  void play(s);
+}
+
+async function play(s: Screen) {
+  const run = await clear();
+  if (!run) return;
 
   for (const b of s.blocks) {
     const el = render(b);
     main.append(el);
     keepInView(el);
-    if (b.kind === "p") await type(el, b.text, alive);
-    else await wait(b.kind === "card" ? (b.resolve ? 650 : 280) : 170);
-    if (!alive()) return;
+    if (b.kind === "p") await type(run, el, b.text);
+    else await wait(run, b.kind === "card" ? (b.resolve ? 650 : 280) : 170);
+    if (!run.alive()) return;
   }
 
+  let list = s.choices ?? [];
+  if (s.rare && (rare.force || Math.random() < rare.chance)) {
+    rare.force = false;
+    const back = s.rare;
+    list = [...list, ["Did you hear that?", () => rare.go(back)]];
+  }
   if (s.input) main.append(codeForm(s.input));
-  if (s.choices?.length) main.append(choices(s.choices));
+  if (list.length) main.append(choices(run, list));
   if (s.forget) foot.append(forgetButton(s.forget));
   keepInView(main.lastElementChild);
 }
 
 /**
- * The loading state, in-world. The bar fills over at least `minMs`, waits
+ * The loading state, in-world. The bar fills over at least 1.4s, waits
  * (creeping) for `ready`, then completes and hands over. On a slow festival
- * connection it just reads as a weak signal.
+ * connection it just reads as a weak signal. Not skippable.
  */
-export async function tune(text: string, ready: Promise<unknown>, then: () => void) {
-  const id = ++run;
-  if (!(await clear(id))) return;
+export function tune(text: string, ready: Promise<unknown>, then: () => void): void {
+  void playTune(text, ready, then);
+}
 
-  const el = document.createElement("p");
-  el.className = "tune";
-  el.innerHTML = `<span class="sr-only"></span><span aria-hidden="true"></span>`;
-  el.children[0].textContent = `${text}…`;
-  const bar = el.children[1];
+async function playTune(text: string, ready: Promise<unknown>, then: () => void) {
+  const run = await clear();
+  if (!run) return;
+
+  const bar = h("span");
+  bar.setAttribute("aria-hidden", "true");
+  const el = h("p", "tune");
+  el.append(h("span", "", text), h("span", "sr-only", "…"), bar);
   main.append(el);
 
-  let ready_ = false;
-  ready.finally(() => (ready_ = true));
+  let isReady = false;
+  ready.finally(() => (isReady = true));
   const minMs = motion.matches ? 300 : 1400;
   const cells = 14;
   const start = performance.now();
   let last = start;
   let progress = 0;
+  let drawn = -1;
 
   await new Promise<void>((done) => {
     const frame = (now: number) => {
-      if (id !== run) return done();
+      if (!run.alive()) return done();
       const t = now - start;
       const dt = now - last;
       last = now;
-      if ((ready_ && t >= minMs) || t > 9000) progress = Math.min(1, progress + dt / 220);
+      if ((isReady && t >= minMs) || t > 9000) progress = Math.min(1, progress + dt / 220);
       else if (t < minMs) progress = 0.9 * (1 - (1 - t / minMs) ** 2);
       else progress = Math.min(0.97, progress + dt / 40000);
       const on = Math.round(progress * cells);
-      bar.textContent = `${text}\n${"▰".repeat(on)}${"▱".repeat(cells - on)}`;
+      if (on !== drawn) bar.textContent = "▰".repeat((drawn = on)) + "▱".repeat(cells - on);
       if (progress >= 1) return done();
       requestAnimationFrame(frame);
     };
@@ -153,63 +187,58 @@ export async function tune(text: string, ready: Promise<unknown>, then: () => vo
   });
 
   await new Promise((r) => setTimeout(r, 220));
-  if (id === run) then();
+  if (run.alive()) then();
 }
 
 /* ---------- typing ---------- */
 
-async function type(el: HTMLElement, text: string, alive: () => boolean) {
+async function type(run: Run, el: HTMLElement, text: string) {
   // The full line is laid out from the start (the unrevealed part is
   // invisible), so words never jump to the next line mid-type.
   const on = el.querySelector<HTMLElement>(".on")!;
   const off = el.querySelector<HTMLElement>(".off")!;
+  let shown = 0;
   const reveal = (n: number) => {
+    if (n === shown) return;
+    shown = n;
     on.textContent = text.slice(0, n);
     off.textContent = text.slice(n);
   };
-  if (fast) return reveal(text.length);
+  if (run.skipped) return reveal(text.length);
 
   el.classList.add("typing");
-  await new Promise<void>((resolve) => {
-    let settled = false;
-    const done = () => {
-      if (settled) return;
-      settled = true;
-      finishLine = null;
-      resolve();
-    };
-    finishLine = () => (reveal(text.length), done());
-    let shown = 0;
+  const typed = new Promise<void>((done) => {
     let budget = 0;
     let hold = 0;
     let last = performance.now();
     const frame = (now: number) => {
-      if (settled) return;
-      if (!alive()) return done();
-      if (fast) return reveal(text.length), done();
+      if (!run.alive() || run.skipped) return done();
       const dt = Math.min(now - last, 50);
       last = now;
       if (hold > 0) hold -= dt;
       else {
         budget += (dt * CPS) / 1000;
-        while (budget >= 1 && shown < text.length) {
+        let n = shown;
+        while (budget >= 1 && n < text.length) {
           budget -= 1;
-          const ch = text[shown++];
-          if (PAUSE[ch] && text[shown] === " ") {
+          const ch = text[n++];
+          if (PAUSE[ch] && text[n] === " ") {
             hold = PAUSE[ch];
             budget = 0;
             break;
           }
         }
-        reveal(shown);
+        reveal(n);
       }
       if (shown >= text.length) return done();
       requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);
   });
+  await Promise.race([typed, run.onSkip]);
+  reveal(text.length);
   el.classList.remove("typing");
-  await wait(110);
+  await wait(run, 110);
 }
 
 /* ---------- rendering ---------- */
@@ -217,12 +246,11 @@ async function type(el: HTMLElement, text: string, alive: () => boolean) {
 function render(b: Block): HTMLElement {
   switch (b.kind) {
     case "p": {
-      const el = h("p", b.dim ? "p dim" : "p");
-      const full = h("span", "sr-only", b.text);
       const shown = h("span");
       shown.setAttribute("aria-hidden", "true");
       shown.append(h("span", "on"), h("span", "off", b.text));
-      el.append(full, shown);
+      const el = h("p", b.dim ? "p dim" : "p");
+      el.append(h("span", "sr-only", b.text), shown);
       return el;
     }
     case "label":
@@ -237,27 +265,15 @@ function render(b: Block): HTMLElement {
     case "card": {
       const c = b.card;
       const fig = h("figure", `post enter${b.faded ? " faded" : ""}${b.resolve ? " resolve" : ""}`);
-      const pic = h("picture", "art");
-      const avif = h("source");
-      avif.setAttribute("type", "image/avif");
-      avif.setAttribute("srcset", c.art.avif);
-      avif.setAttribute("sizes", ART_SIZES);
-      const webp = h("source");
-      webp.setAttribute("type", "image/webp");
-      webp.setAttribute("srcset", c.art.webp);
-      webp.setAttribute("sizes", ART_SIZES);
-      const img = h("img") as HTMLImageElement;
-      Object.assign(img, { src: c.art.src, width: 880, height: 880, alt: `Card art for ${c.name}`, decoding: "async" });
-      pic.append(avif, webp, img);
       const cap = h("figcaption", "name");
       cap.append(h("b", "", c.name), h("span", "code", b.faded ? "unconfirmed" : c.code));
-      fig.append(pic, cap, h("p", "desig", b.faded ? "a leaning, not a post" : c.designation));
+      fig.append(artPicture(c), cap, h("p", "desig", b.faded ? "a leaning, not a post" : c.designation));
       return fig;
     }
   }
 }
 
-function choices(list: Choice[]) {
+function choices(run: Run, list: Choice[]) {
   const nav = h("nav", "choices");
   nav.setAttribute("aria-label", "Choices");
   list.forEach(([text, go], i) => {
@@ -269,7 +285,8 @@ function choices(list: Choice[]) {
       nav.classList.add("chosen");
       btn.classList.add("picked");
       navigator.vibrate?.(8);
-      setTimeout(go, motion.matches ? 0 : 150);
+      // Let the pick register, unless something else (the mark) took over meanwhile.
+      setTimeout(() => run.alive() && go(), motion.matches ? 0 : 150);
     });
     nav.append(btn);
   });
@@ -279,23 +296,19 @@ function choices(list: Choice[]) {
 function codeForm(submit: (code: string) => void) {
   const form = h("form", "code enter") as HTMLFormElement;
   const input = h("input") as HTMLInputElement;
-  Object.assign(input, {
-    id: "code",
-    name: "code",
-    autocomplete: "off",
-    spellcheck: false,
-    maxLength: 5,
-    placeholder: "__-__",
-  });
+  Object.assign(input, { id: "code", name: "code", autocomplete: "off", spellcheck: false, maxLength: 5, placeholder: "__-__" });
   input.setAttribute("autocapitalize", "characters");
   input.setAttribute("autocorrect", "off");
   input.setAttribute("enterkeyhint", "send");
   input.setAttribute("aria-label", "The code from the top corner of your card");
-  // Shape it as they type: two letters, a dash, two numbers.
-  input.addEventListener("input", () => {
-    const raw = input.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
-    input.value = raw.length > 2 ? `${raw.slice(0, 2)}-${raw.slice(2, 4)}` : raw;
+  // Shape it as they type: two letters, a dash, two numbers. Leave it alone
+  // mid-composition, or some Android keyboards double the letters.
+  input.addEventListener("input", (e) => {
     input.classList.remove("nudge");
+    if ((e as InputEvent).isComposing) return;
+    const raw = input.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+    const shaped = raw.length > 2 ? `${raw.slice(0, 2)}-${raw.slice(2, 4)}` : raw;
+    if (shaped !== input.value) input.value = shaped;
   });
   const send = h("button", "choice primary", "Transmit") as HTMLButtonElement;
   send.type = "submit";
@@ -331,7 +344,7 @@ function keepInView(el: Element | null) {
   if (over > 0) window.scrollBy({ top: over, behavior: motion.matches ? "auto" : "smooth" });
 }
 
-function h(tag: string, className = "", text?: string) {
+export function h(tag: string, className = "", text?: string) {
   const el = document.createElement(tag);
   if (className) el.className = className;
   if (text !== undefined) el.textContent = text;

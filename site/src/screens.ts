@@ -4,7 +4,7 @@
 
 import { CALIBRATION, POSTS, RARE, READINGS, RETURNS, TUNING } from "./content";
 import { byCode, bySlug, preloadArt, shortName, type Card } from "./deck";
-import { card, dim, label, p, serif, show, stars, tune, type Choice } from "./engine";
+import { card, dim, label, p, rare, serif, show, stars, tune, type Block, type Choice } from "./engine";
 import { load, update, wipe } from "./state";
 
 const pick = <T>(list: T[]) => list[Math.floor(Math.random() * list.length)];
@@ -16,44 +16,58 @@ function hash(s: string) {
   return h >>> 0;
 }
 
-/** Set by #rare, so the rare moment can be seen without waiting for it. */
-export const flags = { rare: false };
+/** Fonts the deeper screens use but the first one doesn't. The tuning bar
+ *  waits for them with the art, so nothing re-lays out mid-type. */
+const fontsReady = () =>
+  Promise.all(["500 1em 'Plex Mono'", "italic 400 1em 'Plex Mono'", "italic 500 1em Cormorant"].map((f) => document.fonts.load(f))).catch(
+    () => {},
+  );
 
-/** Now and then, on the screens people return to, something extra. */
-function withRare(list: Choice[], back: () => void): Choice[] {
-  if (!flags.rare && Math.random() >= 0.04) return list;
-  flags.rare = false;
-  return [...list, ["Did you hear that?", () => go.rare(back)]];
-}
-
-/** Where the lore rooms lead back to, depending on what's on file. */
-function backHome(): Choice[] {
+/** Where "home" is for this device: their post, their reading, or nowhere yet. */
+function home(): Choice | undefined {
   const m = load();
-  if (m.card) return [["Back to your post", () => go.post()]];
-  if (m.leaning) return [["Back to your reading", () => go.leaning("return")]];
-  return [];
+  if (m.card) return ["Back to your post", () => go.post()];
+  if (m.leaning) return ["Back to your reading", () => go.leaning()];
 }
-const loreExit = (): Choice => backHome()[0] ?? ["Could it read me?", () => go.offer()];
+const homeChoices = (): Choice[] => {
+  const h = home();
+  return h ? [h] : [];
+};
+/** The way out of a lore room: home if there is one, otherwise an offer. */
+const loreExit = (): Choice => home() ?? ["Could it read me?", () => go.offer()];
 
-const current = () => bySlug(load().card);
+/** A screen about the visitor's own post; without one on file, start over. */
+const withPost =
+  (screen: (c: Card) => void) =>
+  (): void => {
+    const c = bySlug(load().card);
+    return c ? screen(c) : go.start();
+  };
+
+const handedACard: Choice = ["I've since been handed a card", () => go.askCode()];
+const mayHandYou = [p("Keep listening."), p("Someone may hand you something.")];
 
 export const go = {
   start(): void {
     const m = load();
-    if (m.card) return go.post("return");
-    if (m.leaning) return go.leaning("return");
+    const c = bySlug(m.card);
+    if (c) {
+      const [a, b] = pick(RETURNS)(shortName(c), c.name);
+      return go.post({ intro: [p(a), dim(b)] });
+    }
+    if (m.leaning) return go.leaning();
     show({
-      blocks: m.listened
-        ? [p("Signal detected."), p("Familiar, this time. You've listened here before."), p("How did you find us?")]
-        : [p("Signal detected."), p("Faint, but it's there. Something about you registered on the Grid."), p("How did you find us?")],
-      choices: withRare(
-        [
-          ["Someone handed me a card", go.askCode],
-          ["Someone took my reading", go.inspected],
-          ["I'm not sure", go.listen],
-        ],
-        go.start,
-      ),
+      blocks: [
+        p("Signal detected."),
+        p(m.listened ? "Familiar, this time. You've listened here before." : "Faint, but it's there. Something about you registered on the Grid."),
+        p("How did you find us?"),
+      ],
+      choices: [
+        ["Someone handed me a card", go.askCode],
+        ["Someone took my reading", go.inspected],
+        ["I'm not sure", go.listen],
+      ],
+      rare: go.start,
     });
   },
 
@@ -62,7 +76,7 @@ export const go = {
   askCode(): void {
     show({
       blocks: [p("Your card carries a code in its top corner."), p("Read it to us.")],
-      input: (v) => go.transmit(v),
+      input: go.transmit,
       choices: [["Never mind", go.start]],
     });
   },
@@ -70,63 +84,55 @@ export const go = {
   transmit(raw: string): void {
     const c = byCode(raw);
     if (!c)
-      return void show({
+      return show({
         blocks: [p("That designation isn't on any register we hold."), dim("Check the corner of the card. Two letters, two numbers.")],
         choices: [
           ["Read it again", go.askCode],
           ["Never mind", go.start],
         ],
       });
-    tune(pick(TUNING), preloadArt(c), () => {
+    tune(pick(TUNING), Promise.all([preloadArt(c), fontsReady()]), () => {
       const before = load();
       update((m) => {
         m.card = c.slug;
         delete m.leaning;
       });
-      if (before.card === c.slug) return go.post("return");
+      if (before.card === c.slug) return go.start();
       const leaned = bySlug(before.leaning);
-      go.post(leaned ? (leaned === c ? "match" : { mismatch: leaned }) : "first");
-    });
-  },
-
-  post(mode: "hub" | "first" | "return" | "match" | { mismatch: Card } = "hub"): void {
-    const c = current();
-    if (!c) return go.start();
-    const intro =
-      mode === "first"
+      const intro = !leaned
         ? [p("There you are."), p("We have you on file.")]
-        : mode === "return"
-          ? (([a, b]) => [p(a), dim(b)])(pick(RETURNS)(shortName(c), c.name))
-          : mode === "match"
-            ? [p(`It was always ${c.name}.`), dim("The draw agrees with the reading. That doesn't happen as often as you'd think.")]
-            : typeof mode === "object"
-              ? [p("The Grid had its own reading."), dim(`You leaned toward ${mode.mismatch.name}. The draw says otherwise.`)]
-              : [];
-    const list: Choice[] = [
-      ["Your assignments", go.assignments],
-      ["Today's reading", go.today],
-      ["Read the card closer", go.closer],
-      ["Who's on the other end?", go.listen],
-    ];
-    show({
-      blocks: [...intro, card(c, { resolve: mode !== "hub" && mode !== "return" }), serif(c.tagline)],
-      choices: mode === "return" || mode === "hub" ? withRare(list, () => go.post()) : list,
-      forget: () => go.forget(() => go.post()),
+        : leaned === c
+          ? [p(`It was always ${c.name}.`), dim("The draw agrees with the reading. That doesn't happen as often as you'd think.")]
+          : [p("The Grid had its own reading."), dim(`You leaned toward ${leaned.name}. The draw says otherwise.`)];
+      go.post({ intro, arriving: true });
     });
   },
 
-  assignments(): void {
-    const c = current();
-    if (!c) return go.start();
+  /** The post hub. `arriving` is the first sight of it: the art resolves, and nothing rare interrupts. */
+  post({ intro = [], arriving = false }: { intro?: Block[]; arriving?: boolean } = {}): void {
+    withPost((c) =>
+      show({
+        blocks: [...intro, card(c, { resolve: arriving }), serif(c.tagline)],
+        choices: [
+          ["Your assignments", go.assignments],
+          ["Today's reading", go.today],
+          ["Read the card closer", go.closer],
+          ["Who's on the other end?", go.listen],
+        ],
+        forget: () => go.forget(() => go.post()),
+        rare: arriving ? undefined : () => go.post(),
+      }),
+    )();
+  },
+
+  assignments: withPost((c) =>
     show({
       blocks: [p(c.bio), dim("Your assignments:"), stars(c.assignments), dim("No end date. They're yours for as long as you carry the card.")],
-      choices: [["Back to your post", () => go.post()]],
-    });
-  },
+      choices: homeChoices(),
+    }),
+  ),
 
-  today(): void {
-    const c = current();
-    if (!c) return go.start();
+  today: withPost((c) => {
     const now = new Date();
     const day = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
     const reading = READINGS[hash(day + c.slug) % READINGS.length];
@@ -134,14 +140,12 @@ export const go = {
     tune("Reading", Promise.resolve(), () =>
       show({
         blocks: [dim(`${c.name} · ${when}`), serif(reading), dim("Come back tomorrow. It won't say the same thing.")],
-        choices: [["Back to your post", () => go.post()]],
+        choices: homeChoices(),
       }),
     );
-  },
+  }),
 
-  closer(): void {
-    const c = current();
-    if (!c) return go.start();
+  closer: withPost((c) => {
     const lore = POSTS[c.slug];
     show({
       blocks: [
@@ -154,38 +158,29 @@ export const go = {
         p(lore.heavy),
         dim(`Often found near ${lore.near}.`),
       ],
-      choices: [
-        ["Where does it come from?", go.root],
-        ["Back to your post", () => go.post()],
-      ],
+      choices: [["Where does it come from?", go.root], ...homeChoices()],
     });
-  },
+  }),
 
-  root(): void {
-    const c = current();
-    if (!c) return go.start();
+  root: withPost((c) =>
     show({
       blocks: [
         dim("Every post is older than Vibe Corp. Listeners were hearing this one long before anyone gave it a code."),
         ...POSTS[c.slug].root.map(p),
         dim("The card doesn't say any of this. It points."),
       ],
-      choices: [["Back to your post", () => go.post()]],
-    });
-  },
+      choices: homeChoices(),
+    }),
+  ),
 
   /* ---------- the listening path ---------- */
 
   listen(): void {
     const m = load();
     if (m.card || m.leaning)
-      return void show({
+      return show({
         blocks: [p("Hard to say. The line runs a long way back."), p("Some of it you can hear from here.")],
-        choices: [
-          [m.card ? "Who sent the card?" : "Who took the reading?", go.whatVC],
-          ["What is this channel?", go.whatChannel],
-          ...backHome(),
-        ],
+        choices: [[m.card ? "Who sent the card?" : "Who took the reading?", go.whatVC], ["What is this channel?", go.whatChannel], ...homeChoices()],
       });
     show({
       blocks: [p("Then listen. There's no wrong place to start.")],
@@ -299,23 +294,17 @@ export const go = {
 
   quiet(): void {
     const m = load();
-    if (m.card) return void show({ blocks: [p("Keep listening."), dim("You already carry something. The channel will be here.")], choices: backHome() });
-    if (m.leaning)
-      return void show({
-        blocks: [p("Keep listening."), p("Someone may hand you something.")],
-        choices: [...backHome(), ["I've since been handed a card", go.askCode]],
-      });
+    if (m.card) return show({ blocks: [p("Keep listening."), dim("You already carry something. The channel will be here.")], choices: homeChoices() });
+    if (m.leaning) return show({ blocks: mayHandYou, choices: [...homeChoices(), handedACard] });
     update((m) => (m.listened = true));
     show({
-      blocks: [p("Keep listening."), p("Someone may hand you something.")],
-      choices: withRare(
-        [
-          ["Take a reading after all", go.calibrate],
-          ["I was handed a card", go.askCode],
-        ],
-        go.quiet,
-      ),
+      blocks: mayHandYou,
+      choices: [
+        ["Take a reading after all", go.calibrate],
+        ["I was handed a card", go.askCode],
+      ],
       forget: () => go.forget(go.quiet),
+      rare: go.quiet,
     });
   },
 
@@ -349,41 +338,34 @@ export const go = {
         .filter((s) => score[s] === top)
         .sort();
       const slug = tied[hash(given.map((g) => g[0]).join("|")) % tied.length];
-      tune("Calibrating", preloadArt(bySlug(slug)!), () => {
+      tune("Calibrating", Promise.all([preloadArt(bySlug(slug)!), fontsReady()]), () => {
         update((m) => (m.leaning = slug));
-        go.leaning("first");
+        go.leaning({ arriving: true });
       });
     };
     ask(0);
   },
 
-  leaning(mode: "first" | "return"): void {
+  /** The reading's result. `arriving` is the moment it's first read out. */
+  leaning({ arriving = false } = {}): void {
     const c = bySlug(load().leaning);
     if (!c) return go.start();
-    const intro = mode === "return" ? [p("Your reading stands."), dim("It hasn't moved. Readings don't, much.")] : [p("Your signal leans toward…")];
-    const list: Choice[] = [
-      ["Who's on the other end?", go.listen],
-      ["I've since been handed a card", go.askCode],
-    ];
     show({
       blocks: [
-        ...intro,
+        ...(arriving ? [p("Your signal leans toward…")] : [p("Your reading stands."), dim("It hasn't moved. Readings don't, much.")]),
         card(c, { faded: true }),
         serif(c.tagline),
         dim("Carry these for now:"),
         stars(c.assignments),
         dim("The Grid confirms a post in person. Someone in purple carries the deck."),
       ],
-      choices: mode === "return" ? withRare(list, () => go.leaning("return")) : list,
-      forget: () => go.forget(() => go.leaning("return")),
+      choices: [["Who's on the other end?", go.listen], handedACard],
+      forget: () => go.forget(() => go.leaning()),
+      rare: arriving ? undefined : () => go.leaning(),
     });
   },
 
-  /* ---------- rare, and forgetting ---------- */
-
-  rare(back: () => void): void {
-    show({ blocks: [dim("…"), p(pick(RARE))], choices: [["Keep listening", back]] });
-  },
+  /* ---------- forgetting ---------- */
 
   forget(back: () => void): void {
     show({
@@ -401,3 +383,5 @@ export const go = {
     });
   },
 };
+
+rare.go = (back) => show({ blocks: [dim("…"), p(pick(RARE))], choices: [["Keep listening", back]] });

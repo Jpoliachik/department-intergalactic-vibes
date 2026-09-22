@@ -32,7 +32,7 @@ export function startHz(el: HTMLElement) {
   }
 
   setInterval(() => {
-    if (spiking) return;
+    if (spiking || document.hidden) return; // rest while nobody's looking
     if (Math.random() < 0.006) return spike(); // every few minutes, on average
     show(BASE + (Math.random() - 0.5) * 0.06);
   }, 1400);

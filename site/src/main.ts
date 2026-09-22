@@ -1,7 +1,8 @@
 import "./style.css";
 import { bySlug, preloadArt } from "./deck";
+import { rare } from "./engine";
 import { startHz } from "./hz";
-import { flags, go } from "./screens";
+import { go } from "./screens";
 import { load, wipe } from "./state";
 
 const hz = startHz(document.getElementById("hz")!);
@@ -12,10 +13,11 @@ const hook = location.hash.slice(1);
 if (hook) history.replaceState(null, "", location.pathname);
 if (hook === "forget") wipe();
 if (hook === "spike") setTimeout(hz.spike, 1200);
-if (hook === "rare") flags.rare = true;
+if (hook === "rare") rare.force = true;
 
-// A returning card holder sees their art within a second; start fetching now.
-const onFile = bySlug(load().card) ?? bySlug(load().leaning);
+// A returning visitor sees their art within a second; start fetching now.
+const m = load();
+const onFile = bySlug(m.card) ?? bySlug(m.leaning);
 if (onFile) void preloadArt(onFile);
 
 // vibecorp.live/GT-01 opens straight into tuning that code.

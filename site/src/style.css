@@ -1,6 +1,9 @@
 /* vibecorp.live — one dark look on purpose: the channel at night.
-   Colours are the brand tokens (brand/tokens.css) plus a ground a step
-   deeper than plum, and one alarm red for the surge. */
+   Colours are the brand tokens (copied in from brand/tokens.css by
+   `npm run sync`) plus a ground a step deeper than plum, two dimmer creams,
+   and one alarm red for the surge. */
+
+@import "./brand/tokens.css";
 
 @font-face {
   font-family: "Plex Mono";
@@ -34,11 +37,16 @@
 :root {
   color-scheme: dark;
   --ground: #120a1b;
-  --plum: #251435;
-  --cream: #f3e9d6;
+  --plum: var(--vc-plum);
+  --cream: var(--vc-cream);
   --cream-dim: #b9ad9c;
-  --cream-faint: #74697c;
-  --mustard: #e8a929;
+  --cream-faint: #8a8092; /* 4.5:1 on plum, the floor for small text */
+  --mustard: var(--vc-mustard);
+  /* Translucent versions, spelled out rather than color-mix()ed so iOS 15 keeps them. */
+  --rule: rgba(138, 128, 146, 0.4);
+  --frame: rgba(232, 169, 41, 0.55);
+  --press: rgba(232, 169, 41, 0.22);
+  --alarm-rule: rgba(236, 91, 63, 0.45);
   --alarm: #ec5b3f;
   --mono: "Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --serif: "Cormorant", "Iowan Old Style", Georgia, serif;
@@ -60,8 +68,7 @@ html {
 body {
   margin: 0;
   min-height: 100dvh;
-  background: var(--ground);
-  color: var(--cream);
+  color: var(--cream); /* no background here: html has it, and the sky below must show through */
   font: 400 clamp(15px, 3.9vw, 16px) / 1.6 var(--mono);
   padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
   -webkit-font-smoothing: antialiased;
@@ -104,9 +111,24 @@ body::before {
   border: 0;
 }
 
-:focus-visible {
+:focus-visible,
+.home:focus-visible,
+.choice:focus-visible,
+.forget:focus-visible {
   outline: 1px dashed var(--mustard);
   outline-offset: 3px;
+}
+main:focus {
+  outline: none; /* focused only to keep keyboard users on the page between screens */
+}
+
+/* The small uppercase voice: header, section labels, designations. */
+.bar,
+.label,
+.desig {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 /* ---------- header ---------- */
@@ -118,15 +140,12 @@ body::before {
   gap: 12px;
   padding-top: max(18px, env(safe-area-inset-top));
   padding-bottom: 10px;
-  border-bottom: 1px solid color-mix(in oklab, var(--cream-faint) 40%, transparent);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
   color: var(--cream-dim);
   transition: border-color 0.6s ease;
 }
 .bar.spiking {
-  border-color: color-mix(in oklab, var(--alarm) 45%, transparent);
+  border-color: var(--alarm-rule);
 }
 
 .home {
@@ -136,7 +155,6 @@ body::before {
   align-items: center;
   gap: 0.6em;
   padding: 6px 8px 6px 0;
-  color: inherit;
   transition: color 0.2s ease;
 }
 .home svg {
@@ -184,7 +202,6 @@ main {
   flex-direction: column;
   gap: 18px;
   padding-block: 28px 24px;
-  outline: none;
 }
 
 main > *,
@@ -193,8 +210,7 @@ footer > * {
     opacity 0.16s ease,
     transform 0.16s ease;
 }
-main.leaving > *,
-footer.leaving > * {
+.leaving :is(main, footer) > * {
   opacity: 0;
   transform: translateY(-4px);
 }
@@ -220,23 +236,20 @@ footer.leaving > * {
 .p .off {
   visibility: hidden;
 }
-/* The caret takes no width, so the line never reflows as it moves. */
+/* The caret sits out of flow at the end of the typed text, so it adds no
+   width and no break opportunity: words never jump lines as it passes. */
 .p.typing .on::after {
   content: "";
-  display: inline-block;
-  width: 0;
+  position: absolute;
+  width: 0.55em;
   height: 1.05em;
-  margin-right: -0.55em;
-  border-left: 0.55em solid var(--mustard);
-  vertical-align: -0.17em;
+  margin-top: 0.22em;
+  background: var(--mustard);
   animation: blink 0.9s steps(2) infinite;
 }
 
 .label {
   margin: 6px 0 -12px;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
   color: var(--cream-faint);
 }
 
@@ -277,8 +290,8 @@ ul.stars li::before {
   display: block;
   aspect-ratio: 1;
   overflow: hidden;
-  border: 1px solid color-mix(in oklab, var(--mustard) 55%, transparent);
-  background: color-mix(in oklab, var(--plum) 70%, var(--ground));
+  border: 1px solid var(--frame);
+  background: #1f112d; /* plum settling into the ground, for the moment before the art lands */
 }
 .post img {
   display: block;
@@ -301,6 +314,10 @@ ul.stars li::before {
   }
 }
 /* A leaning is only half received. */
+.post.faded .art {
+  border-style: dashed;
+  border-color: var(--cream-faint);
+}
 .post.faded img {
   filter: grayscale(0.7) contrast(0.8) brightness(0.7) blur(1.2px);
   opacity: 0.55;
@@ -326,13 +343,11 @@ ul.stars li::before {
 }
 .post.faded .code {
   color: var(--cream-faint);
-  border: 1px dashed var(--cream-faint);
+  border-style: dashed;
+  border-color: var(--cream-faint);
 }
 .post .desig {
   margin: -8px 0 0;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
   color: var(--cream-dim);
 }
 
@@ -343,8 +358,9 @@ ul.stars li::before {
   color: var(--mustard);
   letter-spacing: 0.1em;
   line-height: 1.9;
-  font-variant-numeric: tabular-nums;
-  white-space: pre-line;
+}
+.tune [aria-hidden] {
+  display: block; /* the bar gets its own line, so any label length fits a phone */
 }
 
 /* ---------- choices ---------- */
@@ -386,14 +402,13 @@ ul.stars li::before {
   }
 }
 .choice:active {
-  background: color-mix(in oklab, var(--mustard) 22%, transparent);
+  background: var(--press);
 }
 .choice:focus-visible {
-  outline-offset: 0;
+  outline-offset: -1px;
 }
 /* The DOS-menu moment: the pick inverts, the rest step back. */
-.choice.picked,
-.choice.picked:active {
+.choice.picked {
   background: var(--mustard);
   color: var(--ground);
 }

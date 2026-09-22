@@ -1,7 +1,7 @@
 /**
  * Copies the deck out of card-studio and into the site: the card text as
  * src/deck.json, the art as hashed AVIF/WebP in public/cards, plus the fonts
- * and the 512px icon the site serves. Everything it writes is committed, so
+ * and copies of the brand glyph and tokens for the page to build from. Everything it writes is committed, so
  * the Vercel build never needs card-studio or sharp.
  *
  * Run it after changing anything in card-studio/deck:
@@ -28,11 +28,6 @@ const WIDTHS = [440, 880];
 const AVIF = { quality: 50, effort: 6 };
 const WEBP = { quality: 74, effort: 6 };
 
-const COLOR = {
-  black: "#000000", // matches export-brand's apple-touch-icon ground
-  mustard: "#e8a929",
-};
-
 const kb = (n) => (n / 1024).toFixed(1).padStart(6) + " KB";
 const hash8 = (buf) => crypto.createHash("sha256").update(buf).digest("hex").slice(0, 8);
 
@@ -44,8 +39,15 @@ const cards = fs
   .map((d) => JSON.parse(fs.readFileSync(path.join(deckDir, d.name, "card.json"), "utf8")))
   .sort((a, b) => a.order - b.order);
 
+// card-studio normalises older card shapes when it reads them; this doesn't,
+// so refuse anything that would reach the site half-empty.
+for (const c of cards) {
+  const missing = ["slug", "code", "name", "designation", "function", "tagline", "bio"].filter((k) => !c[k]);
+  if (!Array.isArray(c.assignments) || c.assignments.length !== 2) missing.push("assignments");
+  if (missing.length) throw new Error(`${c.slug ?? "a card"} is missing ${missing.join(", ")}`);
+}
+
 fs.mkdirSync(cardsDir, { recursive: true });
-const written = new Set();
 const sizes = [];
 
 // Writes one encoded image as <slug>-<width>.<hash8>.<ext>; returns its URL.
@@ -53,21 +55,31 @@ const writeCardImage = (slug, width, ext, buf) => {
   const name = `${slug}-${width}.${hash8(buf)}.${ext}`;
   const file = path.join(cardsDir, name);
   if (!fs.existsSync(file)) fs.writeFileSync(file, buf);
-  written.add(name);
   sizes.push({ name, ext, width, bytes: buf.length });
   return `/cards/${name}`;
 };
 
+// Every encode is independent, so run them all at once; libvips spreads
+// them over its own thread pool.
+const encoded = await Promise.all(
+  cards.map((card) => {
+    const source = sharp(path.join(deckDir, card.slug, "image.png"));
+    return Promise.all(
+      WIDTHS.map(async (width) => {
+        const resized = source.clone().resize(width, width);
+        const [avif, webp] = await Promise.all([resized.clone().avif(AVIF).toBuffer(), resized.clone().webp(WEBP).toBuffer()]);
+        return { width, avif, webp };
+      }),
+    );
+  }),
+);
+
 const deck = [];
-for (const card of cards) {
-  const source = path.join(deckDir, card.slug, "image.png");
+for (const [i, card] of cards.entries()) {
   const art = { avif: [], webp: [] };
   let src;
 
-  for (const width of WIDTHS) {
-    const resized = sharp(source).resize(width, width);
-    const avif = await resized.clone().avif(AVIF).toBuffer();
-    const webp = await resized.clone().webp(WEBP).toBuffer();
+  for (const { width, avif, webp } of encoded[i]) {
     art.avif.push(`${writeCardImage(card.slug, width, "avif", avif)} ${width}w`);
     const webpUrl = writeCardImage(card.slug, width, "webp", webp);
     art.webp.push(`${webpUrl} ${width}w`);
@@ -95,6 +107,7 @@ console.log(`wrote src/deck.json (${deck.length} cards)`);
 
 // Anything left over is from an older version of the deck. Cleanup is
 // confined to public/cards — nothing else in public/ is ours to delete.
+const written = new Set(sizes.map((s) => s.name));
 for (const name of fs.readdirSync(cardsDir)) {
   if (!written.has(name)) {
     fs.rmSync(path.join(cardsDir, name));
@@ -127,33 +140,20 @@ for (const [name, from] of Object.entries(FONTS)) {
   console.log(`wrote public/fonts/${name}`);
 }
 
-// ─── 4. Manifest icon ────────────────────────────────────────────────────────
-// favicon.svg and apple-touch-icon.png are written by
-// card-studio/scripts/export-brand.mjs — not here. This adds only the 512px
-// icon (for a future manifest), drawn the same way as that touch icon: the
-// mustard glyph at 62% on the black ground, opaque, straight from the
-// exported mark so a change to the mark flows through.
+// ─── 4. Brand ────────────────────────────────────────────────────────────────
+// The header mark and the palette come from brand/, which is generated from
+// card-studio/lib/brand.ts. Copied in so the site builds on its own.
+// (favicon.svg and apple-touch-icon.png are written by
+// card-studio/scripts/export-brand.mjs, not here.)
 
-const glyph = fs.readFileSync(path.join(root, "brand/mark/glyph.svg"), "utf8");
-const glyphViewBox = glyph.match(/viewBox="([^"]+)"/)[1];
-const glyphPaths = glyph
-  .replace(/^[\s\S]*?<svg[^>]*>/, "")
-  .replace(/<\/svg>\s*$/, "")
-  .replace(/<!--[\s\S]*?-->\s*/g, "")
-  .replace('fill="currentColor"', `fill="${COLOR.mustard}"`);
-
-const ICON_PX = 512;
-const g = Math.round(ICON_PX * 0.62);
-const o = (ICON_PX - g) / 2;
-const icon =
-  `<svg xmlns="http://www.w3.org/2000/svg" width="${ICON_PX}" height="${ICON_PX}">` +
-  `<rect width="${ICON_PX}" height="${ICON_PX}" fill="${COLOR.black}"/>` +
-  `<svg x="${o}" y="${o}" width="${g}" height="${g}" viewBox="${glyphViewBox}">${glyphPaths}</svg></svg>`;
-await sharp(Buffer.from(icon))
-  .flatten({ background: COLOR.black })
-  .png({ compressionLevel: 9 })
-  .toFile(path.join(publicDir, "icon-512.png"));
-console.log("wrote public/icon-512.png");
+fs.mkdirSync(path.join(site, "src/brand"), { recursive: true });
+for (const [from, to] of [
+  ["brand/mark/glyph.svg", "src/brand/glyph.svg"],
+  ["brand/tokens.css", "src/brand/tokens.css"],
+]) {
+  fs.copyFileSync(path.join(root, from), path.join(site, to));
+  console.log(`wrote ${to}`);
+}
 
 // og.png needs IBM Plex Mono, which sharp's SVG renderer can't load from a
 // file — so it lives in scripts/og.mjs, which drives headless Chrome.

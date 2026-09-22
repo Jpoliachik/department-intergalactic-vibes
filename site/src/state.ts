@@ -2,7 +2,7 @@
 // Storage can be missing or throw (private windows, blocked site data), so
 // every access is guarded and the channel works without it.
 
-export type Memory = {
+type Memory = {
   /** Slug of the post they entered from a physical card. */
   card?: string;
   /** Slug the self-calibration leaned toward. */
@@ -21,7 +21,7 @@ export function load(): Memory {
   }
 }
 
-export function save(m: Memory) {
+function save(m: Memory) {
   try {
     localStorage.setItem(KEY, JSON.stringify(m));
   } catch {

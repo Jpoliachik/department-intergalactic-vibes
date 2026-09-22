@@ -23,11 +23,15 @@ const { default: puppeteer } = await import(pathToFileURL(require.resolve("puppe
 const font = (file) =>
   "data:font/woff2;base64," + fs.readFileSync(path.join(site, "public/fonts", file)).toString("base64");
 
+// Brand colours from brand/tokens.json; the ground is the site's own, a step below plum.
+const { palette } = JSON.parse(fs.readFileSync(path.join(root, "brand/tokens.json"), "utf8"));
+const C = { mustard: palette.mustard.hex, plum: palette.plum.hex, cream: palette.cream.hex, ground: "#120a1b" };
+
 const glyph = fs
   .readFileSync(path.join(root, "brand/mark/glyph.svg"), "utf8")
   .replace(/<!--[\s\S]*?-->\s*/g, "")
   .replace("<svg ", '<svg width="120" height="120" ')
-  .replace('fill="currentColor"', 'fill="#e8a929"');
+  .replace('fill="currentColor"', `fill="${C.mustard}"`);
 
 const html = `<!doctype html>
 <style>
@@ -35,13 +39,13 @@ const html = `<!doctype html>
   @font-face { font-family: Plex; font-weight: 500; src: url(${font("plex-mono-500.woff2")}) format("woff2"); }
   html, body { margin: 0; width: 1200px; height: 630px; }
   body {
-    background: radial-gradient(ellipse 85% 75% at 50% -12%, #251435 0%, #120a1b 72%);
+    background: radial-gradient(ellipse 85% 75% at 50% -12%, ${C.plum} 0%, ${C.ground} 72%);
     display: flex; align-items: center; justify-content: center; gap: 48px;
     font-family: Plex, monospace; -webkit-font-smoothing: antialiased;
   }
   svg { flex: none; }
-  .signal { color: #f3e9d6; font-size: 58px; font-weight: 400; letter-spacing: -0.01em; line-height: 1; }
-  .url { color: #e8a929; font-size: 21px; font-weight: 500; letter-spacing: 0.34em;
+  .signal { color: ${C.cream}; font-size: 58px; font-weight: 400; letter-spacing: -0.01em; line-height: 1; }
+  .url { color: ${C.mustard}; font-size: 21px; font-weight: 500; letter-spacing: 0.34em;
          text-transform: uppercase; margin-top: 22px; }
 </style>
 <body>
