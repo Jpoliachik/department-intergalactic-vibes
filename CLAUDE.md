@@ -16,6 +16,7 @@ Goal: surprise and delight people. Create memorable, slightly unreal interaction
 - **`LORE.md`** — index / map of the lore web. The table of contents for everything in `lore/`.
 - **`lore/`** — the lore web. One markdown file per entity, concept, thread, or artifact. Flat folder, cross-linked.
 - **`INSPECTION_REPORT.md`** — the Vibe Inspection Report: the stamped tear-off slip crew hand out as a quick opener. What's printed on it, the rules for its lines, and its print spec. Design source in `design/inspection-report/`.
+- **`site/`**: vibecorp.live, the channel. A one-page text adventure that card codes and inspection reports point to. Pushing `site/` to main deploys it. See `site/CLAUDE.md` for the site's settled decisions, and `site/README.md` for how it runs.
 
 ## Working with the lore web
 
