@@ -7,7 +7,7 @@ _A tear-off pad slip, stamped **VIBES CERTIFIED**._
 
 The fastest interaction crew have. Walk up to someone, give them a two-second once-over, tick one or two boxes, circle a vibe type, stamp it, hand it over. Then walk off — or stay, because it just bought you the next thirty seconds.
 
-It sits **before** the sticker → commendation card → provisional induction ladder. It asks nothing of the person and explains nothing about Vibe Corp. The depth lives on the cards; this is the laugh that gets you there.
+It's **Tier 1, the quick reading** — the first rung of report/sticker → commendation card → provisional induction. It asks nothing of the person and explains nothing about Vibe Corp. The depth lives on the cards; this is the laugh that gets you there.
 
 ## What's on it
 

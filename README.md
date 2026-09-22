@@ -16,7 +16,7 @@ Our job? Make sure the vibes are flowing the way they should. We take readings, 
 
 ## Who you are
 
-You're crew. You're the one who actually shows up — takes measurements, talks to locals, notices things. We work in small crews, posted wherever the readings need attention.
+You're crew. You're the one who actually shows up — takes measurements, talks to locals, notices things. We work in small crews, wherever the readings need attention.
 
 Right now, that's Earth.
 
@@ -28,9 +28,9 @@ You'll be kitted out before your first shift. Standard issue:
 
 - **Purple hi-vis vest** — with reflective striping.
 - **Hard hat, also purple** — with the seal on the front.
-- **ID badge on a lanyard** — your number, your current posting.
+- **ID badge on a lanyard** — your number.
 - **A field instrument** — varies by specialty. Most of us carry a resonance meter or frequency analyzer. Some carry calibration probes, grid testers, or other sensors. They beep. They light up. They occasionally hum a frequency you don't recognize. Trust your readings.
-- **Field kit** — a small carry pouch of inspection stickers, commendation cards, and provisional badges. You'll be handing these out all weekend.
+- **Field kit** — a pad of inspection reports, the **Vibes Certified** stamp, stickers, commendation cards, and provisional badges. You'll be handing these out all weekend.
 - **Walkie-talkie** — for calling HQ. Sometimes HQ answers. Sometimes the channel's just wind. Use it anyway, it might surprise you.
 
 ---
@@ -39,7 +39,7 @@ You'll be kitted out before your first shift. Standard issue:
 
 You'll talk to a lot of locals on shift. Most interactions are quick. A few go deep. You adjust on the fly.
 
-**Tier 1 — Quick reading.** Approach, take a measurement, slap an inspection sticker on them, brief observation, move on. Most of your shift is this.
+**Tier 1 — Quick reading.** Approach, take a measurement, mark what you find on an inspection report, stamp it, hand it over. Or just a sticker. Brief observation, move on. Most of your shift is this.
 
 **Tier 2 — Field commendation.** When someone's reading is unusually clean — or their conduct is exemplary — hand them a numbered commendation card. They're collectible. People love them.
 

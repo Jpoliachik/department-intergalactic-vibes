@@ -8,6 +8,8 @@ Guidance for Claude Code (and future-Justin) when working in this project.
 
 Goal: surprise and delight people. Create memorable, slightly unreal interactions. Eventually back the bit with a story-driven website that diggers can fall into.
 
+**Two registers.** The surface — the inspection report, stickers, the first ten seconds of any encounter — is funny first: it has to land a laugh from a stranger in two seconds, cold. The depth — commendation cards, the lore, the website — is sincere, and rewards whoever leans in. Surface artifacts buy the next thirty seconds; they never explain the universe. The tone rules below govern the depth.
+
 ## Files
 
 - **`README.md`** — public-facing in-universe orientation. The new-crew handbook. Read first.
@@ -55,8 +57,7 @@ Every lore file should pass the **"would someone who actually works the Grid wri
 - Vibe Corp takes itself seriously without being self-serious. The work is real. The Grid is real.
 - **Never wink at the reader.** No "isn't this fun" energy. No genre self-awareness. Play it straight. The whimsy emerges from sincerity, not from irony.
 - Vibe Corp is old, accreted, and mostly benign — not cynical, not evil, and **not a megacorp**. "Corp" here is a worn-in name nobody questions, not a satire target. No compliance jokes, no middle management, no office culture.
-- **No DMV energy.** Avoid the bureaucratic-comedy register: forms, paperwork, filing cabinets, citations, memos, clearance levels, red tape. The old-institution feel comes from age and accretion, not from process.
-- **Exception: the Vibe Inspection Report** is deliberately form-shaped and funny-first — a two-second gag, not lore. Its register stays on that slip; don't carry it into lore files. See `INSPECTION_REPORT.md`.
+- **No DMV energy.** Never satirise Vibe Corp as a bureaucracy: no paperwork, filing cabinets, citations, memos, clearance levels, red tape. The old-institution feel comes from age and accretion, not from process. (A crew member taking a reading and handing you the result is field work, not paperwork — which is why the inspection report is fine. Its deadpan-official jokes stay on the slip; they don't belong in lore.)
 - **Deliberately vague about what Vibe Corp *is*.** Company, guild, lineage, long-running misunderstanding — never settle it. Keep institutional vocabulary light: people are **crew**, not agents or employees. (Exception: Seven is "the Recurring Agent" — an older designation that predates the current scheme. Canon, keep it.)
 
 ## Card layout rules
@@ -81,8 +82,7 @@ These apply to every printed artifact — the field-specialty deck, commendation
 - Astrology = operational framework, not mysticism (Grid is organized by constellations)
 - Seven Stars = the Pleiades cluster
 - **No "field office."** Dropped — it read as a branch of something, which raised questions (branch of what? how many? who runs it?) that the brand should not be answering. Crew are crew wherever they are. No regional structure, no posting, no HQ-and-branches.
-- Interaction tiers: sticker → commendation card → provisional induction
-- Before the tiers: the **Vibe Inspection Report** — a stamped VIBES CERTIFIED slip, the quickest opener crew have. See `INSPECTION_REPORT.md`.
+- Interaction tiers: quick reading (the stamped **inspection report**, or a sticker) → commendation card → provisional induction. See `INSPECTION_REPORT.md`.
 - On-duty in uniform, off-duty at campsite
 
 ## Central mystery: Seven
@@ -101,10 +101,10 @@ See `lore/seven.md` and `lore/who-is-seven.md`. Open question — do not resolve
 
 ## Roadmap (open)
 
-- Populate `BRAND.md` (referenced in memory, not yet in repo).
+- **The website, now:** `vibecorp.live` is printed on the inspection report, so it goes out at Seven Stars. Whoever types it in off a slip needs somewhere worth landing — even one page. The full story-driven site diggers navigate comes later.
 - Lock the README tagline (currently _Keeping the galaxy's vibrations in tune._).
 - Decide which open threads to develop further (empty HQ, who is Seven).
-- Eventually: story-driven website that diggers can navigate. Links on physical cards point here.
+- Brand system lives in `brand/` (see `brand/README.md`); fold a written `BRAND.md` into it if one is ever needed.
 - Artifact design follows lore — not the other way around.
 
 ## Lore minimalism
