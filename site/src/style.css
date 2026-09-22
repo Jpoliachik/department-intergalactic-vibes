@@ -1,0 +1,494 @@
+/* vibecorp.live — one dark look on purpose: the channel at night.
+   Colours are the brand tokens (brand/tokens.css) plus a ground a step
+   deeper than plum, and one alarm red for the surge. */
+
+@font-face {
+  font-family: "Plex Mono";
+  src: url("/fonts/plex-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url("/fonts/plex-mono-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url("/fonts/plex-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant";
+  src: url("/fonts/cormorant-500-italic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --ground: #120a1b;
+  --plum: #251435;
+  --cream: #f3e9d6;
+  --cream-dim: #b9ad9c;
+  --cream-faint: #74697c;
+  --mustard: #e8a929;
+  --alarm: #ec5b3f;
+  --mono: "Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --serif: "Cormorant", "Iowan Old Style", Georgia, serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ground);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--ground);
+  color: var(--cream);
+  font: 400 clamp(15px, 3.9vw, 16px) / 1.6 var(--mono);
+  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The faint plum lift at the top of the sky. Fixed on its own layer, since
+   iOS ignores background-attachment: fixed. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(120% 70% at 50% 0%, var(--plum) 0%, var(--ground) 62%);
+}
+
+::selection {
+  background: var(--mustard);
+  color: var(--ground);
+}
+
+.wrap {
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 1px dashed var(--mustard);
+  outline-offset: 3px;
+}
+
+/* ---------- header ---------- */
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: max(18px, env(safe-area-inset-top));
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in oklab, var(--cream-faint) 40%, transparent);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  transition: border-color 0.6s ease;
+}
+.bar.spiking {
+  border-color: color-mix(in oklab, var(--alarm) 45%, transparent);
+}
+
+.home {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 6px 8px 6px 0;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+.home svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+  color: var(--mustard);
+}
+@media (hover: hover) {
+  .home:hover {
+    color: var(--cream);
+  }
+}
+
+.hz {
+  min-width: 9ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--mustard);
+  transition: color 0.4s ease;
+}
+.hz::before {
+  content: "●";
+  margin-right: 0.5em;
+  animation: blink 2.4s steps(2) infinite;
+}
+.hz.spike {
+  color: var(--alarm);
+}
+.hz.spike::before {
+  animation-duration: 0.3s;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* ---------- screen ---------- */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-block: 28px 24px;
+  outline: none;
+}
+
+main > *,
+footer > * {
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+main.leaving > *,
+footer.leaving > * {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.enter {
+  animation: rise 0.5s var(--ease) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.p {
+  margin: 0;
+  text-wrap: pretty;
+}
+.p.dim {
+  color: var(--cream-dim);
+  font-style: italic;
+}
+.p .off {
+  visibility: hidden;
+}
+/* The caret takes no width, so the line never reflows as it moves. */
+.p.typing .on::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 1.05em;
+  margin-right: -0.55em;
+  border-left: 0.55em solid var(--mustard);
+  vertical-align: -0.17em;
+  animation: blink 0.9s steps(2) infinite;
+}
+
+.label {
+  margin: 6px 0 -12px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+.serif {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(25px, 7vw, 28px);
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+ul.stars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+ul.stars li {
+  display: flex;
+  gap: 0.7em;
+}
+ul.stars li::before {
+  content: "✶";
+  color: var(--mustard);
+}
+
+/* ---------- the card ---------- */
+
+.post {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.post .art {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--mustard) 55%, transparent);
+  background: color-mix(in oklab, var(--plum) 70%, var(--ground));
+}
+.post img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* First time on file: the art resolves out of static. */
+.post.resolve img {
+  animation: resolve 1.3s var(--ease) both;
+}
+@keyframes resolve {
+  from {
+    opacity: 0.15;
+    filter: blur(16px) saturate(0.2) brightness(1.5);
+    transform: scale(1.03);
+  }
+  45% {
+    opacity: 0.8;
+  }
+}
+/* A leaning is only half received. */
+.post.faded img {
+  filter: grayscale(0.7) contrast(0.8) brightness(0.7) blur(1.2px);
+  opacity: 0.55;
+}
+.post .name {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.post .name b {
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.02em;
+}
+.post .code {
+  font-size: 12px;
+  color: var(--mustard);
+  border: 1px solid var(--mustard);
+  padding: 1px 7px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.post.faded .code {
+  color: var(--cream-faint);
+  border: 1px dashed var(--cream-faint);
+}
+.post .desig {
+  margin: -8px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* ---------- tuning ---------- */
+
+.tune {
+  margin: 0;
+  color: var(--mustard);
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+  font-variant-numeric: tabular-nums;
+  white-space: pre-line;
+}
+
+/* ---------- choices ---------- */
+
+.choices {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.choice {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 12px 12px 12px 30px;
+  color: var(--mustard);
+  font: 500 1em/1.4 var(--mono);
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease,
+    opacity 0.2s ease;
+}
+.choice::before {
+  content: "▸";
+  position: absolute;
+  left: 10px;
+}
+.choices .choice {
+  animation: rise 0.45s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+@media (hover: hover) {
+  .choice:hover {
+    background: var(--mustard);
+    color: var(--ground);
+  }
+}
+.choice:active {
+  background: color-mix(in oklab, var(--mustard) 22%, transparent);
+}
+.choice:focus-visible {
+  outline-offset: 0;
+}
+/* The DOS-menu moment: the pick inverts, the rest step back. */
+.choice.picked,
+.choice.picked:active {
+  background: var(--mustard);
+  color: var(--ground);
+}
+.chosen .choice:not(.picked) {
+  opacity: 0.3;
+}
+
+.choice.primary {
+  border: 1px solid var(--mustard);
+  text-align: center;
+  padding-left: 12px;
+}
+.choice.primary::before {
+  content: none;
+}
+
+/* ---------- the code field ---------- */
+
+form.code {
+  display: grid;
+  gap: 12px;
+}
+form.code input {
+  width: 100%;
+  padding: 14px 10px;
+  border: 1px solid var(--cream-faint);
+  border-radius: 0;
+  background: transparent;
+  color: var(--mustard);
+  font: 500 28px/1 var(--mono);
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+  caret-color: var(--mustard);
+  transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+form.code input:focus {
+  outline: none;
+  border-color: var(--mustard);
+}
+form.code input::placeholder {
+  color: var(--cream-faint);
+  opacity: 0.6;
+}
+form.code input.nudge {
+  animation: nudge 0.36s ease;
+}
+@keyframes nudge {
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+/* ---------- footer ---------- */
+
+footer {
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+  padding-top: 10px;
+  padding-bottom: max(22px, env(safe-area-inset-bottom));
+}
+
+.forget {
+  all: unset;
+  cursor: pointer;
+  padding: 6px 0;
+  font: 12px var(--mono);
+  color: var(--cream-faint);
+  transition: color 0.2s ease;
+}
+@media (hover: hover) {
+  .forget:hover {
+    color: var(--cream);
+    text-decoration: underline;
+  }
+}
+
+noscript p {
+  margin: 28px 0;
+  color: var(--cream-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
