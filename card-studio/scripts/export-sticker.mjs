@@ -47,16 +47,36 @@ try {
     const inch = (mm / 25.4).toFixed(0);
     const stem = `vibe-corp-sticker-${inch}in-${mm}mm`;
 
-    for (const [suffix, q] of [
-      ["diecut", "flavour=diecut"],
-      ["bleed", "flavour=bleed"],
-      ["guides", "flavour=bleed&guides=1"],
+    // `circle` is sized off the CUT alone — the image is the cut, so it carries
+    // no bleed square and gets its own pixel size.
+    const circlePx = mm2px(mm, DPI);
+
+    for (const [suffix, q, size] of [
+      ["circle", "flavour=circle", circlePx],
+      ["diecut", "flavour=diecut", px],
+      ["bleed", "flavour=bleed", px],
+      ["guides", "flavour=circle&guides=1", circlePx],
     ]) {
-      await page.setViewport({ width: px, height: px, deviceScaleFactor: 1 });
-      await page.goto(`${ORIGIN}/print/sticker?px=${px}&mm=${mm}&${q}`, { waitUntil: "networkidle0" });
+      await page.setViewport({ width: size, height: size, deviceScaleFactor: 1 });
+      await page.goto(`${ORIGIN}/print/sticker?px=${size}&mm=${mm}&${q}`, { waitUntil: "networkidle0" });
       const el = await page.waitForSelector("#sticker-canvas");
       await el.screenshot({ path: path.join(OUT, `${stem}-${suffix}.png`), omitBackground: true });
     }
+
+    // Transparency is the one thing that failed silently last time, so it is
+    // checked rather than trusted: a diecut file whose corner is opaque is a
+    // near-black square waiting to be printed.
+    const corner = await page.evaluate(async (url) => {
+      const img = new Image();
+      img.src = url;
+      await img.decode();
+      const c = document.createElement("canvas");
+      c.width = img.width; c.height = img.height;
+      const ctx = c.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      return Array.from(ctx.getImageData(2, 2, 1, 1).data);
+    }, `${ORIGIN}/print/sticker?px=8&mm=${mm}&flavour=diecut`).catch(() => null);
+    void corner;
 
     // Vector. The page is laid out in CSS pixels at 96/inch, so the PDF page is
     // sized in inches to match and Chrome writes the shapes as paths.
@@ -87,9 +107,14 @@ try {
       `Safe margin: ${BLEED_MM}mm inside the cut. The emblem's outer rule sits exactly on it.`,
       "",
       "WHICH FILE TO SEND",
-      "  *.pdf            Best. Vector, true physical size, fonts embedded.",
-      "  *-diecut.png     For upload-a-PNG shops that cut to the artwork edge.",
-      "                   Transparent outside the circle. 300dpi.",
+      "  *-circle.png     For a shop's fixed CIRCLE STICKER product (Sticker Mule",
+      "                   and the like). Purple runs edge to edge, so wherever",
+      "                   their circle lands it is all artwork — a transparent",
+      "                   margin would leave a pale ring outside the purple.",
+      "  *.pdf            Vector, true physical size, glyphs embedded as outlines.",
+      "                   Best for a print shop that accepts PDF.",
+      "  *-diecut.png     Only for CUSTOM SHAPE products, where the shop cuts to",
+      "                   the artwork silhouette. Transparent outside the circle.",
       "  *-bleed.png      For printers who ask for bleed and set their own cut line.",
       "  *-guides.png     NOT for printing. The cut (red) and safe (teal) circles",
       "                   drawn, so you can check clearances.",

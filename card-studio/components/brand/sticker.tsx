@@ -22,8 +22,12 @@ import { useId } from "react";
  *   bleed   — a square of artwork with the ground running past the cut, plus
  *             optional guide circles. For printers who ask for bleed and a cut
  *             line of their own.
- *   diecut  — nothing outside the cut circle at all, transparent. For the
- *             upload-a-PNG shops that generate the cut from the artwork edge.
+ *   diecut  — nothing outside the cut circle at all, transparent. For shops
+ *             that cut to the artwork silhouette (a custom-shape product).
+ *   circle  — ground edge to edge, with the SQUARE's inscribed circle treated
+ *             as the cut. For a shop's fixed "circle sticker" product, where
+ *             they cut their own circle and a transparent margin would leave a
+ *             pale ring outside the artwork.
  *
  * Geometry comes from stickerRadii(), which takes the REAL cut diameter in mm,
  * because the bleed is a fixed physical eighth of an inch — it is a much larger
@@ -43,7 +47,7 @@ export function Sticker({
   className?: string;
   style?: React.CSSProperties;
   cutMm?: number;
-  flavour?: "bleed" | "diecut";
+  flavour?: "bleed" | "diecut" | "circle";
   ground?: string;
   ink?: string;
   guides?: boolean;
@@ -53,8 +57,13 @@ export function Sticker({
   const fill = ground ?? STICKER.ground;
   const R = stickerRadii(cutMm);
   const C = R.box / 2;
+  // In `circle` the image IS the cut, so there is no bleed ring to allow for
+  // and the safe radius is measured off the square instead.
+  const safeR =
+    flavour === "circle" ? (R.box / 2) * ((cutMm - 2 * STICKER.safeMm) / cutMm) : R.safe;
+  const cutR = flavour === "circle" ? R.box / 2 : R.cut;
   // The emblem's outer rule lands on the safe circle.
-  const k = R.safe / EMBLEM.ruleRadius;
+  const k = safeR / EMBLEM.ruleRadius;
   const e = EMBLEM.center;
 
   const ring = (
@@ -120,16 +129,16 @@ export function Sticker({
       role="img"
       aria-label={title}
     >
-      {flavour === "bleed" ? (
-        <rect width={R.box} height={R.box} fill={fill} />
+      {flavour === "diecut" ? (
+        <circle cx={C} cy={C} r={cutR} fill={fill} />
       ) : (
-        <circle cx={C} cy={C} r={R.cut} fill={fill} />
+        <rect width={R.box} height={R.box} fill={fill} />
       )}
       {ring}
       {guides && (
         <g fill="none" strokeWidth={0.7} strokeDasharray="4 3">
-          <circle cx={C} cy={C} r={R.cut} stroke="#c4462a" />
-          <circle cx={C} cy={C} r={R.safe} stroke="#2fa090" />
+          <circle cx={C} cy={C} r={cutR} stroke="#c4462a" />
+          <circle cx={C} cy={C} r={safeR} stroke="#2fa090" />
         </g>
       )}
     </svg>
