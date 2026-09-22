@@ -28,7 +28,7 @@ Everyone lands on **Signal detected. How did you find us?** From there:
 
 - **Someone handed me a card.** They enter the code from the card's top corner (`GT-01`, and `gt01` works too). The **tuning** bar runs while the card's art downloads, then **We have you on file** and the post hub:
   - Your assignments
-  - Today's reading (one line per post per day)
+  - Today's reading: each post walks its own shuffle of the lines, one step per day, so it never repeats the next day and every line comes round before any returns
   - Read the card closer (a portrait of the post, then the wisdom it's rooted in)
   - Who's on the other end?
 - **Someone took my reading.** Three tap-to-answer calibration questions, then **Your signal leans toward…** a faded, unconfirmed card. A leaning is not a post: only the physical card confirms one.

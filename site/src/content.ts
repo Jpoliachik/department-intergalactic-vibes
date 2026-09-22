@@ -3,7 +3,8 @@
 // card-studio/deck via `npm run sync` → deck.json. Screen-by-screen prose
 // lives in screens.ts beside the choices it leads to.
 
-/** One line per post per day, picked deterministically from the date. */
+/** One line per post per day: each post steps through its own fixed shuffle
+ *  of these (see readingFor in screens.ts). More lines means a longer cycle. */
 export const READINGS = [
   "Signal clean. Carry on exactly as you are.",
   "Something you left behind is still humming. Go back for it.",

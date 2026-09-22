@@ -16,6 +16,30 @@ function hash(s: string) {
   return h >>> 0;
 }
 
+/**
+ * Today's reading for a post. Each post walks its own fixed shuffle of
+ * READINGS one step per local day, so a reading never repeats on the next
+ * day, every line comes round once before any returns, it holds all day,
+ * and different posts read differently on the same day.
+ */
+function readingFor(slug: string, date: Date) {
+  const day = Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86_400_000);
+  // A seeded Fisher–Yates shuffle (mulberry32), so each post's order is its own but never changes.
+  let seed = hash(slug);
+  const rand = () => {
+    seed = (seed + 0x6d2b79f5) >>> 0;
+    let t = Math.imul(seed ^ (seed >>> 15), seed | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 2 ** 32;
+  };
+  const order = READINGS.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return READINGS[order[day % order.length]];
+}
+
 /** Fonts the deeper screens use but the first one doesn't. The tuning bar
  *  waits for them with the art, so nothing re-lays out mid-type. */
 const fontsReady = () =>
@@ -135,8 +159,7 @@ export const go = {
 
   today: withPost((c) => {
     const now = new Date();
-    const day = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
-    const reading = READINGS[hash(day + c.slug) % READINGS.length];
+    const reading = readingFor(c.slug, now);
     const when = now.toLocaleDateString(undefined, { day: "numeric", month: "long" });
     tune("Reading", Promise.resolve(), () =>
       show({
