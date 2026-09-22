@@ -284,3 +284,61 @@ export const TYPE_VOICES = [
     css: "serif, often uppercase with tracking 0.09em",
   },
 ] as const;
+
+/**
+ * THE EMBLEM — the round VIBE / CORP mark, as distinct from the STAMP.
+ *
+ * Same 200-unit box as the stamp and the same ring-type rules, but no beads and
+ * no bottom label: two four-letter words, a star closing each shoulder, and the
+ * glyph in the middle. Four letters fill about half their arc where CERTIFIED
+ * filled three quarters, which is why the type here is 29 against the stamp's
+ * 23.5 — short words need bigger type to keep the ring from going slack.
+ */
+export const EMBLEM = {
+  viewBox: "0 0 200 200",
+  center: 100,
+  ruleRadius: 96,
+  ruleWidth: 5,
+  innerRule: 88,
+  innerRuleWidth: 1.8,
+  band: 67,
+  fontSize: 29,
+  tracking: 0.22,
+  starSize: 25,
+  waveWidth: 76,
+} as const;
+
+/**
+ * STICKER — the emblem cut as a circle.
+ *
+ * The purple is a deliberate step up from the plum ground: lighter, but not as
+ * light as the palette's own `purple`, which drops cream to 2.9:1 and washes
+ * the hairline rules out. This sits at 7.1:1, which the 1.8-unit inner rule
+ * still survives. Measured, not chosen by eye.
+ *
+ * BLEED and SAFE are the trade's usual eighth of an inch. The emblem's outer
+ * rule sits exactly on the safe circle — as far out as it can go and still
+ * survive a die that wanders the full tolerance.
+ */
+export const STICKER = {
+  ground: "#5c3d82",
+  ink: PALETTE.cream.hex,
+  bleedMm: 3.175,
+  safeMm: 3.175,
+  /** Diameters worth ordering, in mm. 51 / 76 / 102 are 2in / 3in / 4in. */
+  sizesMm: [51, 76, 102],
+} as const;
+
+/** The three radii a die-cut circle actually has, for a given cut diameter.
+ *  Returned in the units of a box whose side is the full bleed square. */
+export function stickerRadii(cutMm: number, box = 240) {
+  const total = cutMm + 2 * STICKER.bleedMm;
+  const half = box / 2;
+  return {
+    total,
+    box,
+    bleed: half,
+    cut: half * (cutMm / total),
+    safe: half * ((cutMm - 2 * STICKER.safeMm) / total),
+  };
+}
