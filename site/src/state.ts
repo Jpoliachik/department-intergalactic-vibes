@@ -9,6 +9,10 @@ type Memory = {
   leaning?: string;
   /** They reached the end of the listening path. */
   listened?: boolean;
+  /** Which of the rare lines this device has heard (indexes into RARE). */
+  heard?: number[];
+  /** They went past the end of the channel. */
+  beyond?: boolean;
 };
 
 const KEY = "vibecorp.channel";

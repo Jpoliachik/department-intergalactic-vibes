@@ -35,13 +35,21 @@ export const RETURNS: ((short: string, full: string) => [string, string])[] = [
 /** Labels for the bar while a card code resolves. */
 export const TUNING = ["Tuning", "Clearing static", "Finding your frequency", "Holding the line"];
 
-/** Behind "Did you hear that?" — rare, and never signed by anyone. */
+/** Behind "Did you hear that?": rare, never signed by anyone, never explained.
+ *  A device hears each once before any repeats. */
 export const RARE = [
   "For a second the channel carried music. Not from here.",
   "Every meter on Sol-3 ticked at once. Nobody has said why.",
   "The static made a shape, briefly. Like a door left open.",
   "The wind stopped. Then it started again, in time with you.",
   "Someone on the line said the name of your sector. Then nothing.",
+  "Someone laughed, very far away. The whole line moved.",
+  "A frequency nobody has logged before. It stopped when we listened.",
+  "For a moment every light on the Grid leaned the same way.",
+  "Two strangers said the same word at the same time. The line went bright.",
+  "Nothing. Then, underneath the nothing, a hum.",
+  "The signal paused, as if it were listening back.",
+  "Somewhere a fire just caught. The whole channel warmed.",
 ];
 
 /**

@@ -20,7 +20,7 @@ function createMeter() {
   let last = opened;
   let presence = 0;
   let presenceAt = opened;
-  let episode: { ep: Episode; start: number } | null = null;
+  let episode: { ep: Episode; start: number; held: boolean } | null = null;
   let anomalies = 0;
   let nextAt = opened + seconds(SCHEDULE.first);
   let textAt = 0;
@@ -30,7 +30,7 @@ function createMeter() {
   const presenceNow = (now: number) => presence * 0.5 ** ((now - presenceAt) / PRESENCE.halfLife);
 
   function begin(name: EpisodeName, now = performance.now() / 1000) {
-    episode = { ep: EPISODES[name](), start: now };
+    episode = { ep: EPISODES[name](), start: now, held: name === "hush" || name === "beyond" };
     textAt = 0; // redraw the number on the next frame
   }
 
@@ -106,6 +106,13 @@ function createMeter() {
       const now = performance.now() / 1000;
       presence = Math.min(1, presenceNow(now) + PRESENCE[kind]);
       presenceAt = now;
+    },
+    /** End a held episode (hush, beyond) when the screen that asked for it goes. */
+    release() {
+      if (episode?.held) {
+        episode = null;
+        textAt = 0;
+      }
     },
     /** Run an anomaly now, by name (the #spike, #dropout and #calibrate hooks). */
     trigger(name: string) {

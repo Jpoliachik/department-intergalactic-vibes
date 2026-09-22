@@ -11,7 +11,9 @@ export type Block =
   | { kind: "label"; text: string }
   | { kind: "serif"; text: string }
   | { kind: "stars"; items: string[] }
-  | { kind: "card"; card: Card; faded?: boolean; resolve?: boolean };
+  | { kind: "card"; card: Card; faded?: boolean; resolve?: boolean }
+  | { kind: "whisper"; text: string }
+  | { kind: "pause"; ms: number };
 
 export type Choice = [label: string, go: () => void];
 
@@ -24,6 +26,10 @@ export type Screen = {
   forget?: () => void;
   /** This screen may, rarely, offer "Did you hear that?"; this is where it goes. */
   rare?: () => void;
+  /** The world goes quiet while this screen is up: the sky dims and the meter
+   *  sinks ("hush"), or the signal is gone altogether ("beyond"). Pauses on a
+   *  quiet screen can't be tapped past: the silence is the point. */
+  hush?: "hush" | "beyond";
 };
 
 /** A line of prose. `lead` types first, slowly, then gives way to the line (the first visit's "....."). */
@@ -32,6 +38,10 @@ export const dim = (text: string): Block => ({ kind: "p", text, dim: true });
 export const label = (text: string): Block => ({ kind: "label", text });
 export const serif = (text: string): Block => ({ kind: "serif", text });
 export const stars = (items: string[]): Block => ({ kind: "stars", items });
+/** A line that isn't typed: it surfaces out of blur, half-heard. */
+export const whisper = (text: string): Block => ({ kind: "whisper", text });
+/** Nothing, for a while. */
+export const pause = (ms: number): Block => ({ kind: "pause", ms });
 export const card = (c: Card, opts: { faded?: boolean; resolve?: boolean } = {}): Block => ({
   kind: "card",
   card: c,
@@ -125,13 +135,22 @@ export function show(s: Screen): void {
 async function play(s: Screen) {
   const run = await clear();
   if (!run) return;
+  document.body.classList.toggle("hush", !!s.hush);
+  document.body.classList.toggle("beyond", s.hush === "beyond");
+  if (s.hush) meter.trigger(s.hush);
+  else meter.release();
 
   for (const b of s.blocks) {
+    if (b.kind === "pause") {
+      await (s.hush ? new Promise((r) => setTimeout(r, b.ms)) : wait(run, b.ms));
+      if (!run.alive()) return;
+      continue;
+    }
     const el = render(b);
     main.append(el);
     keepInView(el);
     if (b.kind === "p") await type(run, el, b.text, b.lead);
-    else await wait(run, b.kind === "card" ? (b.resolve ? 650 : 280) : 170);
+    else await wait(run, b.kind === "card" ? (b.resolve ? 650 : 280) : b.kind === "whisper" ? 2400 : 170);
     if (!run.alive()) return;
   }
 
@@ -159,6 +178,8 @@ export function tune(text: string, ready: Promise<unknown>, then: () => void): v
 async function playTune(text: string, ready: Promise<unknown>, then: () => void) {
   const run = await clear();
   if (!run) return;
+  document.body.classList.remove("hush", "beyond");
+  meter.release();
 
   const bar = h("span");
   bar.setAttribute("aria-hidden", "true");
@@ -275,6 +296,10 @@ function render(b: Block): HTMLElement {
       return h("p", "label enter", b.text);
     case "serif":
       return h("p", "serif enter", b.text);
+    case "whisper":
+      return h("p", "whisper", b.text);
+    case "pause":
+      return h("span"); // never rendered: play() handles pauses before this
     case "stars": {
       const ul = h("ul", "stars enter");
       for (const item of b.items) ul.append(h("li", "", item));

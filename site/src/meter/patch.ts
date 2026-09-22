@@ -125,6 +125,31 @@ export const EPISODES = {
       },
     };
   },
+  /** While something is overheard: the reading sinks nearly to nothing, and the dot almost goes out. */
+  hush(): Episode {
+    const [fall, rise, total] = [1.8, 2.2, 10];
+    return {
+      seconds: total,
+      draw(k, rest) {
+        const t = k * total;
+        const e = t < fall ? (1 - Math.cos((Math.PI * t) / fall)) / 2 : t > total - rise ? (1 + Math.cos((Math.PI * (t - (total - rise))) / rise)) / 2 : 1;
+        return {
+          hz: (rest.hz ?? EARTH) * (1 - 0.94 * e) + (Math.random() - 0.5) * 0.02 * e,
+          glow: rest.glow * (1 - 0.88 * e),
+          size: rest.size * (1 - 0.15 * e),
+          mood: e > 0.5 ? "lost" : undefined,
+        };
+      },
+    };
+  },
+  /** Past the end of the channel: no signal at all, only a faint, far-off flicker of the dot. */
+  beyond(): Episode {
+    const far = oscillator(() => 0.13);
+    return {
+      seconds: 600,
+      draw: (_k, _rest, m) => ({ hz: null, glow: 0.04 + 0.22 * far(m) ** 6, size: 0.75, dot: "cream", mood: "lost" }),
+    };
+  },
   /** A tap on the meter: a small bright swell, like a needle being checked. */
   calibrate(): Episode {
     const lift = 1.5 + Math.random() * 2;

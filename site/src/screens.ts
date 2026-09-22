@@ -4,7 +4,7 @@
 
 import { CALIBRATION, POSTS, RARE, READINGS, RETURNS, TUNING } from "./content";
 import { byCode, bySlug, preloadArt, shortName, type Card } from "./deck";
-import { card, dim, label, p, rare, serif, show, stars, tune, type Block, type Choice } from "./engine";
+import { card, dim, label, p, pause, rare, serif, show, stars, tune, whisper, type Block, type Choice } from "./engine";
 import { load, update, wipe } from "./state";
 
 const pick = <T>(list: T[]) => list[Math.floor(Math.random() * list.length)];
@@ -389,6 +389,31 @@ export const go = {
     });
   },
 
+  /* ---------- past the end of the channel ---------- */
+
+  /** Where "Keep listening" leads. Nobody is meant to be here. */
+  beyond(back: () => void): void {
+    const again = load().beyond;
+    update((m) => (m.beyond = true));
+    show({
+      hush: "beyond",
+      blocks: again
+        ? [pause(1600), dim("…"), pause(1400), p("You again."), p("It's still quiet down here. It always is."), pause(1600), whisper("Some places only exist for the people who come back.")]
+        : [
+            pause(1600),
+            dim("…"),
+            pause(1400),
+            p("You're past the end of the channel."),
+            p("Nothing is broadcast from here. Nobody has ever logged a reading this far down."),
+            pause(1800),
+            whisper("And yet, here you are."),
+            pause(2200),
+            dim("Don't tell anyone how you got here. They'll have to find it on their own."),
+          ],
+      choices: [["Go back up", back]],
+    });
+  },
+
   /* ---------- forgetting ---------- */
 
   forget(back: () => void): void {
@@ -408,4 +433,17 @@ export const go = {
   },
 };
 
-rare.go = (back) => show({ blocks: [dim("…"), p(pick(RARE))], choices: [["Keep listening", back]] });
+/** "Did you hear that?": the world goes quiet, and something surfaces. A line
+ *  this device hasn't heard, until it's heard them all. */
+rare.go = (back) => {
+  const heard = load().heard ?? [];
+  const fresh = RARE.map((_, i) => i).filter((i) => !heard.includes(i));
+  const i = pick(fresh.length ? fresh : RARE.map((_, i) => i));
+  update((m) => (m.heard = [...new Set([...heard, i])]));
+  show({
+    hush: "hush",
+    // "Keep listening" only surfaces after a long silence (~8s), and it can't be tapped past.
+    blocks: [pause(900), dim("…"), pause(1100), whisper(RARE[i]), pause(3600)],
+    choices: [["Keep listening", () => go.beyond(back)]],
+  });
+};

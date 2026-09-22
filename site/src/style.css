@@ -85,6 +85,18 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background: radial-gradient(120% 70% at 50% 0%, var(--plum) 0%, var(--ground) 62%);
+  transition: opacity 2s ease;
+}
+/* Something is being overheard: the sky goes dark around it. */
+body.hush::before {
+  opacity: 0.25;
+}
+/* Past the end of the channel: no sky at all, and the words sit quieter. */
+body.beyond::before {
+  opacity: 0;
+}
+body.beyond main .p:not(.dim) {
+  color: var(--cream-dim);
 }
 
 ::selection {
@@ -296,6 +308,29 @@ footer > * {
   font-size: clamp(25px, 7vw, 28px);
   line-height: 1.18;
   text-wrap: balance;
+}
+
+/* A line that surfaces rather than types: out of blur, with a glow that fades. */
+.whisper {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(26px, 7.4vw, 30px);
+  line-height: 1.22;
+  text-wrap: balance;
+  animation: surface 3.2s var(--ease) both;
+}
+@keyframes surface {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    text-shadow: 0 0 24px var(--cream);
+  }
+  55% {
+    opacity: 0.9;
+    text-shadow: 0 0 14px rgba(243, 233, 214, 0.35);
+  }
 }
 
 ul.stars {
