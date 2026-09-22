@@ -179,15 +179,21 @@ main:focus {
 .hz::before {
   content: "●";
   margin-right: 0.5em;
-  animation: blink 2.4s steps(2) infinite;
+  animation: pulse 2.4s ease-in-out infinite;
 }
 .hz.spike {
   color: var(--alarm);
 }
 .hz.spike::before {
-  animation-duration: 0.3s;
+  animation-duration: 0.4s;
 }
 
+/* The live dot breathes. The caret below blinks hard, like a real one. */
+@keyframes pulse {
+  50% {
+    opacity: 0.2;
+  }
+}
 @keyframes blink {
   50% {
     opacity: 0.25;
