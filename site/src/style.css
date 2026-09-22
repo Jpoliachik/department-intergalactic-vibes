@@ -68,9 +68,10 @@ html {
 body {
   margin: 0;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   color: var(--cream); /* no background here: html has it, and the sky below must show through */
   font: 400 clamp(15px, 3.9vw, 16px) / 1.6 var(--mono);
-  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
@@ -91,10 +92,17 @@ body::before {
   color: var(--ground);
 }
 
-.wrap {
-  max-width: 440px;
+/* The column: 440px of content, with the side gutter inside it. The header
+   uses the same measure so its contents line up with the words below. */
+.wrap,
+.bar-in {
+  max-width: calc(440px + 2 * 16px);
   margin: 0 auto;
-  min-height: 100dvh;
+  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
+}
+.wrap {
+  flex: 1; /* fills the screen under the header, so the footer sits at the bottom */
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -134,23 +142,25 @@ main:focus {
 /* ---------- header ---------- */
 
 .bar {
-  /* Always there. Translucent and blurred, so the plum sky still shows
-     through and the words scroll away beneath it. */
+  /* Always there, edge to edge. Translucent and blurred, so the plum sky
+     still shows through and the words scroll away beneath it. */
   position: sticky;
   top: 0;
   z-index: 1;
   background: rgba(18, 10, 27, 0.6);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+  color: var(--cream-dim);
+  transition: border-color 0.6s ease;
+}
+.bar-in {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding-top: max(18px, env(safe-area-inset-top));
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule);
-  color: var(--cream-dim);
-  transition: border-color 0.6s ease;
 }
 .bar.spiking {
   border-color: var(--alarm-rule);
