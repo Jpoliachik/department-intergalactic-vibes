@@ -1,0 +1,306 @@
+[
+  {
+    "slug": "the-rookie",
+    "order": 0,
+    "code": "AA-00",
+    "name": "The Rookie",
+    "designation": "Open Channel",
+    "function": "Beginner's Mind",
+    "tagline": "An empty cup holds the most",
+    "bio": "The wide-eyed first-timer. Says yes first, and asks what everyone else was too proud to.",
+    "assignments": [
+      "Act a fool so others can follow",
+      "Accept the unknown frequencies"
+    ],
+    "art": {
+      "avif": "/cards/the-rookie-440.ace4d4f4.avif 440w, /cards/the-rookie-880.ae8d02ad.avif 880w",
+      "webp": "/cards/the-rookie-440.5234f8eb.webp 440w, /cards/the-rookie-880.2ce3f621.webp 880w",
+      "src": "/cards/the-rookie-880.2ce3f621.webp"
+    }
+  },
+  {
+    "slug": "the-anchor",
+    "order": 1,
+    "code": "GT-01",
+    "name": "The Anchor",
+    "designation": "Grounding Technician",
+    "function": "Stabilization",
+    "tagline": "Slow is smooth. Smooth is virtuous",
+    "bio": "The rock-solid friend everyone drifts back to. Keeps their feet so others can lose theirs.",
+    "assignments": [
+      "Be someone's solid ground",
+      "When the night speeds up, slow down"
+    ],
+    "art": {
+      "avif": "/cards/the-anchor-440.c1660d55.avif 440w, /cards/the-anchor-880.ea55ffb7.avif 880w",
+      "webp": "/cards/the-anchor-440.ad0a6976.webp 440w, /cards/the-anchor-880.c635b92f.webp 880w",
+      "src": "/cards/the-anchor-880.c635b92f.webp"
+    }
+  },
+  {
+    "slug": "the-spark",
+    "order": 2,
+    "code": "IS-02",
+    "name": "The Spark",
+    "designation": "Ignition Specialist",
+    "function": "Initiation",
+    "tagline": "The path appears underfoot",
+    "bio": "The one who goes first. The moment they move, everyone else finds they were ready too.",
+    "assignments": [
+      "Send the signal. Then let it go",
+      "Start before you're ready"
+    ],
+    "art": {
+      "avif": "/cards/the-spark-440.97eef939.avif 440w, /cards/the-spark-880.90c597be.avif 880w",
+      "webp": "/cards/the-spark-440.dfa7d0bf.webp 440w, /cards/the-spark-880.41e8bed3.webp 880w",
+      "src": "/cards/the-spark-880.41e8bed3.webp"
+    }
+  },
+  {
+    "slug": "the-connector",
+    "order": 3,
+    "code": "LS-03",
+    "name": "The Connector",
+    "designation": "Linkage Officer",
+    "function": "Linkage",
+    "tagline": "Nobody here is a stranger yet",
+    "bio": "The friend who introduces everyone. Remembers what you love, and who else does.",
+    "assignments": [
+      "Find matching vibes & link them",
+      "Introduce those who ride in sync"
+    ],
+    "art": {
+      "avif": "/cards/the-connector-440.b0c73a38.avif 440w, /cards/the-connector-880.b72c4979.avif 880w",
+      "webp": "/cards/the-connector-440.268c70b9.webp 440w, /cards/the-connector-880.70a1f63e.webp 880w",
+      "src": "/cards/the-connector-880.70a1f63e.webp"
+    }
+  },
+  {
+    "slug": "the-beacon",
+    "order": 4,
+    "code": "SL-04",
+    "name": "The Beacon",
+    "designation": "Signal Lamp Operator",
+    "function": "Radiance",
+    "tagline": "The lighthouse never chases the ship",
+    "bio": "The one who picks a spot and stays. Easy to find on purpose.",
+    "assignments": [
+      "Emit your light for others to follow",
+      "Shine steady. They'll find their way"
+    ],
+    "art": {
+      "avif": "/cards/the-beacon-440.d0f04d0f.avif 440w, /cards/the-beacon-880.bd8512c0.avif 880w",
+      "webp": "/cards/the-beacon-440.e1a080e4.webp 440w, /cards/the-beacon-880.5dc4f1b2.webp 880w",
+      "src": "/cards/the-beacon-880.5dc4f1b2.webp"
+    }
+  },
+  {
+    "slug": "the-tuner",
+    "order": 5,
+    "code": "RL-05",
+    "name": "The Tuner",
+    "designation": "Resonance Listener",
+    "function": "Reception",
+    "tagline": "Being heard is being loved",
+    "bio": "The one who really listens. Hears the thing underneath what you said.",
+    "assignments": [
+      "Hear what they aren't saying",
+      "Tap in. Feel the inner pulse."
+    ],
+    "art": {
+      "avif": "/cards/the-tuner-440.22cee246.avif 440w, /cards/the-tuner-880.3a838262.avif 880w",
+      "webp": "/cards/the-tuner-440.1868f856.webp 440w, /cards/the-tuner-880.567e252d.webp 880w",
+      "src": "/cards/the-tuner-880.567e252d.webp"
+    }
+  },
+  {
+    "slug": "the-caretaker",
+    "order": 6,
+    "code": "FM-06",
+    "name": "The Caretaker",
+    "designation": "Field Medic",
+    "function": "Maintenance",
+    "tagline": "Someone here needs exactly you",
+    "bio": "The friend who notices you've gone quiet, and gets there before you think to ask.",
+    "assignments": [
+      "Patch the broken fixtures",
+      "Tend to the dimmest light"
+    ],
+    "art": {
+      "avif": "/cards/the-caretaker-440.60368bb5.avif 440w, /cards/the-caretaker-880.1e22e2a7.avif 880w",
+      "webp": "/cards/the-caretaker-440.fd392840.webp 440w, /cards/the-caretaker-880.c956f36d.webp 880w",
+      "src": "/cards/the-caretaker-880.c956f36d.webp"
+    }
+  },
+  {
+    "slug": "the-wanderer",
+    "order": 7,
+    "code": "FP-07",
+    "name": "The Wanderer",
+    "designation": "Field Pathfinder",
+    "function": "Survey",
+    "tagline": "No fixed plans. No missed moment.",
+    "bio": "The one who wanders off and comes back with a story. Follows the pull past the marked path.",
+    "assignments": [
+      "Get lost. Intentionally.",
+      "Go follow that thing over there..."
+    ],
+    "art": {
+      "avif": "/cards/the-wanderer-440.de63c476.avif 440w, /cards/the-wanderer-880.2ffdf183.avif 880w",
+      "webp": "/cards/the-wanderer-440.7d4f2307.webp 440w, /cards/the-wanderer-880.5f633501.webp 880w",
+      "src": "/cards/the-wanderer-880.5f633501.webp"
+    }
+  },
+  {
+    "slug": "the-jester",
+    "order": 8,
+    "code": "BT-08",
+    "name": "The Jester",
+    "designation": "Buoyancy Technician",
+    "function": "Buoyancy",
+    "tagline": "Licensed fool. Papers in order",
+    "bio": "The one who makes everything lighter just by arriving. Says the ridiculous thing first so everyone else can too.",
+    "assignments": [
+      "Add some chaos. The good kind.",
+      "Do the bit. Commit to the bit"
+    ],
+    "art": {
+      "avif": "/cards/the-jester-440.e5bd531b.avif 440w, /cards/the-jester-880.5490497b.avif 880w",
+      "webp": "/cards/the-jester-440.2ac9f573.webp 440w, /cards/the-jester-880.9181a312.webp 880w",
+      "src": "/cards/the-jester-880.9181a312.webp"
+    }
+  },
+  {
+    "slug": "the-pulse",
+    "order": 9,
+    "code": "TR-09",
+    "name": "The Pulse",
+    "designation": "Tempo Regulation Officer",
+    "function": "Cadence",
+    "tagline": "The music is the space between the notes",
+    "bio": "The one still going after everyone else flagged. Sets a pace the whole night keeps.",
+    "assignments": [
+      "Find the noise behind the signal",
+      "Dance with the highs. Ride the lows"
+    ],
+    "art": {
+      "avif": "/cards/the-pulse-440.d129807a.avif 440w, /cards/the-pulse-880.70333900.avif 880w",
+      "webp": "/cards/the-pulse-440.de7f3ad8.webp 440w, /cards/the-pulse-880.395eb0e1.webp 880w",
+      "src": "/cards/the-pulse-880.395eb0e1.webp"
+    }
+  },
+  {
+    "slug": "the-oracle",
+    "order": 10,
+    "code": "DV-10",
+    "name": "The Oracle",
+    "designation": "Divination Officer",
+    "function": "Divination",
+    "tagline": "Your first instinct already knew",
+    "bio": "The friend with the uncanny gut. Feels the night turn before it does, and is usually right.",
+    "assignments": [
+      "Follow the feel, not the logic",
+      "Don't overthink. Just do."
+    ],
+    "art": {
+      "avif": "/cards/the-oracle-440.6e0d626f.avif 440w, /cards/the-oracle-880.35e1966f.avif 880w",
+      "webp": "/cards/the-oracle-440.fc063318.webp 440w, /cards/the-oracle-880.77fd31e1.webp 880w",
+      "src": "/cards/the-oracle-880.77fd31e1.webp"
+    }
+  },
+  {
+    "slug": "the-fire-tender",
+    "order": 11,
+    "code": "QM-11",
+    "name": "The Fire Tender",
+    "designation": "Quartermaster",
+    "function": "Provision",
+    "tagline": "Every stranger is a friend in disguise",
+    "bio": "The host who stays at camp. Keeps the fire lit and something warm on.",
+    "assignments": [
+      "Make room in the circle",
+      "Feed whoever shows up"
+    ],
+    "art": {
+      "avif": "/cards/the-fire-tender-440.ea3a0577.avif 440w, /cards/the-fire-tender-880.bde7e31f.avif 880w",
+      "webp": "/cards/the-fire-tender-440.a6fdd279.webp 440w, /cards/the-fire-tender-880.08edcf2c.webp 880w",
+      "src": "/cards/the-fire-tender-880.08edcf2c.webp"
+    }
+  },
+  {
+    "slug": "the-patchwork",
+    "order": 12,
+    "code": "MD-12",
+    "name": "The Patchwork",
+    "designation": "Mending Technician",
+    "function": "Mending",
+    "tagline": "The cracks are where the light gets in",
+    "bio": "Fixes what tore and leaves the seam showing. Likes a thing better once it has been broken.",
+    "assignments": [
+      "Inspect the damage. File as beautiful",
+      "Approve someone exactly as-is"
+    ],
+    "art": {
+      "avif": "/cards/the-patchwork-440.388a7597.avif 440w, /cards/the-patchwork-880.3a451d12.avif 880w",
+      "webp": "/cards/the-patchwork-440.342ba00e.webp 440w, /cards/the-patchwork-880.22934e25.webp 880w",
+      "src": "/cards/the-patchwork-880.22934e25.webp"
+    }
+  },
+  {
+    "slug": "the-deep-diver",
+    "order": 13,
+    "code": "IM-13",
+    "name": "The Deep Diver",
+    "designation": "Immersion Specialist",
+    "function": "Immersion",
+    "tagline": "Nothing deep happens at the surface",
+    "bio": "The one who goes all the way in. When the music takes them, they let it.",
+    "assignments": [
+      "Feel what lives below the surface",
+      "Close your eyes. Get deep."
+    ],
+    "art": {
+      "avif": "/cards/the-deep-diver-440.61a1f573.avif 440w, /cards/the-deep-diver-880.58dba721.avif 880w",
+      "webp": "/cards/the-deep-diver-440.decb0bfe.webp 440w, /cards/the-deep-diver-880.8f669840.webp 880w",
+      "src": "/cards/the-deep-diver-880.8f669840.webp"
+    }
+  },
+  {
+    "slug": "the-enchanter",
+    "order": 14,
+    "code": "GL-14",
+    "name": "The Enchanter",
+    "designation": "Glamour Technician",
+    "function": "Glamour",
+    "tagline": "Beauty isn't rare. Noticing is.",
+    "bio": "Makes beauty wherever they stand. The corner nobody noticed becomes the spot nobody leaves.",
+    "assignments": [
+      "Find beauty in the ordinary",
+      "Amplify the immaculate frequencies"
+    ],
+    "art": {
+      "avif": "/cards/the-enchanter-440.53cf5e5b.avif 440w, /cards/the-enchanter-880.d4892fa6.avif 880w",
+      "webp": "/cards/the-enchanter-440.f2d6780e.webp 440w, /cards/the-enchanter-880.ccd46970.webp 880w",
+      "src": "/cards/the-enchanter-880.ccd46970.webp"
+    }
+  },
+  {
+    "slug": "the-mentor",
+    "order": 15,
+    "code": "IN-15",
+    "name": "The Mentor",
+    "designation": "Induction Officer",
+    "function": "Induction",
+    "tagline": "Someone else once showed you the way",
+    "bio": "The one who brings new people in. Spots whoever's standing at the edge and waves them over.",
+    "assignments": [
+      "Hold the door you came through",
+      "Lead others down the divine path"
+    ],
+    "art": {
+      "avif": "/cards/the-mentor-440.70ba32cb.avif 440w, /cards/the-mentor-880.f4748993.avif 880w",
+      "webp": "/cards/the-mentor-440.a9d3e12e.webp 440w, /cards/the-mentor-880.c7119331.webp 880w",
+      "src": "/cards/the-mentor-880.c7119331.webp"
+    }
+  }
+]

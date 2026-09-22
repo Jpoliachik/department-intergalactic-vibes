@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "sync": "node scripts/sync-deck.mjs"
+    "sync": "node scripts/sync-deck.mjs && node scripts/og.mjs"
   },
   "devDependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
