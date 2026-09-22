@@ -49,3 +49,6 @@ Desktop.ini
 
 # Seeded design canvases — regenerate from the .dc.html working files.
 design/**/vibe-corp-*.html
+
+# Vercel project link (local only)
+.vercel
