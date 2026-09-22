@@ -1,4 +1,5 @@
 import "./style.css";
+import { consoleNote, watchIdle, watchTitle } from "./ambient";
 import { bySlug, preloadArt } from "./deck";
 import { rare } from "./engine";
 import { meter } from "./meter/meter";
@@ -7,6 +8,9 @@ import { load, wipe } from "./state";
 
 meter.start(document.getElementById("hz")!, { post: () => load().card });
 document.getElementById("home")!.addEventListener("click", () => go.start());
+consoleNote();
+watchTitle();
+watchIdle(document.getElementById("screen")!);
 
 // Hidden hooks for testing on a real phone: #forget, #rare, and any meter
 // episode by name (#spike, #dropout, #calibrate).

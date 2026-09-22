@@ -18,13 +18,15 @@ The feeling to protect: *you've tuned into a channel that was already running, a
 - **Memory is per device, and forgettable.** `{ card, leaning, listened }` in localStorage. Every end state offers "Let the channel forget me."
 - **Timeless.** The site is always open, with no dusk gating and no festival-only copy. Say *today*, not *tonight*. It has to work in March, from a couch.
 - **Randomness is texture, never facts.** A post, its assignments, a leaning and today's reading never change on refresh. Return greetings, tuning labels, the rare "Did you hear that?" (~4%), and the Hz surge are random.
+- **"Did you hear that?"** (~4% on screens people return to) hushes the world: the sky dims, the meter sinks, and one unsigned line surfaces out of blur. A device hears each of the 12 once before any repeats. After a silence that can't be tapped past (~6–8s), **Keep listening** leads *past the end of the channel*: no sky, no signal (`—.— Hz`), and a few lines saying nobody's meant to be there, and not to tell anyone how they got there. Justin rejected a press-and-hold "find your frequency" version; keep it simple.
+- **Easter eggs:** a crew note in the browser console, the tab title ("… still listening" when hidden, "Signal restored" on return), and a faint line after ~100s of stillness on a settled screen. Secret URLs and secret codes were considered and declined, because nobody would find them.
 - **Cut on purpose:** a waveform in the header (distracting), overheard radio chatter (shifted the layout and didn't land), a past-crew log (confusing), and "just let it play" (duplicated the lore rooms). Don't bring them back without asking.
 
 ## Guardrails
 
 - **Seven never appears on the site.** No rare line, reading or room may be signed, attributed, or read as "from Seven." Rare moments are unsigned and unexplained.
 - **HQ stays open.** "The line runs a long way back." Wind. Never answer who's in charge.
-- **No tracking.** No analytics, no counts of visitors or card holders, no backend. That was considered and declined.
+- **Page views only.** Vercel Web Analytics is on (cookieless, two script tags in the HTML, no npm package): visitors, countries, devices, referrers. No custom events, and no fake page views to count rare moments. Custom events are a Pro feature, and Justin declined any workaround. No backend, no accounts, nothing personal.
 - **Copy rules for new lines.** Short sentences. Present tense. Plain words over clever ones. It should pass the root CLAUDE.md sniff test: would someone who actually works the Grid say it this way?
 
 ## Craft bar
@@ -41,6 +43,10 @@ This has to feel great on a phone at a festival: bright sun or pitch dark, one h
 - Nothing shifts the layout after it appears. If you add a block, reserve its space.
 - Respect `prefers-reduced-motion`. It turns off all animation and typing.
 - Before pushing, check at 375px wide. Nothing may scroll sideways (a long tuning label once did).
+
+## Someday (parked by Justin)
+
+- **Something physical for whoever gets past the end of the channel.** For example, a short code on that page that the visitor shows crew in purple at a festival for a pin, or quotes in an email after one. Not now.
 
 ## Working here
 

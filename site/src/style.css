@@ -333,6 +333,18 @@ footer > * {
   }
 }
 
+/* The line that surfaces after a long stillness: slowly, and last. */
+.p.idle {
+  margin-top: 12px;
+  color: var(--cream-faint);
+  animation: fadein-slow 3s ease both;
+}
+@keyframes fadein-slow {
+  from {
+    opacity: 0;
+  }
+}
+
 ul.stars {
   list-style: none;
   margin: 0;

@@ -52,6 +52,7 @@ Every path ends somewhere the device remembers, and a return visit picks up ther
 | `src/meter/patch.ts` | **The meter's design.** What the Hz number and the live dot do at rest, per post, and in each episode. Play here. |
 | `src/meter/waves.ts` | The toolkit the patch composes: `sine`, `breath`, `noise`, `jitter`, `oscillator`, `sum`, `scale`, `settle`… |
 | `src/meter/meter.ts` | The runtime that plays the patch. You shouldn't need to touch it. |
+| `src/ambient.ts` | The edges: the console note, the tab title that notices you looked away, and the line that surfaces after a long stillness. |
 | `src/haptics.ts` | Ticks on picks and typing: `navigator.vibrate` on Android, a hidden switch toggle on iOS 18+ (best-effort). |
 | `src/style.css` | All styling. One dark look, on purpose. |
 | `scripts/sync-deck.mjs` | Deck → `deck.json`, card art → `public/cards/`, fonts → `public/fonts/`, and the brand glyph and tokens → `src/brand/`. |
@@ -102,4 +103,4 @@ The Vercel project is `vibecorp`, with root directory `site/`. **Pushing to `mai
 - Card art is AVIF (WebP fallback) at 440 and 880px, roughly 20–100KB per card. Only the card being shown is fetched.
 - Only Plex 400, the first screen's face, is preloaded. The other three faces load while the tuning bar runs, so nothing re-lays out mid-type. All fonts use `font-display: swap`.
 - There are no spinners. The tuning bar is the loader: it runs at least 1.4s, waits for the art to decode (8s at most), then completes. On a slow connection it just reads as a weak signal.
-- There's no analytics, no backend, no cookies, and no accounts.
+- Analytics is Vercel Web Analytics, page views only: cookieless, two script tags, no package. No backend, no cookies, no accounts.
