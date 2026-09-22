@@ -342,3 +342,57 @@ export function stickerRadii(cutMm: number, box = 240) {
     safe: half * ((cutMm - 2 * STICKER.safeMm) / total),
   };
 }
+
+/**
+ * THE MIDDLE WAVE'S CENTRELINE — measured, not drawn.
+ *
+ * Produced by rendering the wave path in a browser and scanning it column by
+ * column: for each x, find every y inside the fill, take the midpoint and the
+ * span. Eyeballed beziers for this were tried first and the type slid off the
+ * wave; there is no way to guess the centreline of an S-curve of varying
+ * thickness, so it is sampled here once and kept.
+ *
+ * Entries are [x, centreY, thickness] in the mark's own 150-unit space.
+ *
+ * THE THIRD NUMBER IS THE USEFUL ONE. The wave tapers from 13 units at its
+ * middle to 5.75 at the ends, so type set along it has to be sized off the
+ * THINNEST point it actually crosses, not the widest. Ignoring that is how the
+ * words end up hanging out of the wave at both ends.
+ */
+export const MID_WAVE_CENTRELINE: ReadonlyArray<readonly [number, number, number]> = [
+  [38, 75.13, 5.75], [42, 71.88, 6.25], [46, 68.88, 6.75], [50, 66.63, 7.75],
+  [54, 65.0, 8.5], [58, 64.38, 9.25], [62, 64.25, 10.0], [66, 65.25, 10.5],
+  [70, 67.13, 11.25], [74, 70.13, 12.25], [78, 74.25, 13.0], [82, 77.75, 12.0],
+  [86, 80.25, 11.0], [90, 81.75, 10.0], [94, 82.13, 9.25], [98, 82.0, 8.5],
+  [102, 81.0, 8.0], [106, 79.25, 7.5], [110, 76.75, 7.0], [114, 73.75, 7.0],
+];
+
+/**
+ * That centreline as a path to set type on, mapped into a canvas where the
+ * glyph is drawn at `width` about (cx, cy). Returns the path and the thinnest
+ * the band gets along it, which is what caps the font size.
+ *
+ * Trimmed to x 50..106 by default: that is the stretch thick enough to hold
+ * type. The path is smoothed through the samples because corners in a textPath
+ * make glyphs jump.
+ */
+export function waveTypePath(
+  cx: number,
+  cy: number,
+  width: number,
+  x0 = 50,
+  x1 = 106,
+): { d: string; minThickness: number } {
+  const k = width / GLYPH_BBOX.w;
+  const used = MID_WAVE_CENTRELINE.filter(([x]) => x >= x0 && x <= x1);
+  const pts = used.map(([x, y]) => [cx + (x - GLYPH_CENTER.x) * k, cy + (y - GLYPH_CENTER.y) * k]);
+  let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const mx = (pts[i][0] + pts[i + 1][0]) / 2;
+    const my = (pts[i][1] + pts[i + 1][1]) / 2;
+    d += ` Q ${pts[i][0].toFixed(1)} ${pts[i][1].toFixed(1)}, ${mx.toFixed(1)} ${my.toFixed(1)}`;
+  }
+  const last = pts[pts.length - 1];
+  d += ` L ${last[0].toFixed(1)} ${last[1].toFixed(1)}`;
+  return { d, minThickness: Math.min(...used.map(([, , t]) => t)) * k };
+}
