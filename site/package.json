@@ -1,0 +1,11 @@
+{
+  "name": "vibecorp-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "sync": "node scripts/sync-deck.mjs"
+  }
+}

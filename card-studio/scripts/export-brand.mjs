@@ -1,6 +1,6 @@
 /**
  * Writes the standalone brand assets into /brand from the single source of
- * truth in lib/brand.ts. Same philosophy as the card export: one definition in
+ * truth in lib/brand.ts, plus the site's favicon into /site. Same philosophy as the card export: one definition in
  * the codebase, and the outside world gets files.
  *
  *   node scripts/export-brand.mjs
@@ -8,6 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import puppeteer from "puppeteer";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
@@ -89,6 +90,33 @@ fs.mkdirSync(path.join(out, "mark"), { recursive: true });
 for (const [rel, body] of Object.entries(files)) {
   fs.writeFileSync(path.join(out, rel), body);
   console.log("wrote brand/" + rel);
+}
+
+// The site's favicon is the glyph, fully specified — a browser tab gives
+// currentColor nothing to inherit. Mustard, because it holds on light and dark
+// tab bars alike.
+const site = path.join(root, "site");
+const favicon = head(GLYPH_VIEWBOX, "Vibe Corp") + waves(PALETTE.mustard.hex) + "</svg>\n";
+fs.writeFileSync(path.join(site, "favicon.svg"), favicon);
+console.log("wrote site/favicon.svg");
+
+// iOS home-screen icon: opaque, so the glyph sits on the site's black ground
+// with room around it for the rounded mask.
+const TOUCH_PX = 180;
+const browser = await puppeteer.launch({ headless: true });
+try {
+  const page = await browser.newPage();
+  await page.setViewport({ width: TOUCH_PX, height: TOUCH_PX, deviceScaleFactor: 1 });
+  await page.setContent(
+    `<body style="margin:0;width:${TOUCH_PX}px;height:${TOUCH_PX}px;background:${PALETTE.black.hex};` +
+      `display:grid;place-items:center">` +
+      favicon.replace("<svg ", `<svg width="${TOUCH_PX * 0.62}" height="${TOUCH_PX * 0.62}" `) +
+      `</body>`,
+  );
+  await page.screenshot({ path: path.join(site, "apple-touch-icon.png") });
+  console.log("wrote site/apple-touch-icon.png");
+} finally {
+  await browser.close();
 }
 fs.writeFileSync(path.join(out, "tokens.css"), tokens);
 console.log("wrote brand/tokens.css");
