@@ -33,9 +33,19 @@ export function startHz(el: HTMLElement) {
 
   setInterval(() => {
     if (spiking || document.hidden) return; // rest while nobody's looking
-    if (Math.random() < 0.006) return spike(); // every few minutes, on average
     show(BASE + (Math.random() - 0.5) * 0.06);
   }, 1400);
+
+  // The first surge comes early enough that almost everyone sees one, then
+  // they keep coming at irregular intervals. A hidden tab waits its turn.
+  const between = (lo: number, hi: number) => (lo + Math.random() * (hi - lo)) * 1000;
+  const next = (delay: number) =>
+    setTimeout(() => {
+      if (document.hidden) return next(between(5, 15));
+      spike();
+      next(between(45, 120));
+    }, delay);
+  next(between(20, 40));
 
   return { spike };
 }
