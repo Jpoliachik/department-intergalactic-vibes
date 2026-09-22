@@ -33,8 +33,9 @@ This has to feel great on a phone at a festival: bright sun or pitch dark, one h
 
 - Typing runs at 90 chars/s, with small pauses after punctuation, and a tap anywhere skips it. Nobody should ever wait on text. (120 felt a touch too fast.)
 - A first visit opens on five slow dots before "Signal detected." Return visits skip them.
-- The Hz dot breathes on an eased pulse. The typing caret blinks hard, like a real cursor. Hard steps on the dot read as a stuttering frame rate.
-- Haptics: a tick on each pick, and a light tick per word as text types. Android uses `navigator.vibrate`. iPhone has no web haptics API, so `haptics.ts` toggles a hidden `<input switch>`, which plays the system tick on iOS 18+. Nothing fires before the first touch.
+- **The meter is an instrument, not a readout.** Everything it does lives in `src/meter/patch.ts`, built from the waves in `waves.ts`. That covers the resting wobble, the dusk peak, strengthening over time on the page, presence, each post's temperament and dot colour, the Oracle's hunch, and the surge, dropout and tap-to-calibrate episodes. Keep new touches subtle and in the patch. The dot breathes smoothly on an oscillator; hard steps read as a stuttering frame rate. The typing caret still blinks hard, like a real cursor.
+- **Avoid on the meter:** landing on or holding 7.77, or anything else that reads as a Seven sign. A waveform graphic was also cut.
+- Haptics: a tick on each pick, and a light tick per word as text types. Android uses `navigator.vibrate`. iPhone has no web haptics API, so `haptics.ts` toggles a fresh hidden `<input switch>`, which plays the system tick on iOS 18+. This is best-effort: iOS may ignore ticks not directly from a tap, and none play with System Haptics off. Nothing fires before the first touch.
 - Lines are laid out whole before they type, so words never jump lines. The caret takes no width.
 - There are no spinners. The tuning bar is the loader.
 - Nothing shifts the layout after it appears. If you add a block, reserve its space.

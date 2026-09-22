@@ -1,18 +1,19 @@
 import "./style.css";
 import { bySlug, preloadArt } from "./deck";
 import { rare } from "./engine";
-import { startHz } from "./hz";
+import { meter } from "./meter/meter";
 import { go } from "./screens";
 import { load, wipe } from "./state";
 
-const hz = startHz(document.getElementById("hz")!);
+meter.start(document.getElementById("hz")!, { post: () => load().card });
 document.getElementById("home")!.addEventListener("click", () => go.start());
 
-// Hidden hooks for testing on a real phone: #forget, #spike, #rare.
+// Hidden hooks for testing on a real phone: #forget, #rare, and any meter
+// episode by name (#spike, #dropout, #calibrate).
 const hook = location.hash.slice(1);
 if (hook) history.replaceState(null, "", location.pathname);
 if (hook === "forget") wipe();
-if (hook === "spike") setTimeout(hz.spike, 1200);
+setTimeout(() => meter.trigger(hook), 1200);
 if (hook === "rare") rare.force = true;
 
 // A returning visitor sees their art within a second; start fetching now.

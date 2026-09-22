@@ -155,6 +155,7 @@ main:focus {
   align-items: center;
   gap: 0.6em;
   padding: 6px 8px 6px 0;
+  white-space: nowrap;
   transition: color 0.2s ease;
 }
 .home svg {
@@ -171,29 +172,39 @@ main:focus {
 
 .hz {
   min-width: 9ch;
+  margin: -8px 0;
+  padding: 8px 0 8px 12px; /* a bigger target: tapping the meter checks it */
+  cursor: pointer;
+  touch-action: manipulation;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
   text-align: right;
   font-variant-numeric: tabular-nums;
   color: var(--mustard);
   transition: color 0.4s ease;
 }
-.hz::before {
-  content: "●";
+/* The live dot. Its glow, size and colour are driven every frame by
+   meter/patch.ts; CSS only places it. */
+.hz .dot {
+  display: inline-block;
   margin-right: 0.5em;
-  animation: pulse 2.4s ease-in-out infinite;
-}
-.hz.spike {
-  color: var(--alarm);
-}
-.hz.spike::before {
-  animation-duration: 0.4s;
+  color: var(--mustard);
+  transition: color 0.6s ease;
+  will-change: opacity, transform;
 }
 
-/* The live dot breathes. The caret below blinks hard, like a real one. */
-@keyframes pulse {
-  50% {
-    opacity: 0.2;
-  }
+/* Moods, set by episodes in meter/patch.ts. */
+.hz.hot {
+  color: var(--alarm);
 }
+.hz.bright {
+  color: var(--cream);
+}
+.hz.lost {
+  color: var(--cream-faint);
+}
+
 @keyframes blink {
   50% {
     opacity: 0.25;

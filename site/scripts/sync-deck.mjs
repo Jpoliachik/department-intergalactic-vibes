@@ -150,6 +150,7 @@ fs.mkdirSync(path.join(site, "src/brand"), { recursive: true });
 for (const [from, to] of [
   ["brand/mark/glyph.svg", "src/brand/glyph.svg"],
   ["brand/tokens.css", "src/brand/tokens.css"],
+  ["brand/tokens.json", "src/brand/tokens.json"],
 ]) {
   fs.copyFileSync(path.join(root, from), path.join(site, to));
   console.log(`wrote ${to}`);

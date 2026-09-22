@@ -4,6 +4,7 @@
 
 import { artPicture, type Card } from "./deck";
 import { tick } from "./haptics";
+import { meter } from "./meter/meter";
 
 export type Block =
   | { kind: "p"; text: string; dim?: boolean; lead?: string }
@@ -238,7 +239,7 @@ async function type(run: Run, el: HTMLElement, text: string, lead?: string) {
         while (budget >= 1 && n < text.length) {
           budget -= 1;
           const ch = text[n++];
-          if (text[n - 2] === " " || n === 1) tick("type"); // a tick as each word lands
+          if (text[n - 2] === " " || n === 1) (tick("type"), meter.nudge("type")); // each word lands: a tick, and a little signal
           if (PAUSE[ch] && text[n] === " ") {
             hold = PAUSE[ch];
             budget = 0;
@@ -302,6 +303,7 @@ function choices(run: Run, list: Choice[]) {
       nav.classList.add("chosen");
       btn.classList.add("picked");
       tick("tap");
+      meter.nudge("pick");
       // Let the pick register, unless something else (the mark) took over meanwhile.
       setTimeout(() => run.alive() && go(), motion.matches ? 0 : 150);
     });

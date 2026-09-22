@@ -19,7 +19,7 @@ Hidden hooks for testing on a real phone. Add one to any URL:
 | Hook | Does |
 | --- | --- |
 | `#forget` | Clears what this device remembers and starts fresh |
-| `#spike` | Triggers the Hz surge a second after load |
+| `#spike`, `#dropout`, `#calibrate` | Runs that meter episode a second after load |
 | `#rare` | Shows "Did you hear that?" on the next screen that can have it |
 
 ## The flow
@@ -49,11 +49,46 @@ Every path ends somewhere the device remembers, and a return visit picks up ther
 | `src/deck.ts` | Lookups over the deck, the card-art `<picture>`, and preloading it. |
 | `src/brand/` | **Generated.** Copies of `brand/mark/glyph.svg` (injected into both pages at build) and `brand/tokens.css` (imported by the CSS). |
 | `src/state.ts` | What the device remembers: `{ card?, leaning?, listened? }` in localStorage. |
-| `src/hz.ts` | The 7.83 Hz reading and its occasional surge. |
+| `src/meter/patch.ts` | **The meter's design.** What the Hz number and the live dot do at rest, per post, and in each episode. Play here. |
+| `src/meter/waves.ts` | The toolkit the patch composes: `sine`, `breath`, `noise`, `jitter`, `oscillator`, `sum`, `scale`, `settle`… |
+| `src/meter/meter.ts` | The runtime that plays the patch. You shouldn't need to touch it. |
+| `src/haptics.ts` | Ticks on picks and typing: `navigator.vibrate` on Android, a hidden switch toggle on iOS 18+ (best-effort). |
 | `src/style.css` | All styling. One dark look, on purpose. |
 | `scripts/sync-deck.mjs` | Deck → `deck.json`, card art → `public/cards/`, fonts → `public/fonts/`, and the brand glyph and tokens → `src/brand/`. |
 | `scripts/og.mjs` | Renders `public/og.png` (the link preview) in real Plex Mono using card-studio's puppeteer. |
 | `public/favicon.svg`, `public/apple-touch-icon.png` | **Generated** by `card-studio/scripts/export-brand.mjs`, not by this folder. |
+
+## The meter
+
+The reading in the header is a small instrument. `meter/patch.ts` describes it as four channels:
+
+- **`hz`:** the number.
+- **`glow`:** the dot's brightness, 0–1.
+- **`size`:** the dot's scale.
+- **`dot`:** the dot's colour, a brand band.
+
+Each channel is built from **waves** in `meter/waves.ts`, which are small functions of the current moment. The moment includes seconds on the page, the local hour, recent presence (0–1), the post on file, and seconds until the next episode.
+
+- **At rest:** the number is 7.83 plus a sum of influences:
+  - the post's temperament
+  - a dusk peak
+  - a slow strengthening the longer someone stays
+  - presence
+  - the Oracle's hunch before a surge
+
+  The dot breathes on an `oscillator` whose speed rises with presence and glides rather than jumps.
+- **Temperaments:** each post can set its own `hz` wave, breathing `beat` and `dot` colour. The Anchor barely moves, the Wanderer drifts on smooth noise, the Pulse keeps a beat, and the Deep Diver runs low.
+- **Episodes:** anomalies that override any channel for a few seconds. Each is drawn from progress `k` (0→1). There are three:
+  - `spike`: the red surge
+  - `dropout`: signal lost
+  - `calibrate`: tapping the meter
+
+  `SCHEDULE` sets when the automatic ones come: the first at 20–40s, then every 45–120s.
+- **Presence:** comes in through `meter.nudge("type" | "pick" | "tap")` and halves every 2.5s.
+
+The dot is redrawn every frame. The number redraws at `cadence`: 1.4s at rest, faster while someone's present or an episode runs. Nothing runs while the tab is hidden, and with reduced motion the dot holds still.
+
+To add a touch, add a wave to `hz`, a field to a temperament, or an entry to `EPISODES`. The runtime picks it up. One rule: an `oscillator` keeps its own phase, so evaluate each one exactly once per frame.
 
 ## Deploying
 

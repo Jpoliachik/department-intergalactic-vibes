@@ -1,4 +1,4 @@
 import "./style.css";
-import { startHz } from "./hz";
+import { meter } from "./meter/meter";
 
-startHz(document.getElementById("hz")!);
+meter.start(document.getElementById("hz")!);
