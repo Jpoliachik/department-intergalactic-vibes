@@ -58,7 +58,8 @@ export const go = {
     if (m.leaning) return go.leaning();
     show({
       blocks: [
-        p("Signal detected."),
+        // A first visit waits on the signal before it resolves.
+        m.listened ? p("Signal detected.") : p("Signal detected.", "....."),
         p(m.listened ? "Familiar, this time. You've listened here before." : "Faint, but it's there. Something about you registered on the Grid."),
         p("How did you find us?"),
       ],
@@ -166,7 +167,7 @@ export const go = {
     show({
       blocks: [
         dim("Every post is older than Vibe Corp. Listeners were hearing this one long before anyone gave it a code."),
-        ...POSTS[c.slug].root.map(p),
+        ...POSTS[c.slug].root.map((t) => p(t)),
         dim("The card doesn't say any of this. It points."),
       ],
       choices: homeChoices(),
@@ -326,7 +327,7 @@ export const go = {
       if (i === CALIBRATION.length) return finish();
       const q = CALIBRATION[i];
       show({
-        blocks: [dim(`Calibration ${i + 1} of ${CALIBRATION.length}`), ...q.ask.map(p)],
+        blocks: [dim(`Calibration ${i + 1} of ${CALIBRATION.length}`), ...q.ask.map((t) => p(t))],
         choices: q.answers.map((a): Choice => [a[0], () => (given.push(a), ask(i + 1))]),
       });
     };

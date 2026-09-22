@@ -6,7 +6,7 @@ import { artPicture, type Card } from "./deck";
 import { tick } from "./haptics";
 
 export type Block =
-  | { kind: "p"; text: string; dim?: boolean }
+  | { kind: "p"; text: string; dim?: boolean; lead?: string }
   | { kind: "label"; text: string }
   | { kind: "serif"; text: string }
   | { kind: "stars"; items: string[] }
@@ -25,7 +25,8 @@ export type Screen = {
   rare?: () => void;
 };
 
-export const p = (text: string): Block => ({ kind: "p", text });
+/** A line of prose. `lead` types first, slowly, then gives way to the line (the first visit's "....."). */
+export const p = (text: string, lead?: string): Block => ({ kind: "p", text, lead });
 export const dim = (text: string): Block => ({ kind: "p", text, dim: true });
 export const label = (text: string): Block => ({ kind: "label", text });
 export const serif = (text: string): Block => ({ kind: "serif", text });
@@ -45,7 +46,10 @@ const foot = document.getElementById("foot")!;
 const motion = matchMedia("(prefers-reduced-motion: reduce)");
 
 /** Characters per second while typing. Faster than anyone reads. */
-const CPS = 120;
+const CPS = 90;
+/** Per character of a `lead`, and the beat before the real line replaces it. */
+const LEAD_MS = 300;
+const LEAD_HOLD = 500;
 /** Extra beats after punctuation, so sentences land. */
 const PAUSE: Record<string, number> = { ".": 90, "?": 90, "!": 90, "…": 140, ":": 60, ",": 35 };
 
@@ -125,7 +129,7 @@ async function play(s: Screen) {
     const el = render(b);
     main.append(el);
     keepInView(el);
-    if (b.kind === "p") await type(run, el, b.text);
+    if (b.kind === "p") await type(run, el, b.text, b.lead);
     else await wait(run, b.kind === "card" ? (b.resolve ? 650 : 280) : 170);
     if (!run.alive()) return;
   }
@@ -193,7 +197,7 @@ async function playTune(text: string, ready: Promise<unknown>, then: () => void)
 
 /* ---------- typing ---------- */
 
-async function type(run: Run, el: HTMLElement, text: string) {
+async function type(run: Run, el: HTMLElement, text: string, lead?: string) {
   // The full line is laid out from the start (the unrevealed part is
   // invisible), so words never jump to the next line mid-type.
   const on = el.querySelector<HTMLElement>(".on")!;
@@ -208,6 +212,17 @@ async function type(run: Run, el: HTMLElement, text: string) {
   if (run.skipped) return reveal(text.length);
 
   el.classList.add("typing");
+  if (lead) {
+    // Hold the line's space, tap out the lead, wait, then clear for the real words.
+    on.textContent = "";
+    for (let i = 1; i <= lead.length && !run.skipped; i++) {
+      on.textContent = lead.slice(0, i);
+      await wait(run, LEAD_MS);
+    }
+    await wait(run, LEAD_HOLD);
+    on.textContent = "";
+    if (run.skipped) return reveal(text.length), el.classList.remove("typing");
+  }
   const typed = new Promise<void>((done) => {
     let budget = 0;
     let hold = 0;
