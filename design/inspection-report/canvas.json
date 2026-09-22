@@ -1,0 +1,23 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 384,
+      "h": 528
+    }
+  ],
+  "annotations": [
+    {
+      "id": "spec",
+      "x": 464,
+      "y": 0,
+      "w": 300,
+      "text": "The Vibe Inspection Report, as printed. 4 × 5.5 in pad page at 96px/in (384 × 528). Black ink only on white stock. Blank bottom-right of the frame is the landing zone for the 30mm Vibes Certified stamp. See INSPECTION_REPORT.md."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

@@ -13,6 +13,7 @@ Goal: surprise and delight people. Create memorable, slightly unreal interaction
 - **`README.md`** — public-facing in-universe orientation. The new-crew handbook. Read first.
 - **`LORE.md`** — index / map of the lore web. The table of contents for everything in `lore/`.
 - **`lore/`** — the lore web. One markdown file per entity, concept, thread, or artifact. Flat folder, cross-linked.
+- **`INSPECTION_REPORT.md`** — the Vibe Inspection Report: the stamped tear-off slip crew hand out as a quick opener. What's printed on it, the rules for its lines, and its print spec. Design source in `design/inspection-report/`.
 
 ## Working with the lore web
 
@@ -55,6 +56,7 @@ Every lore file should pass the **"would someone who actually works the Grid wri
 - **Never wink at the reader.** No "isn't this fun" energy. No genre self-awareness. Play it straight. The whimsy emerges from sincerity, not from irony.
 - Vibe Corp is old, accreted, and mostly benign — not cynical, not evil, and **not a megacorp**. "Corp" here is a worn-in name nobody questions, not a satire target. No compliance jokes, no middle management, no office culture.
 - **No DMV energy.** Avoid the bureaucratic-comedy register: forms, paperwork, filing cabinets, citations, memos, clearance levels, red tape. The old-institution feel comes from age and accretion, not from process.
+- **Exception: the Vibe Inspection Report** is deliberately form-shaped and funny-first — a two-second gag, not lore. Its register stays on that slip; don't carry it into lore files. See `INSPECTION_REPORT.md`.
 - **Deliberately vague about what Vibe Corp *is*.** Company, guild, lineage, long-running misunderstanding — never settle it. Keep institutional vocabulary light: people are **crew**, not agents or employees. (Exception: Seven is "the Recurring Agent" — an older designation that predates the current scheme. Canon, keep it.)
 
 ## Card layout rules
@@ -80,6 +82,7 @@ These apply to every printed artifact — the field-specialty deck, commendation
 - Seven Stars = the Pleiades cluster
 - **No "field office."** Dropped — it read as a branch of something, which raised questions (branch of what? how many? who runs it?) that the brand should not be answering. Crew are crew wherever they are. No regional structure, no posting, no HQ-and-branches.
 - Interaction tiers: sticker → commendation card → provisional induction
+- Before the tiers: the **Vibe Inspection Report** — a stamped VIBES CERTIFIED slip, the quickest opener crew have. See `INSPECTION_REPORT.md`.
 - On-duty in uniform, off-duty at campsite
 
 ## Central mystery: Seven
