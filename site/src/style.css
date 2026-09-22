@@ -134,6 +134,14 @@ main:focus {
 /* ---------- header ---------- */
 
 .bar {
+  /* Always there. Translucent and blurred, so the plum sky still shows
+     through and the words scroll away beneath it. */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: rgba(18, 10, 27, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: space-between;

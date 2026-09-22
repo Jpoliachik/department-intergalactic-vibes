@@ -10,7 +10,7 @@ The feeling to protect: *you've tuned into a channel that was already running, a
 
 ## Decisions that are settled (don't undo without asking Justin)
 
-- **One page, text-adventure shape.** Two to four lines of prose, then two to four choices. Tapping only; the card code is the one thing anyone types. No nav bar, no back button. The mark top left always goes home.
+- **One page, text-adventure shape.** Two to four lines of prose, then two to four choices. Tapping only; the card code is the one thing anyone types. No nav bar, no back button. The header (mark + meter) is sticky, so the mark top left is always there to go home.
 - **Home copy is "Signal detected."** It opens with "Signal detected," then "Faint, but it's there. Something about you registered on the Grid. How did you find us?" The three ways in are *Someone handed me a card / Someone took my reading / I'm not sure*.
 - **The site can suggest a post; only the card confirms one.** A calibration gives a *leaning*: a faded card marked "unconfirmed," with the assignments to carry for now. "The Grid confirms a post in person." Never let the site hand out a real post.
 - **Card-holder depth.** *Read the card closer* is only for people who entered a card. It shows a portrait (in the field / on the Grid / when it gets heavy / often found near) and then the **wisdom root**. The printed card never names the root; the site is where it gets named, framed as older listeners who heard the post first.
