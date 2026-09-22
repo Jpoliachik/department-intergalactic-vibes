@@ -31,6 +31,16 @@ const ORIGIN = process.env.ORIGIN ?? "http://localhost:3000";
 const BLEED_MM = 3.175;
 const SIZES_MM = [51, 76, 102];          // 2in, 3in, 4in
 const DPI = 300;
+/**
+ * The upload files are cut at 1200dpi, not 300.
+ *
+ * 300 is the floor a print shop will accept, and shipping exactly the floor
+ * leaves nothing for their pipeline to spend — any rescale, any resample, and
+ * the edges soften. The artwork is vector, so resolution costs nothing but a
+ * few hundred KB, and these are flat colours that compress hard. There is no
+ * argument for the minimum here.
+ */
+const UPLOAD_DPI = 1200;
 const mm2px = (mm, dpi) => Math.round((mm / 25.4) * dpi);
 const mm2in = (mm) => mm / 25.4;
 
@@ -48,12 +58,13 @@ try {
     const stem = `vibe-corp-sticker-${inch}in-${mm}mm`;
 
     // `circle` is sized off the CUT alone — the image is the cut, so it carries
-    // no bleed square and gets its own pixel size.
-    const circlePx = mm2px(mm, DPI);
+    // no bleed square and gets its own pixel size. It is also the file that
+    // actually gets uploaded, so it is the one cut at UPLOAD_DPI.
+    const circlePx = mm2px(mm, UPLOAD_DPI);
 
     for (const [suffix, q, size] of [
       ["circle", "flavour=circle", circlePx],
-      ["diecut", "flavour=diecut", px],
+      ["diecut", "flavour=diecut", mm2px(totalMm, UPLOAD_DPI)],
       ["bleed", "flavour=bleed", px],
       ["guides", "flavour=circle&guides=1", circlePx],
     ]) {
@@ -93,7 +104,7 @@ try {
     });
 
     console.log(
-      `${stem}: ${px}x${px}px @ ${DPI}dpi — ${mm}mm cut + ${BLEED_MM}mm bleed = ${totalMm.toFixed(1)}mm artwork, + pdf`,
+      `${stem}: circle ${circlePx}x${circlePx} @ ${UPLOAD_DPI}dpi · bleed ${px}x${px} @ ${DPI}dpi · pdf vector`,
     );
   }
 
@@ -103,6 +114,9 @@ try {
       "VIBE CORP — circle sticker artwork",
       "",
       `Cut sizes: ${SIZES_MM.map((m) => `${(m / 25.4).toFixed(0)}in (${m}mm)`).join(", ")}`,
+      `Upload files (-circle, -diecut) are ${UPLOAD_DPI}dpi. 300 is the floor a`,
+      "shop will accept; these leave headroom so a rescale on their side cannot",
+      "soften the edges.",
       `Bleed: ${BLEED_MM}mm all round (the trade's usual 1/8in).`,
       `Safe margin: ${BLEED_MM}mm inside the cut. The emblem's outer rule sits exactly on it.`,
       "",
