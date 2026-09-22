@@ -1,7 +1,8 @@
 /**
  * Writes the standalone brand assets into /brand from the single source of
- * truth in lib/brand.ts, plus the site's favicon into /site. Same philosophy as the card export: one definition in
- * the codebase, and the outside world gets files.
+ * truth in lib/brand.ts, plus the site's favicon into /site/public. Same
+ * philosophy as the card export: one definition in the codebase, and the
+ * outside world gets files.
  *
  *   node scripts/export-brand.mjs
  */
@@ -94,11 +95,11 @@ for (const [rel, body] of Object.entries(files)) {
 
 // The site's favicon is the glyph, fully specified — a browser tab gives
 // currentColor nothing to inherit. Mustard, because it holds on light and dark
-// tab bars alike.
-const site = path.join(root, "site");
+// tab bars alike. Written to site/public/, which Vite serves verbatim at /.
+const site = path.join(root, "site", "public");
 const favicon = head(GLYPH_VIEWBOX, "Vibe Corp") + waves(PALETTE.mustard.hex) + "</svg>\n";
 fs.writeFileSync(path.join(site, "favicon.svg"), favicon);
-console.log("wrote site/favicon.svg");
+console.log("wrote site/public/favicon.svg");
 
 // iOS home-screen icon: opaque, so the glyph sits on the site's black ground
 // with room around it for the rounded mask.
@@ -114,7 +115,7 @@ try {
       `</body>`,
   );
   await page.screenshot({ path: path.join(site, "apple-touch-icon.png") });
-  console.log("wrote site/apple-touch-icon.png");
+  console.log("wrote site/public/apple-touch-icon.png");
 } finally {
   await browser.close();
 }
