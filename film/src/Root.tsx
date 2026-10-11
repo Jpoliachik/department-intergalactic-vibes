@@ -1,4 +1,5 @@
 import {Composition} from 'remotion';
+import {CUTS} from './cuts';
 import {DURATION_S, FPS} from './copy';
 import {Film} from './Film';
 import {Lab} from './Lab';
@@ -27,6 +28,25 @@ export const Root: React.FC = () => (
 			width={1080}
 			height={1920}
 			defaultProps={{subtitles: true, narration: voice.narration, footage: {}}}
+		/>
+		{/* 30s — the short cut, both shapes. */}
+		<Composition
+			id="HigherFrequency30"
+			component={Film}
+			durationInFrames={Math.round(CUTS.cut30.duration * FPS)}
+			fps={FPS}
+			width={1080}
+			height={1350}
+			defaultProps={{subtitles: true, narration: null, footage: {}, cut: 'cut30'}}
+		/>
+		<Composition
+			id="HigherFrequency30Vertical"
+			component={Vertical}
+			durationInFrames={Math.round(CUTS.cut30.duration * FPS)}
+			fps={FPS}
+			width={1080}
+			height={1920}
+			defaultProps={{subtitles: true, narration: null, footage: {}, cut: 'cut30'}}
 		/>
 		<Composition id="Lab" component={Lab} durationInFrames={90} fps={FPS} width={1080} height={1350} />
 	</>

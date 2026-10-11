@@ -10,7 +10,10 @@
     "voice": "node scripts/voice.mjs",
     "render": "remotion render src/index.ts HigherFrequency out/a-higher-frequency.mp4 --crf=18",
     "render:vertical": "remotion render src/index.ts HigherFrequencyVertical out/a-higher-frequency-9x16.mp4 --crf=18",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "cut": "python3 scripts/cut.py && python3 scripts/music_cut.py cut30",
+    "render:30": "remotion render src/index.ts HigherFrequency30 out/a-higher-frequency-30s.mp4 --crf=18",
+    "render:30:vertical": "remotion render src/index.ts HigherFrequency30Vertical out/a-higher-frequency-30s-9x16.mp4 --crf=18"
   },
   "dependencies": {
     "@fontsource/cormorant": "5.1.1",

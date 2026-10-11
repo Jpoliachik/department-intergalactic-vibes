@@ -4,3 +4,5 @@ out
 public/music.wav
 public/sfx
 # narration (public/voice/, public/narration.wav) is paid-for ElevenLabs output: commit it
+# a cut's narration and score are rebuilt from the takes by `npm run cut`
+public/cut30

@@ -1,6 +1,7 @@
 import React from 'react';
-import {AbsoluteFill, Audio, OffthreadVideo, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Freeze, OffthreadVideo, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {BEATS, NARRATION, SCENES} from './copy';
+import {CUTS, Cut, designToCut, toDesign} from './cuts';
 import {Iris, Projector, Subtitles} from './look';
 import {Final, FinePrint, Join, Radar, Requirements, Search} from './scenes/closing';
 import {Cosmos, Officer, Us} from './scenes/middle';
@@ -16,6 +17,8 @@ export type FilmProps = {
 	narration: string | null;
 	/** Real footage in public/ to replace a drawn scene, e.g. {crowd: "crowd.mp4"}. */
 	footage: Partial<Record<SceneKey, string>>;
+	/** A short cut from src/cuts (e.g. "cut30"), or null for the full 60s film. */
+	cut?: string | null;
 };
 
 const DRAWN: Record<SceneKey, React.FC> = {
@@ -46,11 +49,12 @@ const IRIS: Partial<Record<SceneKey, {open?: boolean; close?: boolean}>> = {
 	final: {open: true},
 };
 
-/** Every sound effect, as [seconds, file, volume]. */
+/** Every sound effect, as [seconds, file, volume], in design (60s) time. */
 const useFoley = (): [number, string, number][] => {
-	const {fps, width} = useVideoConfig();
+	const {fps} = useVideoConfig();
 	const [c0, c1] = SCENES.conveyor;
-	const stamps = stampFrames(width, Math.round((c1 - c0) * fps), fps).map((f): [number, string, number] => [c0 + f / fps, 'thunk', 0.55]);
+	// the belt is laid out on the 4:5 frame's width whatever the output shape
+	const stamps = stampFrames(1080, Math.round((c1 - c0) * fps), fps).map((f): [number, string, number] => [c0 + f / fps, 'thunk', 0.55]);
 	return [
 		[0.4, 'beep', 0.5],
 		[BEATS.hatTip + 0.27, 'ding', 0.5],
@@ -89,6 +93,14 @@ const PUSH: Partial<Record<SceneKey, number>> = {
 	final: 1.05,
 };
 
+/** Play a scene's 60s design on the cut's warped clock. */
+const Warp: React.FC<{cut: Cut | null; scene: SceneKey; children: React.ReactNode}> = ({cut, scene, children}) => {
+	const frame = useCurrentFrame();
+	const {fps} = useVideoConfig();
+	if (!cut) return <>{children}</>;
+	return <Freeze frame={toDesign(cut, scene, frame / fps) * fps}>{children}</Freeze>;
+};
+
 const Camera: React.FC<{push?: number; dur: number; children: React.ReactNode}> = ({push = 1, dur, children}) => {
 	const frame = useCurrentFrame();
 	const k = interpolate(frame, [0, dur], [1, push]);
@@ -107,45 +119,58 @@ const Splice: React.FC = () => {
 	);
 };
 
-export const Film: React.FC<FilmProps> = ({subtitles, narration, footage}) => {
+export const Film: React.FC<FilmProps> = ({subtitles, narration, footage, cut: cutName = null}) => {
 	const {fps} = useVideoConfig();
-	const foley = useFoley();
+	const cut = cutName ? CUTS[cutName] : null;
+	const scenes = cut ? cut.scenes : SCENES;
+	const voice = cut ? cut.narration : narration;
+	const irisLength = cut ? 9 : 16;
+	// foley moves with the picture; in a fast cut, stamps closer than a few frames merge into one
+	const foley = useFoley()
+		.map(([t, name, vol]): [number, string, number] => [cut ? designToCut(cut, t) : t, name, vol])
+		.filter(([t]) => Number.isFinite(t))
+		.filter(([t, name], i, all) => !all.slice(0, i).some(([t0, n0]) => n0 === name && Math.abs(t - t0) < 0.07));
 	return (
 		<AbsoluteFill style={{background: '#000'}}>
 			<Projector>
 				{(Object.keys(SCENES) as SceneKey[]).map((key) => {
-					const [from, to] = SCENES[key];
+					const [from, to] = scenes[key];
 					const dur = Math.round((to - from) * fps);
+					if (dur <= 0) return null; // dropped from this cut
 					const Drawn = DRAWN[key];
 					const clip = footage[key];
-					const iris = IRIS[key] ?? {};
+					// a short cut opens on a lit frame: it's also the thumbnail
+					const iris = cut && from === 0 ? {} : (IRIS[key] ?? {});
 					return (
 						<Sequence key={key} name={key} from={Math.round(from * fps)} durationInFrames={dur}>
-							<Iris openAt={iris.open ? 0 : undefined} closeAt={iris.close ? dur - 16 : undefined} length={16}>
+							<Iris openAt={iris.open ? 0 : undefined} closeAt={iris.close ? dur - irisLength : undefined} length={irisLength}>
 								<Camera push={PUSH[key]} dur={dur}>
 									{clip ? (
 										<OffthreadVideo src={staticFile(clip)} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
 									) : (
-										<Drawn />
+										<Warp cut={cut} scene={key}>
+											<Drawn />
+										</Warp>
 									)}
 								</Camera>
 							</Iris>
-							{iris.open || key === 'leader' ? null : <Splice />}
+							{iris.open || from === 0 ? null : <Splice />}
 						</Sequence>
 					);
 				})}
-				{subtitles ? <Subtitles lines={NARRATION} /> : null}
+				{subtitles ? <Subtitles lines={cut ? cut.lines : NARRATION} /> : null}
 			</Projector>
 
 			<Audio
-				src={staticFile('music.wav')}
-				volume={(f) =>
-					narration
-						? interpolate(f, [0, 3 * fps, 4 * fps], [0.9, 0.9, 0.45], {extrapolateRight: 'clamp'})
-						: 0.9
-				}
+				src={staticFile(cut ? cut.music : 'music.wav')}
+				volume={(f) => {
+					if (!voice) return 0.9;
+					// full for the opening fanfare, then under the narrator
+					const [a, b] = cut ? [0.8, 1.0] : [3, 4];
+					return interpolate(f, [0, a * fps, b * fps], [0.9, 0.9, 0.45], {extrapolateRight: 'clamp'});
+				}}
 			/>
-			{narration ? <Audio src={staticFile(narration)} /> : null}
+			{voice ? <Audio src={staticFile(voice)} /> : null}
 			<Audio src={staticFile('sfx/projector.wav')} volume={0.12} />
 			{foley.map(([t, name, vol], i) => (
 				<Sequence key={i} from={Math.round(t * fps)} layout="none">
