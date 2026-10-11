@@ -23,7 +23,7 @@ import {fileURLToPath} from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const KEY = process.env.ELEVENLABS_API_KEY;
-const VOICE = process.env.ELEVENLABS_VOICE_ID ?? 'pqHfZKP75CvOlQylNhV4'; // "Bill" — premade, older, trustworthy
+const VOICE = process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB'; // "Adam" — dominant, cuts through; Cave Johnson energy
 const MODEL = process.env.ELEVENLABS_MODEL ?? 'eleven_multilingual_v2';
 const FRESH = process.env.VOICE_FRESH === '1';
 const DURATION = 60;
@@ -65,8 +65,8 @@ for (const [i, line] of lines.entries()) {
 				model_id: MODEL,
 				previous_text: lines[i - 1]?.text,
 				next_text: lines[i + 1]?.text,
-				// steady and certain, with a little warmth
-				voice_settings: {stability: 0.6, similarity_boost: 0.8, style: 0.3, use_speaker_boost: true},
+				// Cave Johnson: bombastic, utterly certain, zero warmth
+				voice_settings: {stability: 0.35, similarity_boost: 0.8, style: 0.65, use_speaker_boost: true},
 			}),
 		});
 		if (!res.ok) {
