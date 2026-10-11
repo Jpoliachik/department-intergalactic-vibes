@@ -57,12 +57,20 @@ LINES = [
 voice_src = (ROOT / "scripts/voice.mjs").read_text()
 VOICE = os.environ.get("ELEVENLABS_VOICE_ID") or re.search(r"ELEVENLABS_VOICE_ID \?\? '([^']+)'", voice_src).group(1)
 MODEL = os.environ.get("ELEVENLABS_MODEL") or re.search(r"ELEVENLABS_MODEL \?\? '([^']+)'", voice_src).group(1)
-takes = [
-    ROOT / "public/voice" / f"{i:02d}-{hashlib.sha1(f'{VOICE}|{MODEL}|{text}'.encode()).hexdigest()[:10]}.mp3"
-    for i, text in enumerate(LINES)
-]
+SPEED = float(os.environ.get("VOICE_SPEED", "1.2"))
+
+
+def take_set(folder, key):
+    return [ROOT / "public/voice" / folder / f"{i:02d}-{hashlib.sha1(key(text).encode()).hexdigest()[:10]}.mp3" for i, text in enumerate(LINES)]
+
+
+# prefer takes voiced fast for this cut (`VOICE_FOR=cut30 npm run voice`); else the 60s takes, sped up more
+takes = take_set(NAME, lambda text: f"{VOICE}|{MODEL}|{SPEED}|{text}")
+if not all(t.exists() for t in takes):
+    takes = take_set("", lambda text: f"{VOICE}|{MODEL}|{text}")
 missing = [t.name for t in takes if not t.exists()]
 assert not missing, f"no take for {missing} in voice {VOICE} — run `npm run voice` first"
+print(f"takes: {takes[0].parent.relative_to(ROOT)}")
 
 
 def ff(*args):

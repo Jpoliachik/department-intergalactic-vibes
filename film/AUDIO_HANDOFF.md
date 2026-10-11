@@ -151,3 +151,17 @@ Commit to `film/a-higher-frequency` and push. Don't push to `main`, because push
 - **The purple.** Purple marks Vibe Corp and nothing else (see README).
 - **The wording** in `NARRATION`.
 - **The picture**, unless a beat has to move for the voice (see §1).
+
+---
+
+## 6. Faster takes for the 30-second cut
+
+The 30s cut (`npm run cut`) time-stretches the 60s takes to about 1.47×, which can sound processed. A faster read sounds better:
+
+```sh
+VOICE_FOR=cut30 npm run voice   # Adam, same settings, ElevenLabs speed 1.2 -> public/voice/cut30/
+npm run cut                     # picks those takes up, re-solves the pace (~1.2x), re-anchors every beat
+npm run render:30 && npm run render:30:vertical
+```
+
+The 60s narration is left alone. Commit `public/voice/cut30/` and push.

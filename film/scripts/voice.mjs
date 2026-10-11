@@ -11,6 +11,9 @@
 //   ELEVENLABS_VOICE_ID   voice to use (default: a warm, older American narrator)
 //   ELEVENLABS_MODEL      default eleven_multilingual_v2
 //   VOICE_FRESH=1         ignore the cache and re-voice every line
+//   VOICE_FOR=cut30       voice takes for a short cut instead: faster delivery
+//                         (VOICE_SPEED, default 1.2 — ElevenLabs' max), saved to
+//                         public/voice/cut30/, and left for `npm run cut` to assemble
 //
 // Lines are cached in public/voice/ by a hash of (voice, model, text), so
 // re-running after a copy edit only pays for the lines that changed.
@@ -26,6 +29,8 @@ const KEY = process.env.ELEVENLABS_API_KEY;
 const VOICE = process.env.ELEVENLABS_VOICE_ID ?? 'pNInz6obpgDQGcFmaJgB'; // "Adam" — dominant, cuts through; Cave Johnson energy
 const MODEL = process.env.ELEVENLABS_MODEL ?? 'eleven_multilingual_v2';
 const FRESH = process.env.VOICE_FRESH === '1';
+const FOR = process.env.VOICE_FOR ?? null;
+const SPEED = Number(process.env.VOICE_SPEED ?? (FOR ? 1.2 : 1));
 const DURATION = 60;
 
 if (!KEY) {
@@ -44,7 +49,7 @@ const lines = [...block.matchAll(/\{from:\s*([\d.]+),\s*to:\s*([\d.]+),\s*text:\
 }));
 if (!lines.length) throw new Error('No NARRATION lines found in src/copy.ts');
 
-const dir = join(root, 'public/voice');
+const dir = join(root, 'public/voice', FOR ?? '');
 mkdirSync(dir, {recursive: true});
 
 const probe = (file) =>
@@ -53,7 +58,7 @@ const probe = (file) =>
 // --- voice each line
 const takes = [];
 for (const [i, line] of lines.entries()) {
-	const id = createHash('sha1').update(`${VOICE}|${MODEL}|${line.text}`).digest('hex').slice(0, 10);
+	const id = createHash('sha1').update(SPEED === 1 ? `${VOICE}|${MODEL}|${line.text}` : `${VOICE}|${MODEL}|${SPEED}|${line.text}`).digest('hex').slice(0, 10);
 	const file = join(dir, `${String(i).padStart(2, '0')}-${id}.mp3`);
 	if (FRESH || !existsSync(file)) {
 		process.stdout.write(`voicing ${i + 1}/${lines.length}: ${line.text}\n`);
@@ -66,7 +71,7 @@ for (const [i, line] of lines.entries()) {
 				previous_text: lines[i - 1]?.text,
 				next_text: lines[i + 1]?.text,
 				// Cave Johnson: bombastic, utterly certain, zero warmth
-				voice_settings: {stability: 0.35, similarity_boost: 0.8, style: 0.65, use_speaker_boost: true},
+				voice_settings: {stability: 0.35, similarity_boost: 0.8, style: 0.65, use_speaker_boost: true, ...(SPEED === 1 ? {} : {speed: SPEED})},
 			}),
 		});
 		if (!res.ok) {
@@ -83,6 +88,11 @@ for (const [i, line] of lines.entries()) {
 	const tempo = dur > slot ? Math.min(1.12, dur / slot) : 1;
 	if (dur / tempo > slot + 0.05) console.warn(`  ! line ${i + 1} runs ${(dur / tempo - slot).toFixed(2)}s long — shorten it or widen its slot in copy.ts`);
 	takes.push({file, at: line.from, tempo});
+}
+
+if (FOR) {
+	console.log(`\nwrote ${takes.length} takes to public/voice/${FOR}/ at speed ${SPEED}. Now: npm run cut, then npm run render:30`);
+	process.exit(0);
 }
 
 // --- lay them down, then the broadcast chain: band-limited, a touch of tube, a small room
