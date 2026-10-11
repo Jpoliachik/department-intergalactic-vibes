@@ -85,7 +85,7 @@ for i, t in enumerate(bars(Q["main"], Q["endless"] + BAR)):
         if tb >= Q["stop"]:
             break
         if beat % 2 == 0:
-            add(orch, tb, tuba(hz(root if beat == 0 else root + 7)), 0.26)
+            add(orch, tb, tuba(hz(root if beat == 0 else root + 7)), 0.15)
         else:
             for m in tones[:3]:
                 add(orch, tb, pizz(hz(C + m)), 0.06)
@@ -151,7 +151,7 @@ for i, t in enumerate(bars(march_from, Q["final"])):
         tb = t + beat * BEAT
         if tb >= Q["final"] - 0.05:
             break
-        add(orch, tb, tuba(hz(root if beat % 2 == 0 else root + 7)), 0.3)
+        add(orch, tb, tuba(hz(root if beat % 2 == 0 else root + 7)), 0.18)
         add(perc, tb, snare(), 0.12 if beat % 2 else 0.05)
         if beat % 2:
             for m in tones[:3]:
@@ -183,7 +183,7 @@ add(button, Q["button"], glock(hz(96), 0.6), 0.1)
 # ---------------------------------------------------------------- mix
 
 lead = render_theremin(melody, N, fade_at=Q["finalEnd"] - 0.05)
-mix = orch + perc + 0.085 * lead
+mix = orch + perc + 0.045 * lead  # theremin underneath, not on top (as the 60s score)
 tape_stop(mix, Q["stop"], Q["soft"])
 mix = master(mix, DUR, fade_end=Q["finalEnd"], button=button)
 

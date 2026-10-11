@@ -13,7 +13,9 @@ Writes  public/cut30/narration.wav    tightened narration, broadcast tone
 Then `npm run music:30` scores it, and `npm run render:30` renders it.
 """
 
+import hashlib
 import json
+import os
 import re
 import subprocess
 import tempfile
@@ -28,8 +30,11 @@ DURATION = 30.0
 SR = 44100
 
 # Pace. The 60s takes are delivered at a stately clip; the short cut is a newsreel.
-TEMPO = 1.42
-TEMPO_FOR = {1: 1.2, 10: 1.25}  # "That someone is us." and the last line keep a little weight
+# The pace is solved for: whatever speed lands the last word at SPEECH_ENDS, so a
+# new voice (longer or shorter takes) still fits. Some lines keep a little weight.
+SPEECH_ENDS = 28.4  # leaves the fine print time to be read
+WEIGHT = {1: 0.85, 10: 0.88}  # "That someone is us." and the last line run slower than the rest
+MAX_TEMPO = 1.6
 GAP = 0.07  # between lines
 GAP_AFTER = {1: 0.18, 7: 0.5}  # a beat after the punchline; room for the JOIN sting before "Requirements"
 FIRST_LINE_AT = 0.42
@@ -48,8 +53,16 @@ LINES = [
     eval(m)  # plain single-quoted literals with \u escapes
     for m in re.findall(r"text: ('(?:[^'\\]|\\.)*')", ts_block("NARRATION"))
 ]
-takes = sorted((ROOT / "public/voice").glob("*.mp3"))
-assert len(takes) == len(LINES), f"{len(takes)} takes for {len(LINES)} lines — run `npm run voice` first"
+# the takes for the current voice: voice.mjs names them <line>-<sha1(voice|model|text)[:10]>.mp3
+voice_src = (ROOT / "scripts/voice.mjs").read_text()
+VOICE = os.environ.get("ELEVENLABS_VOICE_ID") or re.search(r"ELEVENLABS_VOICE_ID \?\? '([^']+)'", voice_src).group(1)
+MODEL = os.environ.get("ELEVENLABS_MODEL") or re.search(r"ELEVENLABS_MODEL \?\? '([^']+)'", voice_src).group(1)
+takes = [
+    ROOT / "public/voice" / f"{i:02d}-{hashlib.sha1(f'{VOICE}|{MODEL}|{text}'.encode()).hexdigest()[:10]}.mp3"
+    for i, text in enumerate(LINES)
+]
+missing = [t.name for t in takes if not t.exists()]
+assert not missing, f"no take for {missing} in voice {VOICE} — run `npm run voice` first"
 
 
 def ff(*args):
@@ -86,20 +99,35 @@ def phrases(x, min_gap=0.07, thresh=0.012):
 # ---------------------------------------------------------------- tighten each take
 
 tmp = Path(tempfile.mkdtemp())
-lines = []
-t = FIRST_LINE_AT
-for i, (take, text) in enumerate(zip(takes, LINES)):
-    out = tmp / f"{i:02d}.wav"
-    tempo = TEMPO_FOR.get(i, TEMPO)
+
+# pass 1: trim head and tail and shorten every internal pause
+trimmed = []
+for i, take in enumerate(takes):
+    out = tmp / f"{i:02d}-trim.wav"
     ff(
         "-i", str(take), "-af",
-        # trim head and tail, shorten every internal pause, then speed up (pitch kept)
         "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.02,areverse,"
         "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.03,areverse,"
         "silenceremove=stop_periods=-1:stop_threshold=-45dB:stop_duration=0.12:stop_silence=0.08,"
-        f"atempo={tempo},aresample={SR}",
+        f"aresample={SR}",
         "-ac", "1", str(out),
     )
+    trimmed.append((out, len(read(out)) / SR))
+
+# solve the pace: sum(d_i / (base * w_i)) + gaps = SPEECH_ENDS - FIRST_LINE_AT
+gaps = sum(GAP_AFTER.get(i, GAP) for i in range(len(LINES) - 1))
+base = sum(d / WEIGHT.get(i, 1.0) for i, (_, d) in enumerate(trimmed)) / (SPEECH_ENDS - FIRST_LINE_AT - gaps)
+base = max(1.0, base)
+assert base <= MAX_TEMPO, f"would need {base:.2f}x to fit — too fast to follow; trim copy or lengthen the cut"
+print(f"pace: {base:.2f}x")
+
+# pass 2: speed up (pitch kept), lay end to end
+lines = []
+t = FIRST_LINE_AT
+for i, ((src, _), text) in enumerate(zip(trimmed, LINES)):
+    out = tmp / f"{i:02d}.wav"
+    tempo = base * WEIGHT.get(i, 1.0)
+    ff("-i", str(src), "-af", f"atempo={tempo:.4f}", str(out))
     x = read(out)
     dur = len(x) / SR
     lines.append({"i": i, "text": text, "file": out, "from": round(t, 3), "to": round(t + dur, 3), "phrases": [(round(t + a, 3), round(t + b, 3)) for a, b in phrases(x)]})
@@ -107,15 +135,22 @@ for i, (take, text) in enumerate(zip(takes, LINES)):
 
 end_of_speech = lines[-1]["to"]
 print(f"narration: {lines[0]['from']:.2f}s → {end_of_speech:.2f}s")
-assert end_of_speech <= DURATION - 1.5, f"narration runs to {end_of_speech:.2f}s — speed up TEMPO or trim gaps"
+assert end_of_speech <= SPEECH_ENDS + 0.05, f"narration runs to {end_of_speech:.2f}s — speed up TEMPO or trim gaps"
 
 L = lambda i: lines[i]  # noqa: E731
-ph = lambda i, k: lines[i]["phrases"][k]  # noqa: E731
 
 
-def phrase_start(i, k):
-    p = lines[i]["phrases"]
-    return p[min(k, len(p) - 1)][0]
+def word_at(i, words):
+    """When `words` (a substring of line i) is spoken.
+
+    Estimated from where it sits in the line, then snapped to the nearest pause the
+    voice actually took — so anchors survive a change of voice or delivery."""
+    ln = lines[i]
+    frac = ln["text"].index(words) / len(ln["text"])
+    guess = ln["from"] + frac * (ln["to"] - ln["from"])
+    starts = [a for a, _ in ln["phrases"]]
+    best = min(starts, key=lambda a: abs(a - guess))
+    return best if abs(best - guess) < 0.4 else guess
 
 
 # ---------------------------------------------------------------- the cut: scene boundaries, in cut time
@@ -129,12 +164,12 @@ cut = {
     "us": (L(1)["from"] - 0.15, L(2)["from"] - 0.1),
     "officer": (L(2)["from"] - 0.1, L(3)["from"] - 0.05),
     "cosmos": (L(3)["from"] - 0.05, L(4)["from"] - 0.1),
-    "headline": (L(4)["from"] - 0.1, phrase_start(4, 2) - 0.05),  # "Every day, | thousands of assessments."
-    "calibrate": (phrase_start(4, 2) - 0.05, L(5)["from"] - 0.1),  # "Calibrations. | Readings."
+    "headline": (L(4)["from"] - 0.1, word_at(4, "Calibrations") - 0.05),
+    "calibrate": (word_at(4, "Calibrations") - 0.05, L(5)["from"] - 0.1),
     "conveyor": (L(5)["from"] - 0.1, L(6)["from"] - 0.1),
     "search": (L(6)["from"] - 0.1, L(8)["from"] - 0.5),
-    "join": (L(8)["from"] - 0.5, phrase_start(8, 1) - 0.08),  # holds through "Requirements are simple:"
-    "requirements": (phrase_start(8, 1) - 0.08, L(9)["from"] - 0.1),
+    "join": (L(8)["from"] - 0.5, word_at(8, "a steady") - 0.08),  # holds through "Requirements are simple:"
+    "requirements": (word_at(8, "a steady") - 0.08, L(9)["from"] - 0.1),
     "radar": (L(9)["from"] - 0.1, L(10)["from"] - 0.1),
     "final": (L(10)["from"] - 0.1, final_end),
     "finePrint": (final_end, DURATION),
@@ -166,14 +201,14 @@ def last_phrase_end(i):
 
 beats_cut = {
     "hatTip": ("us", L(1)["from"] + 0.3),
-    "hammock": ("cosmos", phrase_start(3, 1)),  # "— so you don't have to"
-    "readings": ("calibrate", phrase_start(4, 3)),
-    "endless": ("conveyor", phrase_start(5, 1)),  # "The work is endless."
+    "hammock": ("cosmos", word_at(3, "so you")),
+    "readings": ("calibrate", word_at(4, "Readings")),
+    "endless": ("conveyor", word_at(5, "The work is endless")),
     "rare": ("search", L(7)["from"]),
-    "pulse": ("requirements", phrase_start(8, 1)),
-    "eye": ("requirements", phrase_start(8, 2)),
-    "hum": ("requirements", phrase_start(8, 3)),
-    "found": ("radar", phrase_start(9, 1)),  # "we will find you"
+    "pulse": ("requirements", word_at(8, "a steady")),
+    "eye": ("requirements", word_at(8, "a discerning")),
+    "hum": ("requirements", word_at(8, "no fear")),
+    "found": ("radar", word_at(9, "we will find")),
     "logged": ("final", last_phrase_end(10) - 0.42),
 }
 

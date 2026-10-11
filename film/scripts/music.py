@@ -58,7 +58,7 @@ for bar, name, sec in PLAN:
         for beat in range(4):
             tb = t0 + beat * BEAT
             if beat % 2 == 0:
-                add(orch, tb, tuba(hz(root if beat == 0 else root + 7)), 0.26)
+                add(orch, tb, tuba(hz(root if beat == 0 else root + 7)), 0.15)
             else:
                 for m in tones[:3]:
                     add(orch, tb, pizz(hz(C + m)), 0.06)
@@ -76,7 +76,7 @@ for bar, name, sec in PLAN:
     elif sec == "march":
         for beat in range(4):
             tb = t0 + beat * BEAT
-            add(orch, tb, tuba(hz(root if beat % 2 == 0 else root + 7)), 0.3)
+            add(orch, tb, tuba(hz(root if beat % 2 == 0 else root + 7)), 0.18)
             add(perc, tb, snare(), 0.12 if beat % 2 else 0.05)
             if beat % 2:
                 for m in tones[:3]:
@@ -188,7 +188,7 @@ lead = render_theremin(MELODY, N, fade_at=57.9)
 
 # ---------------------------------------------------------------- master: optical soundtrack
 
-mix = orch + perc + 0.085 * lead
+mix = orch + perc + 0.045 * lead  # theremin pulled back: underneath, not on top
 tape_stop(mix, STOP, SOFT)  # the conveyor's tape-stop
 mix = master(mix, DUR, fade_end=57.95, button=button)  # the finale chord dies away before the fine print
 
