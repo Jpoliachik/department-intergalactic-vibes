@@ -2,7 +2,7 @@
 
 The Vibe Corp recruitment film — a 60-second mid-century informational film, built in [Remotion](https://remotion.dev). First post for @vibecorp.live.
 
-Black and white, grain, gate weave, flicker, iris transitions. Everything is drawn: a 1950s limited-animation crew member and cast, isotype diagrams, a spinning newspaper, a conveyor belt that won't stop. A generated pocket-orchestra cue with a theremin, synthesized foley, and an ElevenLabs narrator carry the sound.
+Black and white, grain, gate weave, flicker, iris transitions, whip pans and splices — with one hand-tinted colour. **Purple only ever marks Vibe Corp**: the crew's hi-vis, the watcher in every era, the mark, the candidate whose frequency turns out to be ours, the radar lock, the logged stamp. Keep it that way; it's the film's one piece of grammar. Everything is drawn: a 1950s limited-animation crew member and cast, isotype diagrams, a spinning newspaper, a conveyor belt that won't stop. A generated pocket-orchestra cue with a theremin, synthesized foley, and an ElevenLabs narrator carry the sound.
 
 ## Run it
 
@@ -14,7 +14,7 @@ npm run sfx              # regenerate public/sfx/*.wav
 npm run voice            # ElevenLabs narration -> public/narration.wav (needs ELEVENLABS_API_KEY)
 npm run studio           # scrub and tweak in the browser
 npm run render           # out/a-higher-frequency.mp4        (1080×1350, 4:5 feed)
-npm run render:vertical  # out/a-higher-frequency-9x16.mp4   (1080×1920, Reels)
+npm run render:vertical  # out/a-higher-frequency-9x16.mp4   (1080×1920, Reels: the 4:5 film in a strip of film)
 ```
 
 `remotion.config.ts` points at the pre-installed headless Chromium; delete that line to let Remotion fetch its own.
@@ -26,7 +26,9 @@ npm run render:vertical  # out/a-higher-frequency-9x16.mp4   (1080×1920, Reels)
 - `src/toon.tsx` — the cartoon rig: crew member and dancers, poses, dance and walk cycles. Check poses in the `Lab` composition.
 - `src/look.tsx` — fonts, the mark, the projector (grain, weave, scratches), iris, subtitles.
 - `src/Film.tsx` — sequencing, music, narration, foley cues.
-- `scripts/music.py`, `scripts/sfx.py`, `scripts/voice.mjs` — the sound.
+- `src/Vertical.tsx` — the 9:16 presentation.
+- `scripts/music.py`, `scripts/sfx.py`, `scripts/voice.mjs` — the sound. The score is cut to picture: cue times live at the top of each section and match `BEATS` in `copy.ts`; move a beat, move its cue.
+- `scripts/stills.sh NAME COMPOSITION FRAME...` — render half-size stills and tile them, for reviewing without a full render.
 
 ## The narrator
 
