@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, interpolate, random, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {BEATS} from '../copy';
 import {Backdrop, FigLabel, Sparkle, Stage, at, clamp} from '../kit';
-import {C, F} from '../look';
+import {C, F, PURPLE} from '../look';
 import {INK, Pose, Toon, dance} from '../toon';
 
 const mix = (a: Pose, b: Pose, k: number): Pose => {
@@ -96,10 +96,10 @@ export const Us: React.FC = () => {
 				)}
 				{/* and, in the front row, one of us */}
 				<g transform={`translate(0 ${(1 - pop) * 700})`}>
-					<Toon x={W * 0.5} y={H + 90} s={2.2} pose={crewPose} />
+					<Toon x={W * 0.5} y={H - 10} s={2.1} pose={crewPose} idle={false} />
 					{tipK > 0.6
 						? [0, 1, 2].map((k) => (
-								<Sparkle key={k} x={W * 0.5 + 140 + k * 50} y={H + 90 - 2.2 * 262 - 40 - k * 40} r={16 + k * 6} o={tipK} rot={frame * 4} />
+								<Sparkle key={k} x={W * 0.5 + 140 + k * 50} y={H - 10 - 2.1 * 262 - 40 - k * 40} r={16 + k * 6} o={tipK} rot={frame * 4} />
 							))
 						: null}
 				</g>
@@ -269,9 +269,9 @@ export const Cosmos: React.FC = () => {
 						<path d="M -40 -30 Q -10 -50 10 -30 Q 30 -10 0 0 Q -30 20 -40 -30 Z M 10 20 Q 40 10 45 30 Q 30 50 15 40 Z" fill="#8a8a8a" />
 						{[0, 1, 2].map((j) => {
 							const rr = ((frame * 0.8 + j * 10) % 30) + 2;
-							return <circle key={j} cx={-14} cy={-24} r={rr} fill="none" stroke={INK} strokeWidth={1.4} opacity={1 - rr / 32} />;
+							return <circle key={j} cx={-14} cy={-24} r={rr} fill="none" stroke={PURPLE} strokeWidth={1.8} opacity={1 - rr / 32} />;
 						})}
-						<circle cx={-14} cy={-24} r={3} fill={INK} />
+						<circle cx={-14} cy={-24} r={3.5} fill={PURPLE} />
 					</g>
 				</g>
 				<g transform={`translate(0 ${(1 - consoleIn) * H})`}>

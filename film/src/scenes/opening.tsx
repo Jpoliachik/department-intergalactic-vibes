@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, interpolate, random, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {TITLE} from '../copy';
 import {Backdrop, Center, Rings, Stage, clamp} from '../kit';
-import {C, F, StarRule} from '../look';
+import {C, F, PURPLE, StarRule, TINT} from '../look';
 import {WAVES} from '../mark-paths';
 import {Toon, dance} from '../toon';
 
@@ -63,7 +63,7 @@ export const Presents: React.FC = () => {
 	return (
 		<Backdrop>
 			<Center style={{gap: 36}}>
-				<LiveGlyph size={250} style={{transform: `scale(${s})`}} />
+				<LiveGlyph size={250} color={PURPLE} style={{transform: `scale(${s})`, filter: TINT}} />
 				<div
 					style={{
 						fontFamily: F.display,
@@ -206,19 +206,19 @@ const Stick: React.FC<{x: number; y: number; s: number; color: string; up: numbe
 
 const EraTag: React.FC<{x: number; label: string; dark?: boolean}> = ({x, label, dark}) => (
 	<g transform={`translate(${x} 150)`}>
-		<rect x={-170} y={-36} width={340} height={64} fill={dark ? '#111' : '#f0efe9'} stroke={dark ? '#f0efe9' : '#111'} strokeWidth={4} />
-		<text x={0} y={10} textAnchor="middle" fontFamily={F.mono} fontSize={30} letterSpacing={6} fill={dark ? '#f0efe9' : '#111'}>
+		<rect x={-170} y={-36} width={340} height={64} fill={dark ? '#111' : '#efefef'} stroke={dark ? '#efefef' : '#111'} strokeWidth={4} />
+		<text x={0} y={10} textAnchor="middle" fontFamily={F.mono} fontSize={30} letterSpacing={6} fill={dark ? '#efefef' : '#111'}>
 			{label}
 		</text>
 	</g>
 );
 
 const Cave: React.FC<{W: number; H: number; f: number}> = ({W, H, f}) => {
-	const ochre = '#e2cfae';
+	const ochre = '#d1d1d1';
 	const fire = (k: number) => 1 + Math.sin(f * 0.9 + k) * 0.12 + (random(`fi${f}${k}`) - 0.5) * 0.1;
 	return (
 		<g>
-			<rect width={W} height={H} fill="#4f4842" />
+			<rect width={W} height={H} fill="#494949" />
 			{Array.from({length: 40}, (_, i) => (
 				<ellipse
 					key={i}
@@ -226,7 +226,7 @@ const Cave: React.FC<{W: number; H: number; f: number}> = ({W, H, f}) => {
 					cy={random(`cvy${i}`) * H}
 					rx={60 + random(`cvr${i}`) * 180}
 					ry={40 + random(`cvq${i}`) * 120}
-					fill={random(`cvc${i}`) > 0.5 ? '#5d554e' : '#3f3934'}
+					fill={random(`cvc${i}`) > 0.5 ? '#565656' : '#3a3a3a'}
 					opacity={0.6}
 				/>
 			))}
@@ -252,10 +252,12 @@ const Cave: React.FC<{W: number; H: number; f: number}> = ({W, H, f}) => {
 			{/* the fire */}
 			<g transform={`translate(${W * 0.45} ${H * 0.86})`} fill={ochre}>
 				<path d={`M -50 0 Q -60 ${-90 * fire(1)} 0 ${-170 * fire(2)} Q 60 ${-90 * fire(3)} 50 0 Z`} />
-				<path d={`M -24 0 Q -30 ${-50 * fire(4)} 0 ${-95 * fire(5)} Q 30 ${-50 * fire(6)} 24 0 Z`} fill="#4f4842" />
+				<path d={`M -24 0 Q -30 ${-50 * fire(4)} 0 ${-95 * fire(5)} Q 30 ${-50 * fire(6)} 24 0 Z`} fill="#494949" />
 			</g>
 			{/* someone at the edge, watching */}
-			<Stick x={W * 0.86} y={H * 0.74} s={2.4} color={ochre} up={0} hat clip />
+			<g style={{filter: TINT}}>
+				<Stick x={W * 0.86} y={H * 0.74} s={2.4} color={PURPLE} up={0} hat clip />
+			</g>
 			<EraTag x={W / 2} label="LONG AGO" />
 		</g>
 	);
@@ -273,8 +275,8 @@ const meander = (x0: number, y: number, w: number, h: number, color: string) => 
 };
 
 const Vase: React.FC<{W: number; H: number; f: number}> = ({W, H, f}) => {
-	const terra = '#c49a6c';
-	const blk = '#1a1410';
+	const terra = '#a0a0a0';
+	const blk = '#151515';
 	const cx = W / 2;
 	const top = H * 0.2;
 	const bot = H * 0.9;
@@ -310,7 +312,7 @@ const Vase: React.FC<{W: number; H: number; f: number}> = ({W, H, f}) => {
 					);
 				})}
 				{/* and the one on the handle side, with a hard hat, taking notes */}
-				<g transform={`translate(${cx + 330} ${bandY + 190})`} fill={blk} stroke={blk}>
+				<g transform={`translate(${cx + 330} ${bandY + 190})`} fill={PURPLE} stroke={PURPLE} style={{filter: TINT}}>
 					<circle cx={0} cy={-200} r={22} stroke="none" />
 					<path d="M -26 -205 Q -26 -238 0 -238 Q 26 -238 26 -205 Z M -34 -207 L 34 -207 L 34 -199 L -34 -199 Z" stroke="none" />
 					<path d="M -26 -170 L 26 -170 L 40 -40 L -40 -40 Z" stroke="none" />
@@ -333,7 +335,7 @@ const Jazz: React.FC<{W: number; H: number; f: number; nod: number}> = ({W, H, f
 			<rect width={W} height={H} fill="#bcbcb6" />
 			{/* deco fan */}
 			{Array.from({length: 9}, (_, i) => (
-				<circle key={i} cx={W / 2} cy={floor} r={900 - i * 90} fill={i % 2 ? '#a9a9a2' : '#c9c9c3'} stroke="#111" strokeWidth={4} />
+				<circle key={i} cx={W / 2} cy={floor} r={900 - i * 90} fill={i % 2 ? '#a8a8a8' : '#c9c9c3'} stroke="#111" strokeWidth={4} />
 			))}
 			{Array.from({length: 13}, (_, i) => {
 				const a = Math.PI + (Math.PI * i) / 12;

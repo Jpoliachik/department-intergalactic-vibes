@@ -38,8 +38,14 @@ Promise.all(
 	}),
 ).then(() => continueRender(fontHandle));
 
-// Projected-light palette. The whole film is graded to greyscale at the end;
-// these just set the values.
+// Projected-light palette. The film is black and white, with one hand-tinted
+// colour: Vibe Corp purple (the crew's hi-vis). Purple only ever marks Vibe Corp
+// — a vest, the mark, a frequency we've found. Nothing else gets colour.
+export const PURPLE = '#a274d6';
+export const PURPLE_DEEP = '#6c44a3';
+/** Stencil-tint misregistration: the colour sits a hair off the line, like it was laid on by hand. */
+export const TINT = 'drop-shadow(2.5px -1.5px 0 rgba(162,116,214,0.38))';
+
 export const C = {
 	black: '#070707',
 	ink: '#141414',
@@ -203,7 +209,8 @@ export const Projector: React.FC<{children: React.ReactNode}> = ({children}) => 
 			<AbsoluteFill
 				style={{
 					transform: `translate(${wx}px, ${wy}px) scale(1.012)`,
-					filter: `grayscale(1) contrast(1.12) brightness(${flicker})`,
+					// no greyscale pass: everything is drawn in neutral greys, so the purple survives
+					filter: `contrast(1.12) brightness(${flicker})`,
 				}}
 			>
 				{children}

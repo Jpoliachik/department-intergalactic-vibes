@@ -1,6 +1,8 @@
 // The cartoon cast: a 1950s limited-animation rig (flat shapes, heavy outline,
 // rubber-hose limbs, white gloves). One rig draws the crew member and the dancers.
 import React from 'react';
+import {useCurrentFrame} from 'remotion';
+import {PURPLE, TINT} from './look';
 
 export const INK = '#111';
 
@@ -31,6 +33,10 @@ export type ToonProps = {
 	skin?: string;
 	hold?: 'clipboard' | 'stamp' | 'tea' | null;
 	pose?: Pose;
+	/** the hi-vis: Vibe Corp purple unless a scene says otherwise */
+	vest?: string;
+	/** idle life: blinks and a little sway. On unless a scene is driving the face itself. */
+	idle?: boolean;
 };
 
 const rad = (d: number) => (d * Math.PI) / 180;
@@ -53,10 +59,15 @@ export const Toon: React.FC<ToonProps> = ({
 	kind = 'crew',
 	hair = 0,
 	tone,
-	skin = '#e9e6df',
+	skin = '#e6e6e6',
 	hold = null,
 	pose = {},
+	vest = PURPLE,
+	idle = true,
 }) => {
+	const frame = useCurrentFrame();
+	// a stable per-character seed, from where they stand
+	const seed = Math.abs(Math.round(x * 7 + y * 13)) % 997;
 	const {
 		armL = [12, 6],
 		armR = [12, 6],
@@ -72,7 +83,12 @@ export const Toon: React.FC<ToonProps> = ({
 		hatLift = 0,
 	} = pose;
 	const crew = kind === 'crew';
-	const body = tone ?? (crew ? '#8d8d8d' : '#cfcfcf');
+	const body = tone ?? (crew ? vest : '#cfcfcf');
+	const sleeve = crew ? '#6a6a6a' : skin;
+	// blink every few seconds, each on their own rhythm; breathe a little
+	const period = 88 + (seed % 40);
+	const autoBlink = idle && (frame + seed) % period < 4 ? 1 : 0;
+	const breath = idle ? Math.sin((frame + seed) * 0.07) * 1.2 : 0;
 
 	const arm = (side: -1 | 1, [a1, a2]: Arm): {pts: [number, number][]; hand: [number, number]; ang: number} => {
 		const S: [number, number] = [side * 33, -150];
@@ -94,7 +110,7 @@ export const Toon: React.FC<ToonProps> = ({
 		<ellipse cx={p[0] + side * 9} cy={p[1] - 4} rx={20} ry={10} fill={INK} />
 	);
 
-	const eyeRy = 11 * (1 - blink * 0.92);
+	const eyeRy = 11 * (1 - Math.max(blink, autoBlink) * 0.92);
 	const px = look * 3.5;
 
 	return (
@@ -106,10 +122,11 @@ export const Toon: React.FC<ToonProps> = ({
 			{shoe(LR[1], 1)}
 
 			{/* arm behind */}
-			{limb(L.pts, crew ? body : skin)}
+			{limb(L.pts, sleeve)}
 			{glove(L.hand)}
 
 			{/* torso */}
+			<g style={crew ? {filter: TINT} : undefined}>
 			<path
 				d="M -36 -150 Q -36 -164 -22 -164 L 22 -164 Q 36 -164 36 -150 L 30 -96 Q 30 -88 22 -88 L -22 -88 Q -30 -88 -30 -96 Z"
 				fill={body}
@@ -117,6 +134,7 @@ export const Toon: React.FC<ToonProps> = ({
 				strokeWidth={5}
 				strokeLinejoin="round"
 			/>
+			</g>
 			{crew ? (
 				<g>
 					<rect x={-34} y={-139} width={68} height={9} fill="#f6f6f2" stroke={INK} strokeWidth={2.5} />
@@ -128,7 +146,7 @@ export const Toon: React.FC<ToonProps> = ({
 			)}
 
 			{/* head */}
-			<g transform={`rotate(${nod} 0 -166)`}>
+			<g transform={`rotate(${nod + breath} 0 -166)`}>
 				{!crew && hair === 1 ? (
 					<g fill="#2a2a2a" stroke={INK} strokeWidth={4}>
 						{[[-34, -200], [34, -200], [-40, -228], [40, -228], [-24, -252], [24, -252], [0, -262]].map(([cx, cy]) => (
@@ -184,7 +202,7 @@ export const Toon: React.FC<ToonProps> = ({
 			</g>
 
 			{/* arm in front, and whatever it holds */}
-			{limb(R.pts, crew ? body : skin)}
+			{limb(R.pts, sleeve)}
 			{hold === 'clipboard' ? (
 				<g transform={`translate(${R.hand[0] + 8} ${R.hand[1] - 30}) rotate(-6)`}>
 					<rect x={-26} y={-34} width={56} height={74} rx={4} fill="#f4f4f0" stroke={INK} strokeWidth={4} />

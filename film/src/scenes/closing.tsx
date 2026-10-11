@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, interpolate, random, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {BEATS, TITLE} from '../copy';
 import {Backdrop, Center, Rings, Sparkle, Stage, StampMark, Sunburst, at, clamp} from '../kit';
-import {C, F, Star} from '../look';
+import {C, F, PURPLE, Star, TINT} from '../look';
 import {INK, Toon, dance} from '../toon';
 import {LiveGlyph} from './opening';
 
@@ -99,15 +99,16 @@ export const Search: React.FC = () => {
 								kind="dancer"
 								hair={(i % 4) as 0 | 1 | 2 | 3}
 								tone={`rgb(${tone},${tone},${tone})`}
-								skin={`rgb(${Math.round(110 + l * 120)},${Math.round(110 + l * 120)},${Math.round(108 + l * 118)})`}
+								skin={`rgb(${Math.round(110 + l * 120)},${Math.round(110 + l * 120)},${Math.round(110 + l * 120)})`}
 								x={p.x}
 								y={p.y}
 								s={p.s * (isOne ? 1 + glow * 0.12 : 1)}
 								pose={isOne && glow > 0 ? {...dance(t, 0, glow), mouth: 'grin'} : {...dance(t * 0.5, i + 1, 0.4), mouth: 'smile'}}
 							/>
 							<g transform={`translate(${p.x} ${wy - (isOne ? glow * 30 : 0)})`} opacity={0.35 + l * 0.65}>
-								{isOne && glow > 0 ? <polyline points={pts} fill="none" stroke="#fff" strokeWidth={18} opacity={0.25 * glow} /> : null}
-								<polyline points={pts} fill="none" stroke="#fff" strokeWidth={isOne ? 4 + glow * 2 : 3} />
+								{isOne && glow > 0 ? <polyline points={pts} fill="none" stroke={PURPLE} strokeWidth={22} opacity={0.3 * glow} /> : null}
+								{/* found: their frequency turns out to be ours */}
+								<polyline points={pts} fill="none" stroke={isOne && glow > 0 ? PURPLE : '#fff'} strokeWidth={isOne ? 4 + glow * 3 : 3} style={isOne && glow > 0 ? {filter: TINT} : undefined} />
 							</g>
 						</g>
 					);
@@ -295,12 +296,12 @@ export const Radar: React.FC = () => {
 					<g>
 						{[0, 1, 2].map((k) => {
 							const r = (((frame - found) * 2.5 + k * 30) % 90) + 6;
-							return <circle key={k} cx={tx} cy={ty} r={r} fill="none" stroke="#fff" strokeWidth={3} opacity={1 - r / 96} />;
+							return <circle key={k} cx={tx} cy={ty} r={r} fill="none" stroke={PURPLE} strokeWidth={4} opacity={1 - r / 96} />;
 						})}
-						<circle cx={tx} cy={ty} r={12} fill="#fff" />
+						<circle cx={tx} cy={ty} r={13} fill={PURPLE} stroke="#fff" strokeWidth={3} />
 						<g transform={`translate(${tx} ${ty}) scale(${3 - 2 * lock}) rotate(${(1 - lock) * 90})`} opacity={lock}>
 							{[0, 90, 180, 270].map((r) => (
-								<path key={r} d="M -60 -30 L -60 -60 L -30 -60" transform={`rotate(${r})`} fill="none" stroke="#fff" strokeWidth={6} />
+								<path key={r} d="M -60 -30 L -60 -60 L -30 -60" transform={`rotate(${r})`} fill="none" stroke={PURPLE} strokeWidth={7} style={{filter: TINT}} />
 							))}
 						</g>
 					</g>
@@ -335,13 +336,13 @@ export const Final: React.FC = () => {
 				<Rings cx={W / 2} cy={H * 0.36} speed={2.6} gap={90} max={800} opacity={0.3} />
 			</Stage>
 			<Center style={{gap: 30, marginTop: -H * 0.16, transform: `translate(${shake}px, ${shake * 0.5}px)`}}>
-				<LiveGlyph size={360} amp={1.4} />
+				<LiveGlyph size={360} amp={1.4} color={PURPLE} style={{filter: TINT}} />
 				<div style={{fontFamily: F.display, fontWeight: 700, fontSize: 116, letterSpacing: 26, marginRight: -26, color: C.paper, opacity: a}}>{TITLE.finalBrand}</div>
 				<div style={{fontFamily: F.mono, fontSize: 36, letterSpacing: 6, color: C.light, opacity: a}}>{TITLE.url}</div>
 			</Center>
 			{st > 0 ? (
 				<div style={{position: 'absolute', left: 0, right: 0, top: H * 0.62, display: 'flex', justifyContent: 'center'}}>
-					<StampMark text="FREQUENCY LOGGED" size={64} rotate={-9} p={st} color={C.paper} />
+					<StampMark text="FREQUENCY LOGGED" size={64} rotate={-9} p={st} color={PURPLE} style={{filter: TINT}} />
 				</div>
 			) : null}
 		</Backdrop>

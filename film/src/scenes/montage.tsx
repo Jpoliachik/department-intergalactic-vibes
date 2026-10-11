@@ -22,7 +22,7 @@ export const Headline: React.FC = () => {
 				<div
 					style={{
 						width: 800,
-						background: '#ecebe4',
+						background: '#ebebeb',
 						color: '#111',
 						padding: '40px 46px 50px',
 						boxShadow: '0 40px 80px rgba(0,0,0,0.7)',
