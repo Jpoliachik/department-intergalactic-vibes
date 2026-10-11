@@ -9,11 +9,11 @@ export const NARRATION: {from: number; to: number; text: string}[] = [
 	{from: 11.6, to: 14.6, text: 'That someone is us.'},
 	{from: 15.5, to: 19.8, text: 'At VibeCorp\u2019s Department of Vibe Assessment,'},
 	{from: 20.0, to: 25.0, text: 'our officers monitor the universe\u2019s frequencies \u2014 so you don\u2019t have to.'},
-	{from: 25.5, to: 29.9, text: 'Every day, thousands of assessments. Calibrations. Readings.'},
+	{from: 25.2, to: 29.9, text: 'Every day, thousands of assessments. Calibrations. Readings.'},
 	{from: 30.2, to: 34.6, text: 'The work is vital. The work is endless.'},
 	{from: 35.4, to: 38.4, text: 'And we are always looking for more.'},
 	{from: 38.6, to: 41.8, text: 'Individuals of rare frequency. People with good vibes.'},
-	{from: 43.6, to: 48.6, text: 'Requirements are simple: a steady pulse, a discerning eye, and no fear of the hum.'},
+	{from: 42.4, to: 48.6, text: 'Requirements are simple: a steady pulse, a discerning eye, and no fear of the hum.'},
 	{from: 49.0, to: 53.6, text: 'If your frequency is true \u2014 we will find you.'},
 	{from: 54.6, to: 57.8, text: 'VibeCorp. Your frequency has already been logged.'},
 ];
