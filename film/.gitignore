@@ -1,0 +1,7 @@
+node_modules
+out
+# generated audio — `npm run music`, `npm run sfx`, `npm run voice`
+public/music.wav
+public/sfx
+public/voice
+public/narration.wav
