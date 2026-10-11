@@ -1,7 +1,6 @@
 node_modules
 out
-# generated audio — `npm run music`, `npm run sfx`, `npm run voice`
+# generated audio — regenerate with `npm run music` / `npm run sfx`
 public/music.wav
 public/sfx
-public/voice
-public/narration.wav
+# narration (public/voice/, public/narration.wav) is paid-for ElevenLabs output: commit it
