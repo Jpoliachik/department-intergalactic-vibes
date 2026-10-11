@@ -173,9 +173,9 @@ export const Conveyor: React.FC = () => {
 	const travel = beltTravel(frame, endless);
 	const v = beltSpeed(frame, endless);
 
-	const beltTop = H * 0.56;
+	const beltTop = H * 0.6;
 	const beltH = 130;
-	const s = 1.5;
+	const s = 1.85;
 	// stamp-hand geometry from the rig: arm [20,20] puts the stamp face at (71.8, -45.4) * s
 	const X0 = W * 0.5;
 	const cx = X0 - 71.8 * s;
@@ -206,7 +206,7 @@ export const Conveyor: React.FC = () => {
 				<foreignObject x={W / 2 - 300} y={H * 0.08} width={600} height={220}>
 					<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12}}>
 						<div style={{fontFamily: F.mono, fontSize: 26, letterSpacing: 6, color: '#111'}}>ASSESSMENTS TODAY</div>
-						<Digits value={48210 + stamped} size={110} />
+						<Digits value={48210 + Math.floor(travel * 1.7) + stamped * 11} size={110} />
 					</div>
 				</foreignObject>
 				{/* belt */}

@@ -354,17 +354,23 @@ const Jazz: React.FC<{W: number; H: number; f: number; nod: number}> = ({W, H, f
 export const History: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {width: W, height: H} = useVideoConfig();
-	const cam = interpolate(frame, [30, 50, 82, 102], [0, W, W, 2 * W], {...clamp, easing: Easing.inOut(Easing.cubic)});
-	const nod = interpolate(frame, [104, 112, 122], [0, 14, 0], clamp);
+	const cam = interpolate(frame, [26, 40, 66, 80], [0, W, W, 2 * W], {...clamp, easing: Easing.inOut(Easing.cubic)});
+	const nod = interpolate(frame, [92, 102, 114], [0, 14, 0], clamp);
+	// whip pan: blur along the direction of travel, by how fast the camera is moving
+	const camAt = (f: number) => interpolate(f, [26, 40, 66, 80], [0, W, W, 2 * W], {...clamp, easing: Easing.inOut(Easing.cubic)});
+	const whip = Math.abs(camAt(frame + 0.5) - camAt(frame - 0.5));
 	return (
 		<AbsoluteFill style={{background: C.black}}>
 			<Stage>
 				<defs>
+					<filter id="whip" x="-10%" y="0" width="120%" height="100%">
+						<feGaussianBlur stdDeviation={`${whip * 0.22} 0`} />
+					</filter>
 					<clipPath id="panel">
 						<rect width={W} height={H} />
 					</clipPath>
 				</defs>
-				<g transform={`translate(${-cam} 0)`}>
+				<g transform={`translate(${-cam} 0)`} filter={whip > 1 ? 'url(#whip)' : undefined}>
 					<g clipPath="url(#panel)">
 						<Cave W={W} H={H} f={frame} />
 					</g>

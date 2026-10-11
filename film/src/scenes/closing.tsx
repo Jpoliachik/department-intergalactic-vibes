@@ -38,8 +38,8 @@ export const Search: React.FC = () => {
 	const ground = H * 0.78;
 	const crowd = Array.from({length: 7}, (_, i) => ({
 		x: W * 0.08 + (i / 6) * W * 0.84,
-		y: ground - (i % 2) * 30,
-		s: 0.78 - (i % 2) * 0.08,
+		y: ground - (i % 2) * 34,
+		s: 0.98 - (i % 2) * 0.1,
 	}));
 	const chosen = 4;
 	// the beam sweeps, then settles on one person
@@ -363,7 +363,7 @@ export const FinePrint: React.FC = () => {
 			</Center>
 			<Stage>
 				<g transform={`translate(0 ${(1 - peek) * 420})`}>
-					<Toon x={W * 0.8} y={H + 160} s={1.5} pose={{armR: [150 + Math.sin(frame * 0.6) * 18, 20], mouth: 'grin', brow: 0.8, look: -1}} />
+					<Toon x={W * 0.74} y={H + 60} s={1.9} pose={{armR: [150 + Math.sin(frame * 0.6) * 18, 20], mouth: 'grin', brow: 0.8, look: -1}} />
 				</g>
 			</Stage>
 		</AbsoluteFill>

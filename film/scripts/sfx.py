@@ -69,6 +69,25 @@ save("chime", x, 0.55)
 tt = t(1.0)
 save("ding", (np.sin(2 * np.pi * 2093 * tt) + 0.35 * np.sin(2 * np.pi * 5650 * tt) * np.exp(-tt * 9)) * np.exp(-tt * 4), 0.5)
 
+# heartbeat: lub-dub, twice
+x = np.zeros(int(1.7 * SR))
+for beat in (0.0, 0.8):
+    for off, f, g in ((0.0, 55, 1.0), (0.17, 70, 0.7)):
+        tt = t(0.22)
+        thump = np.sin(2 * np.pi * f * tt) * np.exp(-tt * 22) * g
+        s0 = int((beat + off) * SR)
+        x[s0 : s0 + len(thump)] += thump
+save("heartbeat", lowpass(x, 400), 0.9)
+
+# tink: a tiny glassy tap (the monocle)
+tt = t(0.5)
+save("tink", (np.sin(2 * np.pi * 3520 * tt) + 0.5 * np.sin(2 * np.pi * 5280 * tt)) * np.exp(-tt * 14), 0.4)
+
+# hum: mains buzz, the transformer that isn't scary
+tt = t(1.3)
+buzz = sum(np.sin(2 * np.pi * 60 * k * tt) / k for k in range(1, 12))
+save("hum", buzz * np.minimum(1, tt / 0.08) * np.minimum(1, (1.3 - tt) / 0.2), 0.45)
+
 # projector: shutter rattle at 24 fps plus motor hum, 60 s
 tt = t(60.0)
 clicks = np.zeros_like(tt)

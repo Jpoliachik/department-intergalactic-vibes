@@ -126,7 +126,7 @@ PLAN = [(0, "C", "fanfare")]
 PLAN += [(b, c, "title") for b, c in zip(range(1, 5), ["C", "Am", "F", "G7"])]
 MAIN = ["C", "Am", "Dm", "G7", "C", "E7", "F", "Fm", "C", "A7", "D7", "G7"]
 PLAN += [(b, c, "main") for b, c in zip(range(5, 17), MAIN)]
-PLAN += [(b, c, "soft") for b, c in zip(range(17, 21), ["Fmaj7", "Em7", "Dm7", "G7sus"])]
+# bar 17 (34-35s) belongs to the runaway conveyor; the soft section starts on the cut at 35s (below)
 PLAN += [(b, c, "march") for b, c in zip(range(21, 27), ["C", "F", "Am", "D7", "F", "G7"])]
 PLAN += [(27, "C69", "finale")]
 
@@ -134,11 +134,13 @@ orch = np.zeros(N)
 lead = np.zeros(N)
 perc = np.zeros(N)
 
-# Fanfare: timpani roll into a brass C chord
-add(perc, 0.0, timpani(hz(36), 2.0, roll=True), 0.35)
+# Fanfare: timpani roll under the countdown, brass C chord on the logo (1.4s)
+LOGO = 1.4
+add(perc, 0.2, timpani(hz(36), LOGO - 0.2, roll=True), 0.35)
 for m in (48, 55, 60, 64, 67):
-    add(orch, 0.9, brass(hz(m), 1.4), 0.10)
-add(orch, 0.9, glock(hz(84)), 0.12)
+    add(orch, LOGO, brass(hz(m), 1.4), 0.11)
+add(orch, LOGO, glock(hz(84)), 0.14)
+add(perc, LOGO, timpani(hz(36), 1.4), 0.3)
 
 for bar, name, sec in PLAN:
     t0 = bar * BAR
@@ -191,6 +193,49 @@ for bar, name, sec in PLAN:
         for i, m in enumerate((0, 4, 7, 12)):
             add(orch, t0 + 0.12 * i, glock(hz(84 + m), 2.0), 0.07)
 
+# ---------------------------------------------------------------- picture-sync moments
+
+# "The work is endless": a pizzicato ostinato that won't stop speeding up and climbing
+ENDLESS, STOP, SOFT = 32.6, 34.55, 35.0
+tt = ENDLESS
+k = 0
+while tt < STOP:
+    gap = max(0.045, 0.24 * (1 - (tt - ENDLESS) / (STOP - ENDLESS)) ** 1.6)
+    m = 72 + int(k * 0.7) % 24
+    add(orch, tt, pizz(hz(m), 0.2), 0.11)
+    add(orch, tt, pizz(hz(m - 12), 0.2), 0.06)
+    if k % 2 == 0:
+        add(perc, tt, snare(0.08), 0.03 + 0.05 * (tt - ENDLESS) / (STOP - ENDLESS))
+    tt += gap
+    k += 1
+
+# the soft section, on the cut to the night sky: four chords, 1.75s each
+for i, name in enumerate(["Fmaj7", "Em7", "Dm7", "G7sus"]):
+    t0 = SOFT + i * 1.75
+    tones = CH[name]
+    root = C + tones[0] - 12 if tones[0] < 7 else C + tones[0] - 24
+    for m in tones:
+        add(orch, t0, strings(hz(C + m), 2.3), 0.08)
+    add(orch, t0, tuba(hz(root), 1.6), 0.12)
+    add(orch, t0 + 0.9, glock(hz(C + 24 + tones[-1]), 1.5), 0.04)
+
+# 42s, JOIN THE MOVEMENT: a sting — brass stab, timpani, a crash
+for m in (48, 55, 60, 64, 67, 72):
+    add(orch, 42.0, brass(hz(m), 0.7), 0.1)
+add(perc, 42.0, timpani(hz(36), 1.5), 0.45)
+_n = int(1.6 * SR)
+_crash = rng.standard_normal(_n) * np.exp(-np.arange(_n) / SR * 3.2)
+_crash = np.convolve(_crash, [1, -0.95], mode="same")
+add(perc, 42.0, _crash, 0.07)
+
+# 58.5s, the button: one short, satisfied C major, after a breath of silence
+BUTTON_AT = 58.5
+button = np.zeros(N)
+for m in (48, 60, 64, 67, 72):
+    add(button, BUTTON_AT, pizz(hz(m), 0.4), 0.11)
+add(button, BUTTON_AT, tuba(hz(36), 0.3), 0.3)
+add(button, BUTTON_AT, glock(hz(96), 1.0), 0.1)
+
 # ---------------------------------------------------------------- theremin
 
 # Melody as (start_s, midi, len_s). Portamento between notes is what sells it.
@@ -222,10 +267,14 @@ phrase(14, [(73, 2), (76, 1), (79, 1)])
 phrase(15, [(78, 2), (81, 2)])
 phrase(16, [(79, 3), (None, 1)])
 # soft: theremin alone up top, slow and searching
-phrase(17, [(81, 3), (79, 1)])
-phrase(18, [(83, 4)])
-phrase(19, [(84, 2), (81, 2)])
-phrase(20, [(79, 3), (86, 1)])
+MELODY += [
+    (35.2, 81, 1.45),
+    (36.75, 83, 1.7),
+    # 38.6s — the searchlight finds someone: the theremin swoops up and hangs there
+    (38.6, 88, 1.6),
+    (40.25, 86, 0.8),
+    (41.1, 79, 0.8),
+]
 # march: proud, plain
 phrase(21, [(84, 2), (79, 2)])
 phrase(22, [(81, 2), (84, 2)])
@@ -272,7 +321,7 @@ def render_theremin():
     ph = 2 * np.pi * np.cumsum(freq) / SR
     tone = np.sin(ph) + 0.08 * np.sin(2 * ph) + 0.03 * np.sin(3 * ph)
     # end fade
-    env *= np.clip((DUR - 0.4 - t) / 3.0, 0, 1)
+    env *= np.clip((57.9 - t) / 1.5, 0, 1)
     return tone * env
 
 
@@ -289,11 +338,18 @@ def bandlimit(x, lo, hi):
 
 
 mix = orch + perc + 0.085 * lead
+
+# the conveyor's tape-stop: playback slows to nothing between STOP and SOFT
+a, b = int(STOP * SR), int(SOFT * SR)
+u = np.arange(b - a) / (b - a)
+pos = a + np.cumsum((1 - u) ** 1.3)
+mix[a:b] = np.interp(pos, np.arange(N), mix) * (1 - u ** 3)
 if __import__("os").environ.get("STEMS"):
     for nm, sg in (("orch", orch), ("perc", perc), ("lead", 0.085 * lead)):
         print(nm, " ".join(f"{20*np.log10(np.sqrt((sg[i*SR*4:(i+1)*SR*4]**2).mean())+1e-9):.0f}" for i in range(15)))
 t = np.arange(N) / SR
-mix *= np.clip((DUR - t) / 1.2, 0, 1)
+mix *= np.clip((57.95 - t) / 0.9, 0, 1)  # the finale chord dies away before the fine print
+mix += button
 mix = bandlimit(mix, 110, 5200)
 mix = mix / np.percentile(np.abs(mix), 99.9) * 0.7
 mix = np.tanh(mix * 1.4) / 1.4  # gentle valve-amp warmth, not a limiter
