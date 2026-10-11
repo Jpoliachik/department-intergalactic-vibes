@@ -20,6 +20,8 @@ export type Pose = {
 	brow?: number; // -1 stern .. 1 raised
 	bounce?: number; // squash, px
 	hatLift?: number; // tip of the hat, px
+	squash?: number; // + squashes, - stretches (from the feet)
+	wink?: number; // 0..1, right eye only
 };
 
 export type ToonProps = {
@@ -81,6 +83,8 @@ export const Toon: React.FC<ToonProps> = ({
 		brow = 0,
 		bounce = 0,
 		hatLift = 0,
+		squash = 0,
+		wink = 0,
 	} = pose;
 	const crew = kind === 'crew';
 	const body = tone ?? (crew ? vest : '#cfcfcf');
@@ -114,7 +118,7 @@ export const Toon: React.FC<ToonProps> = ({
 	const px = look * 3.5;
 
 	return (
-		<g transform={`translate(${x} ${y - bounce}) scale(${flip ? -s : s} ${s}) rotate(${tilt} 0 -96)`}>
+		<g transform={`translate(${x} ${y - bounce}) scale(${(flip ? -s : s) * (1 + squash * 0.6)} ${s * (1 - squash)}) rotate(${tilt} 0 -96)`}>
 			{/* legs */}
 			{limb(LL, crew ? '#5a5a5a' : '#3d3d3d', 13)}
 			{limb(LR, crew ? '#5a5a5a' : '#3d3d3d', 13)}
@@ -161,12 +165,19 @@ export const Toon: React.FC<ToonProps> = ({
 				<rect x={-9} y={-176} width={18} height={14} fill={skin} stroke={INK} strokeWidth={4} />
 				<circle cx={0} cy={-206} r={38} fill={skin} stroke={INK} strokeWidth={5} />
 				{/* eyes */}
-				{[-13, 13].map((ex) => (
-					<g key={ex}>
-						<ellipse cx={ex + px} cy={-210} rx={6.5} ry={Math.max(1.4, eyeRy)} fill={INK} />
-						{blink < 0.5 ? <circle cx={ex + px + 2} cy={-214} r={2} fill="#fff" /> : null}
-					</g>
-				))}
+				{[-13, 13].map((ex) => {
+					const ry = ex > 0 ? Math.min(eyeRy, 11 * (1 - wink * 0.92)) : eyeRy;
+					return (
+						<g key={ex}>
+							{ex > 0 && wink > 0.6 ? (
+								<path d={`M ${ex + px - 7} -209 Q ${ex + px} -203 ${ex + px + 7} -209`} stroke={INK} strokeWidth={4} fill="none" strokeLinecap="round" />
+							) : (
+								<ellipse cx={ex + px} cy={-210} rx={6.5} ry={Math.max(1.4, ry)} fill={INK} />
+							)}
+							{ry > 5 ? <circle cx={ex + px + 2} cy={-214} r={2} fill="#fff" /> : null}
+						</g>
+					);
+				})}
 				{/* brows */}
 				<g stroke={INK} strokeWidth={4} strokeLinecap="round">
 					<line x1={-20} y1={-226 - brow * 5 + (brow < 0 ? -3 : 0)} x2={-6} y2={-226 - brow * 5 + (brow < 0 ? 3 : 0)} />

@@ -363,7 +363,7 @@ export const FinePrint: React.FC = () => {
 			</Center>
 			<Stage>
 				<g transform={`translate(0 ${(1 - peek) * 420})`}>
-					<Toon x={W * 0.74} y={H + 60} s={1.9} pose={{armR: [150 + Math.sin(frame * 0.6) * 18, 20], mouth: 'grin', brow: 0.8, look: -1}} />
+					<Toon x={W * 0.74} y={H + 60} s={1.9} pose={{armR: [150 + Math.sin(frame * 0.6) * 18, 20], mouth: 'grin', brow: 0.8, look: -1, wink: interpolate(frame, [30, 33, 40, 43], [0, 1, 1, 0], clamp)}} idle={false} />
 				</g>
 			</Stage>
 		</AbsoluteFill>

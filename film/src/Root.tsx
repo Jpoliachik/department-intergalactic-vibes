@@ -2,6 +2,7 @@ import {Composition} from 'remotion';
 import {DURATION_S, FPS} from './copy';
 import {Film} from './Film';
 import {Lab} from './Lab';
+import {Vertical} from './Vertical';
 // Written by scripts/voice.mjs once a narration track exists.
 import voice from './voice.json';
 
@@ -17,10 +18,10 @@ export const Root: React.FC = () => (
 			height={1350}
 			defaultProps={{subtitles: true, narration: voice.narration, footage: {}}}
 		/>
-		{/* 9:16 — Reels / Stories. Same film, taller frame. */}
+		{/* 9:16 — Reels / Stories: the same film, projected into a strip of film. */}
 		<Composition
 			id="HigherFrequencyVertical"
-			component={Film}
+			component={Vertical}
 			durationInFrames={DURATION_S * FPS}
 			fps={FPS}
 			width={1080}

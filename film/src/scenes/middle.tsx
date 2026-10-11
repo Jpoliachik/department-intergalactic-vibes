@@ -56,7 +56,11 @@ export const Us: React.FC = () => {
 	];
 	const pop = spring({frame: frame - 10, fps, config: {damping: 13, mass: 0.8}});
 	const tipK = interpolate(frame, [tip, tip + 8, tip + 34, tip + 44], [0, 1, 1, 0], clamp);
+	const land = frame - 10;
+	const squash = land > 0 && land < 16 ? Math.sin((land / 16) * Math.PI) * 0.12 * (1 - land / 16) * 2 : 0;
+	const crouch = interpolate(frame, [tip - 6, tip, tip + 4], [0, 0.07, -0.04], clamp) + interpolate(frame, [tip + 4, tip + 10], [0, 0.04], clamp);
 	const crewPose: Pose = {
+		squash: squash + crouch,
 		look: interpolate(frame, [tip - 14, tip - 4], [-1, 0], clamp),
 		mouth: frame > tip - 4 ? 'grin' : 'smile',
 		brow: tipK * 0.8,
@@ -150,7 +154,21 @@ export const Officer: React.FC = () => {
 				{/* the dancer, warming up */}
 				<Toon kind="dancer" hair={3} x={W * 0.7} y={floor + 6} s={1.55} pose={dance(t * (0.8 + energy * 0.3), 0, energy)} />
 				{/* the reading */}
-				<Toon x={W * 0.27} y={floor + 6} s={1.55} hold="clipboard" pose={{nod, brow: -1, mouth: 'flat', armR: [40, 70], look: 1}} />
+				<Toon
+					x={W * 0.27}
+					y={floor + 6}
+					s={1.55}
+					hold="clipboard"
+					pose={{
+						nod,
+						// stern, stern, stern... and then, despite everything, impressed
+						brow: interpolate(frame, [108, 116], [-1, 1], clamp),
+						mouth: frame > 110 ? 'o' : 'flat',
+						armR: [40, 70],
+						look: 1,
+						squash: frame > 110 && frame < 122 ? Math.sin(((frame - 110) / 12) * Math.PI) * -0.06 : 0,
+					}}
+				/>
 				<g transform={`translate(${W * 0.3 + peg} ${H * 0.3}) scale(${bubble})`}>
 					<ellipse cx={0} cy={0} rx={220} ry={150} fill="#f4f4f0" stroke={INK} strokeWidth={6} />
 					<circle cx={-110} cy={170} r={24} fill="#f4f4f0" stroke={INK} strokeWidth={5} />
