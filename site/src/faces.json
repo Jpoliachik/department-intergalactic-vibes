@@ -1,0 +1,82 @@
+{
+  "the-rookie": {
+    "avif": "/faces/the-rookie-360.5b7f7d97.avif 360w, /faces/the-rookie-720.605da94d.avif 720w",
+    "webp": "/faces/the-rookie-360.cb5a6b59.webp 360w, /faces/the-rookie-720.6659b9e8.webp 720w",
+    "src": "/faces/the-rookie-720.6659b9e8.webp"
+  },
+  "the-anchor": {
+    "avif": "/faces/the-anchor-360.ed02a5a1.avif 360w, /faces/the-anchor-720.277f4eda.avif 720w",
+    "webp": "/faces/the-anchor-360.ff7f5ae8.webp 360w, /faces/the-anchor-720.7f763a08.webp 720w",
+    "src": "/faces/the-anchor-720.7f763a08.webp"
+  },
+  "the-spark": {
+    "avif": "/faces/the-spark-360.8356e78b.avif 360w, /faces/the-spark-720.3f13c307.avif 720w",
+    "webp": "/faces/the-spark-360.29729382.webp 360w, /faces/the-spark-720.2b36efbb.webp 720w",
+    "src": "/faces/the-spark-720.2b36efbb.webp"
+  },
+  "the-connector": {
+    "avif": "/faces/the-connector-360.01653ba9.avif 360w, /faces/the-connector-720.256c2dc0.avif 720w",
+    "webp": "/faces/the-connector-360.f322f43e.webp 360w, /faces/the-connector-720.b27bd817.webp 720w",
+    "src": "/faces/the-connector-720.b27bd817.webp"
+  },
+  "the-beacon": {
+    "avif": "/faces/the-beacon-360.cb8b78cc.avif 360w, /faces/the-beacon-720.5e4a5c4b.avif 720w",
+    "webp": "/faces/the-beacon-360.3e2342d5.webp 360w, /faces/the-beacon-720.4c8afbc0.webp 720w",
+    "src": "/faces/the-beacon-720.4c8afbc0.webp"
+  },
+  "the-tuner": {
+    "avif": "/faces/the-tuner-360.6277dbd3.avif 360w, /faces/the-tuner-720.c22af393.avif 720w",
+    "webp": "/faces/the-tuner-360.544037f0.webp 360w, /faces/the-tuner-720.bbf5c7fd.webp 720w",
+    "src": "/faces/the-tuner-720.bbf5c7fd.webp"
+  },
+  "the-caretaker": {
+    "avif": "/faces/the-caretaker-360.e42b4956.avif 360w, /faces/the-caretaker-720.e3955e00.avif 720w",
+    "webp": "/faces/the-caretaker-360.a36dca0a.webp 360w, /faces/the-caretaker-720.64895910.webp 720w",
+    "src": "/faces/the-caretaker-720.64895910.webp"
+  },
+  "the-wanderer": {
+    "avif": "/faces/the-wanderer-360.9d6e05b0.avif 360w, /faces/the-wanderer-720.2f115604.avif 720w",
+    "webp": "/faces/the-wanderer-360.ea52065f.webp 360w, /faces/the-wanderer-720.66883c8e.webp 720w",
+    "src": "/faces/the-wanderer-720.66883c8e.webp"
+  },
+  "the-jester": {
+    "avif": "/faces/the-jester-360.fa13cdf1.avif 360w, /faces/the-jester-720.d8a3aa1f.avif 720w",
+    "webp": "/faces/the-jester-360.f583c1e8.webp 360w, /faces/the-jester-720.c58f5b7c.webp 720w",
+    "src": "/faces/the-jester-720.c58f5b7c.webp"
+  },
+  "the-pulse": {
+    "avif": "/faces/the-pulse-360.b5fe2cd9.avif 360w, /faces/the-pulse-720.d6a73781.avif 720w",
+    "webp": "/faces/the-pulse-360.4e640128.webp 360w, /faces/the-pulse-720.bd357afe.webp 720w",
+    "src": "/faces/the-pulse-720.bd357afe.webp"
+  },
+  "the-oracle": {
+    "avif": "/faces/the-oracle-360.3155830a.avif 360w, /faces/the-oracle-720.9e4df1c2.avif 720w",
+    "webp": "/faces/the-oracle-360.e772c35e.webp 360w, /faces/the-oracle-720.add73b2a.webp 720w",
+    "src": "/faces/the-oracle-720.add73b2a.webp"
+  },
+  "the-fire-tender": {
+    "avif": "/faces/the-fire-tender-360.072a1e45.avif 360w, /faces/the-fire-tender-720.2157fe61.avif 720w",
+    "webp": "/faces/the-fire-tender-360.04673d1f.webp 360w, /faces/the-fire-tender-720.548a5992.webp 720w",
+    "src": "/faces/the-fire-tender-720.548a5992.webp"
+  },
+  "the-patchwork": {
+    "avif": "/faces/the-patchwork-360.2f098817.avif 360w, /faces/the-patchwork-720.9f3b2d8f.avif 720w",
+    "webp": "/faces/the-patchwork-360.f43c29d9.webp 360w, /faces/the-patchwork-720.3921fecb.webp 720w",
+    "src": "/faces/the-patchwork-720.3921fecb.webp"
+  },
+  "the-deep-diver": {
+    "avif": "/faces/the-deep-diver-360.1980b3b3.avif 360w, /faces/the-deep-diver-720.1e49a16a.avif 720w",
+    "webp": "/faces/the-deep-diver-360.f5c0fbd5.webp 360w, /faces/the-deep-diver-720.793027b7.webp 720w",
+    "src": "/faces/the-deep-diver-720.793027b7.webp"
+  },
+  "the-enchanter": {
+    "avif": "/faces/the-enchanter-360.f96280b4.avif 360w, /faces/the-enchanter-720.beeb724d.avif 720w",
+    "webp": "/faces/the-enchanter-360.7cf4f28a.webp 360w, /faces/the-enchanter-720.ae2f776d.webp 720w",
+    "src": "/faces/the-enchanter-720.ae2f776d.webp"
+  },
+  "the-mentor": {
+    "avif": "/faces/the-mentor-360.e04c9686.avif 360w, /faces/the-mentor-720.12705ff6.avif 720w",
+    "webp": "/faces/the-mentor-360.97f641ee.webp 360w, /faces/the-mentor-720.f5b9535f.webp 720w",
+    "src": "/faces/the-mentor-720.f5b9535f.webp"
+  }
+}

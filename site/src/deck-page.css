@@ -1,0 +1,87 @@
+/* /deck: the whole deck laid out like cards on a table. Wider than the
+   channel's 440px column, so the header widens with it. */
+
+body.deck .wrap,
+body.deck .bar-in {
+  max-width: calc(1040px + 2 * 16px);
+}
+
+.deck-title {
+  margin: 28px 0 18px;
+  font-weight: 400;
+  color: var(--mustard);
+}
+
+.faces {
+  list-style: none;
+  margin: 0 0 48px;
+  padding: 0;
+  display: grid;
+  /* Two across on a phone, up to four on a desk. */
+  grid-template-columns: repeat(auto-fill, minmax(min(150px, calc(50% - 6px)), 1fr));
+  gap: 12px;
+}
+@media (min-width: 560px) {
+  .faces {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+}
+
+.face {
+  all: unset;
+}
+/* A printed card's corners: about 3mm on a 63mm card, as a share of width
+   and of height so they stay round at any size. */
+.face,
+.lightbox picture {
+  display: block;
+  width: 100%;
+  aspect-ratio: 720 / 1006; /* reserves the card's space before the art lands */
+  border-radius: 4.8% / 3.44%;
+  overflow: hidden;
+  background: var(--plum);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+}
+.face {
+  cursor: zoom-in;
+  transition: transform 0.25s var(--ease);
+}
+.face:focus-visible {
+  outline: 1px dashed var(--mustard);
+  outline-offset: 4px;
+}
+@media (hover: hover) {
+  .face:hover {
+    transform: translateY(-3px);
+  }
+}
+.face img,
+.lightbox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Tap a card to hold it up close. */
+.lightbox {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  width: min(92vw, 60dvh);
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  cursor: zoom-out;
+}
+.lightbox::backdrop {
+  background: rgba(18, 10, 27, 0.86);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .face {
+    transition: none;
+  }
+}

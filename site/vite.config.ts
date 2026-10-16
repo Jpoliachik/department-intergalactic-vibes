@@ -9,11 +9,12 @@ const glyph = () =>
     .replace(' role="img" aria-label="Vibe Corp"', ' aria-hidden="true" focusable="false"')
     .trim();
 
-// Two pages: the channel itself, and the in-world 404 Vercel serves for unknown paths.
+// Three pages: the channel itself, the in-world 404 Vercel serves for unknown
+// paths, and /deck, every card face, unlinked.
 export default defineConfig({
   plugins: [{ name: "brand-glyph", transformIndexHtml: (html) => html.replace("<!-- glyph -->", glyph()) }],
   build: {
     target: "es2022",
-    rollupOptions: { input: { main: "index.html", notFound: "404.html" } },
+    rollupOptions: { input: { main: "index.html", notFound: "404.html", deck: "deck.html" } },
   },
 });

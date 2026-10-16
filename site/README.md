@@ -12,6 +12,7 @@ npm install
 npm run dev        # http://localhost:5173
 npm run build      # type-check, then build to dist/
 npm run sync       # after changing anything in card-studio/deck
+npm run sync:faces # after changing a card face; needs card-studio's dev server on :3000
 ```
 
 Hidden hooks for testing on a real phone. Add one to any URL:
@@ -36,6 +37,8 @@ Everyone lands on **Signal detected. How did you find us?** From there:
 
 Every path ends somewhere the device remembers, and a return visit picks up there. The mark top left always goes home. Every end state has **Let the channel forget me**.
 
+`vibecorp.live/deck` is a page of every finished card face, two across on a phone, four on a desk; tap one to see it up close. Nothing on the channel links to it, and it's kept out of search.
+
 `vibecorp.live/GT-01` (any card code as the path) skips straight to tuning that code. Unknown paths get an in-world 404.
 
 ## Where things live
@@ -56,6 +59,9 @@ Every path ends somewhere the device remembers, and a return visit picks up ther
 | `src/haptics.ts` | Ticks on picks and typing: `navigator.vibrate` on Android, a hidden switch toggle on iOS 18+ (best-effort). |
 | `src/style.css` | All styling. One dark look, on purpose. |
 | `scripts/sync-deck.mjs` | Deck → `deck.json`, card art → `public/cards/`, fonts → `public/fonts/`, and the brand glyph and tokens → `src/brand/`. |
+| `deck.html`, `src/deck-page.ts`, `src/deck-page.css` | `/deck`, the unlinked page of every card face. |
+| `src/faces.json` | **Generated.** The card faces' image sets, by slug. Run `npm run sync:faces`. |
+| `scripts/sync-faces.mjs` | Screenshots each card's trim box from card-studio's `/print/<slug>` (the face the printer gets) → hashed AVIF/WebP in `public/faces/` and `src/faces.json`. |
 | `scripts/og.mjs` | Renders `public/og.png` (the link preview) in real Plex Mono using card-studio's puppeteer. |
 | `public/favicon.svg`, `public/apple-touch-icon.png` | **Generated** by `card-studio/scripts/export-brand.mjs`, not by this folder. |
 

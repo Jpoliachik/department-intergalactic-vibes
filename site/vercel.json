@@ -13,7 +13,7 @@
   ],
   "headers": [
     {
-      "source": "/(assets|cards)/(.*)",
+      "source": "/(assets|cards|faces)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
