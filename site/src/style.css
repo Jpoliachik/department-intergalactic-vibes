@@ -134,7 +134,8 @@ body.beyond main .p:not(.dim) {
 :focus-visible,
 .home:focus-visible,
 .choice:focus-visible,
-.forget:focus-visible {
+.forget:focus-visible,
+.footlink:focus-visible {
   outline: 1px dashed var(--mustard);
   outline-offset: 3px;
 }
@@ -556,9 +557,24 @@ form.code input.nudge {
 footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   min-height: 20px;
   padding-top: 10px;
   padding-bottom: max(22px, env(safe-area-inset-bottom));
+}
+
+.footlink {
+  color: var(--cream-faint);
+  font: 12px var(--mono);
+  text-decoration: none;
+  padding: 6px 0;
+}
+@media (hover: hover) {
+  .footlink:hover {
+    color: var(--cream);
+    text-decoration: underline;
+  }
 }
 
 .forget {

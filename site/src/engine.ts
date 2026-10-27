@@ -162,6 +162,9 @@ async function play(s: Screen) {
   }
   if (s.input) main.append(codeForm(s.input));
   if (list.length) main.append(choices(run, list));
+  // The one persistent footer link: the kit page. Not on hush/beyond
+  // screens, where the world is meant to be quiet and untold.
+  if (!s.hush) foot.append(outfitLink());
   if (s.forget) foot.append(forgetButton(s.forget));
   keepInView(main.lastElementChild);
 }
@@ -379,6 +382,12 @@ function forgetButton(go: () => void) {
   btn.type = "button";
   btn.addEventListener("click", go);
   return btn;
+}
+
+function outfitLink() {
+  const a = h("a", "footlink enter", "Outfit yourself") as HTMLAnchorElement;
+  a.href = "/outfit.html";
+  return a;
 }
 
 /** As a screen grows past the fold, ease it into view. */

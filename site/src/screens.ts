@@ -143,6 +143,7 @@ export const go = {
           ["Today's reading", go.today],
           ["Read the card closer", go.closer],
           ["Who's on the other end?", go.listen],
+          ["Outfit yourself", go.outfit],
         ],
         forget: () => go.forget(() => go.post()),
         rare: arriving ? undefined : () => go.post(),
@@ -288,8 +289,14 @@ export const go = {
         p("A crew in purple hi-vis. They take readings, patch what's leaking, look into anything strange."),
         p("Most of the time you'd walk right past them. Some of the time they walk up to you."),
       ],
-      choices: [["Who sends them?", go.hq], loreExit()],
+      choices: [["Outfit yourself", go.outfit], ["Who sends them?", go.hq], loreExit()],
     });
+  },
+
+  outfit(): void {
+    // The kit lives on its own page, with pictures and descriptions, so the
+    // channel stays text. That page ends at the (minimal) request form.
+    window.location.href = "/outfit.html";
   },
 
   hq(): void {
